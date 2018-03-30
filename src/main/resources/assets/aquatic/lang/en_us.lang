@@ -1,0 +1,7 @@
+#Misc
+message.aquatic.update=Update available for %s for Minecraft %s
+message.aquatic.update.download=Download v%s %s (your version is %s)
+message.aquatic.update.download.keyword=here
+
+#Config
+config.aquatic.title=Aquatic Config

@@ -1,13 +1,13 @@
 [
 {
-  "modid": "foolslib",
+  "modid": "aquatic",
   "name": "${mod_name}",
   "description": "${mod_description}",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "${url}",
   "updateUrl": "${update_url}",
-  "authorList": ["UpcraftLP, abused_master, Radient_Sora, EPIIC_THUNDERCAT"],
+  "authorList": ["UpcraftLP", "abused_master", "Radient_Sora", "EPIIC_THUNDERCAT"],
   "credits": "(C)2018-${year} UpcraftLP",
   "logoFile": "",
   "screenshots": [],
