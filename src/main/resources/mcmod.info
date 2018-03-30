@@ -8,7 +8,7 @@
   "url": "${url}",
   "updateUrl": "${update_url}",
   "authorList": ["UpcraftLP", "abused_master", "Radient_Sora", "EPIIC_THUNDERCAT"],
-  "credits": "(C)2018-${year} UpcraftLP",
+  "credits": "(C)2018-${year} Team Rapture",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
