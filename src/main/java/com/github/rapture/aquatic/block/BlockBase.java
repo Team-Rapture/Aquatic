@@ -11,6 +11,7 @@ public class BlockBase extends Block implements IHasItemBlock {
     public BlockBase(String name, Material material) {
         super(material);
         this.setUnlocalizedName(Aquatic.MODID + "." + name);
+        this.setCreativeTab(Aquatic.CREATIVE_TAB);
     }
 
     public BlockBase(String name) {

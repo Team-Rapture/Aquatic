@@ -1,5 +1,6 @@
 package com.github.rapture.aquatic.proxy;
 
+import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.UpdateChecker;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -10,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
-
+        AutoRegistry.findRegistryEntries(event);
     }
 
     public void init(FMLInitializationEvent event) {

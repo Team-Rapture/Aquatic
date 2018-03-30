@@ -53,8 +53,10 @@ public class AutoRegistry {
             }
         }
         Loader.instance().setActiveModContainer(currentModContainer);
-        Aquatic.getLogger().debug("Active mod container restored.");
-        Aquatic.getLogger().debug("successfully registered {} objects.", count);
+        if(AquaticConfig.debugMode) {
+            Aquatic.getLogger().info("Active mod container restored.");
+            Aquatic.getLogger().info("successfully registered {} objects.", count);
+        }
     }
 
     /**

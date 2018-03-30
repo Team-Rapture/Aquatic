@@ -1,7 +1,5 @@
 package com.github.rapture.aquatic.util;
 
-import com.github.rapture.aquatic.Aquatic;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -19,6 +17,6 @@ public @interface RegistryCreate {
      */
     Class[] value();
 
-    String modid() default Aquatic.MODID;
+    String modid();
 
 }
