@@ -34,7 +34,7 @@ public class Aquatic {
 
     private static Logger log = LogManager.getLogger(MODID);
 
-    @SidedProxy(clientSide = "ClientProxy", serverSide = "ServerProxy")
+    @SidedProxy(clientSide = "com.github.rapture.aquatic.proxy.ClientProxy", serverSide = "com.github.rapture.aquatic.proxy.ServerProxy")
     public static CommonProxy proxy;
 
     public static Logger getLogger() {
