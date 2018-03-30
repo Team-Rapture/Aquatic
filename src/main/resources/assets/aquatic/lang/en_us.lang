@@ -5,3 +5,12 @@ message.aquatic.update.download.keyword=here
 
 #Config
 config.aquatic.title=Aquatic Config
+
+#Blocks
+tile.coral_reef.name=Coral Reef
+
+#Items
+
+
+#CreativeTabs
+itemGroup.aquatic.name=Aquatic
