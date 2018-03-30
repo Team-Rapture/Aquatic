@@ -7,6 +7,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemLilyPad;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -39,7 +41,7 @@ public class BlockPistia extends BlockBush implements IHasItemBlock {
 
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return world.getBlockState(pos.down(1)).getBlock() == Blocks.WATER || world.getBlockState(pos.down(1)).getMaterial() == Material.ICE;
+        return world.getBlockState(pos.down(1)).getBlock() == Blocks.WATER;
     }
 
     @Override
@@ -50,5 +52,10 @@ public class BlockPistia extends BlockBush implements IHasItemBlock {
     @Override
     public boolean canSustainBush(IBlockState state) {
         return state.getBlock() == Blocks.WATER || state.getMaterial() == Material.ICE;
+    }
+
+    @Override
+    public Class<? extends ItemBlock> getItemBlockClass() {
+        return ItemBlockPistia.class;
     }
 }
