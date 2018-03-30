@@ -26,6 +26,6 @@ public class CommonProxy {
     }
 
     public void registerRender(Item item) {
-        
+        //NO-OP
     }
 }

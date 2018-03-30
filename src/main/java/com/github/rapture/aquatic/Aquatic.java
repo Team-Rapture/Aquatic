@@ -1,6 +1,8 @@
 package com.github.rapture.aquatic;
 
+import com.github.rapture.aquatic.creativetab.CreativeTab;
 import com.github.rapture.aquatic.proxy.CommonProxy;
+import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -39,13 +41,12 @@ public class Aquatic {
         return log;
     }
 
-    //TODO base creative tab class!
-    //public static final CreativeTab CREATIVE_TAB = new CreativeTab(MODID);
+    public static final CreativeTab CREATIVE_TAB = new CreativeTab(MODID);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
-        //CREATIVE_TAB.setIcon(new ItemStack(TestItems.TEST_ITEM0));
+        CREATIVE_TAB.setIcon(Items.PRISMARINE_SHARD);
     }
 
     @Mod.EventHandler
