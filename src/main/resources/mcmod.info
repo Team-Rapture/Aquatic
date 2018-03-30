@@ -7,7 +7,7 @@
   "mcversion": "${mcversion}",
   "url": "${url}",
   "updateUrl": "${update_url}",
-  "authorList": ["UpcraftLP"],
+  "authorList": ["UpcraftLP, abused_master, Radient_Sora, EPIIC_THUNDERCAT"],
   "credits": "(C)2018-${year} UpcraftLP",
   "logoFile": "",
   "screenshots": [],
