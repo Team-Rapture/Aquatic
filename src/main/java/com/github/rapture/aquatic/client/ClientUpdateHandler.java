@@ -26,12 +26,12 @@ public class ClientUpdateHandler {
         if(player != null) {
             if (UpdateChecker.hasUpdate()) {
                 ForgeVersion.CheckResult result = UpdateChecker.getResult();
-                ITextComponent update = new TextComponentTranslation("message.foolslib.update", Aquatic.MODNAME, Loader.MC_VERSION);
+                ITextComponent update = new TextComponentTranslation("message.aquatic.update", Aquatic.MODNAME, Loader.MC_VERSION);
 
                 ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, result.url);
                 HoverEvent hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(result.url).setStyle(new Style().setColor(TextFormatting.AQUA).setItalic(true)));
-                ITextComponent keyword = new TextComponentTranslation("message.foolslib.update.download.keyword").setStyle(new Style().setColor(TextFormatting.BLUE).setClickEvent(clickEvent).setHoverEvent(hoverEvent));
-                ITextComponent download = new TextComponentTranslation("message.foolslib.update.download", result.target, keyword, Aquatic.VERSION);
+                ITextComponent keyword = new TextComponentTranslation("message.aquatic.update.download.keyword").setStyle(new Style().setColor(TextFormatting.BLUE).setClickEvent(clickEvent).setHoverEvent(hoverEvent));
+                ITextComponent download = new TextComponentTranslation("message.aquatic.update.download", result.target, keyword, Aquatic.VERSION);
 
                 player.sendMessage(update);
                 player.sendMessage(download);

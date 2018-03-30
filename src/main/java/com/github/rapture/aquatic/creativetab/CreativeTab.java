@@ -1,6 +1,6 @@
 package com.github.rapture.aquatic.creativetab;
 
-import com.github.upcraftlp.foolslib.FoolsLib;
+import com.github.rapture.aquatic.Aquatic;
 import com.google.common.base.Preconditions;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -8,21 +8,18 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreativeTab extends CreativeTabs {
 
     protected static final String BACKGROUND_IMAGE_SEARCHBAR = "item_search.png";
 
-    private ItemStack icon = null;
+    private ItemStack icon = ItemStack.EMPTY;
     private boolean hasSearchBar = false;
     private boolean displayRandom = true;
-    private List<ItemStack> displayStacks = new ArrayList<>();
+    private NonNullList<ItemStack> displayStacks = NonNullList.create();
 
     /**
      * @param label the lang key for this tab, the final key will be {@code itemGroup.label.name}
@@ -37,7 +34,7 @@ public class CreativeTab extends CreativeTabs {
     public void setHasSearchBar(boolean hasSearchBar) {
         this.hasSearchBar = hasSearchBar;
     }
-    
+
     /**
      * @param label the lang key for this tab, the final key will be {@code itemGroup.label.name}
      */
@@ -45,23 +42,23 @@ public class CreativeTab extends CreativeTabs {
         this(label, false);
     }
 
-    public void setDisplayFromList(List<ItemStack> displayList) {
+    public void setDisplayFromList(NonNullList<ItemStack> displayList) {
         Preconditions.checkNotNull(displayList);
         this.displayStacks = displayList;
         this.displayRandom = true;
     }
 
     /**
-     * Used to set a CreativeTab's display icon. use {@code null} to display a random Item from
+     * Used to set a CreativeTab's display icon. use {@link ItemStack#EMPTY} to display a random Item from
      * the Tab's item list.
      */
-    public void setIcon(@Nullable ItemStack icon) {
-        if (icon == null) this.displayRandom = true;
-		else {
-			this.displayRandom = false;
-			icon.stackSize = 1;
-		}
-		this.icon = icon;
+    public void setIcon(ItemStack icon) {
+        if (icon.isEmpty()) this.displayRandom = true;
+        else {
+            this.displayRandom = false;
+            icon.setCount(1);
+        }
+        this.icon = icon;
     }
 
     public void setIcon(Item item) {
@@ -81,20 +78,20 @@ public class CreativeTab extends CreativeTabs {
     @Override
     public ItemStack getIconItemStack() {
         this.updateDisplayStack();
-		return this.icon;
+        return this.icon;
     }
 
     @SideOnly(Side.CLIENT)
     private void updateDisplayStack() {
-        if (this.icon == null || this.displayRandom && Minecraft.getSystemTime() % 120 == 0) {
+        if (this.icon.isEmpty() || this.displayRandom && Minecraft.getSystemTime() % 120 == 0) {
             if(this.displayStacks.isEmpty()) {
-                this.displayAllReleventItems(displayStacks);
+                this.displayAllRelevantItems(displayStacks);
             }
-            this.icon = null;
+            this.icon = ItemStack.EMPTY;
             if(!displayStacks.isEmpty()) try {
                 for(int i = 0; i < displayStacks.size(); i++) {
                     ItemStack listStack = displayStacks.get(i);
-                    if(listStack != null && listStack.isItemEqual(this.icon)) {
+                    if(!listStack.isEmpty() && listStack.isItemEqual(this.icon)) {
                         int nextIndex = i + 1;
                         if(nextIndex > displayStacks.size()) nextIndex = 0;
                         this.icon = displayStacks.get(nextIndex);
@@ -104,9 +101,9 @@ public class CreativeTab extends CreativeTabs {
             catch (Exception e) {
                 //NO-OP
             }
-            if(this.icon == null) {
-                FoolsLib.getLogger().warn("found no display ItemStack for CreativeTab {}, defaulting to {}", this.getTabLabel(), Items.diamond.getUnlocalizedName().substring(5));
-                this.icon = new ItemStack(Items.diamond);
+            if(this.icon.isEmpty()) {
+                Aquatic.getLogger().warn("found empty Itemstack for CreativeTab " + this.getTabLabel() + ", defaulting to " + Items.DIAMOND.getRegistryName());
+                this.icon = new ItemStack(Items.DIAMOND);
                 this.displayRandom = false;
             }
         }
@@ -114,13 +111,7 @@ public class CreativeTab extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public Item getTabIconItem() {
-        return this.getIconItemStack().getItem();
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getIconItemDamage() {
-        return this.getIconItemStack().getItemDamage();
+    public ItemStack getTabIconItem() {
+        return this.getIconItemStack();
     }
 }
