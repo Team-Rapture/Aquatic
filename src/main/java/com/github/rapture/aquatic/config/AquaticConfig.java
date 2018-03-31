@@ -23,4 +23,31 @@ public class AquaticConfig {
     @Config.Name("Aqua Net Controller")
     @Config.Comment("Amount of energy an aqua net controller will generate")
     public static int aquaNetGeneration = 50;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @Config.Name("Dim ID")
+    @Config.Comment("Dimension ID- CAREFUL WHEN CHANGING ID! Default: 300")
+    public static int dimensionID = 300;
+    
+    
+    
+    
+    
 }
