@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic;
 
 import com.github.rapture.aquatic.creativetab.CreativeTab;
+import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.proxy.CommonProxy;
 import net.minecraft.init.Items;
 import net.minecraftforge.client.model.obj.OBJLoader;
@@ -48,7 +49,6 @@ public class Aquatic {
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
         CREATIVE_TAB.setIcon(Items.PRISMARINE_SHARD);
-        OBJLoader.INSTANCE.addDomain(MODID);
     }
 
     @Mod.EventHandler

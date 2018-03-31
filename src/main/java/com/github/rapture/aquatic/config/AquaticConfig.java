@@ -22,5 +22,5 @@ public class AquaticConfig {
 
     @Config.Name("Aqua Net Controller")
     @Config.Comment("Amount of energy an aqua net controller will generate")
-    public static int aquaNetGeneration = 5;
+    public static int aquaNetGeneration = 50;
 }
