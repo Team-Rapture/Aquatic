@@ -7,7 +7,6 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -15,14 +14,12 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fluids.BlockFluidClassic;
 
 import javax.annotation.Nullable;
 
+//TODO Fix Bubble Rendering to Follow Player As They Sink (Bubbles Vertical Line)
 public class HeavyIronBoots extends ItemArmor {
     public static final ArmorMaterial heavyIronBoots = EnumHelper.addArmorMaterial("heavy_iron_boots", "aquatic:heavy_iron_boots", 25, new int[]{0, 0, 0, 4}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.5F);
 
@@ -41,13 +38,16 @@ public class HeavyIronBoots extends ItemArmor {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+        if(player.isInWater()){
+
+
         if (player.capabilities.isCreativeMode) return;
         if (world.getBlockState(player.getPosition().down(1)).getMaterial() == Material.WATER) {
-            ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE,5,player.getPosition().getX(),player.getPosition().getY(),player.getPosition().getZ(),0,2,0,0);
-
+            ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, 5, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 1, 0, 0);
 
 
             player.motionY -= 0.04F;
+        }
         } else {
 
 
