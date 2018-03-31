@@ -25,7 +25,7 @@ public class AquaNode extends BlockContainerBase {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileAquaNode ctrl = (TileAquaNode) worldIn.getTileEntity(pos);
         if(!worldIn.isRemote) {
-            playerIn.sendMessage(new TextComponentString(ctrl.storage.getEnergyStored() + " FE"));
+            playerIn.sendMessage(new TextComponentString(ctrl.storage.getEnergyStored() + " FE " + ctrl.oxygenlevels + " H2O"));
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }

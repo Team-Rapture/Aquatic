@@ -36,12 +36,6 @@ public class WorldProviderAquatic extends WorldProvider
     }
 
 	@Override
-    public float calculateCelestialAngle(long worldTime, float partialTicks)
-    {
-    	return 0.5F;
-    }
-
-	@Override
     @SideOnly(Side.CLIENT)
     public Vec3d getFogColor(float celestialAngle, float partialTicks)
     {
@@ -73,4 +67,42 @@ public class WorldProviderAquatic extends WorldProvider
 	{
 		return DimensionAquatic.dimension;
 	}
+
+    @Override
+    public boolean isSurfaceWorld() {
+        return super.isSurfaceWorld();
+    }
+
+    @Override
+    public int getMoonPhase(long worldTime)
+    {
+        return (int)(worldTime / 24000L % 8L + 8L) % 8;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isSkyColored()
+    {
+        return true;
+    }
+
+    @Override
+    public float calculateCelestialAngle(long worldTime, float partialTicks){
+        int i = (int)(worldTime % 24000L);
+        float f = ((float)i + partialTicks) / 24000.0F - 0.25F;
+
+        if (f < 0.0F)
+        {
+            ++f;
+        }
+
+        if (f > 1.0F)
+        {
+            --f;
+        }
+
+        float f1 = 1.0F - (float)((Math.cos((double)f * Math.PI) + 1.0D) / 2.0D);
+        f = f + (f1 - f) / 3.0F;
+        return f;
+    }
 }

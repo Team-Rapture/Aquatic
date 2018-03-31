@@ -5,7 +5,12 @@ import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
+
+import javax.annotation.Nullable;
 
 public class TileAquaNode extends TileEntityBase {
 
@@ -88,7 +93,18 @@ public class TileAquaNode extends TileEntityBase {
                 oxygenlevels+=50;
             }
         }
+    }
 
-        
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityEnergy.ENERGY) return true;
+        return super.hasCapability(capability, facing);
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityEnergy.ENERGY) return (T) this.storage;
+        return super.getCapability(capability, facing);
     }
 }

@@ -22,8 +22,8 @@ public class RenderAquaNetController extends TileEntitySpecialRenderer<TileAquaN
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
         bindTexture(modelTexture);
         ModelAquaNetController.INSTANCE.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        long angle = (System.currentTimeMillis() / 10) % 360;
-        ModelAquaNetController.INSTANCE.shaft.rotateAngleY = angle;
+        //long angle = (System.currentTimeMillis() / 10) % 360;
+        //ModelAquaNetController.INSTANCE.shaft.rotateAngleY = angle;
         GL11.glPopMatrix();
         HudRender.renderHud(te, x, y, z);
     }
