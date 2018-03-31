@@ -14,10 +14,10 @@ public class AquaticItems {
 
 
     //register items by just creating public static final fields
-    public static final Item heavy_iron_boots = new HeavyIronBoots();
+    public static final Item HEAVY_IRON_BOOTS = new HeavyIronBoots();
 
 
-	public static final Item aquatic_charm = new ItemAquaticCharm("aquatic_charm", 1, 0, AquaticConfig.dimensionID);
-	public static final Item test = new ItemTesting("test");
+	public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm", 1, 0, AquaticConfig.dimensionID);
+	public static final Item TEST = new ItemTesting("test");
 
 }
