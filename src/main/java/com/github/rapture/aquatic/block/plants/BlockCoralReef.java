@@ -13,6 +13,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+//TODO get a better texture/model made
 public class BlockCoralReef extends BlockBush implements IHasItemBlock {
 
     public BlockCoralReef() {

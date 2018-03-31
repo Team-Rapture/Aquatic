@@ -1,6 +1,5 @@
 package com.github.rapture.aquatic.block;
 
-import com.github.rapture.aquatic.tileentity.TileAquaNetController;
 import com.github.rapture.aquatic.tileentity.TileAquaNode;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +13,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
+//TODO make displaying oxygen and energy display not depend on right click
 public class AquaNode extends BlockContainerBase {
 
     public AquaNode() {

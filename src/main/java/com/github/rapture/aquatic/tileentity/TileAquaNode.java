@@ -12,6 +12,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
 
+//TODO make oxygen generation smoother, maybe a better way the Aqua Controllers are founds?
 public class TileAquaNode extends TileEntityBase {
 
     public CustomEnergyStorage storage = new CustomEnergyStorage(50000);

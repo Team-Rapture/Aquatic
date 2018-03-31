@@ -3,6 +3,7 @@ package com.github.rapture.aquatic.client.render;
 import com.github.rapture.aquatic.tileentity.TileAquaNode;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 
+//TODO Render the things for the aqua node
 public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
 
     @Override

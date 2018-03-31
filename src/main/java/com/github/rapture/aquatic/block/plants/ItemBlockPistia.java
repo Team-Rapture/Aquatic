@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
+//TODO fix right on water to place
 public class ItemBlockPistia extends ItemBlock {
 
     public ItemBlockPistia(Block block) {

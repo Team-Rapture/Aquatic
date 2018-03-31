@@ -13,6 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
+//TODO get a better texture/model made
 public class BlockPistia extends BlockBush implements IHasItemBlock {
 
     public BlockPistia() {
