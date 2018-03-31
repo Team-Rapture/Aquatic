@@ -60,7 +60,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
             for (BlockPos bp : BlockPos.getAllInBox(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15)) {
                 IBlockState state = world.getBlockState(bp);
                 if (!world.isAirBlock(bp)) {
-                    if (state.getBlock() == AquaticBlocks.aquanet_controller) {
+                    if (state.getBlock() == AquaticBlocks.AQUANET_CONTROLLER) {
                         controllerPos = bp;
                         hasAquaController = true;
                     }
