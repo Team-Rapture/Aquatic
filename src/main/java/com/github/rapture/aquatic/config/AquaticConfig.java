@@ -1,8 +1,9 @@
 package com.github.rapture.aquatic.config;
 
-import net.minecraftforge.common.config.Config;
+import static com.github.rapture.aquatic.Aquatic.MODID;
+import static com.github.rapture.aquatic.Aquatic.MODNAME;
 
-import static com.github.rapture.aquatic.Aquatic.*;
+import net.minecraftforge.common.config.Config;
 
 @Config(modid = MODID, name = MODNAME)
 @Config.LangKey("config.aquatic.title")
@@ -23,4 +24,7 @@ public class AquaticConfig {
     @Config.Name("Aqua Net Controller")
     @Config.Comment("Amount of energy an aqua net controller will generate")
     public static int aquaNetGeneration = 5;
+    @Config.Name("Dim ID")
+    @Config.Comment("Dimension Id, Default 300")
+    public static int dimensionID = 300;
 }
