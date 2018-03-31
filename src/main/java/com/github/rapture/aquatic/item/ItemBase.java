@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.item;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.util.NameUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,8 +13,7 @@ public class ItemBase extends Item {
 
     public ItemBase(String name) {
         super();
-        this.setRegistryName(name);
-        this.setUnlocalizedName(this.getRegistryName().getResourceDomain() + "." + name);
+        NameUtil.name(this, name);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
     }
 

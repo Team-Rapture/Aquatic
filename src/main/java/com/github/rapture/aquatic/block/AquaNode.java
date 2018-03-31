@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.block;
 
 import com.github.rapture.aquatic.tileentity.TileAquaNode;
+import com.github.rapture.aquatic.util.IHasItemBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

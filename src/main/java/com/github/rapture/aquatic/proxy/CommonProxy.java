@@ -8,6 +8,7 @@ import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.UpdateChecker;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -36,6 +37,10 @@ public class CommonProxy {
 	}
 
 	public void registerRender(Item item) {
+		// NO-OP
+	}
+
+	public void registerRender(Block block) {
 		// NO-OP
 	}
 
