@@ -3,8 +3,10 @@ package com.github.rapture.aquatic.tileentity;
 import com.github.rapture.aquatic.client.render.hud.HudRender;
 import com.github.rapture.aquatic.client.render.hud.IHudSupport;
 import com.github.rapture.aquatic.config.AquaticConfig;
+import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -46,19 +48,6 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return true;
-        return super.hasCapability(capability, facing);
-    }
-
-    @Nullable
-    @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return (T) storage;
-        return super.getCapability(capability, facing);
-    }
-
-    @Override
     public EnumFacing getBlockOrientation() {
         return HudRender.getOrientationHoriz(getBlockMetadata());
     }
@@ -76,5 +65,18 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     @Override
     public BlockPos getBlockPos() {
         return getPos();
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        if(capability == CapabilityEnergy.ENERGY) return true;
+        return super.hasCapability(capability, facing);
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if(capability == CapabilityEnergy.ENERGY) return (T) storage;
+        return super.getCapability(capability, facing);
     }
 }
