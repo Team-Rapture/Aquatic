@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.item.armor;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.util.ParticleUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
@@ -42,7 +43,7 @@ public class HeavyIronBoots extends ItemArmor {
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
         if (player.capabilities.isCreativeMode) return;
         if (world.getBlockState(player.getPosition().down(1)).getMaterial() == Material.WATER) {
-            world.spawnParticle(EnumParticleTypes.WATER_DROP, false, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 2, 0);
+            ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE,5,player.getPosition().getX(),player.getPosition().getY(),player.getPosition().getZ(),0,2,0,0);
 
 
 
