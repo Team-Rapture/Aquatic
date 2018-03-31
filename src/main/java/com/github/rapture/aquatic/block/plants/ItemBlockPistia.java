@@ -1,11 +1,9 @@
 package com.github.rapture.aquatic.block.plants;
 
-import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
