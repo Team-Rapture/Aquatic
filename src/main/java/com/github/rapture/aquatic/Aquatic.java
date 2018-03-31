@@ -1,10 +1,8 @@
 package com.github.rapture.aquatic;
 
 import com.github.rapture.aquatic.creativetab.CreativeTab;
-import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.proxy.CommonProxy;
 import net.minecraft.init.Items;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -68,5 +66,4 @@ public class Aquatic {
         proxy.serverStarting(event);
         getLogger().info("World initialization complete.");
     }
-
 }
