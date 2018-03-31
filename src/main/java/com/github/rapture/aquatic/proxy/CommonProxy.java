@@ -1,11 +1,15 @@
 package com.github.rapture.aquatic.proxy;
 
+import com.github.rapture.aquatic.api.oxygen.IOxygenProvider;
+import com.github.rapture.aquatic.api.oxygen.OxygenHandler;
+import com.github.rapture.aquatic.network.capability.OxygenStorage;
 import com.github.rapture.aquatic.dimensions.DimensionAquatic;
 import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.UpdateChecker;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -20,6 +24,7 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		AquaticTiles.registerTiles();
 		DimensionAquatic.init();
+		CapabilityManager.INSTANCE.register(IOxygenProvider.class, new OxygenStorage(), OxygenHandler.class);
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
