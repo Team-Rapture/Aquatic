@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.init;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.block.AquaNetController;
 import com.github.rapture.aquatic.block.plants.BlockCoralReef;
 import com.github.rapture.aquatic.block.plants.BlockPistia;
 import com.github.rapture.aquatic.util.RegistryCreate;
@@ -12,5 +13,6 @@ public class AquaticBlocks {
     //register blocks by just creating public static final fields
     public static Block coral_reef = new BlockCoralReef();
     public static Block pistia = new BlockPistia();
+    public static Block aquanet_controller = new AquaNetController();
 
 }

@@ -19,4 +19,8 @@ public class AquaticConfig {
     @Config.Name("Debug Mode")
     @Config.Comment("enable additional console output")
     public static boolean debugMode = false;
+
+    @Config.Name("Aqua Net Controller")
+    @Config.Comment("Amount of energy an aqua net controller will generate")
+    public static int aquaNetGeneration = 5;
 }

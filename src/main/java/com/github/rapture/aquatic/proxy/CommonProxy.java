@@ -1,5 +1,6 @@
 package com.github.rapture.aquatic.proxy;
 
+import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.UpdateChecker;
 import net.minecraft.item.Item;
@@ -15,7 +16,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
-
+        AquaticTiles.registerTiles();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

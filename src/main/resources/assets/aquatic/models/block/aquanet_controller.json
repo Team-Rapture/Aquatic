@@ -1,0 +1,9 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "aquatic:blocks/aquanet_top",
+        "bottom": "aquatic:blocks/aquanet_sides",
+        "front": "aquatic:blocks/aquanet_sides",
+        "side": "aquatic:blocks/aquanet_sides"
+    }
+}
