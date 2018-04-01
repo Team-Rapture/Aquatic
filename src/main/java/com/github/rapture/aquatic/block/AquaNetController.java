@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 //TODO Fix model rendering
 public class AquaNetController extends BlockContainerBase {
 
-    public AquaNetController(EntityEquipmentSlot slot) {
+    public AquaNetController() {
         super("aquanet_controller", Material.ROCK);
         this.setHardness(1.0f);
     }
