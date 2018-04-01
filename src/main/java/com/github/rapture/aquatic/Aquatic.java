@@ -15,9 +15,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-/**
- * @author UpcraftLP
- */
 @Mod(name = Aquatic.MODNAME, version = Aquatic.VERSION, modid = Aquatic.MODID, certificateFingerprint = Aquatic.FINGERPRINT_KEY, dependencies = Aquatic.DEPENDENCIES, updateJSON = Aquatic.UPDATE_JSON)
 public class Aquatic {
 
