@@ -20,4 +20,6 @@ public class AquaticItems {
 	public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm", 1, 0, AquaticConfig.dimensionID);
 	public static final Item TEST = new ItemTesting("test");
 
+
+
 }

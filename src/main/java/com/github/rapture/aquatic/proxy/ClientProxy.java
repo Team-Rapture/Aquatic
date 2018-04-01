@@ -1,12 +1,15 @@
 package com.github.rapture.aquatic.proxy;
 
+import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.util.ICustomModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -22,6 +25,7 @@ public class ClientProxy extends CommonProxy {
         super.preInit(event);
         OBJLoader.INSTANCE.addDomain(MODID);
         AquaticTiles.bindTESR();
+        ModelLoader.setCustomStateMapper(AquaticBlocks.AQUA_WATER_BLOCK, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
     }
 
 

@@ -1,8 +1,10 @@
 package com.github.rapture.aquatic;
 
+import com.github.rapture.aquatic.block.fluid.FluidAquaWater;
 import com.github.rapture.aquatic.creativetab.CreativeTab;
 import com.github.rapture.aquatic.proxy.CommonProxy;
 import net.minecraft.init.Items;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -42,6 +44,10 @@ public class Aquatic {
     }
 
     public static final CreativeTab CREATIVE_TAB = new CreativeTab(MODID);
+
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
