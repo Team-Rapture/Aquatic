@@ -37,24 +37,21 @@ public class HeavyIronBoots extends ItemArmor {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        if(player.isInWater()){
+        if (player.isInWater()) {
 
+            if (player.capabilities.isCreativeMode) return;
+            if (world.getBlockState(player.getPosition().down(1)).getMaterial() == Material.WATER) {
+                ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, 5, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 1, 0, 0);
+                player.motionY -= 0.05F;
+            }
 
-        if (player.capabilities.isCreativeMode) return;
-        if (world.getBlockState(player.getPosition().down(1)).getMaterial() == Material.WATER) {
-            ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, 5, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 1, 0, 0);
-
-
-            player.motionY -= 0.05F;
-        }
+            player.stepHeight = 1.0f;
+            player.capabilities.setPlayerWalkSpeed(0.24f);
         } else {
-
-
             for (Entity e : world.getEntitiesWithinAABB(EntityLiving.class, player.getEntityBoundingBox().expand(0, 8, 0))) {
                 if (player.collidedVertically) {
                     e.attackEntityFrom(DamageSource.ANVIL, 2);
                 }
-
             }
         }
 
