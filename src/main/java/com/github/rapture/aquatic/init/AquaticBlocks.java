@@ -27,7 +27,7 @@ public class AquaticBlocks {
 	public static final Block OXYGEN_STONE = new BlockOxygenStone();
 	public static final Block AQUA_WATER_BLOCK = new FluidAquaWaterBlock();
 	public static final Block AQUATIC_STONE = new BlockBase("aquatic_stone");
-	public static final Block AQUATIC_STONE_CRACKED = new BlockBase("aquatic_stone");
+	public static final Block AQUATIC_STONE_CRACKED = new BlockBase("aquatic_stone_cracked");
 
 	public static final Block coral_reef_pink = new BlockCoralReef("coral_reef_pink");
 	public static final Block coral_reef_blue = new BlockCoralReef("coral_reef_blue");
