@@ -45,7 +45,7 @@ public class HeavyIronBoots extends ItemArmor {
             ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, 5, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 1, 0, 0);
 
 
-            player.motionY -= 0.04F;
+            player.motionY -= 0.05F;
         }
         } else {
 
