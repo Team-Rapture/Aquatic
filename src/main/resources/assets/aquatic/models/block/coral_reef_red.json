@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "blocks/corals/red/coral_reef_red",
-		"particle": "blocks/corals/red/coral_reef_red"
+		"0": "aquatic:blocks/corals/red/coral_reef_red",
+		"particle": "aquatic:blocks/corals/red/coral_reef_red"
 	},
 	"elements": [
 		{

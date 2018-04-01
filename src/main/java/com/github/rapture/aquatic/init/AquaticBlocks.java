@@ -8,6 +8,7 @@ import com.github.rapture.aquatic.block.BlockBase;
 import com.github.rapture.aquatic.block.BlockOxygenStone;
 import com.github.rapture.aquatic.block.fluid.FluidAquaWaterBlock;
 import com.github.rapture.aquatic.block.plants.BlockCoralReef;
+import com.github.rapture.aquatic.block.plants.BlockCoralReefNew;
 import com.github.rapture.aquatic.block.plants.BlockPistia;
 import com.github.rapture.aquatic.util.RegistryCreate;
 
@@ -29,11 +30,11 @@ public class AquaticBlocks {
 	public static final Block AQUATIC_STONE = new BlockBase("aquatic_stone");
 	public static final Block AQUATIC_STONE_CRACKED = new BlockBase("aquatic_stone_cracked");
 
-	public static final Block coral_reef_pink = new BlockCoralReef("coral_reef_pink");
-	public static final Block coral_reef_blue = new BlockCoralReef("coral_reef_blue");
-	public static final Block coral_reef_green = new BlockCoralReef("coral_reef_green");
-	public static final Block coral_reef_red = new BlockCoralReef("coral_reef_red");
-	public static final Block coral_reef_yellow = new BlockCoralReef("coral_reef_yellow");
+	public static final Block coral_reef_pink = new BlockCoralReefNew("coral_reef_pink", Material.PLANTS);
+	public static final Block coral_reef_blue = new BlockCoralReefNew("coral_reef_blue", Material.PLANTS);
+	public static final Block coral_reef_green = new BlockCoralReefNew("coral_reef_green", Material.PLANTS);
+	public static final Block coral_reef_red = new BlockCoralReefNew("coral_reef_red", Material.PLANTS);
+	public static final Block coral_reef_yellow = new BlockCoralReefNew("coral_reef_yellow", Material.PLANTS);
 	
 	
 }

@@ -1,14 +1,14 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "blocks/corals/red/coral_reef_red",
-		"1": "blocks/corals/pink/coral_reef_pink",
-		"2": "blocks/corals/green/coral_reef_green",
-		"3": "blocks/aquatic_stone_cracked",
-		"4": "blocks/aquatic_stone",
-		"5": "blocks/silver",
-		"6": "blocks/fish",
-		"particle": "blocks/corals/red/coral_reef_red"
+		"0": "aquatic:blocks/corals/red/coral_reef_red",
+		"1": "aquatic:blocks/corals/pink/coral_reef_pink",
+		"2": "aquatic:blocks/corals/green/coral_reef_green",
+		"3": "aquatic:blocks/aquatic_stone_cracked",
+		"4": "aquatic:blocks/aquatic_stone",
+		"5": "aquatic:blocks/silver",
+		"6": "aquatic:blocks/fish",
+		"particle": "aquatic:blocks/corals/red/coral_reef_red"
 	},
 	"elements": [
 		{

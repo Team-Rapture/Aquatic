@@ -1,0 +1,17 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+      "model": "aquatic:aquatic_stone_cracked.json",
+      "custom": {
+        "flip-v": true
+      }
+    },
+    "variants": {
+      "normal": [
+        {}
+      ],
+      "inventory": [
+        {}
+      ]
+    }
+  }
