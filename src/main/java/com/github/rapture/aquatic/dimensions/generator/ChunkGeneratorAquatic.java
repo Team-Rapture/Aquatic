@@ -3,6 +3,7 @@ package com.github.rapture.aquatic.dimensions.generator;
 import java.util.List;
 import java.util.Random;
 
+import com.github.rapture.aquatic.init.AquaticBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -22,7 +23,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 	private IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
 	private IBlockState SAND = Blocks.SAND.getDefaultState();
 
-	private IBlockState WATER = Blocks.WATER.getDefaultState();
+	private IBlockState WATER = AquaticBlocks.AQUA_WATER_BLOCK.getDefaultState();
 	public NoiseGeneratorOctaves scaleNoise;
 	public NoiseGeneratorOctaves depthNoise;
 	private AquaticGenerator gensPerlin;

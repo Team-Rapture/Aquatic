@@ -26,6 +26,10 @@ public class AquaticConfig {
     @Config.Comment("Amount of energy an aqua net controller will generate")
     public static int aquaNetGeneration = 50;
 
+    @Config.Name("Aqua Node Laser Beams")
+    @Config.Comment("Set to false to disable laser beam render to player from Aqua Nodes")
+    public static boolean aquaNodeBeam = true;
+
     @Config.RequiresMcRestart
     @Config.Name("Dimension ID")
     @Config.Comment("Dimension ID - CAREFUL WHEN CHANGING! Default: 300")

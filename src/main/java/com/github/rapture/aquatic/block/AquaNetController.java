@@ -2,6 +2,7 @@ package com.github.rapture.aquatic.block;
 
 import com.github.rapture.aquatic.tileentity.TileAquaNetController;
 import net.minecraft.block.material.Material;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.world.World;
@@ -13,7 +14,7 @@ import javax.annotation.Nullable;
 //TODO Fix model rendering
 public class AquaNetController extends BlockContainerBase {
 
-    public AquaNetController() {
+    public AquaNetController(EntityEquipmentSlot slot) {
         super("aquanet_controller", Material.ROCK);
         this.setHardness(1.0f);
     }

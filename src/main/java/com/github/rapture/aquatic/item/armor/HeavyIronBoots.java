@@ -28,7 +28,6 @@ public class HeavyIronBoots extends ItemArmor {
         this.setUnlocalizedName("heavy_iron_boots");
         this.setRegistryName("heavy_iron_boots");
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
-
     }
 
     @Override
