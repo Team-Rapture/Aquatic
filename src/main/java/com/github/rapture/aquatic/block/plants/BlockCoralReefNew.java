@@ -11,7 +11,8 @@ import net.minecraft.world.World;
 public class BlockCoralReefNew extends BlockBush {
 	public BlockCoralReefNew(String name, Material material) {
 		super(material);
-
+		this.setUnlocalizedName(name);
+		this.setRegistryName(name);
 		this.setCreativeTab(Aquatic.CREATIVE_TAB);
 	}
 

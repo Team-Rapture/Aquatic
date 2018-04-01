@@ -1,7 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-      "model": "aquatic:aquatic_stone.json",
+      "model": "aquatic:aquatic_stone",
       "custom": {
         "flip-v": true
       }

@@ -1,7 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-      "model": "aquatic:coral_reef_pink.json",
+      "model": "aquatic:coral_reef_pink",
       "custom": {
         "flip-v": true
       }
