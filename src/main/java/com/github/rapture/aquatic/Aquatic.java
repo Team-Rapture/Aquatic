@@ -22,64 +22,72 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(name = Aquatic.MODNAME, version = Aquatic.VERSION, modid = Aquatic.MODID, certificateFingerprint = Aquatic.FINGERPRINT_KEY, dependencies = Aquatic.DEPENDENCIES, updateJSON = Aquatic.UPDATE_JSON)
-
+@Mod(
+        name = Aquatic.MODNAME,
+        version = Aquatic.VERSION,
+        modid = Aquatic.MODID,
+        certificateFingerprint = Aquatic.FINGERPRINT_KEY,
+        dependencies = Aquatic.DEPENDENCIES,
+        updateJSON = Aquatic.UPDATE_JSON
+)
 public class Aquatic {
 
-	public static final String MODNAME = "Aquatic";
-	public static final String MODID = "aquatic";
-	public static final String VERSION = "@VERSION@";
-	public static final String FINGERPRINT_KEY = "@FINGERPRINTKEY@";
-	public static final String DEPENDENCIES = ""; // none for now
-	public static final String UPDATE_JSON = "@UPDATEJSON@";
-	@Instance(value = Aquatic.MODID)
-	public static Aquatic instance;
-	private static Logger log = LogManager.getLogger(MODID);
+    public static final String MODNAME = "Aquatic";
+    public static final String MODID = "aquatic";
+    public static final String VERSION = "@VERSION@";
+    public static final String FINGERPRINT_KEY = "@FINGERPRINTKEY@";
+    public static final String DEPENDENCIES = ""; // none for now
+    public static final String UPDATE_JSON = "@UPDATEJSON@";
 
-	@SidedProxy(clientSide = "com.github.rapture.aquatic.proxy.ClientProxy", serverSide = "com.github.rapture.aquatic.proxy.ServerProxy")
-	public static CommonProxy proxy;
+    @Instance(value = Aquatic.MODID)
+    public static Aquatic instance;
 
-	public static Logger getLogger() {
-		return log;
-	}
+    private static Logger log = LogManager.getLogger(MODID);
 
-	public static final CreativeTab CREATIVE_TAB = new CreativeTab(MODID);
+    @SidedProxy(clientSide = "com.github.rapture.aquatic.proxy.ClientProxy", serverSide = "com.github.rapture.aquatic.proxy.ServerProxy")
+    public static CommonProxy proxy;
 
-	static {
-		FluidRegistry.enableUniversalBucket();
-	}
+    public static Logger getLogger() {
+        return log;
+    }
 
-	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit(event);
-		CREATIVE_TAB.setIcon(Items.PRISMARINE_SHARD);
-		MinecraftForge.EVENT_BUS.register(this);
-	}
+    public static final CreativeTab CREATIVE_TAB = new CreativeTab(MODID);
 
-	@Mod.EventHandler
-	public void init(FMLInitializationEvent event) {
-		proxy.init(event);
-		getLogger().info("Initialization finished.");
-	}
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
 
-	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit(event);
-		getLogger().info("Post-Initialization finished.");
-	}
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        proxy.preInit(event);
+        CREATIVE_TAB.setIcon(Items.PRISMARINE_SHARD);
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-	@Mod.EventHandler
-	public void serverLoad(FMLServerStartingEvent event) {
-		proxy.serverStarting(event);
-		getLogger().info("World initialization complete.");
-	}
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        proxy.init(event);
+        getLogger().info("Initialization finished.");
+    }
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void onFogRender(EntityViewRenderEvent.FogDensity e) {
-		if (e.getState().getBlock() == AquaticBlocks.AQUA_WATER_BLOCK) {
-			e.setDensity(0.0F);
-			e.setCanceled(true);
-		}
-	}
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        proxy.postInit(event);
+        getLogger().info("Post-Initialization finished.");
+    }
+
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        proxy.serverStarting(event);
+        getLogger().info("World initialization complete.");
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void onFogRender(EntityViewRenderEvent.FogDensity e) {
+        if (e.getState().getBlock() == AquaticBlocks.AQUA_WATER_BLOCK) {
+            e.setDensity(0.0F);
+            e.setCanceled(true);
+        }
+    }
 }
