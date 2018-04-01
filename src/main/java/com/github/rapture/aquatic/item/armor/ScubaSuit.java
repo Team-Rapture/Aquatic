@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 public class ScubaSuit extends ItemArmor {
     public static final ArmorMaterial scuba_suit = EnumHelper.addArmorMaterial("scuba_suit", "scuba_suit", 5, new int[]{1, 2, 3, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
     public EntityEquipmentSlot slot;
-    public OxygenHandler oxygenStorage = new OxygenHandler(10000,10000);
+    public OxygenHandler oxygenStorage = new OxygenHandler(10000, 10000);
 
     public ScubaSuit(EntityEquipmentSlot slot, String name) {
         super(scuba_suit, 0, slot);
@@ -35,11 +35,11 @@ public class ScubaSuit extends ItemArmor {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        if(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD ).getItem()== AquaticItems.SCUBA_HELEMT && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST ).getItem()== AquaticItems.SCUBA_CHEST && player.getItemStackFromSlot(EntityEquipmentSlot.LEGS ).getItem()== AquaticItems.SCUBA_LEGGINGS && (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()== AquaticItems.SCUBA_FEET || player.getItemStackFromSlot(EntityEquipmentSlot.FEET ).getItem()== AquaticItems.HEAVY_IRON_BOOTS)){
-
-
+        if(hasFullArmor(player) == true){
+            sendPlayerAir(player);
 
         }
+
         super.onArmorTick(world, player, itemStack);
     }
 
@@ -69,4 +69,21 @@ public class ScubaSuit extends ItemArmor {
         };
     }
 
+    public boolean hasFullArmor(EntityPlayer player) {
+        if(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == AquaticItems.SCUBA_CHEST && player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == AquaticItems.SCUBA_LEGGINGS && (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.SCUBA_FEET || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS)){
+            return true;
+        }
+        return false;
+
+    }
+    public void sendPlayerAir(EntityPlayer player) {
+        if (player.getAir() < 300) {
+            if (oxygenStorage.canSendOxygen(300)) {
+                oxygenStorage.drainOxygen(300);
+                player.setAir(player.getAir() + 30);
+            }
+        }
+    }
 }
+
+
