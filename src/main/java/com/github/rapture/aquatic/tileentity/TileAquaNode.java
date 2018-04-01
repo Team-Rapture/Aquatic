@@ -8,6 +8,7 @@ import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +16,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
@@ -23,6 +25,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     public boolean hasAquaController = false;
     public BlockPos controllerPos = null;
     public int timer = 0;
+    public int oxygenTimer = 0;
 
     public TileAquaNode() {
     }
@@ -34,6 +37,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
         oxygenStorage.readFromNBT(nbt);
         hasAquaController = nbt.getBoolean("hasAquaController");
         this.timer = nbt.getInteger("timer");
+        this.oxygenTimer = nbt.getInteger("oxygenTimer");
         if (nbt.hasKey("x") && nbt.hasKey("y") && nbt.hasKey("z")) {
             controllerPos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
         }
@@ -45,6 +49,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
         oxygenStorage.writeToNBT(nbt);
         nbt.setBoolean("hasAquaController", hasAquaController);
         nbt.setInteger("timer", timer);
+        nbt.setInteger("oxygenTimer", oxygenTimer);
         if (controllerPos != null) {
             nbt.setInteger("x", controllerPos.getX());
             nbt.setInteger("y", controllerPos.getY());
@@ -94,6 +99,34 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
                 }
             }else if (timer > 0) {
                 timer = 0;
+            }
+        }
+
+        oxygenTimer++;
+        if(oxygenTimer >= 18) {
+            playersInRange();
+            oxygenTimer = 0;
+        }
+    }
+
+    public List<EntityPlayer> playersInRange() {
+        List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getRadius(getPos(), 60, 60));
+        if(players != null) {
+            for (EntityPlayer player : players) {
+                if (player.isInWater() && !player.capabilities.isCreativeMode) {
+                    sendPlayerAir(player);
+                }
+            }
+            return players;
+        }
+        return null;
+    }
+
+    public void sendPlayerAir(EntityPlayer player) {
+        if (player.getAir() < 300) {
+            if (oxygenStorage.canSendOxygen(300)) {
+                oxygenStorage.drainOxygen(300);
+                player.setAir(player.getAir() + 30);
             }
         }
     }
