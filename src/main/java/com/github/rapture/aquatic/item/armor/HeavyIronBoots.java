@@ -39,9 +39,10 @@ public class HeavyIronBoots extends ItemArmor {
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
         if (player.isInWater()) {
 
-            if (player.capabilities.isCreativeMode) return;
+            if (player.capabilities.isFlying) return;
+            //if (player.capabilities.isCreativeMode) return;
             if (world.getBlockState(player.getPosition().down(1)).getMaterial() == Material.WATER) {
-                ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, 5, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 1, 0, 0);
+                ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, (int) Math.round(Math.random() * 4), player.getPositionVector().x, player.getPositionVector().y, player.getPositionVector().z, (Math.random() - 0.5) * 0.8, 0.5, (Math.random() - 0.5) * 0.8, 0);
                 player.motionY -= 0.08F;
             }
 
