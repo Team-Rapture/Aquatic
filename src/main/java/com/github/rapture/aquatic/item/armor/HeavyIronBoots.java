@@ -42,7 +42,7 @@ public class HeavyIronBoots extends ItemArmor {
             if (player.capabilities.isCreativeMode) return;
             if (world.getBlockState(player.getPosition().down(1)).getMaterial() == Material.WATER) {
                 ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, 5, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), 0, 1, 0, 0);
-                player.motionY -= 0.05F;
+                player.motionY -= 0.08F;
             }
 
             player.stepHeight = 1.0f;

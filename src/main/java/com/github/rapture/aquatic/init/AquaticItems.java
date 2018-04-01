@@ -6,6 +6,7 @@ import com.github.rapture.aquatic.item.ItemAquaticCharm;
 import com.github.rapture.aquatic.item.ItemTesting;
 import com.github.rapture.aquatic.item.armor.HeavyIronBoots;
 import com.github.rapture.aquatic.item.armor.ScubaSuit;
+import com.github.rapture.aquatic.item.tool.HydroDrill;
 import com.github.rapture.aquatic.util.RegistryCreate;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -21,6 +22,7 @@ public class AquaticItems {
     public static final Item SCUBA_CHEST = new ScubaSuit(EntityEquipmentSlot.CHEST , "scuba_chestplate");
     public static final Item SCUBA_LEGGINGS = new ScubaSuit(EntityEquipmentSlot.LEGS , "scuba_leggings");
     public static final Item SCUBA_FEET = new ScubaSuit(EntityEquipmentSlot.FEET , "scuba_fins");
+    public static final Item HYDRO_DRILL = new HydroDrill();
 
 
 
