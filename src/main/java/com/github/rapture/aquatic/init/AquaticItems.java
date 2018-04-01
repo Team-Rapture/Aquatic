@@ -21,5 +21,4 @@ public class AquaticItems {
 	public static final Item TEST = new ItemTesting("test");
 
 
-
 }
