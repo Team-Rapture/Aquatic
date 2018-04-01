@@ -5,10 +5,13 @@ import com.github.rapture.aquatic.api.oxygen.capability.CapabilityOxygen;
 import com.github.rapture.aquatic.client.render.hud.HudRender;
 import com.github.rapture.aquatic.client.render.hud.IHudSupport;
 import com.github.rapture.aquatic.init.AquaticBlocks;
+import com.github.rapture.aquatic.init.AquaticItems;
+import com.github.rapture.aquatic.item.armor.ScubaSuit;
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -124,10 +127,26 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     public void sendPlayerAir(EntityPlayer player) {
         if (player.getAir() < 300) {
             if (oxygenStorage.canSendOxygen(300)) {
-                oxygenStorage.drainOxygen(300);
-                player.setAir(player.getAir() + 30);
+                if(hasFullArmor(player)) {
+                    ScubaSuit suit = (ScubaSuit) player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem();
+                    suit.oxygenStorage.fillOxygen(300);
+                    oxygenStorage.drainOxygen(300);
+                    player.setAir(player.getAir() + 30);
+                }
             }
         }
+    }
+
+    public boolean hasFullArmor(EntityPlayer player) {
+        if(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT
+                && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == AquaticItems.SCUBA_CHEST
+                && player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == AquaticItems.SCUBA_LEGGINGS
+                && (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.SCUBA_FEET
+                || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS)){
+            return true;
+        }
+
+        return false;
     }
 
     @Override

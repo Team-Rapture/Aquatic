@@ -73,7 +73,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 			for (int z = 0; z < 16; z++) {
 				for (int y = 0; y < 80; y++) {
 					p.setBlockState(x, y + yn, z, WATER);
-					
+
 				}
 			}
 		}
@@ -126,7 +126,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 
 	@Override
 	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position,
-			boolean findUnexplored) {
+										   boolean findUnexplored) {
 		return null;
 	}
 

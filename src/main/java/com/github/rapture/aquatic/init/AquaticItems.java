@@ -18,9 +18,9 @@ public class AquaticItems {
     //register items by just creating public static final fields
     public static final Item HEAVY_IRON_BOOTS = new HeavyIronBoots();
     public static final Item SCUBA_HELEMT = new ScubaSuit(EntityEquipmentSlot.HEAD , "scuba_helmet");
-    public static final Item SCUBA_CHEST = new ScubaSuit(EntityEquipmentSlot.HEAD , "scuba_chestplate");
-    public static final Item SCUBA_LEGGINGS = new ScubaSuit(EntityEquipmentSlot.HEAD , "scuba_leggings");
-    public static final Item SCUBA_FEET = new ScubaSuit(EntityEquipmentSlot.HEAD , "scuba_fins");
+    public static final Item SCUBA_CHEST = new ScubaSuit(EntityEquipmentSlot.CHEST , "scuba_chestplate");
+    public static final Item SCUBA_LEGGINGS = new ScubaSuit(EntityEquipmentSlot.LEGS , "scuba_leggings");
+    public static final Item SCUBA_FEET = new ScubaSuit(EntityEquipmentSlot.FEET , "scuba_fins");
 
 
 
