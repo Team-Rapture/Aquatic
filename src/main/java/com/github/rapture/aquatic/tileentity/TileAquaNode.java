@@ -104,7 +104,11 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
         oxygenTimer++;
         if(oxygenTimer >= 18) {
-            playersInRange();
+            for (EntityPlayer player : playersInRange()) {
+                if (player.isInWater() && !player.capabilities.isCreativeMode) {
+                    sendPlayerAir(player);
+                }
+            }
             oxygenTimer = 0;
         }
     }
@@ -112,11 +116,6 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     public List<EntityPlayer> playersInRange() {
         List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getRadius(getPos(), 60, 60));
         if(players != null) {
-            for (EntityPlayer player : players) {
-                if (player.isInWater() && !player.capabilities.isCreativeMode) {
-                    sendPlayerAir(player);
-                }
-            }
             return players;
         }
         return null;
