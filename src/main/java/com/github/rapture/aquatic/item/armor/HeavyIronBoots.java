@@ -46,7 +46,6 @@ public class HeavyIronBoots extends ItemArmor {
             }
 
             player.stepHeight = 1.0f;
-            player.capabilities.setPlayerWalkSpeed(0.24f);
         } else {
             for (Entity e : world.getEntitiesWithinAABB(EntityLiving.class, player.getEntityBoundingBox().expand(0, 8, 0))) {
                 if (player.collidedVertically) {
