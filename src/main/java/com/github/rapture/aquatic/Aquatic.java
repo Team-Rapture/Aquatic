@@ -1,18 +1,18 @@
 package com.github.rapture.aquatic;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.github.rapture.aquatic.creativetab.CreativeTab;
-import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.proxy.CommonProxy;
+
 import net.minecraft.init.Items;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * @author UpcraftLP
@@ -33,7 +33,7 @@ public class Aquatic {
     public static final String FINGERPRINT_KEY = "@FINGERPRINTKEY@";
     public static final String DEPENDENCIES = ""; //none for now
     public static final String UPDATE_JSON = "@UPDATEJSON@";
-
+    public static Aquatic instance;
     private static Logger log = LogManager.getLogger(MODID);
 
     @SidedProxy(clientSide = "com.github.rapture.aquatic.proxy.ClientProxy", serverSide = "com.github.rapture.aquatic.proxy.ServerProxy")

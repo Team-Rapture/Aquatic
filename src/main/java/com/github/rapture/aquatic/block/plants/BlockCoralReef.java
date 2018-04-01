@@ -16,12 +16,11 @@ import net.minecraft.world.World;
 //TODO get a better texture/model made
 public class BlockCoralReef extends BlockBush implements IHasItemBlock {
 
-    public BlockCoralReef() {
+    public BlockCoralReef(String name) {
         super(Material.ROCK);
         this.setSoundType(SoundType.PLANT);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
-        this.setUnlocalizedName("coral_reef");
-        this.setRegistryName("coral_reef");
+      
     }
 
     @Override

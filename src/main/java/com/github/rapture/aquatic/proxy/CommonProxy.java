@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.proxy;
 
 import com.github.rapture.aquatic.dimensions.DimensionAquatic;
+import com.github.rapture.aquatic.entity.ModEntities;
 import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.UpdateChecker;
@@ -20,6 +21,7 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		AquaticTiles.registerTiles();
 		DimensionAquatic.init();
+		ModEntities.init();
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
