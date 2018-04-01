@@ -1,12 +1,20 @@
 package com.github.rapture.aquatic;
 
+<<<<<<< HEAD
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+=======
+import com.github.rapture.aquatic.block.fluid.FluidAquaWater;
+>>>>>>> 908bffbeb20c9cd5fecd4979e37f132ef064b979
 import com.github.rapture.aquatic.creativetab.CreativeTab;
 import com.github.rapture.aquatic.proxy.CommonProxy;
 
 import net.minecraft.init.Items;
+<<<<<<< HEAD
+=======
+import net.minecraftforge.fluids.FluidRegistry;
+>>>>>>> 908bffbeb20c9cd5fecd4979e37f132ef064b979
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -45,6 +53,10 @@ public class Aquatic {
 
     public static final CreativeTab CREATIVE_TAB = new CreativeTab(MODID);
 
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
@@ -68,5 +80,4 @@ public class Aquatic {
         proxy.serverStarting(event);
         getLogger().info("World initialization complete.");
     }
-
 }

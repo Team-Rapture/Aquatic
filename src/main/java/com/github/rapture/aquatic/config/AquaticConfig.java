@@ -8,10 +8,12 @@ import static com.github.rapture.aquatic.Aquatic.*;
 @Config.LangKey("config.aquatic.title")
 public class AquaticConfig {
 
+    @Config.RequiresMcRestart
     @Config.Name("Enable Update Checker")
     @Config.Comment("whether to announce mod updates")
     public static boolean enableUpdateChecker = true;
 
+    @Config.RequiresMcRestart
     @Config.Name("Announce Beta Updates")
     @Config.Comment("enable to also show beta updates")
     public static boolean announceBetaUpdates = false;
@@ -23,29 +25,13 @@ public class AquaticConfig {
     @Config.Name("Aqua Net Controller")
     @Config.Comment("Amount of energy an aqua net controller will generate")
     public static int aquaNetGeneration = 50;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    @Config.Name("Dim ID")
-    @Config.Comment("Dimension ID- CAREFUL WHEN CHANGING ID! Default: 300")
+
+    @Config.RequiresMcRestart
+    @Config.Name("Dimension ID")
+    @Config.Comment("Dimension ID - CAREFUL WHEN CHANGING! Default: 300")
     public static int dimensionID = 300;
     
+<<<<<<< HEAD
     @Config.Name("Angler Spawn Rate")
     @Config.Comment("Angler Fish Spawn Rate - Default: 8")
     public static int angler_spawn_rate = 8;
@@ -62,4 +48,6 @@ public class AquaticConfig {
     
     
     
+=======
+>>>>>>> 908bffbeb20c9cd5fecd4979e37f132ef064b979
 }

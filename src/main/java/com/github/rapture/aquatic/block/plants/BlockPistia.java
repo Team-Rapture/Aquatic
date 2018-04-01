@@ -2,7 +2,9 @@ package com.github.rapture.aquatic.block.plants;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.util.IHasItemBlock;
+import com.github.rapture.aquatic.util.NameUtil;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,8 +22,7 @@ public class BlockPistia extends BlockBush implements IHasItemBlock {
         super(Material.ROCK);
         this.setSoundType(SoundType.PLANT);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
-        this.setUnlocalizedName("pistia");
-        this.setRegistryName("pistia");
+        NameUtil.name(this, "pistia");
     }
 
     @Override
@@ -41,7 +42,13 @@ public class BlockPistia extends BlockBush implements IHasItemBlock {
 
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
-        return world.getBlockState(pos.down(1)).getBlock() == Blocks.WATER;
+        IBlockState soil = world.getBlockState(pos.down());
+        return world.isAirBlock(pos) && soil.getMaterial() == Material.WATER && (!soil.getPropertyKeys().contains(BlockLiquid.LEVEL) || soil.getValue(BlockLiquid.LEVEL) == 0);
+    }
+
+    @Override
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+        return canSustainBush(worldIn.getBlockState(pos.down()));
     }
 
     @Override
@@ -51,7 +58,7 @@ public class BlockPistia extends BlockBush implements IHasItemBlock {
 
     @Override
     public boolean canSustainBush(IBlockState state) {
-        return state.getBlock() == Blocks.WATER || state.getMaterial() == Material.ICE;
+        return state.getMaterial() == Material.ICE || state.getMaterial() == Material.WATER && (!state.getPropertyKeys().contains(BlockLiquid.LEVEL) || state.getValue(BlockLiquid.LEVEL) == 0);
     }
 
     @Override

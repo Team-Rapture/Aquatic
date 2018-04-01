@@ -6,6 +6,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
 
@@ -54,5 +56,12 @@ public class TileEntityBase extends TileEntity implements ITickable {
 
     public IBlockState getState() {
         return world.getBlockState(pos);
+    }
+
+    public AxisAlignedBB getRadius(BlockPos blockPos, int size, int height) {
+        double hs = size / 2;
+        double hh = height / 2;
+        return new AxisAlignedBB(blockPos.getX() - hs, blockPos.getY() - hh, blockPos.getZ() - hs,
+                blockPos.getX() + hs, blockPos.getY() + hh, blockPos.getZ() + hs);
     }
 }

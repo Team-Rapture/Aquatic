@@ -3,8 +3,10 @@ package com.github.rapture.aquatic.util;
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.item.ItemBlockBase;
+import com.google.common.collect.ObjectArrays;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -18,8 +20,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,7 +59,7 @@ public class AutoRegistry {
         Loader.instance().setActiveModContainer(currentModContainer);
         if(AquaticConfig.debugMode) {
             Aquatic.getLogger().info("Active mod container restored.");
-            Aquatic.getLogger().info("successfully registered {} objects.", count);
+            Aquatic.getLogger().info("successfully registered {} objects for event {}", count, registry.getRegistrySuperType().getSimpleName().toUpperCase(Locale.ROOT));
         }
     }
 
@@ -102,13 +106,30 @@ public class AutoRegistry {
                     if (Item.class.isAssignableFrom(type)) {
                         Aquatic.proxy.registerRender((Item) entry);
                     } else if (Block.class.isAssignableFrom(type)) {
-                        if(entry instanceof IHasItemBlock) {
-                            Block block = (Block) entry;
-                            final Item itemBlock = new ItemBlockBase(block).setCreativeTab(block.getCreativeTabToDisplayOn());
+                        Block block = (Block) entry;
+                        Class<? extends ItemBlock> itemBlockClass = ItemBlockBase.class;
+                        Object[] cArgs = new Object[0];
+                        if(block instanceof IHasItemBlock) {
+                            IHasItemBlock block1 = (IHasItemBlock) block;
+                            itemBlockClass = block1.getItemBlockClass();
+                            cArgs = block1.getAdditionalItemBlockConstructorArguments();
+                        }
+
+                        if(itemBlockClass != null) { //register itemblock
+                            Class<?>[] ctorArgClasses = new Class<?>[cArgs.length + 1];
+                            ctorArgClasses[0] = Block.class;
+                            for (int idx = 1; idx < ctorArgClasses.length; idx++)
+                            {
+                                ctorArgClasses[idx] = cArgs[idx-1].getClass();
+                            }
+                            Constructor<? extends ItemBlock> itemCtor = itemBlockClass.getConstructor(ctorArgClasses);
+                            final Item itemBlock = itemCtor.newInstance(ObjectArrays.concat(block, cArgs));
+                            if(itemBlock.getRegistryName() == null) itemBlock.setRegistryName(block.getRegistryName());
                             ITEM_REGISTRY.register(itemBlock);
                             count++;
-                            Aquatic.proxy.registerRender(itemBlock);
+                            Aquatic.proxy.registerRender(block);
                         }
+
                     }
                 } catch (Exception e) {
                     Aquatic.getLogger().error("Exception thrown during registration step!", e);
