@@ -21,13 +21,4 @@ public class AquaticItems {
 	public static final Item TEST = new ItemTesting("test");
 
 
-<<<<<<< HEAD
-	public static final Item aquatic_charm = new ItemAquaticCharm("aquatic_charm", 1, 0, AquaticConfig.dimensionID);
-	
-	
-//	USE FOR TESTING METHODS AND STUFF!
-	public static final Item test = new ItemTesting("test");
-=======
->>>>>>> 908bffbeb20c9cd5fecd4979e37f132ef064b979
-
 }

@@ -31,6 +31,6 @@ public class BlockAquaCharm extends BlockBase {
 	 */
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return AquaticItems.aquatic_charm;
+		return AquaticItems.AQUATIC_CHARM;
 	}
 }

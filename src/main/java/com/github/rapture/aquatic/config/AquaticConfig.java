@@ -31,7 +31,6 @@ public class AquaticConfig {
     @Config.Comment("Dimension ID - CAREFUL WHEN CHANGING! Default: 300")
     public static int dimensionID = 300;
     
-<<<<<<< HEAD
     @Config.Name("Angler Spawn Rate")
     @Config.Comment("Angler Fish Spawn Rate - Default: 8")
     public static int angler_spawn_rate = 8;
@@ -46,8 +45,5 @@ public class AquaticConfig {
     public static int angler_MAX_spawn_rate = 3;
     
     
-    
-    
-=======
->>>>>>> 908bffbeb20c9cd5fecd4979e37f132ef064b979
+   
 }
