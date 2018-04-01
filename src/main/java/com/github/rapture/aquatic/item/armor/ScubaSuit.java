@@ -20,62 +20,40 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ScubaSuit extends ItemArmor {
+
     public static final ArmorMaterial scuba_suit = EnumHelper.addArmorMaterial("scuba_suit", "scuba_suit", 5, new int[]{1, 2, 3, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
     public EntityEquipmentSlot slot;
-    public OxygenHandler oxygenStorage = new OxygenHandler(10000, 10000);
+    public OxygenHandler oxygenStorage = new OxygenHandler(10000);
 
     public ScubaSuit(EntityEquipmentSlot slot, String name) {
         super(scuba_suit, 0, slot);
         this.slot = slot;
-        this.setUnlocalizedName("scuba_suit" + slot);
+        this.setUnlocalizedName("scuba_suit_" + slot.toString().toLowerCase());
         this.setRegistryName(name);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
     }
 
-
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        if(hasFullArmor(player) == true){
+        if(hasFullArmor(player)){
             sendPlayerAir(player);
-
         }
 
         super.onArmorTick(world, player, itemStack);
     }
 
-    @Nullable
-    @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        ICapabilityProvider defaultProvider = super.initCapabilities(stack, nbt);
-
-        return new ICapabilityProvider() {
-            @Override
-            public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-                if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) {
-                    return true;
-                }
-                return defaultProvider.hasCapability(capability, facing);
-            }
-
-            @Nullable
-            @Override
-            public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-                if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) {
-
-                    return (T) oxygenStorage;
-                }
-                return defaultProvider.getCapability(capability, facing);
-            }
-        };
-    }
-
     public boolean hasFullArmor(EntityPlayer player) {
-        if(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == AquaticItems.SCUBA_CHEST && player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == AquaticItems.SCUBA_LEGGINGS && (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.SCUBA_FEET || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS)){
+        if(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT
+                && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == AquaticItems.SCUBA_CHEST
+                && player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == AquaticItems.SCUBA_LEGGINGS
+                && (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.SCUBA_FEET
+                || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS)){
             return true;
         }
-        return false;
 
+        return false;
     }
+
     public void sendPlayerAir(EntityPlayer player) {
         if (player.getAir() < 300) {
             if (oxygenStorage.canSendOxygen(300)) {
@@ -83,6 +61,24 @@ public class ScubaSuit extends ItemArmor {
                 player.setAir(player.getAir() + 30);
             }
         }
+    }
+
+    @Nullable
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+        ICapabilityProvider defaultProvider = super.initCapabilities(stack, nbt);
+        return new ICapabilityProvider() {
+            @Override
+            public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+                return capability == CapabilityOxygen.OXYGEN_CAPABILITY ? true : defaultProvider.hasCapability(capability, facing);
+            }
+
+            @Nullable
+            @Override
+            public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+                return capability == CapabilityOxygen.OXYGEN_CAPABILITY ? (T) oxygenStorage : defaultProvider.getCapability(capability, facing);
+            }
+        };
     }
 }
 
