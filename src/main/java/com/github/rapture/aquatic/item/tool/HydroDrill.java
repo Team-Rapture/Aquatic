@@ -44,13 +44,14 @@ public class HydroDrill extends ItemPickaxe {
         return new ICapabilityProvider() {
             @Override
             public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityEnergy.ENERGY ? true : defaultProvider.hasCapability(capability, facing);
+                return capability == CapabilityEnergy.ENERGY || defaultProvider.hasCapability(capability, facing);
             }
 
             @Nullable
             @Override
             public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityEnergy.ENERGY ? (T) energyStorage : defaultProvider.getCapability(capability, facing);
+                return capability == CapabilityEnergy.ENERGY ? (T) energyStorage :
+                        (defaultProvider == null ? null : defaultProvider.getCapability(capability, facing));
             }
         };
     }

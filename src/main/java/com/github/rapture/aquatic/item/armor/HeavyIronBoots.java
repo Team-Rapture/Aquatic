@@ -56,6 +56,7 @@ public class HeavyIronBoots extends ItemArmor {
                     e.attackEntityFrom(DamageSource.ANVIL, 2);
                 }
             }
+            player.stepHeight = 0.6f;
         }
 
         super.onArmorTick(world, player, itemStack);
