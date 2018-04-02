@@ -2,6 +2,7 @@ package com.github.rapture.aquatic;
 
 import com.github.rapture.aquatic.creativetab.CreativeTab;
 import com.github.rapture.aquatic.init.AquaticBlocks;
+import com.github.rapture.aquatic.network.EventHandler;
 import com.github.rapture.aquatic.proxy.CommonProxy;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.Items;
@@ -58,6 +59,7 @@ public class Aquatic {
         proxy.preInit(event);
         CREATIVE_TAB.setIcon(Items.PRISMARINE_SHARD);
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
     }
 
     @Mod.EventHandler
