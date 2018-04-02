@@ -37,16 +37,11 @@ public class HydroDrill extends ItemPickaxe {
         return super.showDurabilityBar(stack);
     }
 
-    public int getCurrentEnergy() {
-        return energyStorage.getEnergyStored();
-    }
-
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+        ICapabilityProvider defaultProvider = super.initCapabilities(stack, nbt);
         return new ICapabilityProvider() {
-            ICapabilityProvider defaultProvider = HydroDrill.super.initCapabilities(stack, nbt);
-
             @Override
             public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
                 return capability == CapabilityEnergy.ENERGY ? true : defaultProvider.hasCapability(capability, facing);

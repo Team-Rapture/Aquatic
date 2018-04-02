@@ -39,13 +39,11 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 	private NoiseGeneratorPerlin perlinAdditional2;
 
 	private IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
-	private IBlockState SAND = Blocks.SAND.getDefaultState();
 
 	private IBlockState WATER = AquaticBlocks.AQUA_WATER_BLOCK.getDefaultState();
 	public NoiseGeneratorOctaves scaleNoise;
 	public NoiseGeneratorOctaves depthNoise;
 	private AquaticGenerator gensPerlin;
-	private final WorldGenMiniIsland miniIsland = new WorldGenMiniIsland();
 	double[] data4;
 	private Random random;
 
@@ -261,7 +259,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
 				for (int y = 0; y < 126; y++) {
-					if(p.getBlockState(x, y + yn, z) == Blocks.AIR.getDefaultState()) {
+					if (p.getBlockState(x, y + yn, z) == Blocks.AIR.getDefaultState()) {
 						p.setBlockState(x, y + yn, z, WATER);
 					}
 				}
@@ -287,18 +285,6 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 		Biome biome = this.world.getBiome(blockpos.add(16, 0, 16));
 
 		net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.random, x, z, false);
-
-		/**
-		if (this.random.nextInt(24) == 0) {
-			this.miniIsland.generate(this.world, this.random, blockpos.add(this.random.nextInt(16) + 8,
-					110 + this.random.nextInt(16), this.random.nextInt(16) + 8));
-
-			if (this.random.nextInt(14) == 0) {
-				this.miniIsland.generate(this.world, this.random, blockpos.add(this.random.nextInt(16) + 8,
-						110 + this.random.nextInt(16), this.random.nextInt(16) + 8));
-			}
-		}
-		*/
 
 		biome.decorate(this.world, this.random, new BlockPos(i, 0, j));
 
