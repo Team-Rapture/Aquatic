@@ -25,7 +25,7 @@ public class ItemBlockPistia extends ItemBlock {
     }
 
     public EnumActionResult tryPlaceBlock(World worldIn, EntityPlayer playerIn, EnumHand handIn, ItemStack stack) {
-        if(worldIn.isRemote) return EnumActionResult.SUCCESS;
+        if (worldIn.isRemote) return EnumActionResult.SUCCESS;
         RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, true);
         if (raytraceresult == null) return EnumActionResult.PASS;
         if (!stack.isEmpty() && raytraceresult.typeOfHit == RayTraceResult.Type.BLOCK) {

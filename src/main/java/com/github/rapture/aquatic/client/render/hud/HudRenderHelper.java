@@ -40,7 +40,7 @@ public class HudRenderHelper {
 
         if (hudPlacement == HudPlacement.HUD_FRONT || hudPlacement == HudPlacement.HUD_ABOVE_FRONT) {
             GlStateManager.translate(0.0F, -0.2500F, -0.4375F + .9);
-        } else if (hudPlacement != HudPlacement.HUD_CENTER){
+        } else if (hudPlacement != HudPlacement.HUD_CENTER) {
             GlStateManager.translate(0.0F, -0.2500F, -0.4375F + .4);
         }
 
@@ -95,14 +95,14 @@ public class HudRenderHelper {
         fontrenderer.drawString(fontrenderer.trimStringToWidth(messages, 115), 7, currenty, 0xffffff);
     }
 
-    public static enum HudPlacement {
+    public enum HudPlacement {
         HUD_ABOVE,
         HUD_ABOVE_FRONT,
         HUD_FRONT,
         HUD_CENTER
     }
 
-    public static enum HudOrientation {
+    public enum HudOrientation {
         HUD_SOUTH,
         HUD_TOPLAYER_HORIZ,
         HUD_TOPLAYER

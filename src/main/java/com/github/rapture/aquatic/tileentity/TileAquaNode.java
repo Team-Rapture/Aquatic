@@ -7,7 +7,6 @@ import com.github.rapture.aquatic.client.render.hud.IHudSupport;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.init.AquaticItems;
 import com.github.rapture.aquatic.item.armor.ScubaSuit;
-import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +15,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -87,7 +85,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
         }
 
         oxygenTimer++;
-        if(oxygenTimer >= 10) {
+        if (oxygenTimer >= 10) {
             for (EntityPlayer player : playersInRange()) {
                 if (player.isInWater() && !player.capabilities.isCreativeMode) {
                     sendPlayerAir(player);
@@ -99,7 +97,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
     public List<EntityPlayer> playersInRange() {
         List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getRadius(getPos(), 60, 60));
-        if(players != null) {
+        if (players != null) {
             return players;
         }
         return null;
@@ -108,7 +106,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     public void sendPlayerAir(EntityPlayer player) {
         if (player.getAir() < 300) {
             if (oxygen.canSendOxygen(300)) {
-                if(hasFullArmor(player)) {
+                if (hasFullArmor(player)) {
                     ScubaSuit suit = (ScubaSuit) player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem();
                     suit.oxygenStorage.fillOxygen(300);
                     oxygen.drainOxygen(300);
@@ -119,15 +117,12 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     }
 
     public boolean hasFullArmor(EntityPlayer player) {
-        if(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT
+        return player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT
                 && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == AquaticItems.SCUBA_CHEST
                 && player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == AquaticItems.SCUBA_LEGGINGS
                 && (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.SCUBA_FEET
-                || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS)){
-            return true;
-        }
+                || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS);
 
-        return false;
     }
 
     @Override

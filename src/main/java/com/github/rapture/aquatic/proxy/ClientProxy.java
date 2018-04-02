@@ -27,36 +27,36 @@ import static com.github.rapture.aquatic.Aquatic.MODID;
  */
 public class ClientProxy extends CommonProxy {
 
-	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-		super.preInit(event);
-		OBJLoader.INSTANCE.addDomain(MODID);
-		AquaticTiles.bindTESR();
-		ModelLoader.setCustomStateMapper(AquaticBlocks.AQUA_WATER_BLOCK,
-				new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
+        super.preInit(event);
+        OBJLoader.INSTANCE.addDomain(MODID);
+        AquaticTiles.bindTESR();
+        ModelLoader.setCustomStateMapper(AquaticBlocks.AQUA_WATER_BLOCK,
+                new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
         RenderingRegistry.registerEntityRenderingHandler(EntityAnglerFish.class, RenderAnglerFish::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityScylla.class, RenderScylla::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWaterBubble.class, RenderEntityBubble::new);
-	}
+    }
 
-	@Override
-	public void registerRender(Item item) {
-		if (item instanceof ICustomModelProvider)
-			((ICustomModelProvider) item).initModel();
-		else
-			ModelLoader.setCustomModelResourceLocation(item, 0,
-					new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
+    @Override
+    public void registerRender(Item item) {
+        if (item instanceof ICustomModelProvider)
+            ((ICustomModelProvider) item).initModel();
+        else
+            ModelLoader.setCustomModelResourceLocation(item, 0,
+                    new ModelResourceLocation(item.getRegistryName(), "inventory"));
+    }
 
-	public void init(FMLInitializationEvent event) {
-		super.init(event);
-	}
+    public void init(FMLInitializationEvent event) {
+        super.init(event);
+    }
 
-	@Override
-	public void registerRender(Block block) {
-		if (block instanceof ICustomModelProvider)
-			((ICustomModelProvider) block).initModel();
-		else
-			registerRender(Item.getItemFromBlock(block));
-	}
+    @Override
+    public void registerRender(Block block) {
+        if (block instanceof ICustomModelProvider)
+            ((ICustomModelProvider) block).initModel();
+        else
+            registerRender(Item.getItemFromBlock(block));
+    }
 }

@@ -28,10 +28,8 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
     }
 
     @Override
-    public boolean shouldSideBeRendered(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
-    {
-        if(side == EnumFacing.UP)
-        {
+    public boolean shouldSideBeRendered(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
+        if (side == EnumFacing.UP) {
             IBlockState upperState = world.getBlockState(pos.add(0, 1, 0));
             return !isSourceBlock(world, pos) || (!upperState.isFullBlock() && upperState.getMaterial() != Material.WATER);
         }

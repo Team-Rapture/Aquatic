@@ -45,10 +45,10 @@ public class AutoRegistry {
         IForgeRegistry<T> registry = event.getRegistry();
         Aquatic.getLogger().debug("Registering type {}", registry.getRegistrySuperType().getSimpleName());
         int count = 0;
-        for(Class clazz : REGISTRY_CLASSES.keySet()) {
+        for (Class clazz : REGISTRY_CLASSES.keySet()) {
             RegistryCreate classAnnotation = (RegistryCreate) clazz.getAnnotation(RegistryCreate.class);
-            for(Class type : classAnnotation.value()) {
-                if(registry.getRegistrySuperType().isAssignableFrom(type)) {
+            for (Class type : classAnnotation.value()) {
+                if (registry.getRegistrySuperType().isAssignableFrom(type)) {
                     String modid = REGISTRY_CLASSES.get(clazz);
                     Loader.instance().setActiveModContainer(FMLCommonHandler.instance().findContainerFor(modid));
                     count += createRegistryEntries(registry, clazz, modid);
@@ -57,7 +57,7 @@ public class AutoRegistry {
             }
         }
         Loader.instance().setActiveModContainer(currentModContainer);
-        if(AquaticConfig.debugMode) {
+        if (AquaticConfig.debugMode) {
             Aquatic.getLogger().info("Active mod container restored.");
             Aquatic.getLogger().info("successfully registered {} objects for event {}", count, registry.getRegistrySuperType().getSimpleName().toUpperCase(Locale.ROOT));
         }
@@ -86,7 +86,8 @@ public class AutoRegistry {
             }
         });
         Loader.instance().setActiveModContainer(originalModContainer); //restore the active mod container
-        if(AquaticConfig.debugMode) Aquatic.getLogger().debug("Mod container restored. The following classes were determined for registry entry examination: {}", list.toString());
+        if (AquaticConfig.debugMode)
+            Aquatic.getLogger().debug("Mod container restored. The following classes were determined for registry entry examination: {}", list.toString());
     }
 
     private static <T extends IForgeRegistryEntry<T>> int createRegistryEntries(IForgeRegistry<T> registry, Class clazz, String modid) {
@@ -97,7 +98,7 @@ public class AutoRegistry {
                 try {
                     @SuppressWarnings("unchecked")
                     T entry = (T) f.get(null);
-                    if(entry.getRegistryName() == null) {
+                    if (entry.getRegistryName() == null) {
                         Aquatic.getLogger().warn("No registry name set for {}:{}, substituting field name", clazz.getName(), f.getName());
                         entry.setRegistryName(new ResourceLocation(modid, f.getName().toLowerCase()));
                     }
@@ -109,22 +110,21 @@ public class AutoRegistry {
                         Block block = (Block) entry;
                         Class<? extends ItemBlock> itemBlockClass = ItemBlockBase.class;
                         Object[] cArgs = new Object[0];
-                        if(block instanceof IHasItemBlock) {
+                        if (block instanceof IHasItemBlock) {
                             IHasItemBlock block1 = (IHasItemBlock) block;
                             itemBlockClass = block1.getItemBlockClass();
                             cArgs = block1.getAdditionalItemBlockConstructorArguments();
                         }
 
-                        if(itemBlockClass != null) { //register itemblock
+                        if (itemBlockClass != null) { //register itemblock
                             Class<?>[] ctorArgClasses = new Class<?>[cArgs.length + 1];
                             ctorArgClasses[0] = Block.class;
-                            for (int idx = 1; idx < ctorArgClasses.length; idx++)
-                            {
-                                ctorArgClasses[idx] = cArgs[idx-1].getClass();
+                            for (int idx = 1; idx < ctorArgClasses.length; idx++) {
+                                ctorArgClasses[idx] = cArgs[idx - 1].getClass();
                             }
                             Constructor<? extends ItemBlock> itemCtor = itemBlockClass.getConstructor(ctorArgClasses);
                             final Item itemBlock = itemCtor.newInstance(ObjectArrays.concat(block, cArgs));
-                            if(itemBlock.getRegistryName() == null) itemBlock.setRegistryName(block.getRegistryName());
+                            if (itemBlock.getRegistryName() == null) itemBlock.setRegistryName(block.getRegistryName());
                             ITEM_REGISTRY.register(itemBlock);
                             count++;
                             Aquatic.proxy.registerRender(block);
@@ -134,7 +134,8 @@ public class AutoRegistry {
                 } catch (Exception e) {
                     Aquatic.getLogger().error("Exception thrown during registration step!", e);
                 }
-                if (!Modifier.isFinal(f.getModifiers())) Aquatic.getLogger().warn("{}:{} has no final modifier! Please change this!", clazz.getName(), f.getName());
+                if (!Modifier.isFinal(f.getModifiers()))
+                    Aquatic.getLogger().warn("{}:{} has no final modifier! Please change this!", clazz.getName(), f.getName());
             }
         }
         return count;

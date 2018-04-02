@@ -50,7 +50,7 @@ public class TileEntityBase extends TileEntity implements ITickable {
     public void sendUpdates() {
         world.markBlockRangeForRenderUpdate(pos, pos);
         world.notifyBlockUpdate(pos, getState(), getState(), 3);
-        world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
+        world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
         markDirty();
     }
 

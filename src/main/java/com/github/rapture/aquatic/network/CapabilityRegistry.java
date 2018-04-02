@@ -11,7 +11,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 public class CapabilityRegistry {
 
     public static void registerCapabilities() {
-        CapabilityManager.INSTANCE.register(IOxygenProvider.class, new OxygenStorage(), OxygenHandler.class);
-        CapabilityManager.INSTANCE.register(IPHProvider.class, new PHStorage(), PHHandler.class);
+        CapabilityManager.INSTANCE.register(IOxygenProvider.class, new OxygenStorage(), OxygenHandler::new);
+        CapabilityManager.INSTANCE.register(IPHProvider.class, new PHStorage(), PHHandler::new);
     }
 }

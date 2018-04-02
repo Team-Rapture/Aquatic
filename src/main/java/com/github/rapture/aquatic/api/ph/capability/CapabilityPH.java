@@ -25,7 +25,7 @@ public class CapabilityPH implements ICapabilitySerializable<NBTBase> {
     @Nullable
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == PH_CAPABILITY ? PH_CAPABILITY.<T> cast(this.instance) : null;
+        return capability == PH_CAPABILITY ? PH_CAPABILITY.cast(this.instance) : null;
     }
 
     @Override

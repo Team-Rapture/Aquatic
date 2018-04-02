@@ -17,23 +17,22 @@ public class ItemBase extends Item {
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
     }
 
+    public int getSubItemCount() {
+        return this.subItemCount;
+    }
+
     public void setSubItemCount(int count) {
         this.subItemCount = count;
         this.setHasSubtypes(count > 0);
     }
 
-    public int getSubItemCount() {
-        return this.subItemCount;
-    }
-
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if(!this.isInCreativeTab(tab)) return;
+        if (!this.isInCreativeTab(tab)) return;
         if (this.getSubItemCount() > 0) {
-            for ( int i = 0; i < this.getSubItemCount(); i++ )
+            for (int i = 0; i < this.getSubItemCount(); i++)
                 items.add(new ItemStack(this, 1, i));
-        }
-        else {
+        } else {
             super.getSubItems(tab, items);
         }
     }

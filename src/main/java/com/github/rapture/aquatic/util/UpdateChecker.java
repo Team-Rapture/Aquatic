@@ -10,11 +10,11 @@ public class UpdateChecker {
     public static boolean hasUpdate() {
         ForgeVersion.CheckResult result = getResult();
         ForgeVersion.Status status = result.status;
-        if(status == ForgeVersion.Status.PENDING || status == ForgeVersion.Status.FAILED) {
+        if (status == ForgeVersion.Status.PENDING || status == ForgeVersion.Status.FAILED) {
             Aquatic.getLogger().warn("Error getting update status for {}, found status {}!", Aquatic.MODID, status.toString());
             return false;
-        }
-        else return status == ForgeVersion.Status.OUTDATED || (AquaticConfig.announceBetaUpdates && status == ForgeVersion.Status.BETA_OUTDATED);
+        } else
+            return status == ForgeVersion.Status.OUTDATED || (AquaticConfig.announceBetaUpdates && status == ForgeVersion.Status.BETA_OUTDATED);
     }
 
     public static ForgeVersion.CheckResult getResult() {

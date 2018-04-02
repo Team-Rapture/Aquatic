@@ -48,21 +48,21 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     public void update() {
         super.update();
         spawnTimer++;
-        if(spawnTimer >= 25) {
-            EntityWaterBubble bubble = new EntityWaterBubble(world, new BlockPos(pos.getX() + world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ()+ world.rand.nextInt(8)), pos);
+        if (spawnTimer >= 25) {
+            EntityWaterBubble bubble = new EntityWaterBubble(world, new BlockPos(pos.getX() + world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() + world.rand.nextInt(8)), pos);
             world.spawnEntity(bubble);
             spawnTimer = 0;
         }
 
-        if(oxygen.canReceiveOxygen(oxygenGeneration)) {
-            if(storage.getEnergyStored() >= energyToGenerate) {
+        if (oxygen.canReceiveOxygen(oxygenGeneration)) {
+            if (storage.getEnergyStored() >= energyToGenerate) {
                 generatingOxygen = true;
                 storage.extractEnergy(energyToGenerate, false);
                 oxygen.fillOxygen(oxygenGeneration);
-            }else {
+            } else {
                 generatingOxygen = false;
             }
-        }else {
+        } else {
             generatingOxygen = false;
         }
     }
@@ -89,16 +89,16 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return true;
-        if(capability == CapabilityOxygen.OXYGEN_CAPABILITY) return true;
+        if (capability == CapabilityEnergy.ENERGY) return true;
+        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return true;
         return super.hasCapability(capability, facing);
     }
 
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return (T) storage;
-        if(capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) oxygen;
+        if (capability == CapabilityEnergy.ENERGY) return (T) storage;
+        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) oxygen;
         return super.getCapability(capability, facing);
     }
 }

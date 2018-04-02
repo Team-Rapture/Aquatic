@@ -35,7 +35,7 @@ public class ScubaSuit extends ItemArmor {
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        if(hasFullArmor(player)){
+        if (hasFullArmor(player)) {
             sendPlayerAir(player);
         }
 
@@ -43,15 +43,12 @@ public class ScubaSuit extends ItemArmor {
     }
 
     public boolean hasFullArmor(EntityPlayer player) {
-        if(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT
+        return player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT
                 && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == AquaticItems.SCUBA_CHEST
                 && player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == AquaticItems.SCUBA_LEGGINGS
                 && (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.SCUBA_FEET
-                || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS)){
-            return true;
-        }
+                || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS);
 
-        return false;
     }
 
     public void sendPlayerAir(EntityPlayer player) {
@@ -70,7 +67,7 @@ public class ScubaSuit extends ItemArmor {
         return new ICapabilityProvider() {
             @Override
             public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityOxygen.OXYGEN_CAPABILITY ? true : defaultProvider.hasCapability(capability, facing);
+                return capability == CapabilityOxygen.OXYGEN_CAPABILITY || defaultProvider.hasCapability(capability, facing);
             }
 
             @Nullable

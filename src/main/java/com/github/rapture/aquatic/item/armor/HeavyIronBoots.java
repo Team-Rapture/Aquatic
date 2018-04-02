@@ -62,16 +62,14 @@ public class HeavyIronBoots extends ItemArmor {
         super.onArmorTick(world, player, itemStack);
     }
 
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-    {
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         if (!stack.isItemEnchanted()) {
             stack.addEnchantment(Enchantments.DEPTH_STRIDER, 3);
         }
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean hasEffect(ItemStack stack)
-    {
+    public boolean hasEffect(ItemStack stack) {
         return false;
     }
 

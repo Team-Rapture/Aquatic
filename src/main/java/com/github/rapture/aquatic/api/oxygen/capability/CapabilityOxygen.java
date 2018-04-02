@@ -25,7 +25,7 @@ public class CapabilityOxygen implements ICapabilitySerializable<NBTBase> {
     @Nullable
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == OXYGEN_CAPABILITY ? OXYGEN_CAPABILITY.<T> cast(this.instance) : null;
+        return capability == OXYGEN_CAPABILITY ? OXYGEN_CAPABILITY.cast(this.instance) : null;
     }
 
     @Override

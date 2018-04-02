@@ -18,15 +18,14 @@ public class AquaticItems {
 
     //register items by just creating public static final fields
     public static final Item HEAVY_IRON_BOOTS = new HeavyIronBoots();
-    public static final Item SCUBA_HELEMT = new ScubaSuit(EntityEquipmentSlot.HEAD , "scuba_helmet");
-    public static final Item SCUBA_CHEST = new ScubaSuit(EntityEquipmentSlot.CHEST , "scuba_chestplate");
-    public static final Item SCUBA_LEGGINGS = new ScubaSuit(EntityEquipmentSlot.LEGS , "scuba_leggings");
-    public static final Item SCUBA_FEET = new ScubaSuit(EntityEquipmentSlot.FEET , "scuba_fins");
+    public static final Item SCUBA_HELEMT = new ScubaSuit(EntityEquipmentSlot.HEAD, "scuba_helmet");
+    public static final Item SCUBA_CHEST = new ScubaSuit(EntityEquipmentSlot.CHEST, "scuba_chestplate");
+    public static final Item SCUBA_LEGGINGS = new ScubaSuit(EntityEquipmentSlot.LEGS, "scuba_leggings");
+    public static final Item SCUBA_FEET = new ScubaSuit(EntityEquipmentSlot.FEET, "scuba_fins");
     public static final Item HYDRO_DRILL = new HydroDrill();
     public static final Item SCYLLA_SKULL = new ItemBase("scylla_skull");
 
 
-
-	public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm_item", 1, 0, AquaticConfig.dimensionID);
-	public static final Item TEST = new ItemTesting("test");
+    public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm_item", 1, 0, AquaticConfig.dimensionID);
+    public static final Item TEST = new ItemTesting("test");
 }

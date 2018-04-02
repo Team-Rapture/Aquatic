@@ -39,14 +39,14 @@ public class EntityWaterBubble extends Entity {
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
-        if(nbt.hasKey("x")) {
+        if (nbt.hasKey("x")) {
             endPos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
         }
     }
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
-        if(endPos != null) {
+        if (endPos != null) {
             nbt.setInteger("x", endPos.getX());
             nbt.setInteger("y", endPos.getY());
             nbt.setInteger("z", endPos.getZ());

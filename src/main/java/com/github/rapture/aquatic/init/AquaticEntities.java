@@ -1,29 +1,18 @@
 package com.github.rapture.aquatic.init;
 
 import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.client.render.entity.RenderEntityBubble;
-import com.github.rapture.aquatic.client.render.entity.boss.RenderScylla;
-import com.github.rapture.aquatic.client.render.entity.hostile.RenderAnglerFish;
 import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.entity.boss.EntityScylla;
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
-
 import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
 import com.github.rapture.aquatic.util.RegistryCreate;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.debug.DebugRendererWater;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 @RegistryCreate(value = EntityEntry.class, modid = Aquatic.MODID)
 public class AquaticEntities {
@@ -58,8 +47,8 @@ public class AquaticEntities {
         // LootTableList.register(EntityScylla.LOOT_);
     }
 
-	private static ResourceLocation getEntityResource(String entityName) {
-		return new ResourceLocation(Aquatic.MODID, entityName);
-	}
+    private static ResourceLocation getEntityResource(String entityName) {
+        return new ResourceLocation(Aquatic.MODID, entityName);
+    }
 
 }

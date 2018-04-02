@@ -4,6 +4,8 @@ import net.minecraft.util.EnumFacing;
 
 public class HudRender {
 
+    public static final int MASK_ORIENTATION_HORIZONTAL = 0x3;
+
     public static void renderHud(IHudSupport hudSupport, double x, double y, double z) {
         renderHud(hudSupport, x, y, z, 0.0f, false);
     }
@@ -16,9 +18,7 @@ public class HudRender {
         HudRenderHelper.renderHud(display, hudPlacement, orientation1, orientation, x, y - 0.5, z, 1.3f + scale);
     }
 
-    public static final int MASK_ORIENTATION_HORIZONTAL = 0x3;
-
     public static EnumFacing getOrientationHoriz(int metadata) {
-        return EnumFacing.VALUES[(metadata & MASK_ORIENTATION_HORIZONTAL)+2];
+        return EnumFacing.VALUES[(metadata & MASK_ORIENTATION_HORIZONTAL) + 2];
     }
 }

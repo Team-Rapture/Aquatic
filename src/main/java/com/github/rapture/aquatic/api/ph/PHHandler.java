@@ -1,47 +1,42 @@
 package com.github.rapture.aquatic.api.ph;
 
 import com.github.rapture.aquatic.api.ph.capability.CapabilityPH;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 public class PHHandler implements IPHProvider {
 
-    private int PH = 0;
-    private int maxPH = 10000;
+    private int PH;
+    private static final int MAX_PH = 10000;
+
+    public PHHandler() {
+        this(0);
+    }
 
     public PHHandler(int ph) {
         this.PH = ph;
     }
 
     @Override
-    public void setPH(int amount) {
-        this.PH = amount;
-        if (this.PH < 0) {
-            this.PH = 0;
-        }
-    }
-
-    @Override
     public void addPH(int amount) {
-        this.PH += amount;
-        if (this.PH > this.maxPH) {
-            this.PH = this.maxPH;
-        }
+        this.PH = MathHelper.clamp(this.PH + amount, 0, MAX_PH);
     }
 
     @Override
     public void drainPH(int amount) {
-        this.PH -= amount;
-        if (this.PH < 0) {
-            this.PH = 0;
-        }
+        addPH(-amount);
     }
 
     @Override
     public int getPHFromLocation(World world, BlockPos pos) {
-        IPHProvider capPH = world.getChunkFromBlockCoords(pos).getCapability(CapabilityPH.PH_CAPABILITY, EnumFacing.UP);
-        return capPH.getPH();
+        Chunk chunk = world.getChunkFromBlockCoords(pos);
+        if(chunk.hasCapability(CapabilityPH.PH_CAPABILITY, null)) {
+            return world.getChunkFromBlockCoords(pos).getCapability(CapabilityPH.PH_CAPABILITY, null).getPH();
+        }
+        return 0;
+
     }
 
     @Override
@@ -50,7 +45,12 @@ public class PHHandler implements IPHProvider {
     }
 
     @Override
+    public void setPH(int amount) {
+        this.PH = Math.max(0, amount);
+    }
+
+    @Override
     public int getMaxPH() {
-        return this.maxPH;
+        return MAX_PH;
     }
 }

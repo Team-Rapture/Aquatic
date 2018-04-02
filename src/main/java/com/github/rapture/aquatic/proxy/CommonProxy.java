@@ -15,36 +15,36 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 public class CommonProxy {
 
-	public static FluidAquaWater AQUA_WATER = new FluidAquaWater();
+    public static FluidAquaWater AQUA_WATER = new FluidAquaWater();
 
-	public void preInit(FMLPreInitializationEvent event) {
-		AQUA_WATER.register();
-		AutoRegistry.findRegistryEntries(event);
-	}
+    public void preInit(FMLPreInitializationEvent event) {
+        AQUA_WATER.register();
+        AutoRegistry.findRegistryEntries(event);
+    }
 
-	public void init(FMLInitializationEvent event) {
-		AquaticTiles.registerTiles();
-		DimensionAquatic.init();
-		CapabilityRegistry.registerCapabilities();
-	}
+    public void init(FMLInitializationEvent event) {
+        AquaticTiles.registerTiles();
+        DimensionAquatic.init();
+        CapabilityRegistry.registerCapabilities();
+    }
 
-	public void postInit(FMLPostInitializationEvent event) {
+    public void postInit(FMLPostInitializationEvent event) {
 
-	}
+    }
 
-	public void serverStarting(FMLServerStartingEvent event) {
-		UpdateChecker.notifyServer();
-	}
+    public void serverStarting(FMLServerStartingEvent event) {
+        UpdateChecker.notifyServer();
+    }
 
-	public void registerRender(Item item) {
-		// NO-OP
-	}
+    public void registerRender(Item item) {
+        // NO-OP
+    }
 
-	public void registerRender(Block block) {
-		// NO-OP
-	}
+    public void registerRender(Block block) {
+        // NO-OP
+    }
 
-	public void handleLightMapColor(float partialTicks, float[] colors) {
+    public void handleLightMapColor(float partialTicks, float[] colors) {
 
-	}
+    }
 }

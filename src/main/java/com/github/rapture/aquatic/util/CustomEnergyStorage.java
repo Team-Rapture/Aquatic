@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.util;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.energy.EnergyStorage;
 
 public class CustomEnergyStorage extends EnergyStorage {
@@ -22,31 +23,16 @@ public class CustomEnergyStorage extends EnergyStorage {
     }
 
     public void setEnergyStored(int amount) {
-        this.energy = amount;
-
-        if(this.energy > capacity) {
-            this.energy = capacity;
-        }else if(energy < 0) {
-            energy = 0;
-        }
+        this.energy = MathHelper.clamp(amount, 0, this.capacity);
     }
 
     public CustomEnergyStorage readFromNBT(NBTTagCompound nbt) {
-
-        this.energy = nbt.getInteger("Energy");
-
-        if (energy > capacity) {
-            energy = capacity;
-        }
+        this.setEnergyStored(nbt.getInteger("energy"));
         return this;
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-
-        if (energy < 0) {
-            energy = 0;
-        }
-        nbt.setInteger("Energy", energy);
+        nbt.setInteger("energy", energy);
         return nbt;
     }
 

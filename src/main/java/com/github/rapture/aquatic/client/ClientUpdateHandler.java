@@ -23,7 +23,7 @@ public class ClientUpdateHandler {
     @SubscribeEvent
     public static void showUpdateNotification(TickEvent.ClientTickEvent event) {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
-        if(player != null) {
+        if (player != null) {
             if (UpdateChecker.hasUpdate()) {
                 ForgeVersion.CheckResult result = UpdateChecker.getResult();
                 ITextComponent update = new TextComponentTranslation("message.aquatic.update", Aquatic.MODNAME, Loader.MC_VERSION);

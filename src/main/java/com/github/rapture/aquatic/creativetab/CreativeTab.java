@@ -22,7 +22,7 @@ public class CreativeTab extends CreativeTabs {
     private NonNullList<ItemStack> displayStacks = NonNullList.create();
 
     /**
-     * @param label the lang key for this tab, the final key will be {@code itemGroup.label.name}
+     * @param label            the lang key for this tab, the final key will be {@code itemGroup.label.name}
      * @param searchBarEnabled if the tab should have a search bar;<br/>this will also automatically set the background texture to <b>{@code item_search.png}</b>
      */
     public CreativeTab(String label, boolean searchBarEnabled) {
@@ -31,15 +31,15 @@ public class CreativeTab extends CreativeTabs {
         if (searchBarEnabled) this.setBackgroundImageName(BACKGROUND_IMAGE_SEARCHBAR);
     }
 
-    public void setHasSearchBar(boolean hasSearchBar) {
-        this.hasSearchBar = hasSearchBar;
-    }
-
     /**
      * @param label the lang key for this tab, the final key will be {@code itemGroup.label.name}
      */
     public CreativeTab(String label) {
         this(label, false);
+    }
+
+    public void setHasSearchBar(boolean hasSearchBar) {
+        this.hasSearchBar = hasSearchBar;
     }
 
     public void setDisplayFromList(NonNullList<ItemStack> displayList) {
@@ -84,24 +84,23 @@ public class CreativeTab extends CreativeTabs {
     @SideOnly(Side.CLIENT)
     private void updateDisplayStack() {
         if (this.icon.isEmpty() || this.displayRandom && Minecraft.getSystemTime() % 120 == 0) {
-            if(this.displayStacks.isEmpty()) {
+            if (this.displayStacks.isEmpty()) {
                 this.displayAllRelevantItems(displayStacks);
             }
             this.icon = ItemStack.EMPTY;
-            if(!displayStacks.isEmpty()) try {
-                for(int i = 0; i < displayStacks.size(); i++) {
+            if (!displayStacks.isEmpty()) try {
+                for (int i = 0; i < displayStacks.size(); i++) {
                     ItemStack listStack = displayStacks.get(i);
-                    if(!listStack.isEmpty() && listStack.isItemEqual(this.icon)) {
+                    if (!listStack.isEmpty() && listStack.isItemEqual(this.icon)) {
                         int nextIndex = i + 1;
-                        if(nextIndex > displayStacks.size()) nextIndex = 0;
+                        if (nextIndex > displayStacks.size()) nextIndex = 0;
                         this.icon = displayStacks.get(nextIndex);
                     }
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 //NO-OP
             }
-            if(this.icon.isEmpty()) {
+            if (this.icon.isEmpty()) {
                 Aquatic.getLogger().warn("found empty Itemstack for CreativeTab " + this.getTabLabel() + ", defaulting to " + Items.DIAMOND.getRegistryName());
                 this.icon = new ItemStack(Items.DIAMOND);
                 this.displayRandom = false;

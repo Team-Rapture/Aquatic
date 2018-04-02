@@ -10,20 +10,20 @@ import net.minecraft.world.WorldServer;
 
 public class ItemTesting extends ItemBase {
 
-	public ItemTesting(String name) {
-		super(name);
-	}
+    public ItemTesting(String name) {
+        super(name);
+    }
 
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 
-		if (worldIn instanceof WorldServer) {
+        if (worldIn instanceof WorldServer) {
 
-			playerIn.posY += 1;
-			System.out.println("fired");
+            playerIn.posY += 1;
+            System.out.println("fired");
 
-		}
+        }
 
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
-	}
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+    }
 }

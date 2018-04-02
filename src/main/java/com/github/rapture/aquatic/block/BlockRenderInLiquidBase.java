@@ -13,21 +13,20 @@ public class BlockRenderInLiquidBase extends BlockBase {
     }
 
     @Override
-    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
-    {
-        switch(face) {
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+        switch (face) {
             case DOWN:
                 return false;
             case UP:
-                return isWater(world,pos.add(0,1,0));
+                return isWater(world, pos.add(0, 1, 0));
             case NORTH:
-                return isWater(world,pos.add(0,0,-1));
+                return isWater(world, pos.add(0, 0, -1));
             case SOUTH:
-                return isWater(world,pos.add(0,0,1));
+                return isWater(world, pos.add(0, 0, 1));
             case EAST:
-                return isWater(world,pos.add(1,0,0));
+                return isWater(world, pos.add(1, 0, 0));
             case WEST:
-                return isWater(world,pos.add(-1,0,0));
+                return isWater(world, pos.add(-1, 0, 0));
         }
         return false;
     }
