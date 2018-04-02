@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.dimensions.generator;
+package com.github.rapture.aquatic.world.dimension.generator;
 
 import net.minecraft.world.gen.MapGenBase;
 

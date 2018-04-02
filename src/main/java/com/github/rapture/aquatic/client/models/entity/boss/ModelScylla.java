@@ -4,10 +4,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-/**
- * ModelScylla - EPIIC
- */
 public class ModelScylla extends ModelBase {
+
 	public ModelRenderer mainBody;
 	public ModelRenderer bodyBottom;
 	public ModelRenderer tentacleBase1;
@@ -169,9 +167,6 @@ public class ModelScylla extends ModelBase {
 		this.mainBody.render(f5);
 	}
 
-	/**
-	 * This is a helper function from Tabula to set the rotation of model parts
-	 */
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;

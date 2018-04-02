@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.dimensions;
+package com.github.rapture.aquatic.world.dimension;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.world.Teleporter;

@@ -2,10 +2,13 @@ package com.github.rapture.aquatic.proxy;
 
 import static com.github.rapture.aquatic.Aquatic.MODID;
 
+import com.github.rapture.aquatic.client.render.entity.RenderEntityBubble;
 import com.github.rapture.aquatic.client.render.entity.boss.RenderScylla;
 import com.github.rapture.aquatic.client.render.entity.hostile.RenderAnglerFish;
+import com.github.rapture.aquatic.entity.ModEntities;
 import com.github.rapture.aquatic.entity.boss.EntityScylla;
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
+import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.util.ICustomModelProvider;
@@ -48,12 +51,7 @@ public class ClientProxy extends CommonProxy {
 
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
-		RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
-		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
-
-		rm.entityRenderMap.put(EntityAnglerFish.class, new RenderAnglerFish(rm));
-		rm.entityRenderMap.put(EntityScylla.class, new RenderScylla(rm));
-
+		ModEntities.renderEntities();
 	}
 
 	@Override

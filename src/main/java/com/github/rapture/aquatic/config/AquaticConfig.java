@@ -1,5 +1,6 @@
 package com.github.rapture.aquatic.config;
 
+import com.github.rapture.aquatic.tileentity.TileAquaNetController;
 import net.minecraftforge.common.config.Config;
 
 import static com.github.rapture.aquatic.Aquatic.*;
@@ -23,8 +24,8 @@ public class AquaticConfig {
     public static boolean debugMode = false;
 
     @Config.Name("Aqua Net Controller")
-    @Config.Comment("Amount of energy an aqua net controller will generate")
-    public static int aquaNetGeneration = 200;
+    @Config.Comment("Amount of oxygen an aqua net controller will generate per 20 FE")
+    public static int aquaNetGeneration = 10;
 
     @Config.Name("Aqua Node Laser Beams")
     @Config.Comment("Set to false to disable laser beam render to player from Aqua Nodes")

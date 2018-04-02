@@ -1,8 +1,7 @@
-package com.github.rapture.aquatic.dimensions;
+package com.github.rapture.aquatic.world.dimension;
 
 import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.dimensions.provider.WorldProviderAquatic;
-import com.github.rapture.aquatic.util.ParticleUtils;
+import com.github.rapture.aquatic.world.dimension.provider.WorldProviderAquatic;
 
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;

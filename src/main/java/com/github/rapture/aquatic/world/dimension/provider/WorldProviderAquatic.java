@@ -1,8 +1,8 @@
-package com.github.rapture.aquatic.dimensions.provider;
+package com.github.rapture.aquatic.world.dimension.provider;
 
 import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.dimensions.DimensionAquatic;
-import com.github.rapture.aquatic.dimensions.generator.ChunkGeneratorAquatic;
+import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
+import com.github.rapture.aquatic.world.dimension.generator.ChunkGeneratorAquatic;
 
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.Vec3d;

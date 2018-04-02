@@ -23,11 +23,9 @@ import java.util.List;
 
 public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
-    public CustomEnergyStorage storage = new CustomEnergyStorage(50000);
-    public OxygenHandler oxygenStorage = new OxygenHandler(10000);
+    public OxygenHandler oxygen = new OxygenHandler(10000);
     public boolean hasAquaController = false;
     public BlockPos controllerPos = null;
-    public int timer = 0;
     public int oxygenTimer = 0;
 
     public TileAquaNode() {
@@ -36,10 +34,8 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        storage.readFromNBT(nbt);
-        oxygenStorage.readFromNBT(nbt);
+        oxygen.readFromNBT(nbt);
         hasAquaController = nbt.getBoolean("hasAquaController");
-        this.timer = nbt.getInteger("timer");
         this.oxygenTimer = nbt.getInteger("oxygenTimer");
         if (nbt.hasKey("x") && nbt.hasKey("y") && nbt.hasKey("z")) {
             controllerPos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
@@ -48,10 +44,8 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        storage.writeToNBT(nbt);
-        oxygenStorage.writeToNBT(nbt);
+        oxygen.writeToNBT(nbt);
         nbt.setBoolean("hasAquaController", hasAquaController);
-        nbt.setInteger("timer", timer);
         nbt.setInteger("oxygenTimer", oxygenTimer);
         if (controllerPos != null) {
             nbt.setInteger("x", controllerPos.getX());
@@ -81,10 +75,10 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
                     return;
                 }
                 TileAquaNetController controller = (TileAquaNetController) world.getTileEntity(controllerPos);
-                if (controller.storage.getEnergyStored() >= 20) {
-                    if (storage.canReceiveEnergy(20)) {
-                        controller.storage.extractEnergy(20, false);
-                        storage.receiveEnergy(20, false);
+                if (controller.oxygen.canSendOxygen(20)) {
+                    if (oxygen.canReceiveOxygen(20)) {
+                        controller.oxygen.drainOxygen(20);
+                        oxygen.fillOxygen(20);
                     }
                 }
             } else {
@@ -92,21 +86,8 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
             }
         }
 
-        if (oxygenStorage.canReceiveOxygen(50)) {
-            if (storage.getEnergyStored() > 500) {
-                timer++;
-                if(timer >= 20) {
-                    storage.extractEnergy(500, false);
-                    oxygenStorage.fillOxygen(50);
-                    timer = 0;
-                }
-            }else if (timer > 0) {
-                timer = 0;
-            }
-        }
-
         oxygenTimer++;
-        if(oxygenTimer >= 18) {
+        if(oxygenTimer >= 10) {
             for (EntityPlayer player : playersInRange()) {
                 if (player.isInWater() && !player.capabilities.isCreativeMode) {
                     sendPlayerAir(player);
@@ -126,11 +107,11 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
     public void sendPlayerAir(EntityPlayer player) {
         if (player.getAir() < 300) {
-            if (oxygenStorage.canSendOxygen(300)) {
+            if (oxygen.canSendOxygen(300)) {
                 if(hasFullArmor(player)) {
                     ScubaSuit suit = (ScubaSuit) player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem();
                     suit.oxygenStorage.fillOxygen(300);
-                    oxygenStorage.drainOxygen(300);
+                    oxygen.drainOxygen(300);
                     player.setAir(player.getAir() + 30);
                 }
             }
@@ -156,7 +137,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
     @Override
     public String getDisplay() {
-        return "FE: " + storage.getEnergyStored() + " Oxygen: " + oxygenStorage.getOxygenStored();
+        return "Oxygen: " + oxygen.getOxygenStored();
     }
 
     @Override
@@ -171,7 +152,6 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityEnergy.ENERGY) return true;
         if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return true;
         return super.hasCapability(capability, facing);
     }
@@ -179,8 +159,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityEnergy.ENERGY) return (T) this.storage;
-        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) this.oxygenStorage;
+        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) this.oxygen;
         return super.getCapability(capability, facing);
     }
 }
