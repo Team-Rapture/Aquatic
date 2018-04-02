@@ -1,5 +1,6 @@
 package com.github.rapture.aquatic.proxy;
 
+import com.github.rapture.aquatic.client.guide.GuideReader;
 import com.github.rapture.aquatic.client.render.entity.RenderEntityBubble;
 import com.github.rapture.aquatic.client.render.entity.boss.RenderScylla;
 import com.github.rapture.aquatic.client.render.entity.hostile.RenderAnglerFish;
@@ -37,6 +38,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityAnglerFish.class, RenderAnglerFish::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityScylla.class, RenderScylla::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWaterBubble.class, RenderEntityBubble::new);
+        GuideReader.init();
     }
 
     @Override
