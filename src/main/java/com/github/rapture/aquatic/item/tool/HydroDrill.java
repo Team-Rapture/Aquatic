@@ -2,6 +2,7 @@ package com.github.rapture.aquatic.item.tool;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +18,7 @@ import javax.annotation.Nullable;
 public class HydroDrill extends ItemPickaxe {
 
     public static final ToolMaterial hydro_drill = EnumHelper.addToolMaterial("hydro_drill", 3, 1561, 8.0F, 3.0F, 10);
-    public CustomEnergyStorage energyStorage = new CustomEnergyStorage(10000);
+    public CustomEnergyStorage energyStorage = new CustomEnergyStorage(10);
 
     public HydroDrill() {
         super(hydro_drill);
@@ -29,8 +30,29 @@ public class HydroDrill extends ItemPickaxe {
     }
 
     @Override
-    public boolean showDurabilityBar(ItemStack stack) {
-        return super.showDurabilityBar(stack);
+    public boolean isDamageable() {
+        return true;
+    }
+
+    @Override
+    public int getDamage(ItemStack stack) {
+        return 100;
+    }
+
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        return energyStorage.getMaxEnergyStored();
+    }
+
+    @Override
+    public boolean isDamaged(ItemStack stack) {
+        return true;
+    }
+
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack) {
+        return this.energyStorage.getEnergyStored() / this.energyStorage.getMaxEnergyStored();
     }
 
     @Nullable
@@ -40,7 +62,7 @@ public class HydroDrill extends ItemPickaxe {
         return new ICapabilityProvider() {
             @Override
             public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityEnergy.ENERGY || defaultProvider.hasCapability(capability, facing);
+                return capability == CapabilityEnergy.ENERGY || (defaultProvider != null ? defaultProvider.hasCapability(capability, facing) : null);
             }
 
             @Nullable
