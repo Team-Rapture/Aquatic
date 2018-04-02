@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockCoralReefNew extends BlockBush {
+
 	public BlockCoralReefNew(String name, Material material) {
 		super(material);
 		this.setUnlocalizedName(name);

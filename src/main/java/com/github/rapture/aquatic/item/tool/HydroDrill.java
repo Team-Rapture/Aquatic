@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.item.tool;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
@@ -18,15 +19,26 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class HydroDrill extends ItemPickaxe {
-    public static final ToolMaterial hydro_drill = EnumHelper.addToolMaterial("hydro_drill",3, 1561, 8.0F, 3.0F, 10);
-    public EnergyStorage energyStorage = new EnergyStorage(10000);
+
+    public static final ToolMaterial hydro_drill = EnumHelper.addToolMaterial("hydro_drill", 3, 1561, 8.0F, 3.0F, 10);
+    public CustomEnergyStorage energyStorage = new CustomEnergyStorage(10000);
+
     public HydroDrill() {
         super(hydro_drill);
         this.setRegistryName("hydro_drill");
         this.setUnlocalizedName("hydro_drill");
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
-        setHarvestLevel("pickaxe",3);
-        setHarvestLevel("spade",3);
+        this.setHarvestLevel("pickaxe", 3);
+        this.setHarvestLevel("shovel", 3);
+    }
+
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        return super.showDurabilityBar(stack);
+    }
+
+    public int getCurrentEnergy() {
+        return energyStorage.getEnergyStored();
     }
 
     @Nullable
@@ -34,10 +46,10 @@ public class HydroDrill extends ItemPickaxe {
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new ICapabilityProvider() {
             ICapabilityProvider defaultProvider = HydroDrill.super.initCapabilities(stack, nbt);
+
             @Override
             public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-
-                return capability == CapabilityEnergy.ENERGY? true : defaultProvider.hasCapability(capability, facing);
+                return capability == CapabilityEnergy.ENERGY ? true : defaultProvider.hasCapability(capability, facing);
             }
 
             @Nullable
@@ -46,18 +58,5 @@ public class HydroDrill extends ItemPickaxe {
                 return capability == CapabilityEnergy.ENERGY ? (T) energyStorage : defaultProvider.getCapability(capability, facing);
             }
         };
-
-
-    }
-
-
-
-    @Override
-    public boolean showDurabilityBar(ItemStack stack) {
-        return super.showDurabilityBar(stack);
-    }
-    public int getCurrentEnergy (ItemStack itemStack){
-
-        return energyStorage.getEnergyStored();
     }
 }

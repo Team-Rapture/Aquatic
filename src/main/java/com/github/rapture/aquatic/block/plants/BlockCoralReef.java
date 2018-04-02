@@ -16,7 +16,8 @@ public class BlockCoralReef extends BlockBush implements IHasItemBlock {
         super(Material.ROCK);
         this.setSoundType(SoundType.PLANT);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
-      
+        this.setUnlocalizedName(name);
+        this.setRegistryName(name);
     }
 
     @Override
