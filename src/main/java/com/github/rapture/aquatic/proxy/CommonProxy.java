@@ -1,13 +1,11 @@
 package com.github.rapture.aquatic.proxy;
 
 import com.github.rapture.aquatic.block.fluid.FluidAquaWater;
-import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
-import com.github.rapture.aquatic.entity.ModEntities;
 import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.network.CapabilityRegistry;
 import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.UpdateChecker;
-
+import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -27,7 +25,6 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		AquaticTiles.registerTiles();
 		DimensionAquatic.init();
-		ModEntities.init();
 		CapabilityRegistry.registerCapabilities();
 	}
 
