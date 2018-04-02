@@ -1,6 +1,6 @@
 package com.github.rapture.aquatic.item;
 
-import com.github.rapture.aquatic.dimensions.TeleporterDim;
+import com.github.rapture.aquatic.world.dimension.TeleporterDim;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

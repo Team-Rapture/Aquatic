@@ -1,7 +1,7 @@
 package com.github.rapture.aquatic.proxy;
 
 import com.github.rapture.aquatic.block.fluid.FluidAquaWater;
-import com.github.rapture.aquatic.dimensions.DimensionAquatic;
+import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
 import com.github.rapture.aquatic.entity.ModEntities;
 import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.network.CapabilityRegistry;
