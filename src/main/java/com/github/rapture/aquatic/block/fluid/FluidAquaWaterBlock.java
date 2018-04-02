@@ -32,7 +32,8 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
     {
         if(side == EnumFacing.UP)
         {
-            return !world.getBlockState(pos.add(0,1,0)).isFullBlock();
+            IBlockState upperState = world.getBlockState(pos.add(0, 1, 0));
+            return !isSourceBlock(world, pos) || (!upperState.isFullBlock() && upperState.getMaterial() != Material.WATER);
         }
         return super.shouldSideBeRendered(state, world, pos, side);
     }
