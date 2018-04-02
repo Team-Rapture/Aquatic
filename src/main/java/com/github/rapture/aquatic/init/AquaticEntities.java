@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.entity;
+package com.github.rapture.aquatic.init;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.client.render.entity.RenderEntityBubble;
@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @RegistryCreate(value = EntityEntry.class, modid = Aquatic.MODID)
-public class ModEntities {
+public class AquaticEntities {
 
     public static final EntityEntry ANGLERFISH = EntityEntryBuilder.create()
             .entity(EntityAnglerFish.class)
