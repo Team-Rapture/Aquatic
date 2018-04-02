@@ -1,5 +1,7 @@
 package com.github.rapture.aquatic;
 
+import com.github.rapture.aquatic.client.render.RenderAquaNode;
+import com.github.rapture.aquatic.tileentity.TileAquaNode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
