@@ -68,20 +68,20 @@ public class EntityAnglerFish extends EntityMob {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(MOVING, Boolean.valueOf(false));
-        this.dataManager.register(TARGET_ENTITY, Integer.valueOf(0));
+        this.dataManager.register(MOVING, Boolean.FALSE);
+        this.dataManager.register(TARGET_ENTITY, 0);
     }
 
     public boolean isMoving() {
-        return this.dataManager.get(MOVING).booleanValue();
+        return this.dataManager.get(MOVING);
     }
 
     private void setMoving(boolean moving) {
-        this.dataManager.set(MOVING, Boolean.valueOf(moving));
+        this.dataManager.set(MOVING, moving);
     }
 
     public boolean hasTargetedEntity() {
-        return this.dataManager.get(TARGET_ENTITY).intValue() != 0;
+        return this.dataManager.get(TARGET_ENTITY) != 0;
     }
 
     @Nullable
@@ -92,7 +92,7 @@ public class EntityAnglerFish extends EntityMob {
             if (this.targetedEntity != null) {
                 return this.targetedEntity;
             } else {
-                Entity entity = this.world.getEntityByID(this.dataManager.get(TARGET_ENTITY).intValue());
+                Entity entity = this.world.getEntityByID(this.dataManager.get(TARGET_ENTITY));
 
                 if (entity instanceof EntityLivingBase) {
                     this.targetedEntity = (EntityLivingBase) entity;
@@ -107,7 +107,7 @@ public class EntityAnglerFish extends EntityMob {
     }
 
     private void setTargetedEntity(int entityId) {
-        this.dataManager.set(TARGET_ENTITY, Integer.valueOf(entityId));
+        this.dataManager.set(TARGET_ENTITY, entityId);
     }
 
     @Override
