@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
 public class ItemAquaticCharm extends ItemBase {
+
 	protected final int DIMENSION_FROM_ID;
 	protected final int DIMENSION_TO_ID;
 
@@ -42,7 +43,7 @@ public class ItemAquaticCharm extends ItemBase {
 
 			}
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
 
+		return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
 	}
 }

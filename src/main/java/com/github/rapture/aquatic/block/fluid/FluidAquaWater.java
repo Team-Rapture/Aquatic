@@ -11,7 +11,7 @@ public class FluidAquaWater extends Fluid {
     public FluidAquaWater() {
         super("aqua_water", new ResourceLocation(Aquatic.MODID, "blocks/fluids/aqua_water_still"), new ResourceLocation(Aquatic.MODID, "blocks/fluids/aqua_water_flowing"));
         this.setGaseous(false);
-        this.setDensity(1);
+        this.setDensity(1000);
         this.setRarity(EnumRarity.RARE);
     }
 
