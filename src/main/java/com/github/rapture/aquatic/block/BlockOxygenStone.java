@@ -1,5 +1,6 @@
 package com.github.rapture.aquatic.block;
 
+import com.github.rapture.aquatic.block.util.BlockRenderInLiquidBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;

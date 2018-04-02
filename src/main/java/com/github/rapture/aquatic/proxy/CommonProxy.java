@@ -1,6 +1,8 @@
 package com.github.rapture.aquatic.proxy;
 
+import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.block.fluid.FluidAquaWater;
+import com.github.rapture.aquatic.client.gui.GuiHandler;
 import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.network.CapabilityRegistry;
 import com.github.rapture.aquatic.util.AutoRegistry;
@@ -12,6 +14,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class CommonProxy {
 
@@ -26,6 +29,7 @@ public class CommonProxy {
         AquaticTiles.registerTiles();
         DimensionAquatic.init();
         CapabilityRegistry.registerCapabilities();
+        NetworkRegistry.INSTANCE.registerGuiHandler(Aquatic.instance, new GuiHandler());
     }
 
     public void postInit(FMLPostInitializationEvent event) {
