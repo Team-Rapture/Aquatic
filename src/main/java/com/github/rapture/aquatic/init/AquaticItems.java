@@ -3,6 +3,7 @@ package com.github.rapture.aquatic.init;
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.item.ItemAquaticCharm;
+import com.github.rapture.aquatic.item.ItemBase;
 import com.github.rapture.aquatic.item.ItemTesting;
 import com.github.rapture.aquatic.item.armor.HeavyIronBoots;
 import com.github.rapture.aquatic.item.armor.ScubaSuit;
@@ -23,6 +24,7 @@ public class AquaticItems {
     public static final Item SCUBA_LEGGINGS = new ScubaSuit(EntityEquipmentSlot.LEGS , "scuba_leggings");
     public static final Item SCUBA_FEET = new ScubaSuit(EntityEquipmentSlot.FEET , "scuba_fins");
     public static final Item HYDRO_DRILL = new HydroDrill();
+    public static final Item SCYLLA_SKULL = new ItemBase("scylla_skull");
 
 
 
