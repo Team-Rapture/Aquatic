@@ -9,7 +9,6 @@ import com.github.rapture.aquatic.item.armor.HeavyIronBoots;
 import com.github.rapture.aquatic.item.armor.ScubaSuit;
 import com.github.rapture.aquatic.item.tool.HydroDrill;
 import com.github.rapture.aquatic.util.RegistryCreate;
-
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 
@@ -30,6 +29,4 @@ public class AquaticItems {
 
 	public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm_item", 1, 0, AquaticConfig.dimensionID);
 	public static final Item TEST = new ItemTesting("test");
-
-
 }
