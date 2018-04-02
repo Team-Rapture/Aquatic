@@ -12,6 +12,10 @@ public class BlockRenderInLiquidBase extends BlockBase {
         super(name);
     }
 
+    public BlockRenderInLiquidBase(String name, Material material) {
+        super(name, material);
+    }
+
     @Override
     public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
         switch (face) {

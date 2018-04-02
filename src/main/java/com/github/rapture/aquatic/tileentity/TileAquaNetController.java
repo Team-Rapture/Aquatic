@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 public class TileAquaNetController extends TileEntityBase implements IHudSupport {
 
-    public CustomEnergyStorage storage = new CustomEnergyStorage(100000);
+    public CustomEnergyStorage storage = new CustomEnergyStorage(100000, 10000, 10000, 10000);
     public OxygenHandler oxygen = new OxygenHandler(10000);
     public int oxygenGeneration = AquaticConfig.aquaNetGeneration;
     public int energyToGenerate = 20;

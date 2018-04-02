@@ -3,6 +3,7 @@ package com.github.rapture.aquatic;
 import com.github.rapture.aquatic.creativetab.CreativeTab;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.proxy.CommonProxy;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.Items;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.opengl.GL11;
 
 @Mod(
         name = Aquatic.MODNAME,
@@ -80,8 +82,33 @@ public class Aquatic {
     @SubscribeEvent
     public void onFogRender(EntityViewRenderEvent.FogDensity e) {
         if (e.getState().getBlock() == AquaticBlocks.AQUA_WATER_BLOCK) {
-            e.setDensity(0.0F);
+            //GlStateManager.setFog(GlStateManager.FogMode.EXP);
+            GlStateManager.setFog(GlStateManager.FogMode.LINEAR);
+            e.setDensity(0.06f);
+            GlStateManager.setFogStart(30f);
+            GlStateManager.setFogEnd(70f);
             e.setCanceled(true);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void onFogRender(EntityViewRenderEvent.RenderFogEvent e) {
+        /*if (e.getState().getBlock() == AquaticBlocks.AQUA_WATER_BLOCK) {
+            GlStateManager.setFogStart(20.0f);
+            GlStateManager.setFogEnd(30.0f);
+            //e.setCanceled(true);
+        }*/
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void onFogRender(EntityViewRenderEvent.FogColors e) {
+        if (e.getState().getBlock() == AquaticBlocks.AQUA_WATER_BLOCK) {
+            e.setRed(1f/255f);
+            e.setGreen(36f/255f);
+            e.setBlue(92f/255f);
+            //e.setCanceled(true);
         }
     }
 }

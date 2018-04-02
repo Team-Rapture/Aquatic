@@ -1,7 +1,6 @@
 package com.github.rapture.aquatic.client;
 
 import com.github.rapture.aquatic.client.gui.GuiScreenGuide;
-import com.github.rapture.aquatic.client.guide.GuideReader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.common.Mod;
@@ -19,7 +18,7 @@ public class KeyHandler {
     public static void onKeyPressed(InputEvent.KeyInputEvent event) {
         if (mc.currentScreen == null) {
             //query key bindings here
-            if (KEY_GUIDE.isPressed()) GuiScreenGuide.openPage(GuideReader.INDEX);
+            //if (KEY_GUIDE.isPressed()) GuiScreenGuide.openPage(GuideReader.INDEX);
         }
     }
 }

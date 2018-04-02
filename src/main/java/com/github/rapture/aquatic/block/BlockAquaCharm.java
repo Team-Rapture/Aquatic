@@ -10,11 +10,10 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockAquaCharm extends BlockBase {
+public class BlockAquaCharm extends BlockRenderInLiquidBase {
 
     public BlockAquaCharm(String name, Material material) {
         super(name, material);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
