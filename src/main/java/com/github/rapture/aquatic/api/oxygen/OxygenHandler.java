@@ -34,15 +34,17 @@ public class OxygenHandler implements IOxygenProvider {
     @Override
     public void fillOxygen(int amount) {
         oxygen += amount;
-        if(this.oxygen > this.maxOxygen)
+        if(this.oxygen > this.maxOxygen) {
             this.oxygen = this.maxOxygen;
+        }
     }
 
     @Override
     public void drainOxygen(int amount) {
         this.oxygen -= amount;
-        if(this.oxygen < 0)
+        if(this.oxygen < 0) {
             this.oxygen = 0;
+        }
     }
 
     @Override
