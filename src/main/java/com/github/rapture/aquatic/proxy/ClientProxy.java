@@ -2,7 +2,6 @@ package com.github.rapture.aquatic.proxy;
 
 import static com.github.rapture.aquatic.Aquatic.MODID;
 
-import com.github.rapture.aquatic.block.BlockRenderInLiquidBase;
 import com.github.rapture.aquatic.client.render.entity.boss.RenderScylla;
 import com.github.rapture.aquatic.client.render.entity.hostile.RenderAnglerFish;
 import com.github.rapture.aquatic.entity.boss.EntityScylla;

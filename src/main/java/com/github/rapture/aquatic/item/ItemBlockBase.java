@@ -9,5 +9,4 @@ public class ItemBlockBase extends ItemBlock {
         super(block);
         this.setRegistryName(block.getRegistryName());
     }
-
 }

@@ -23,8 +23,7 @@ public class ItemTesting extends ItemBase {
 			System.out.println("fired");
 
 		}
+
 		return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
-
 	}
-
 }
