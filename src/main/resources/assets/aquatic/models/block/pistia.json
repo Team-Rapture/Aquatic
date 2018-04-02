@@ -1,4 +1,5 @@
 {
+	"parent": "block/block",
 	"textures": {
 		"0": "aquatic:blocks/pistia",
 		"particle": "aquatic:blocks/pistia"

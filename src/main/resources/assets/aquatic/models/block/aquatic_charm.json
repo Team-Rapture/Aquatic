@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"parent": "block/block",
 	"textures": {
 		"0": "aquatic:blocks/corals/red/coral_reef_red",
 		"1": "aquatic:blocks/corals/pink/coral_reef_pink",
