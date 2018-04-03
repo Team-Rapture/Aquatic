@@ -32,6 +32,16 @@ public class AquaticBlocks {
     public static final Block ENERGY_FILLER = new BlockEnergyFiller();
     public static final Block DEPTH_GENERATOR = new BlockDepthGenerator();
 
+    public static final Block IRON_ORE_DEPOSIT = new BlockBase("iron_ore_deposit");
+    public static final Block GOLD_ORE_DEPOSIT = new BlockBase("gold_ore_deposit");
+    public static final Block DIAMOND_ORE_DEPOSIT = new BlockBase("diamond_ore_deposit");
+    public static final Block COAL_ORE_DEPOSIT = new BlockBase("coal_ore_deposit");
+    public static final Block REDSTONE_ORE_DEPOSIT = new BlockBase("redstone_ore_deposit");
+    public static final Block LAPIZ_ORE_DEPOSIT = new BlockBase("lapiz_ore_deposit");
+    public static final Block QUARTZ_ORE_DEPOSIT = new BlockBase("quartz_ore_deposit");
+    public static final Block EMERALD_ORE_DEPOSIT = new BlockBase("emerald_ore_deposit");
+   
+    
     public static final Block coral_reef_pink = new BlockPlantBase("coral_reef_pink");
     public static final Block coral_reef_blue = new BlockPlantBase("coral_reef_blue");
     public static final Block coral_reef_green = new BlockPlantBase("coral_reef_green");
