@@ -31,6 +31,10 @@ public class AquaticConfig {
     @Config.Comment("Set to false to disable laser beam render to player from Aqua Nodes")
     public static boolean aquaNodeBeam = true;
 
+    @Config.Name("Depth Generator energy usage")
+    @Config.Comment("Set the amount of power per ore the depth generator uses")
+    public static int depthUsage = 2000;
+
     @Config.RequiresMcRestart
     @Config.Name("Dimension ID")
     @Config.Comment("Dimension ID - CAREFUL WHEN CHANGING! Default: 300")

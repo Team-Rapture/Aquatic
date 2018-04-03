@@ -30,6 +30,7 @@ public class AquaticBlocks {
     public static final Block SOLUTION_TANK = new BlockSolutionTank();
     public static final Block OXYGEN_FILLER = new BlockOxygenFiller();
     public static final Block ENERGY_FILLER = new BlockEnergyFiller();
+    public static final Block DEPTH_GENERATOR = new BlockDepthGenerator();
 
     public static final Block coral_reef_pink = new BlockPlantBase("coral_reef_pink");
     public static final Block coral_reef_blue = new BlockPlantBase("coral_reef_blue");
