@@ -4,7 +4,6 @@ import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.client.render.hud.HudRender;
 import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.tileentity.TileAquaNode;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -15,9 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.client.FMLClientHandler;
-
-import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -35,7 +31,7 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
             double sX = te.controllerPos.getX() - blockPos.getX() + x + 0.5;
             double sY = te.controllerPos.getY() - blockPos.getY() + y + 0.5;
             double sZ = te.controllerPos.getZ() - blockPos.getZ() + z + 0.5;
-            this.renderBeam( sX, sY, sZ, x + 0.5, y + 0.5, z + 0.5, te.beamRenderTicks, partialTicks);
+            this.renderBeam(sX, sY, sZ, x + 0.5, y + 0.5, z + 0.5, te.beamRenderTicks, partialTicks);
         }
         //System.out.printf("%s %s%n", partialTicks, alpha);
         //System.out.printf("%s %s %s%n", blockPos.getX(), blockPos.getY(), blockPos.getZ());
@@ -76,17 +72,17 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         //System.out.printf("%s %s %s%n", timing, ticks, partialTicks);
         float f3 = timing * 0.3F % 1.0F;
         GlStateManager.pushMatrix();
-        GlStateManager.translate((float)x2, (float)y2, (float)z2);
-        Vec3d vec3d = new Vec3d(x1,y1,z1);
-        Vec3d vec3d1 = new Vec3d(x2,y2,z2);
+        GlStateManager.translate((float) x2, (float) y2, (float) z2);
+        Vec3d vec3d = new Vec3d(x1, y1, z1);
+        Vec3d vec3d1 = new Vec3d(x2, y2, z2);
         Vec3d vec3d2 = vec3d.subtract(vec3d1);
         double d0 = vec3d2.lengthVector();
         vec3d2 = vec3d2.normalize();
-        float f5 = (float)Math.acos(vec3d2.y);
-        float f6 = (float)Math.atan2(vec3d2.z, vec3d2.x);
-        GlStateManager.rotate((((float)Math.PI / 2F) + -f6) * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(f5 * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
-        double d1 = (double)timing * 0.05D * -1.5D;
+        float f5 = (float) Math.acos(vec3d2.y);
+        float f6 = (float) Math.atan2(vec3d2.z, vec3d2.x);
+        GlStateManager.rotate((((float) Math.PI / 2F) + -f6) * (180F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(f5 * (180F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
+        double d1 = (double) timing * 0.05D * -1.5D;
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         int r1 = 104;
         int g1 = 217;
@@ -114,7 +110,7 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         double d19 = 0.0D + Math.sin(d1 + (Math.PI * 3D / 2D)) * 0.2D;
         double d20 = 0.0D;
         double d21 = 0.4999D;
-        double d22 = (double)(-1.0F + f3);
+        double d22 = (double) (-1.0F + f3);
         double d23 = d0 * 2.5D + d22;
         bufferbuilder.pos(d12, d0, d13).tex(0.4999D, d23).color(r1, g1, b1, 255).endVertex();
         bufferbuilder.pos(d12, 0.0D, d13).tex(0.4999D, d22).color(r2, g2, b2, 255).endVertex();
@@ -140,22 +136,22 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
 
 
         /**glDisable(GL_TEXTURE_2D);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glDisable(GL_LIGHTING);
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+         glDisable(GL_LIGHTING);
 
-        glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-        glBegin(GL_LINE_STRIP);
+         glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+         glBegin(GL_LINE_STRIP);
 
-        glVertex3d(x1, y1, z1);
-        glVertex3d(x2, y2, z2);
+         glVertex3d(x1, y1, z1);
+         glVertex3d(x2, y2, z2);
 
-        glEnd();
-        glColor4f(1f, 1f, 1f, 1.0f);
+         glEnd();
+         glColor4f(1f, 1f, 1f, 1.0f);
 
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_ALPHA_TEST);
+         glEnable(GL_TEXTURE_2D);
+         glEnable(GL_ALPHA_TEST);
 
-        glEnable(GL_LIGHTING);'**/
+         glEnable(GL_LIGHTING);'**/
     }
 
     @Override

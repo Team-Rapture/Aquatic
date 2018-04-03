@@ -1,11 +1,8 @@
 package com.github.rapture.aquatic.block;
 
 import com.github.rapture.aquatic.block.util.BlockRenderInLiquidBase;
-import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +22,7 @@ public class BlockOxygenStone extends BlockRenderInLiquidBase {
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getRadius(pos, 2, 6));
-        if(players.size() > 0) {
+        if (players.size() > 0) {
             for (EntityPlayer player : players) {
                 player.setAir(300);
             }

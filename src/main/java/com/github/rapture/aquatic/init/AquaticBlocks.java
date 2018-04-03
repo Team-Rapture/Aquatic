@@ -11,14 +11,12 @@ import com.github.rapture.aquatic.block.util.BlockBase;
 import com.github.rapture.aquatic.util.RegistryCreate;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemShears;
 
 @RegistryCreate(value = Block.class, modid = Aquatic.MODID)
 public class AquaticBlocks {
 
-    public static final Block aquatic_charm = new BlockAquaCharm("aquatic_charm", Material.CLAY);
+    public static final Block AQUATIC_CHARM = new BlockAquaCharm("aquatic_charm", Material.CLAY);
 
-    // register blocks by just creating public static final fields
     public static final Block HYDRILLA = new BlockPlantBase("hydrilla");
     public static final Block PISTIA = new BlockPistia();
     public static final Block AQUANET_CONTROLLER = new AquaNetController();
@@ -41,13 +39,12 @@ public class AquaticBlocks {
     public static final Block LAPIZ_ORE_DEPOSIT = new BlockBase("lapiz_ore_deposit");
     public static final Block QUARTZ_ORE_DEPOSIT = new BlockBase("quartz_ore_deposit");
     public static final Block EMERALD_ORE_DEPOSIT = new BlockBase("emerald_ore_deposit");
-   
-    
-    public static final Block coral_reef_pink = new BlockPlantBase("coral_reef_pink");
-    public static final Block coral_reef_blue = new BlockPlantBase("coral_reef_blue");
-    public static final Block coral_reef_green = new BlockPlantBase("coral_reef_green");
-    public static final Block coral_reef_red = new BlockPlantBase("coral_reef_red");
-    public static final Block coral_reef_yellow = new BlockPlantBase("coral_reef_yellow");
+
+    public static final Block CORAL_REEF_PINK = new BlockPlantBase("coral_reef_pink");
+    public static final Block CORAL_REEF_BLUE = new BlockPlantBase("coral_reef_blue");
+    public static final Block CORAL_REEF_GREEN = new BlockPlantBase("coral_reef_green");
+    public static final Block CORAL_REEF_RED = new BlockPlantBase("coral_reef_red");
+    public static final Block CORAL_REEF_YELLOW = new BlockPlantBase("coral_reef_yellow");
 
 
 }

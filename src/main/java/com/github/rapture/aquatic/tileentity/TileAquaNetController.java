@@ -48,7 +48,7 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     @Override
     public void update() {
         super.update();
-        if(world.getBlockState(pos.down()).getBlock() == AquaticBlocks.OXYGEN_STONE) {
+        if (world.getBlockState(pos.down()).getBlock() == AquaticBlocks.OXYGEN_STONE) {
             if (generatingOxygen) {
                 spawnTimer++;
                 if (spawnTimer >= 20) {
@@ -71,7 +71,7 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
             } else {
                 generatingOxygen = false;
             }
-        }else {
+        } else {
             generatingOxygen = false;
         }
     }

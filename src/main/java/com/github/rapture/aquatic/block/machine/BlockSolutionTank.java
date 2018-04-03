@@ -33,7 +33,7 @@ public class BlockSolutionTank extends BlockContainerBase {
         IFluidHandler handler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
         if (FluidUtil.interactWithFluidHandler(player, hand, handler)) {
         } else {
-            if(!world.isRemote) {
+            if (!world.isRemote) {
                 player.openGui(Aquatic.instance, GuiHandler.GUI_SOLUTION_TANK, world, pos.getX(), pos.getY(), pos.getZ());
             }
         }

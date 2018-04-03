@@ -77,15 +77,15 @@ public class TileOxygenFiller extends TileEntityInventory {
             }
         }
 
-        if(!inventory.getStackInSlot(0).isEmpty()) {
-            if(inventory.getStackInSlot(0).hasCapability(CapabilityOxygen.OXYGEN_CAPABILITY, EnumFacing.UP)) {
+        if (!inventory.getStackInSlot(0).isEmpty()) {
+            if (inventory.getStackInSlot(0).hasCapability(CapabilityOxygen.OXYGEN_CAPABILITY, EnumFacing.UP)) {
                 IOxygenProvider oxygenProvider = inventory.getStackInSlot(0).getCapability(CapabilityOxygen.OXYGEN_CAPABILITY, EnumFacing.UP);
-                if(oxygenProvider.getOxygenStored() < oxygenProvider.getMaxOxygenStorage()) {
+                if (oxygenProvider.getOxygenStored() < oxygenProvider.getMaxOxygenStorage()) {
                     if (oxygenProvider.canReceiveOxygen(20) && oxygen.canSendOxygen(20)) {
                         oxygenProvider.fillOxygen(20);
                         oxygen.drainOxygen(20);
                     }
-                }else {
+                } else {
                     inventory.setStackInSlot(1, inventory.getStackInSlot(0));
                     inventory.setStackInSlot(0, ItemStack.EMPTY);
                 }
@@ -95,14 +95,14 @@ public class TileOxygenFiller extends TileEntityInventory {
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityOxygen.OXYGEN_CAPABILITY) return true;
+        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return true;
         return super.hasCapability(capability, facing);
     }
 
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) oxygen;
+        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) oxygen;
         return super.getCapability(capability, facing);
     }
 }

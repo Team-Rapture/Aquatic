@@ -22,6 +22,11 @@
           "icon": "minecraft:prismarine_shard"
         }
       ]
+    },
+    {
+      "id": "aquatic:test",
+      "icon": "minecraft:diamond",
+      "page": "aquatic:test"
     }
   ]
 }

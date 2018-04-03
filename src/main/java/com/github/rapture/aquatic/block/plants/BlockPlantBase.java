@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.block.plants;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.util.NameUtil;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,8 +17,7 @@ public class BlockPlantBase extends BlockBush {
         super(Material.ROCK);
         this.setSoundType(SoundType.PLANT);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
-        this.setUnlocalizedName(name);
-        this.setRegistryName(name);
+        NameUtil.name(this, name);
     }
 
     @Override

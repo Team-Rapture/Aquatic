@@ -4,6 +4,7 @@ import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.api.oxygen.OxygenHandler;
 import com.github.rapture.aquatic.api.oxygen.capability.CapabilityOxygen;
 import com.github.rapture.aquatic.init.AquaticItems;
+import com.github.rapture.aquatic.util.NameUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -18,6 +19,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Locale;
 
 public class ScubaSuit extends ItemArmor {
 
@@ -28,8 +30,7 @@ public class ScubaSuit extends ItemArmor {
     public ScubaSuit(EntityEquipmentSlot slot, String name) {
         super(scuba_suit, 0, slot);
         this.slot = slot;
-        this.setUnlocalizedName("scuba_suit_" + slot.toString().toLowerCase());
-        this.setRegistryName(name);
+        NameUtil.name(this, name);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
     }
 
