@@ -2,11 +2,9 @@ package com.github.rapture.aquatic.block.fluid;
 
 import com.github.rapture.aquatic.Aquatic;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 public class FluidAquaWater extends Fluid {
 

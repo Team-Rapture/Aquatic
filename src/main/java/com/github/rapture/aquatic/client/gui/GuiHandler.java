@@ -21,8 +21,8 @@ public class GuiHandler implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
 
-        if(ID == GUI_SOLUTION_TANK) {
-            if(te instanceof TileSolutionTank) {
+        if (ID == GUI_SOLUTION_TANK) {
+            if (te instanceof TileSolutionTank) {
                 return new ContainerSolutionTank(player.inventory, (TileSolutionTank) te);
             }
         }
@@ -36,8 +36,8 @@ public class GuiHandler implements IGuiHandler {
         BlockPos pos = new BlockPos(x, y, z);
         TileEntity te = world.getTileEntity(pos);
 
-        if(ID == GUI_SOLUTION_TANK) {
-            if(te instanceof TileSolutionTank) {
+        if (ID == GUI_SOLUTION_TANK) {
+            if (te instanceof TileSolutionTank) {
                 return new GuiSolutionTank(new ContainerSolutionTank(player.inventory, (TileSolutionTank) te), (TileSolutionTank) te);
             }
         }

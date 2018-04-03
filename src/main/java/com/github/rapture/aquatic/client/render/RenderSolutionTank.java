@@ -11,7 +11,7 @@ public class RenderSolutionTank extends TileEntitySpecialRenderer<TileSolutionTa
     @Override
     public void render(TileSolutionTank te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         super.render(te, x, y, z, partialTicks, destroyStage, alpha);
-        if(te != null) {
+        if (te != null) {
             final FluidTank fluid = te.tank;
             if (fluid != null && fluid.getFluid() != null && fluid.getFluidAmount() > 0) {
                 GlStateManager.pushMatrix();

@@ -18,7 +18,7 @@ public class KeyHandler {
     public static void onKeyPressed(InputEvent.KeyInputEvent event) {
         if (mc.currentScreen == null) {
             //query key bindings here
-            //if (KEY_GUIDE.isPressed()) GuiScreenGuide.openPage(GuideReader.INDEX);
+            if (KEY_GUIDE.isPressed()) GuiScreenGuide.openPage(null);
         }
     }
 }

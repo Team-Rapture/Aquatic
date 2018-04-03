@@ -4,8 +4,6 @@ import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.api.oxygen.OxygenHandler;
 import com.github.rapture.aquatic.api.oxygen.capability.CapabilityOxygen;
 import com.github.rapture.aquatic.init.AquaticItems;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;

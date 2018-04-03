@@ -1,0 +1,27 @@
+{
+  "index": [
+    {
+      "id": "aquatic:aqua_net",
+      "icon": "minecraft:prismarine_shard",
+      "tooltip": true,
+      "page": "aquatic:aqua_net/aquanet",
+      "child_elements": [
+        {
+          "id": "aquatic:aqua_net_controller",
+          "page": "aquatic:aqua_net/controller",
+          "icon": "minecraft:prismarine_shard"
+        },
+        {
+          "id": "aquatic:aqua_net_nodes",
+          "page": "aquatic:aqua_net/nodes",
+          "icon": "minecraft:prismarine_shard"
+        },
+        {
+          "id": "aquatic:aqua_net_nodes_advanced",
+          "page": "aquatic:aqua_net/nodes_advanced",
+          "icon": "minecraft:prismarine_shard"
+        }
+      ]
+    }
+  ]
+}

@@ -26,10 +26,15 @@ public class EntityWaterBubble extends Entity {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        deathCounter++;
-        if (deathCounter >= 20 * 10) {
-            this.setDead();
-            deathCounter = 0;
+        if(!oxygen) {
+            deathCounter++;
+            if (deathCounter >= 20 * 10) {
+                this.setDead();
+                deathCounter = 0;
+            }
+        }else {
+            posY++;
+            if(prevPosY)
         }
     }
 

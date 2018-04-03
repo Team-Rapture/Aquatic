@@ -17,7 +17,7 @@ public class TileSolutionTank extends TileEntityInventory {
 
     public FluidTank tank = new FluidTank(8000) {
         @Override
-        public void onContentsChanged () {
+        public void onContentsChanged() {
             if (this.tile != null) {
                 final IBlockState state = this.tile.getWorld().getBlockState(this.tile.getPos());
                 this.tile.getWorld().notifyBlockUpdate(this.tile.getPos(), state, state, 8);
@@ -37,9 +37,9 @@ public class TileSolutionTank extends TileEntityInventory {
             this.tank.setFluid(FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("FluidData")));
         }
 
-        if(tank != null) {
+        if (tank != null) {
             this.tank.setTileEntity(this);
-            if(tank.getFluid() != null) {
+            if (tank.getFluid() != null) {
                 tank.readFromNBT(nbt);
             }
         }
@@ -58,9 +58,9 @@ public class TileSolutionTank extends TileEntityInventory {
 
     @Override
     public void update() {
-        if(!inventory.getStackInSlot(1).isEmpty() && inventory.getStackInSlot(1).getItem() == Items.BUCKET) {
-            if(tank.getFluidAmount() >= 1000 && tank.getFluid().getFluid() == FluidRegistry.WATER) {
-                if(inventory.getStackInSlot(2).isEmpty()) {
+        if (!inventory.getStackInSlot(1).isEmpty() && inventory.getStackInSlot(1).getItem() == Items.BUCKET) {
+            if (tank.getFluidAmount() >= 1000 && tank.getFluid().getFluid() == FluidRegistry.WATER) {
+                if (inventory.getStackInSlot(2).isEmpty()) {
                     decrease(1);
                     inventory.setStackInSlot(2, new ItemStack(Items.WATER_BUCKET));
                     tank.drain(1000, true);
@@ -68,11 +68,11 @@ public class TileSolutionTank extends TileEntityInventory {
             }
         }
 
-        if(tank.getFluidAmount() > 0 && tank.getFluid().isFluidEqual(new FluidStack(CommonProxy.AQUA_WATER, 1000))) {
-            if(tank.getFluid().tag != null) {
+        if (tank.getFluidAmount() > 0 && tank.getFluid().isFluidEqual(new FluidStack(CommonProxy.AQUA_WATER, 1000))) {
+            if (tank.getFluid().tag != null) {
                 double randomValue = (double) Math.round(Math.sqrt(6 + (14 - 6) * world.rand.nextDouble()) * 100d) / 100d;
                 tank.getFluid().tag.setDouble("ph", randomValue);
-            }else {
+            } else {
                 tank.getFluid().tag = new NBTTagCompound();
             }
         }
@@ -80,13 +80,13 @@ public class TileSolutionTank extends TileEntityInventory {
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-        if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) return true;
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) return true;
         return super.hasCapability(capability, facing);
     }
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-        if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) return (T) this.tank;
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) return (T) this.tank;
         return super.getCapability(capability, facing);
     }
 }

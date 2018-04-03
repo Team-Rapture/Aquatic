@@ -1,7 +1,8 @@
 package com.github.rapture.aquatic.init;
 
 import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.block.*;
+import com.github.rapture.aquatic.block.BlockAquaCharm;
+import com.github.rapture.aquatic.block.BlockOxygenStone;
 import com.github.rapture.aquatic.block.fluid.FluidAquaWaterBlock;
 import com.github.rapture.aquatic.block.machine.AquaNetController;
 import com.github.rapture.aquatic.block.machine.AquaNode;

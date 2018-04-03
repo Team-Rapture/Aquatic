@@ -21,7 +21,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.opengl.GL11;
 
 @Mod(
         name = Aquatic.MODNAME,
@@ -107,9 +106,9 @@ public class Aquatic {
     @SubscribeEvent
     public void onFogRender(EntityViewRenderEvent.FogColors e) {
         if (e.getState().getBlock() == AquaticBlocks.AQUA_WATER_BLOCK) {
-            e.setRed(1f/255f);
-            e.setGreen(36f/255f);
-            e.setBlue(92f/255f);
+            e.setRed(1f / 255f);
+            e.setGreen(36f / 255f);
+            e.setBlue(92f / 255f);
             //e.setCanceled(true);
         }
     }
