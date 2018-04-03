@@ -1,6 +1,5 @@
 package com.github.rapture.aquatic.world.dimension.generator;
 
-import com.github.rapture.aquatic.init.AquaticBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

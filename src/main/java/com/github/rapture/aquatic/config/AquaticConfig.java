@@ -37,20 +37,20 @@ public class AquaticConfig {
 
     @Config.RequiresMcRestart
     @Config.Name("Dimension ID")
-    @Config.Comment("Dimension ID - CAREFUL WHEN CHANGING! Default: 300")
+    @Config.Comment("Dimension ID - CAREFUL WHEN CHANGING!")
     public static int dimensionID = 300;
 
     @Config.Name("Angler Spawn Rate")
-    @Config.Comment("Angler Fish Spawn Rate - Default: 8")
+    @Config.Comment("Angler Fish Spawn Rate")
     public static int angler_spawn_rate = 8;
 
 
     @Config.Name("Angler MIN amount")
-    @Config.Comment("Angler Fish Spawn Rate - Default: 1")
+    @Config.Comment("Angler Fish Spawn Rate")
     public static int angler_MIN_spawn_rate = 1;
 
     @Config.Name("Angler MAX amount")
-    @Config.Comment("Angler Fish Spawn Rate - Default: 3")
+    @Config.Comment("Angler Fish Spawn Rate")
     public static int angler_MAX_spawn_rate = 3;
 
 
