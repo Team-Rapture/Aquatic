@@ -15,25 +15,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DivingKnife extends ItemBase {
-    List<Block> breakable = new ArrayList<>();
+    private static final List<Block> breakable = new ArrayList<>();
 
-    public DivingKnife(String name) {
-        super(name);
+    static {
         breakable.add(AquaticBlocks.CORAL_REEF_BLUE);
         breakable.add(AquaticBlocks.CORAL_REEF_PINK);
         breakable.add(AquaticBlocks.CORAL_REEF_RED);
-
         breakable.add(AquaticBlocks.CORAL_REEF_YELLOW);
         breakable.add(AquaticBlocks.CORAL_REEF_GREEN);
         breakable.add(AquaticBlocks.PISTIA);
     }
 
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos,
-                                    EntityLivingBase entityLiving) {
+    public DivingKnife(String name) {
+        super(name);
+    }
+
+    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         if (!worldIn.isRemote) {
             stack.damageItem(1, entityLiving);
-        }
-        if (!worldIn.isRemote) {
             Block block = state.getBlock();
             if (breakable.contains(block))
                 return !worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(),

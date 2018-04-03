@@ -21,11 +21,11 @@ import javax.annotation.Nullable;
 
 public class TileAquaNetController extends TileEntityBase implements IHudSupport, ITickable {
 
-    private CustomEnergyStorage storage = new CustomEnergyStorage(100000);
     public OxygenHandler oxygen = new OxygenHandler(10000);
     public int energyToGenerate = 20;
-    private boolean generatingOxygen = false;
     public int spawnTimer = 0;
+    private CustomEnergyStorage storage = new CustomEnergyStorage(100000);
+    private boolean generatingOxygen = false;
 
     public TileAquaNetController() {
     }
@@ -52,7 +52,7 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
             IBlockState state = world.getBlockState(pos);
             world.notifyBlockUpdate(pos, state, state, 3);
         }
-        if(world.isRemote) return;
+        if (world.isRemote) return;
         if (world.getBlockState(pos.down()).getBlock() == AquaticBlocks.OXYGEN_STONE) {
             if (isGeneratingOxygen()) {
                 spawnTimer++;

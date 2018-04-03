@@ -21,8 +21,8 @@ import java.util.List;
 
 public class TileDepthGenerator extends TileEntityBase implements IHudSupport, ITickable {
 
-    private CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
     private static List<Block> ores = new ArrayList<>();
+    private CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
     private int timer = 0;
 
     public static void init() {

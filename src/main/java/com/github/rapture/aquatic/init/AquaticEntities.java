@@ -6,7 +6,6 @@ import com.github.rapture.aquatic.entity.boss.EntityScylla;
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.rapture.aquatic.entity.hostile.EntityShark;
 import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
-import com.github.rapture.aquatic.proxy.CommonProxy;
 import com.github.rapture.aquatic.util.RegistryCreate;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;

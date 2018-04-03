@@ -81,18 +81,16 @@ public class HydroDrill extends ItemTool {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        ICapabilityProvider defaultProvider = super.initCapabilities(stack, nbt);
         return new ICapabilityProvider() {
             @Override
             public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityEnergy.ENERGY || (defaultProvider != null ? defaultProvider.hasCapability(capability, facing) : null);
+                return capability == CapabilityEnergy.ENERGY;
             }
 
             @Nullable
             @Override
             public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityEnergy.ENERGY ? (T) energyStorage :
-                        (defaultProvider == null ? null : defaultProvider.getCapability(capability, facing));
+                return capability == CapabilityEnergy.ENERGY ? CapabilityEnergy.ENERGY.cast(energyStorage) : null;
             }
         };
     }

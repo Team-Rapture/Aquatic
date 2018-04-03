@@ -21,7 +21,7 @@ public class TileCreativeGenerator extends TileEntityBase implements IEnergyStor
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return CapabilityEnergy.ENERGY.cast(this);
+        if (capability == CapabilityEnergy.ENERGY) return CapabilityEnergy.ENERGY.cast(this);
         return super.getCapability(capability, facing);
     }
 
@@ -57,12 +57,13 @@ public class TileCreativeGenerator extends TileEntityBase implements IEnergyStor
 
     @Override
     public void update() {
-        if(this.world.isRemote) return;
-        for(EnumFacing facing : EnumFacing.values()) {
+        if (this.world.isRemote) return;
+        for (EnumFacing facing : EnumFacing.values()) {
             TileEntity te = this.world.getTileEntity(this.pos.offset(facing));
-            if(te != null && te.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite())) {
+            if (te != null && te.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite())) {
                 IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
-                if(energyStorage.canReceive()) energyStorage.receiveEnergy(AquaticConfig.creativeBatteryMaxTransfer, false);
+                if (energyStorage.canReceive())
+                    energyStorage.receiveEnergy(AquaticConfig.creativeBatteryMaxTransfer, false);
             }
         }
     }

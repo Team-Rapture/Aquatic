@@ -35,14 +35,14 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         HudRender.renderHud(te, x, y, z);
         if (te.controllerPos != null && te.hasAquaController()) {
             TileEntity controllerTe = te.getWorld().getTileEntity(te.controllerPos);
-            if(controllerTe != null && controllerTe instanceof  TileAquaNetController) {
-                TileAquaNetController controller = (TileAquaNetController)controllerTe;
+            if (controllerTe != null && controllerTe instanceof TileAquaNetController) {
+                TileAquaNetController controller = (TileAquaNetController) controllerTe;
 
                 double sX = te.controllerPos.getX() - blockPos.getX() + x + 0.5;
                 double sY = te.controllerPos.getY() - blockPos.getY() + y + 0.5;
                 double sZ = te.controllerPos.getZ() - blockPos.getZ() + z + 0.5;
 
-                this.renderBeam( sX, sY, sZ, x + 0.5, y + 0.625, z + 0.5, te.beamRenderTicks, partialTicks,
+                this.renderBeam(sX, sY, sZ, x + 0.5, y + 0.625, z + 0.5, te.beamRenderTicks, partialTicks,
                         te.oxygen.getOxygenStored() != te.oxygen.getMaxOxygenStorage() && controller.oxygen.canSendOxygen(20));
             }
         }
@@ -85,17 +85,17 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         //System.out.printf("%s %s %s%n", timing, ticks, partialTicks);
         float f3 = timing * 0.3F % 1.0F;
         GlStateManager.pushMatrix();
-        GlStateManager.translate((float)x2, (float)y2, (float)z2);
-        Vec3d vec3d = new Vec3d(x1,y1,z1);
-        Vec3d vec3d1 = new Vec3d(x2,y2,z2);
+        GlStateManager.translate((float) x2, (float) y2, (float) z2);
+        Vec3d vec3d = new Vec3d(x1, y1, z1);
+        Vec3d vec3d1 = new Vec3d(x2, y2, z2);
         Vec3d beamDirection = vec3d.subtract(vec3d1);
         double beamLength = beamDirection.lengthVector();
         beamDirection = beamDirection.normalize();
-        float f5 = (float)Math.acos(beamDirection.y);
-        float f6 = (float)Math.atan2(beamDirection.z, beamDirection.x);
-        GlStateManager.rotate((((float)Math.PI / 2F) + -f6) * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(f5 * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
-        double d1 = (double)timing * 0.05D * -1.5D;
+        float f5 = (float) Math.acos(beamDirection.y);
+        float f6 = (float) Math.atan2(beamDirection.z, beamDirection.x);
+        GlStateManager.rotate((((float) Math.PI / 2F) + -f6) * (180F / (float) Math.PI), 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(f5 * (180F / (float) Math.PI), 1.0F, 0.0F, 0.0F);
+        double d1 = (double) timing * 0.05D * -1.5D;
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         int r1 = 104;
         int g1 = 217;
@@ -123,7 +123,7 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         double d19 = 0.0D + Math.sin(d1 + (Math.PI * 3D / 2D)) * 0.2D;
         double d20 = 0.0D;
         double d21 = 0.4999D;
-        double d22 = (double)(-1.0F + f3);
+        double d22 = (double) (-1.0F + f3);
         double d23 = beamLength * 2.5D + d22;
         bufferbuilder.pos(d12, beamLength, d13).tex(0.4999D, d23).color(r1, g1, b1, 255).endVertex();
         bufferbuilder.pos(d12, 0.0D, d13).tex(0.4999D, d22).color(r2, g2, b2, 255).endVertex();
@@ -147,27 +147,27 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         tessellator.draw();
         GlStateManager.popMatrix();
 
-        if(!renderBubbles) return;
+        if (!renderBubbles) return;
         this.bindTexture(BUBBLE);
         // DO RENDERS FOR BUBBLES
         /*Vec3d pos1 = new Vec3d(x1,y1,z1);
         Vec3d pos2 = new Vec3d(x2,y2,z2);
         Vec3d halfWay = pos1.subtract(pos2).scale(0.5f).add(pos2).add(beamDirection.scale(-timing * 0.10 % 2));
         this.renderBubble(halfWay.x,halfWay.y,halfWay.z);*/
-        Vec3d origin = new Vec3d(x1,y1,z1);
+        Vec3d origin = new Vec3d(x1, y1, z1);
         float bubbleDist = 1;
-        for(int i = 0; i <= beamLength / bubbleDist; i++) {
+        for (int i = 0; i <= beamLength / bubbleDist; i++) {
             double bubbleProg = (timing * 0.10) % bubbleDist + i * bubbleDist;
-            if(bubbleProg > beamLength) break;
+            if (bubbleProg > beamLength) break;
             Vec3d bubbleLoc = origin.add(beamDirection.scale(-bubbleProg));
-            this.renderBubble(bubbleLoc.x,bubbleLoc.y,bubbleLoc.z);
+            this.renderBubble(bubbleLoc.x, bubbleLoc.y, bubbleLoc.z);
         }
     }
 
     public void renderBubble(double x, double y, double z) {
 
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x,y,z);
+        GlStateManager.translate(x, y, z);
         GlStateManager.disableBlend();
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 0.3F);

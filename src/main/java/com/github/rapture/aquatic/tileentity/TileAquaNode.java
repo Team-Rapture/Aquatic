@@ -25,9 +25,9 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
 
     public static final int sqRange = 30 * 30;
     public OxygenHandler oxygen = new OxygenHandler(10000);
-    private boolean hasAquaController = false;
     public BlockPos controllerPos = null;
     public int beamRenderTicks;
+    private boolean hasAquaController = false;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {

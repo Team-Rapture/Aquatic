@@ -11,11 +11,10 @@ public class FluidUtil {
     private static List<Fluid> FLUIDS = new ArrayList<>();
 
     public static Fluid createAndRegister(Fluid fluid) {
-        if(FluidRegistry.registerFluid(fluid)) {
+        if (FluidRegistry.registerFluid(fluid)) {
             FLUIDS.add(fluid);
             return fluid;
-        }
-        else return FluidRegistry.getFluid(fluid.getName());
+        } else return FluidRegistry.getFluid(fluid.getName());
     }
 
     public static void addBuckets() {

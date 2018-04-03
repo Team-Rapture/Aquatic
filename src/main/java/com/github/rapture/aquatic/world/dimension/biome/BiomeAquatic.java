@@ -1,25 +1,24 @@
 package com.github.rapture.aquatic.world.dimension.biome;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.rapture.aquatic.entity.hostile.EntityShark;
 import com.google.common.collect.Lists;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BiomeAquatic extends Biome {
 
-	public BiomeAquatic(BiomeProperties properties) {
-		super(properties);
-		this.addSpawnablesList();
-	
-	}
-	
+    public BiomeAquatic(BiomeProperties properties) {
+        super(properties);
+        this.addSpawnablesList();
+
+    }
+
     public void addSpawnablesList() {
         ArrayList<SpawnListEntry> entityList = new ArrayList<SpawnListEntry>();
 
@@ -37,14 +36,14 @@ public class BiomeAquatic extends Biome {
 
         return this.modSpawnableLists.get(creatureType);
     }
-	@Override
-    public BiomeDecorator createBiomeDecorator()
-    {
+
+    @Override
+    public BiomeDecorator createBiomeDecorator() {
         return new BiomeAquaticDecorator();
     }
+
     @Override
-    public Class <? extends Biome > getBiomeClass()
-    {
-    	return BiomeAquatic.class;
+    public Class<? extends Biome> getBiomeClass() {
+        return BiomeAquatic.class;
     }
 }

@@ -3,8 +3,6 @@ package com.github.rapture.aquatic.block.fluid;
 import com.github.rapture.aquatic.Aquatic;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 
 public class FluidAquaWater extends net.minecraftforge.fluids.Fluid {
 

@@ -4,10 +4,8 @@ import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.util.NameUtil;
 import com.github.rapture.aquatic.util.ParticleUtils;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
@@ -20,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
 
 //TODO Fix Bubble Rendering to Follow Player As They Sink (Bubbles Vertical Line)
 public class HeavyIronBoots extends ItemArmor {
@@ -41,9 +37,7 @@ public class HeavyIronBoots extends ItemArmor {
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
         if (player.isInWater()) {
-
             if (player.capabilities.isFlying) return;
-            //if (player.capabilities.isCreativeMode) return;
             if (world.getBlockState(player.getPosition().down(1)).getMaterial() == Material.WATER && !player.onGround) {
                 ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, (int) Math.round(Math.random() * 4), player.getPositionVector().x, player.getPositionVector().y, player.getPositionVector().z, (Math.random() - 0.5) * 0.8, 0.5, (Math.random() - 0.5) * 0.8, 0);
                 player.motionY -= 0.08F;
@@ -71,18 +65,6 @@ public class HeavyIronBoots extends ItemArmor {
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return false;
-    }
-
-    @Nullable
-    @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        return super.getArmorTexture(stack, entity, slot, type);
-    }
-
-    @Nullable
-    @Override
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-        return super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
     }
 
 }

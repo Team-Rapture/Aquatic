@@ -19,7 +19,6 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Locale;
 
 public class ScubaSuit extends ItemArmor {
 
@@ -64,17 +63,16 @@ public class ScubaSuit extends ItemArmor {
     @Nullable
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-        ICapabilityProvider defaultProvider = super.initCapabilities(stack, nbt);
         return new ICapabilityProvider() {
             @Override
             public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityOxygen.OXYGEN_CAPABILITY || defaultProvider.hasCapability(capability, facing);
+                return capability == CapabilityOxygen.OXYGEN_CAPABILITY;
             }
 
             @Nullable
             @Override
             public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityOxygen.OXYGEN_CAPABILITY ? (T) oxygenStorage : defaultProvider.getCapability(capability, facing);
+                return capability == CapabilityOxygen.OXYGEN_CAPABILITY ? CapabilityOxygen.OXYGEN_CAPABILITY.cast(oxygenStorage) : null;
             }
         };
     }

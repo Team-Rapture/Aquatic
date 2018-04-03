@@ -31,7 +31,8 @@ public class ItemAquaticCharm extends ItemBase {
             TeleporterDim teleporter = new TeleporterDim((WorldServer) worldIn);
             if (playerIn instanceof EntityPlayerMP) {
                 EntityPlayerMP teleportee = (EntityPlayerMP) playerIn;
-                if (teleportee.dimension == DIMENSION_TO_ID) playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, DIMENSION_FROM_ID, teleporter);
+                if (teleportee.dimension == DIMENSION_TO_ID)
+                    playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, DIMENSION_FROM_ID, teleporter);
                 else playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, DIMENSION_TO_ID, teleporter);
             }
         }
