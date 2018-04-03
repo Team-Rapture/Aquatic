@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -18,15 +19,15 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileDepthGenerator extends TileEntityBase implements IHudSupport {
+public class TileDepthGenerator extends TileEntityBase implements IHudSupport, ITickable {
 
-    public CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
-    public List<Block> ores = new ArrayList<>();
-    public int timer = 0;
+    private CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
+    private static List<Block> ores = new ArrayList<>();
+    private int timer = 0;
 
-    public TileDepthGenerator() {
+    public static void init() {
         for (String string : OreDictionary.getOreNames()) {
-            if(string.toLowerCase().startsWith("ore")) {
+            if (string.toLowerCase().startsWith("ore")) {
                 ores.add(Block.getBlockFromItem(OreDictionary.getOres(string).get(0).getItem()));
             }
         }
@@ -48,13 +49,12 @@ public class TileDepthGenerator extends TileEntityBase implements IHudSupport {
 
     @Override
     public void update() {
-        super.update();
-        if(world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
+        if (world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
             for (BlockPos po : BlockPos.getAllInBox(pos.getX() - 5, pos.getY(), pos.getZ() - 5, pos.getX() + 5, pos.getY(), pos.getZ() + 5)) {
-                if(world.isAirBlock(po)) {
-                    if(storage.getEnergyStored() >= AquaticConfig.depthUsage && ores.size() > 0) {
+                if (world.isAirBlock(po)) {
+                    if (storage.getEnergyStored() >= AquaticConfig.depthUsage && ores.size() > 0) {
                         timer++;
-                        if(timer >= 20 * 15) {
+                        if (timer >= 20 * 15) {
                             storage.extractEnergy(AquaticConfig.depthUsage, false);
                             world.setBlockState(po, ores.get(world.rand.nextInt(ores.size())).getDefaultState());
                             timer = 0;
@@ -67,14 +67,14 @@ public class TileDepthGenerator extends TileEntityBase implements IHudSupport {
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return true;
+        if (capability == CapabilityEnergy.ENERGY) return true;
         return super.hasCapability(capability, facing);
     }
 
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return (T) storage;
+        if (capability == CapabilityEnergy.ENERGY) return (T) storage;
         return super.getCapability(capability, facing);
     }
 

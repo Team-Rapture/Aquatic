@@ -34,17 +34,21 @@ public class GuiScreenGuide extends GuiScreen {
             LIGHT_GRAY = 0x808080FF;
 
     private static String lastEntry = null;
+    private static String lastChild = null;
 
     private GuiScrollableList textBox;
     /**
      * what page we are displaying
      */
     private String selectedEntry;
+    private String selectedChild = null;
 
     private GuiScreenGuide(@Nullable ResourceLocation selectedPage) {
         if (selectedPage != null) this.selectedEntry = selectedPage.toString();
-        else if (lastEntry != null) this.selectedEntry = lastEntry;
-        else selectedEntry = "aquatic:aqua_net";
+        else {
+            this.selectedEntry = lastEntry;
+            this.selectedChild = lastChild;
+        }
     }
 
     public static void openPage(@Nullable ResourceLocation page) {
@@ -56,16 +60,42 @@ public class GuiScreenGuide extends GuiScreen {
     @Override
     public void onGuiClosed() {
         lastEntry = this.selectedEntry;
+        lastChild = this.selectedChild;
     }
 
     public void setSelected(@Nullable String entry) {
-        this.selectedEntry = entry;
+        if (entry == null || GuideReader.GUIDE_INDEX.containsKey(entry)) {
+            if (entry != null && entry.equals(this.selectedEntry)) { //unselect
+                this.selectedEntry = null;
+            } else this.selectedEntry = entry;
+            this.selectedChild = null;
+        } else {
+            boolean hasKey = false;
+            keys:
+            for (String key : GuideReader.GUIDE_INDEX.keySet()) {
+                if (GuideReader.CHILD_COUNT.get(key) > 0) {
+                    NBTTagList tagList = GuideReader.GUIDE_INDEX.get(key).getTagList("child_elements", Constants.NBT.TAG_COMPOUND);
+                    for (int i = 0; i < tagList.tagCount(); i++) {
+                        if (entry.equals(tagList.getCompoundTagAt(i).getString("id"))) {
+                            this.selectedEntry = key;
+                            this.selectedChild = entry;
+                            hasKey = true;
+                            break keys;
+                        }
+                    }
+                }
+            }
+            if (!hasKey) {
+                this.selectedEntry = null;
+                this.selectedChild = null;
+            }
+        }
         this.initGui();
     }
 
     @Override
     public void initGui() {
-        List<String> lines = GuideReader.readPage(this.selectedEntry);
+        List<String> lines = GuideReader.readPage(this.selectedChild != null ? this.selectedChild : this.selectedEntry);
         this.textBox = new GuiScrollableList(MARGIN_SIDE + INDEX_WIDTH + INDEX_MARGIN * 2 + ENTRY_MARGIN, MARGIN_TOP + ENTRY_MARGIN, width - (MARGIN_SIDE * 2) - ENTRY_MARGIN - INDEX_WIDTH - 12, height - MARGIN_TOP - MARGIN_BOTTOM - 16, lines);
     }
 
@@ -135,8 +165,29 @@ public class GuiScreenGuide extends GuiScreen {
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         this.textBox.mouseClicked(mouseX, mouseY, mouseButton);
-        //TODO select index
-        //setSelected();
+        int xPos = MARGIN_SIDE + INDEX_MARGIN + 1;
+        if (mouseX >= xPos && mouseX <= xPos + INDEX_WIDTH) {
+            this.setSelected(this.getIndexAtPos(mouseY));
+        }
+    }
+
+    @Nullable
+    private String getIndexAtPos(int yPos) {
+        int y = MARGIN_TOP + ENTRY_MARGIN + 1;
+        if (yPos >= y) {
+            for (String key : GuideReader.GUIDE_INDEX.keySet()) {
+                y += INDEX_HEIGHT + 1;
+                if (y > yPos) return key;
+                else if (key.equals(selectedEntry)) {
+                    for (int i = 0; i < GuideReader.CHILD_COUNT.get(key); i++) {
+                        y += INDEX_HEIGHT + 1;
+                        if (y > yPos)
+                            return GuideReader.GUIDE_INDEX.get(key).getTagList("child_elements", Constants.NBT.TAG_COMPOUND).getCompoundTagAt(i).getString("id");
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     @Override

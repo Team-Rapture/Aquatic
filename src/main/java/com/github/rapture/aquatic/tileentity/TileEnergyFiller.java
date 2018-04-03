@@ -5,13 +5,14 @@ import com.github.rapture.aquatic.util.TileEntityInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nullable;
 
-public class TileEnergyFiller extends TileEntityInventory {
+public class TileEnergyFiller extends TileEntityInventory implements ITickable {
 
     public CustomEnergyStorage storage = new CustomEnergyStorage(100000);
 
@@ -33,7 +34,6 @@ public class TileEnergyFiller extends TileEntityInventory {
 
     @Override
     public void update() {
-        super.update();
         if (!inventory.getStackInSlot(0).isEmpty()) {
             if (inventory.getStackInSlot(0).hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
                 IEnergyStorage energyProvider = inventory.getStackInSlot(0).getCapability(CapabilityEnergy.ENERGY, EnumFacing.UP);
@@ -52,14 +52,14 @@ public class TileEnergyFiller extends TileEntityInventory {
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return true;
+        if (capability == CapabilityEnergy.ENERGY) return true;
         return super.hasCapability(capability, facing);
     }
 
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return (T) storage;
+        if (capability == CapabilityEnergy.ENERGY) return (T) storage;
         return super.getCapability(capability, facing);
     }
 }

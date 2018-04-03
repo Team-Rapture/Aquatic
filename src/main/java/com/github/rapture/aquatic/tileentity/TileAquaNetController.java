@@ -11,13 +11,14 @@ import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
 
-public class TileAquaNetController extends TileEntityBase implements IHudSupport {
+public class TileAquaNetController extends TileEntityBase implements IHudSupport, ITickable {
 
     public CustomEnergyStorage storage = new CustomEnergyStorage(100000);
     public OxygenHandler oxygen = new OxygenHandler(10000);
@@ -47,8 +48,7 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
 
     @Override
     public void update() {
-        super.update();
-        if(world.getBlockState(pos.down()).getBlock() == AquaticBlocks.OXYGEN_STONE) {
+        if (world.getBlockState(pos.down()).getBlock() == AquaticBlocks.OXYGEN_STONE) {
             if (generatingOxygen) {
                 spawnTimer++;
                 if (spawnTimer >= 20) {
@@ -71,7 +71,7 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
             } else {
                 generatingOxygen = false;
             }
-        }else {
+        } else {
             generatingOxygen = false;
         }
     }

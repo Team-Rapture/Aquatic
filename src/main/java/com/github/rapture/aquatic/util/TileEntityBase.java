@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
 
-public class TileEntityBase extends TileEntity implements ITickable {
+public class TileEntityBase extends TileEntity {
 
     public TileEntityBase() {
     }
@@ -24,10 +24,6 @@ public class TileEntityBase extends TileEntity implements ITickable {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         return super.writeToNBT(nbt);
-    }
-
-    @Override
-    public void update() {
     }
 
     @Override

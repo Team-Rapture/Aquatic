@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.item.armor;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.util.NameUtil;
 import com.github.rapture.aquatic.util.ParticleUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBiped;
@@ -28,8 +29,7 @@ public class HeavyIronBoots extends ItemArmor {
 
     public HeavyIronBoots() {
         super(heavyIronBoots, 0, EntityEquipmentSlot.FEET);
-        this.setUnlocalizedName("heavy_iron_boots");
-        this.setRegistryName("heavy_iron_boots");
+        NameUtil.name(this, "heavy_iron_boots");
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
     }
 

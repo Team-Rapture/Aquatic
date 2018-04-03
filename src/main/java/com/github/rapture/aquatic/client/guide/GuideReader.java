@@ -22,8 +22,11 @@ import java.util.*;
 @SideOnly(Side.CLIENT)
 public class GuideReader {
 
-    public static final ResourceLocation INDEX_PAGE = new ResourceLocation(Aquatic.MODID, "index.json");
     public static final TreeMap<String, NBTTagCompound> GUIDE_INDEX = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    public static final Map<String, Integer> CHILD_COUNT = new HashMap<>();
+
+    private static final ResourceLocation INDEX_PAGE = new ResourceLocation(Aquatic.MODID, "index.json");
+    private static final Map<String, String> PAGES = new HashMap<>();
 
     private static NBTTagCompound readJsonToNbt(@Nullable ResourceLocation location) {
         if (location != null) {
@@ -41,9 +44,8 @@ public class GuideReader {
     }
 
     public static List<String> readPage(String page) {
-        if (page != null && GUIDE_INDEX.containsKey(page)) {
-            NBTTagCompound nbt = GUIDE_INDEX.get(page);
-            ResourceLocation location = new ResourceLocation(nbt.getString("page"));
+        if (page != null && PAGES.containsKey(page)) {
+            ResourceLocation location = new ResourceLocation(PAGES.get(page));
             String path = ("/assets/" + location.getResourceDomain() + "/pages/" + Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode() + "/" + location.getResourcePath()).toLowerCase(Locale.ROOT);
             if (!path.endsWith(".md")) path += ".md";
             try (InputStream stream = new BufferedInputStream(MinecraftServer.class.getResourceAsStream(path))) {
@@ -52,8 +54,6 @@ public class GuideReader {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
             try (Scanner sc = new Scanner(new BufferedInputStream(MinecraftServer.class.getResourceAsStream(path)))) {
                 StringBuilder builder = new StringBuilder();
                 while (sc.hasNext()) {
@@ -62,6 +62,7 @@ public class GuideReader {
                 return Lists.newArrayList(builder.toString());
                 //return Arrays.asList(builder.toString().split("\n"));
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         Aquatic.getLogger().error("Exception reading {}, defaulting to empty page!", page);
@@ -77,7 +78,17 @@ public class GuideReader {
         NBTTagList topics = indexNBT.getTagList("index", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < topics.tagCount(); i++) {
             NBTTagCompound compound = topics.getCompoundTagAt(i);
-            GUIDE_INDEX.put(compound.getString("id"), compound);
+            String id = compound.getString("id");
+            GUIDE_INDEX.put(id, compound);
+            PAGES.put(id, compound.getString("page"));
+            if (compound.hasKey("child_elements", Constants.NBT.TAG_LIST)) {
+                NBTTagList tagList = compound.getTagList("child_elements", Constants.NBT.TAG_COMPOUND);
+                CHILD_COUNT.put(id, tagList.tagCount());
+                for (int j = 0; j < tagList.tagCount(); j++) {
+                    NBTTagCompound child = tagList.getCompoundTagAt(j);
+                    PAGES.put(child.getString("id"), child.getString("page"));
+                }
+            } else CHILD_COUNT.put(id, 0);
         }
     }
 }

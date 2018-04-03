@@ -17,6 +17,7 @@ public class AquaticTiles {
         GameRegistry.registerTileEntity(TileOxygenFiller.class, "aquatic:oxygen_filler");
         GameRegistry.registerTileEntity(TileEnergyFiller.class, "aquatic:energy_filler");
         GameRegistry.registerTileEntity(TileDepthGenerator.class, "aquatic:depth_generator");
+        GameRegistry.registerTileEntity(TileCreativeGenerator.class, "aquatic:creative_generator");
     }
 
     public static void bindTESR() {
