@@ -43,8 +43,7 @@ public class WorldGenReefs implements IWorldGenerator {
 			int y = MathHelper.clamp(getTopSolidOrLiquidBlock(world, new BlockPos(x, 64, z)).getY(), minHeight,
 					maxHeight);
 			BlockPos position = new BlockPos(x + 8, y, z + 8);
-			Biome biome = world.getBiome(position);
-
+			
 			genCoralReef.generate(world, rand, position);
 
 		}

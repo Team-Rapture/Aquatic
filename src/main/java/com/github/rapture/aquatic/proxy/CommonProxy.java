@@ -31,7 +31,6 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         AutoRegistry.findRegistryEntries(event);
         GameRegistry.registerWorldGenerator(new WorldGenReefs(),1);
-  
     }
 
     public void init(FMLInitializationEvent event) {
