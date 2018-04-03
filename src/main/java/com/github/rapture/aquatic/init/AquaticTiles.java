@@ -3,9 +3,7 @@ package com.github.rapture.aquatic.init;
 import com.github.rapture.aquatic.client.render.RenderAquaNetController;
 import com.github.rapture.aquatic.client.render.RenderAquaNode;
 import com.github.rapture.aquatic.client.render.RenderSolutionTank;
-import com.github.rapture.aquatic.tileentity.TileAquaNetController;
-import com.github.rapture.aquatic.tileentity.TileAquaNode;
-import com.github.rapture.aquatic.tileentity.TileSolutionTank;
+import com.github.rapture.aquatic.tileentity.*;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -15,6 +13,8 @@ public class AquaticTiles {
         GameRegistry.registerTileEntity(TileAquaNetController.class, "aquatic:aquanet_controller");
         GameRegistry.registerTileEntity(TileAquaNode.class, "aquatic:aqua_node");
         GameRegistry.registerTileEntity(TileSolutionTank.class, "aquatic:solution_tank");
+        GameRegistry.registerTileEntity(TileOxygenFiller.class, "aquatic:oxygen_filler");
+        GameRegistry.registerTileEntity(TileEnergyFiller.class, "aquatic:energy_filler");
     }
 
     public static void bindTESR() {
