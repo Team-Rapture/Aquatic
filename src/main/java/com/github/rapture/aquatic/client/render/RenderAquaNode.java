@@ -6,7 +6,6 @@ import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.tileentity.TileAquaNetController;
 import com.github.rapture.aquatic.tileentity.TileAquaNode;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -34,7 +33,7 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         BlockPos blockPos = te.getPos();
 
         HudRender.renderHud(te, x, y, z);
-        if (te.controllerPos != null && te.hasAquaController) {
+        if (te.controllerPos != null && te.hasAquaController()) {
             TileEntity controllerTe = te.getWorld().getTileEntity(te.controllerPos);
             if(controllerTe != null && controllerTe instanceof  TileAquaNetController) {
                 TileAquaNetController controller = (TileAquaNetController)controllerTe;

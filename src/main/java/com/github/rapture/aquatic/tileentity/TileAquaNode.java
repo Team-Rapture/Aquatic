@@ -25,9 +25,8 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
 
     public static final int sqRange = 30 * 30;
     public OxygenHandler oxygen = new OxygenHandler(10000);
-    public boolean hasAquaController = false;
+    private boolean hasAquaController = false;
     public BlockPos controllerPos = null;
-    public int oxygenTimer = 0;
     public int beamRenderTicks;
 
     @Override
@@ -35,7 +34,6 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
         super.readFromNBT(nbt);
         oxygen.readFromNBT(nbt);
         hasAquaController = nbt.getBoolean("hasAquaController");
-        this.oxygenTimer = nbt.getInteger("oxygenTimer");
         if (nbt.hasKey("x") && nbt.hasKey("y") && nbt.hasKey("z")) {
             controllerPos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
         }
@@ -44,8 +42,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         oxygen.writeToNBT(nbt);
-        nbt.setBoolean("hasAquaController", hasAquaController);
-        nbt.setInteger("oxygenTimer", oxygenTimer);
+        nbt.setBoolean("hasAquaController", hasAquaController());
         if (controllerPos != null) {
             nbt.setInteger("x", controllerPos.getX());
             nbt.setInteger("y", controllerPos.getY());
@@ -56,20 +53,23 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
 
     @Override
     public void update() {
-        if (!hasAquaController) {
+        if(world.isRemote) return;
+        if (!hasAquaController()) {
+            if(world.getTotalWorldTime() % 20 != 0) return;
             for (BlockPos bp : BlockPos.getAllInBox(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15)) {
                 IBlockState state = world.getBlockState(bp);
                 if (!world.isAirBlock(bp)) {
                     if (state.getBlock() == AquaticBlocks.AQUANET_CONTROLLER) {
                         controllerPos = bp;
-                        hasAquaController = true;
+                        setHasAquaController(true);
                     }
                 }
             }
         } else {
             if (controllerPos != null && world.getTileEntity(controllerPos) != null) {
                 if (!(world.getTileEntity(controllerPos) instanceof TileAquaNetController)) {
-                    hasAquaController = false;
+                    setHasAquaController(false);
+                    markDirty();
                     return;
                 }
                 TileAquaNetController controller = (TileAquaNetController) world.getTileEntity(controllerPos);
@@ -77,17 +77,16 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
                     if (oxygen.canReceiveOxygen(20)) {
                         controller.oxygen.drainOxygen(20);
                         oxygen.fillOxygen(20);
+                        markDirty();
                     }
                 }
             } else {
-                hasAquaController = false;
+                setHasAquaController(false);
             }
         }
 
         this.beamRenderTicks++;
-
-        oxygenTimer++;
-        if (oxygenTimer >= 10) {
+        if (world.getTotalWorldTime() % 10 == 0) {
             List<EntityPlayer> playerList = playersInRange();
             if (playerList.size() > 0) {
             }
@@ -96,7 +95,6 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
                     sendPlayerAir(player);
                 }
             }
-            oxygenTimer = 0;
         }
     }
 
@@ -119,6 +117,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
                     suit.oxygenStorage.fillOxygen(300);
                     oxygen.drainOxygen(300);
                     player.setAir(player.getAir() + 30);
+                    markDirty();
                 }
             }
         }
@@ -164,5 +163,14 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) this.oxygen;
         return super.getCapability(capability, facing);
+    }
+
+    public boolean hasAquaController() {
+        return hasAquaController;
+    }
+
+    public void setHasAquaController(boolean hasAquaController) {
+        this.hasAquaController = hasAquaController;
+        markDirty();
     }
 }

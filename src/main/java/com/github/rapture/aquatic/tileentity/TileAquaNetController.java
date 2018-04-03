@@ -20,11 +20,10 @@ import javax.annotation.Nullable;
 
 public class TileAquaNetController extends TileEntityBase implements IHudSupport, ITickable {
 
-    public CustomEnergyStorage storage = new CustomEnergyStorage(100000);
+    private CustomEnergyStorage storage = new CustomEnergyStorage(100000);
     public OxygenHandler oxygen = new OxygenHandler(10000);
-    public int oxygenGeneration = AquaticConfig.aquaNetGeneration;
     public int energyToGenerate = 20;
-    public boolean generatingOxygen = false;
+    private boolean generatingOxygen = false;
     public int spawnTimer = 0;
 
     public TileAquaNetController() {
@@ -33,14 +32,14 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        generatingOxygen = nbt.getBoolean("generatingOxygen");
+        setGeneratingOxygen(nbt.getBoolean("generatingOxygen"));
         storage.readFromNBT(nbt);
         oxygen.readFromNBT(nbt);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setBoolean("generatingOxygen", generatingOxygen);
+        nbt.setBoolean("generatingOxygen", isGeneratingOxygen());
         storage.writeToNBT(nbt);
         oxygen.writeToNBT(nbt);
         return super.writeToNBT(nbt);
@@ -48,31 +47,31 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
 
     @Override
     public void update() {
+        if(world.isRemote) return;
         if (world.getBlockState(pos.down()).getBlock() == AquaticBlocks.OXYGEN_STONE) {
-            if (generatingOxygen) {
+            if (isGeneratingOxygen()) {
                 spawnTimer++;
-                if (spawnTimer >= 20) {
+                if (spawnTimer % 20 == 0) {
                     EntityWaterBubble bubble = new EntityWaterBubble(world, new BlockPos(pos.getX() + world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() + world.rand.nextInt(8)));
                     EntityWaterBubble bubble2 = new EntityWaterBubble(world, new BlockPos(pos.getX() - world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() - world.rand.nextInt(8)));
                     world.spawnEntity(bubble);
                     world.spawnEntity(bubble2);
-                    spawnTimer = 0;
                 }
             }
 
-            if (oxygen.canReceiveOxygen(oxygenGeneration)) {
+            if (oxygen.canReceiveOxygen(AquaticConfig.aquaNetGeneration)) {
                 if (storage.getEnergyStored() >= energyToGenerate) {
-                    generatingOxygen = true;
                     storage.extractEnergy(energyToGenerate, false);
-                    oxygen.fillOxygen(oxygenGeneration);
+                    oxygen.fillOxygen(AquaticConfig.aquaNetGeneration);
+                    setGeneratingOxygen(true);
                 } else {
-                    generatingOxygen = false;
+                    setGeneratingOxygen(false);
                 }
             } else {
-                generatingOxygen = false;
+                setGeneratingOxygen(false);
             }
         } else {
-            generatingOxygen = false;
+            setGeneratingOxygen(false);
         }
     }
 
@@ -106,8 +105,17 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityEnergy.ENERGY) return (T) storage;
-        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) oxygen;
+        if (capability == CapabilityEnergy.ENERGY) return CapabilityEnergy.ENERGY.cast(storage);
+        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return CapabilityOxygen.OXYGEN_CAPABILITY.cast(oxygen);
         return super.getCapability(capability, facing);
+    }
+
+    public boolean isGeneratingOxygen() {
+        return generatingOxygen;
+    }
+
+    public void setGeneratingOxygen(boolean generatingOxygen) {
+        this.generatingOxygen = generatingOxygen;
+        markDirty();
     }
 }
