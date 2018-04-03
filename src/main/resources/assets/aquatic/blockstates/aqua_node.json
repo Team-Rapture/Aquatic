@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "aquatic:aquatic_node",
+    "model": "aquatic:aqua_node",
     "custom": {
       "flip-v": true
     }
