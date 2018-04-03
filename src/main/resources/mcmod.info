@@ -7,7 +7,7 @@
   "mcversion": "${mcversion}",
   "url": "${url}",
   "updateUrl": "${update_url}",
-  "authorList": ["UpcraftLP", "abused_master", "Radient_Sora", "EPIIC_THUNDERCAT"],
+  "authorList": ["UpcraftLP", "abused_master", "Sekwah41" , "EPIIC_THUNDERCAT", "Radient_Sora"],
   "credits": "(C)2018-${year} Team Rapture",
   "logoFile": "",
   "screenshots": [],

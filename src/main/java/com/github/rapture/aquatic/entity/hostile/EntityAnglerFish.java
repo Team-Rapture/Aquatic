@@ -140,10 +140,10 @@ public class EntityAnglerFish extends EntityMob {
         }
     }
 
-    @SideOnly(Side.CLIENT)
+   /* @SideOnly(Side.CLIENT)
     public int getBrightnessForRender() {
         return 15728880;
-    }
+    }*/
 
     /**
      * Gets how bright this entity is.
