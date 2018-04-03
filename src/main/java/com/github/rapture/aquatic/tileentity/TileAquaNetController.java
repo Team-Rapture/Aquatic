@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 public class TileAquaNetController extends TileEntityBase implements IHudSupport {
 
-    public CustomEnergyStorage storage = new CustomEnergyStorage(100000, 10000, 10000, 10000);
+    public CustomEnergyStorage storage = new CustomEnergyStorage(100000);
     public OxygenHandler oxygen = new OxygenHandler(10000);
     public int oxygenGeneration = AquaticConfig.aquaNetGeneration;
     public int energyToGenerate = 20;
@@ -47,6 +47,7 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     @Override
     public void update() {
         super.update();
+        this.storage.setEnergyStored(storage.getMaxEnergyStored());
         spawnTimer++;
         if (spawnTimer >= 25) {
             EntityWaterBubble bubble = new EntityWaterBubble(world, new BlockPos(pos.getX() + world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() + world.rand.nextInt(8)), pos);
