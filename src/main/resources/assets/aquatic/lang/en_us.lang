@@ -3,6 +3,9 @@ message.aquatic.update=Update available for %s for Minecraft %s
 message.aquatic.update.download=Download v%s %s (your version is %s)
 message.aquatic.update.download.keyword=here
 
+key.aquatic.guide=Open Guide
+key.category.aquatic=Aquatic
+
 #Config
 config.aquatic.title=Aquatic Config
 
@@ -14,3 +17,9 @@ tile.coral_reef.name=Coral Reef
 
 #CreativeTabs
 itemGroup.aquatic.name=Aquatic
+
+#Guide Index
+entry.aquatic.aqua_net.caption=AquaNet
+entry.aquatic.aqua_net_controller.caption=AquaNet Controller
+entry.aquatic.aqua_net_nodes.caption=AquaNet Nodes
+entry.aquatic.aqua_net_nodes_advanced.caption=Advanced AquaNet Nodes
