@@ -69,7 +69,6 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
             if (controllerPos != null && world.getTileEntity(controllerPos) != null) {
                 if (!(world.getTileEntity(controllerPos) instanceof TileAquaNetController)) {
                     setHasAquaController(false);
-                    markDirty();
                     return;
                 }
                 TileAquaNetController controller = (TileAquaNetController) world.getTileEntity(controllerPos);
@@ -78,6 +77,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
                         controller.oxygen.drainOxygen(20);
                         oxygen.fillOxygen(20);
                         markDirty();
+                        controller.markDirty();
                     }
                 }
             } else {

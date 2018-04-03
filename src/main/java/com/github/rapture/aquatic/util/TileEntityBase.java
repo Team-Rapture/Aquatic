@@ -17,6 +17,13 @@ public class TileEntityBase extends TileEntity {
     }
 
     @Override
+    public void markDirty() {
+        super.markDirty();
+        IBlockState state = world.getBlockState(pos);
+        world.markAndNotifyBlock(pos, world.getChunkFromBlockCoords(pos), state, state, 255);
+    }
+
+    @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
     }
