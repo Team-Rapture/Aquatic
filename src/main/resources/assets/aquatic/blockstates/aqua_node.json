@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "bedrock",
+    "model": "aquatic:aquatic_node",
     "custom": {
       "flip-v": true
     }
