@@ -43,20 +43,20 @@ public class GuiEnergyFiller extends GuiContainer {
         mc.getTextureManager().bindTexture(background);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        renderOxygen();
+        renderEnergy();
 
-        if (this.isPointInRegion(82, 6, 14, 50, mouseX, mouseY)) {
+        if (this.isPointInRegion(24, 12, 18, 50, mouseX, mouseY)) {
             List<String> fluid = new ArrayList<String>();
             fluid.add(tile.storage.getEnergyStored() + " / " + tile.storage.getMaxEnergyStored() + "  FE");
             GuiUtils.drawHoveringText(fluid, mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
         }
     }
 
-    public void renderOxygen() {
+    public void renderEnergy() {
         if (tile.storage.getEnergyStored() > 0) {
             int i = 48;
             int j = tile.storage.getEnergyStored() * i / tile.storage.getMaxEnergyStored();
-            drawTexturedModalRect(guiLeft + 33, guiTop + 64 - j, 180, 49 - j, 12, j);
+            drawTexturedModalRect(guiLeft + 25, guiTop + 61 - j, 179, 51 - j, 16, j);
         }
     }
 }

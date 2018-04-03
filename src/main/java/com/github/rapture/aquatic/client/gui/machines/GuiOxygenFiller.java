@@ -2,7 +2,6 @@ package com.github.rapture.aquatic.client.gui.machines;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.client.gui.container.ContainerOxygenFiller;
-import com.github.rapture.aquatic.proxy.CommonProxy;
 import com.github.rapture.aquatic.tileentity.TileOxygenFiller;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
@@ -46,7 +45,7 @@ public class GuiOxygenFiller extends GuiContainer {
 
         renderOxygen();
 
-        if (this.isPointInRegion(82, 6, 14, 50, mouseX, mouseY)) {
+        if (this.isPointInRegion(24, 12, 18, 50, mouseX, mouseY)) {
             List<String> fluid = new ArrayList<String>();
             fluid.add(tile.oxygen.getOxygenStored() + " / " + tile.oxygen.getMaxOxygenStorage() + "  Oxygen");
             GuiUtils.drawHoveringText(fluid, mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
@@ -57,7 +56,7 @@ public class GuiOxygenFiller extends GuiContainer {
         if (tile.oxygen.getOxygenStored() > 0) {
             int i = 48;
             int j = tile.oxygen.getOxygenStored() * i / tile.oxygen.getMaxOxygenStorage();
-            drawTexturedModalRect(guiLeft + 33, guiTop + 64 - j, 180, 49 - j, 12, j);
+            drawTexturedModalRect(guiLeft + 25, guiTop + 61 - j, 179, 51 - j, 16, j);
         }
     }
 }

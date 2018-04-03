@@ -87,11 +87,12 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
             }
         }
 
+        this.beamRenderTicks++;
+
         oxygenTimer++;
         if (oxygenTimer >= 10) {
             List<EntityPlayer> playerList = playersInRange();
             if (playerList.size() > 0) {
-                this.beamRenderTicks++;
             }
             for (EntityPlayer player : playerList) {
                 if (player.isInWater() && !player.capabilities.isCreativeMode) {

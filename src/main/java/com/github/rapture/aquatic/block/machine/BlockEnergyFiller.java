@@ -26,7 +26,7 @@ public class BlockEnergyFiller extends BlockContainerBase {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(!world.isRemote) {
-            player.openGui(Aquatic.instance, GuiHandler.GUI_SOLUTION_TANK, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Aquatic.instance, GuiHandler.GUI_ENERGY_FILLER, world, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }

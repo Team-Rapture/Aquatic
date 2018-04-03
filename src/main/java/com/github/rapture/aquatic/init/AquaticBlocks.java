@@ -19,7 +19,6 @@ public class AquaticBlocks {
     public static final Block aquatic_charm = new BlockAquaCharm("aquatic_charm", Material.CLAY);
 
     // register blocks by just creating public static final fields
-    public static final Block CORAL_REEF = new BlockPlantBase("coral_reef");
     public static final Block HYDRILLA = new BlockPlantBase("hydrilla");
     public static final Block PISTIA = new BlockPistia();
     public static final Block AQUANET_CONTROLLER = new AquaNetController();
