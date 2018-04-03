@@ -6,6 +6,7 @@ import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import java.util.Random;
 
 public class AquaticGenerator extends NoiseGenerator {
+
     private final NoiseGeneratorSimplex[] noiseLevels;
     private final int levels;
 
