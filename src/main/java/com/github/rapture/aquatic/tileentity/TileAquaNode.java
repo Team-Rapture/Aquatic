@@ -53,9 +53,14 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
 
     @Override
     public void update() {
-        if(world.isRemote) return;
+        if (!world.isRemote) {
+            IBlockState state = world.getBlockState(pos);
+            world.notifyBlockUpdate(pos, state, state, 3);
+        }
+        this.beamRenderTicks++;
+        if (world.isRemote) return;
         if (!hasAquaController()) {
-            if(world.getTotalWorldTime() % 20 != 0) return;
+            if (world.getTotalWorldTime() % 20 != 0) return;
             for (BlockPos bp : BlockPos.getAllInBox(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15)) {
                 IBlockState state = world.getBlockState(bp);
                 if (!world.isAirBlock(bp)) {
@@ -85,7 +90,6 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
             }
         }
 
-        this.beamRenderTicks++;
         if (world.getTotalWorldTime() % 10 == 0) {
             List<EntityPlayer> playerList = playersInRange();
             if (playerList.size() > 0) {

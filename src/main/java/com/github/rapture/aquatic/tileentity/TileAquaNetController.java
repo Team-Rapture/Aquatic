@@ -9,6 +9,7 @@ import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -47,6 +48,10 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
 
     @Override
     public void update() {
+        if (!world.isRemote) {
+            IBlockState state = world.getBlockState(pos);
+            world.notifyBlockUpdate(pos, state, state, 3);
+        }
         if(world.isRemote) return;
         if (world.getBlockState(pos.down()).getBlock() == AquaticBlocks.OXYGEN_STONE) {
             if (isGeneratingOxygen()) {

@@ -13,6 +13,7 @@ public class BlockBase extends Block implements IHasItemBlock {
         super(material);
         NameUtil.name(this, name);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
+        this.setHardness(1.0f);
     }
 
     public BlockBase(String name) {
