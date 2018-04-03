@@ -2,6 +2,7 @@ package com.github.rapture.aquatic.block.util;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.util.IHasItemBlock;
+import com.github.rapture.aquatic.util.NameUtil;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,9 +22,8 @@ public class BlockContainerBase extends BlockContainer implements IHasItemBlock 
 
     public BlockContainerBase(String name, Material material) {
         super(material);
-        this.setUnlocalizedName(name);
-        this.setRegistryName(name);
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
+        NameUtil.name(this, name);
     }
 
     @Override
