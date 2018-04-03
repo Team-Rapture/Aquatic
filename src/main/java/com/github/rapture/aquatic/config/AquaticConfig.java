@@ -9,6 +9,8 @@ import static com.github.rapture.aquatic.Aquatic.MODNAME;
 @Config.LangKey("config.aquatic.title")
 public class AquaticConfig {
 
+    //TODO add default value to all comments!
+
     @Config.RequiresMcRestart
     @Config.Name("Enable Update Checker")
     @Config.Comment("whether to announce mod updates")
@@ -53,5 +55,7 @@ public class AquaticConfig {
     @Config.Comment("Angler Fish Spawn Rate")
     public static int angler_MAX_spawn_rate = 3;
 
-
+    @Config.Name("Creative Battery max transfer")
+    @Config.Comment("how much the creative battery should transfer per tick and connection")
+    public static int creativeBatteryMaxTransfer = 16384;
 }
