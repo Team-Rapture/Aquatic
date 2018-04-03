@@ -74,9 +74,6 @@ public class GuideReader {
      * TODO unlock entries via capability
      */
     public static void init() {
-        GUIDE_INDEX.clear();
-        CHILD_COUNT.clear();
-        PAGES.clear();
         NBTTagCompound indexNBT = readJsonToNbt(INDEX_PAGE);
         NBTTagList topics = indexNBT.getTagList("index", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < topics.tagCount(); i++) {

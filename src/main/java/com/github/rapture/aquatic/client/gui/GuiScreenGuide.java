@@ -95,7 +95,6 @@ public class GuiScreenGuide extends GuiScreen {
 
     @Override
     public void initGui() {
-        GuideReader.init();
         List<String> lines = GuideReader.readPage(this.selectedChild != null ? this.selectedChild : this.selectedEntry);
         this.textBox = new GuiScrollableList(MARGIN_SIDE + INDEX_WIDTH + INDEX_MARGIN * 2 + ENTRY_MARGIN, MARGIN_TOP + ENTRY_MARGIN, width - (MARGIN_SIDE * 2) - ENTRY_MARGIN - INDEX_WIDTH - 12, height - MARGIN_TOP - MARGIN_BOTTOM - 16, lines);
     }
