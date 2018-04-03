@@ -1,6 +1,11 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
-	"textures": {"1": "aquatic:blocks/pistia"},
+	"textures": {"1": "aquatic:blocks/pistia",
+		"particle": "aquatic:blocks/pistia"
+	},
+	
+		
+
 	"elements": [
 		{
 			"name": "botBranchLeafLets1",
