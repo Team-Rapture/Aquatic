@@ -9,6 +9,7 @@ import com.github.rapture.aquatic.init.AquaticItems;
 import com.github.rapture.aquatic.item.armor.ScubaSuit;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TileAquaNode extends TileEntityBase implements IHudSupport {
@@ -25,6 +27,8 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     public boolean hasAquaController = false;
     public BlockPos controllerPos = null;
     public int oxygenTimer = 0;
+    public static final int sqRange = 30 * 30;
+    public int beamRenderTicks;
 
     public TileAquaNode() {
     }
@@ -86,7 +90,11 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
         oxygenTimer++;
         if (oxygenTimer >= 10) {
-            for (EntityPlayer player : playersInRange()) {
+            List<EntityPlayer> playerList = playersInRange();
+            if(playerList.size() > 0) {
+                this.beamRenderTicks++;
+            }
+            for (EntityPlayer player : playerList) {
                 if (player.isInWater() && !player.capabilities.isCreativeMode) {
                     sendPlayerAir(player);
                 }
@@ -97,10 +105,13 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
     public List<EntityPlayer> playersInRange() {
         List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getRadius(getPos(), 60, 60));
-        if (players != null) {
-            return players;
+        List<EntityPlayer> rangePlayer = new ArrayList<>();
+        for(EntityPlayer player : players) {
+            if(player.getDistanceSq(this.pos) <= sqRange) {
+                rangePlayer.add(player);
+            }
         }
-        return null;
+        return rangePlayer;
     }
 
     public void sendPlayerAir(EntityPlayer player) {
