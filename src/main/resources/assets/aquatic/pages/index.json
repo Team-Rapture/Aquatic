@@ -56,6 +56,33 @@
           "icon": "aquatic:diving_knife"
         }
       ]
+    },
+	    {
+      "id": "aquatic:machines",
+      "icon": "aquatic:depth_generator",
+      "page": "aquatic:machines/machines_overview",
+      "child_elements": [
+        {
+          "id": "aquatic:depth_generator",
+          "page": "aquatic:machines/depth_generator",
+          "icon": "aquatic:depth_generator"
+        },
+        {
+          "id": "aquatic:solution_tank",
+          "page": "aquatic:machines/solution_tank",
+          "icon": "aquatic:solution_tank"
+        },
+        {
+          "id": "aquatic:oxygen_filler",
+          "page": "aquatic:machines/oxygen_filler",
+          "icon": "aquatic:oxygen_filler"
+        },
+        {
+          "id": "aquatic:energy_filler",
+          "page": "aquatic:machines/energy_filler",
+          "icon": "aquatic:energy_filler"
+        }
+      ]
     }
   ]
 }

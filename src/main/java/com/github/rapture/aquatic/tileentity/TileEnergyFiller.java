@@ -2,6 +2,7 @@ package com.github.rapture.aquatic.tileentity;
 
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityInventory;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -34,6 +35,10 @@ public class TileEnergyFiller extends TileEntityInventory implements ITickable {
 
     @Override
     public void update() {
+        if (!world.isRemote) {
+            IBlockState state = world.getBlockState(pos);
+            world.notifyBlockUpdate(pos, state, state, 3);
+        }
         if (!inventory.getStackInSlot(0).isEmpty()) {
             if (inventory.getStackInSlot(0).hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
                 IEnergyStorage energyProvider = inventory.getStackInSlot(0).getCapability(CapabilityEnergy.ENERGY, EnumFacing.UP);
