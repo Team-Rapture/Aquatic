@@ -42,6 +42,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 	public WorldGenPlants coralGenerator4 = new WorldGenPlants(AquaticBlocks.coral_reef_blue);
 	public WorldGenPlants hydrillaGenerator = new WorldGenPlants(AquaticBlocks.HYDRILLA);
 	public WorldGenPlants oxygenGenerator = new WorldGenPlants(AquaticBlocks.OXYGEN_STONE);
+	public WorldGenReefs ww = new WorldGenReefs();
 
 	private final WorldGenerator ironGen = new WorldGenMinable(AquaticBlocks.IRON_ORE_DEPOSIT.getDefaultState(), 6,
 			BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
@@ -59,7 +60,8 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 			8, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
 	private final WorldGenerator quartzGen = new WorldGenMinable(AquaticBlocks.QUARTZ_ORE_DEPOSIT.getDefaultState(), 13,
 			BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-	private final WorldGenerator aquaCrackedStone = new WorldGenMinable(AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState(), 60,
+	private final WorldGenerator aquaCrackedStone = new WorldGenMinable(
+			AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState(), 20,
 			BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
 	private World world;
 	private double[] slowsandNoise = new double[256];
@@ -108,7 +110,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 		this.scaleNoise = ctx.getScale();
 		this.depthNoise = ctx.getDepth();
 
-		this.world.setSeaLevel(60);
+		this.world.setSeaLevel(87);
 	}
 
 	public void prepareHeights(int p_185936_1_, int p_185936_2_, ChunkPrimer primer) {
@@ -387,6 +389,8 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 				.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(this.world, this.rand, blockpos));
 
 		if (rand.nextBoolean()) {
+		ww.genCoralReef.generate(this.world, rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+		
 			this.coralGenerator0.generate(this.world, this.rand,
 					blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
 			this.coralGenerator1.generate(this.world, this.rand,

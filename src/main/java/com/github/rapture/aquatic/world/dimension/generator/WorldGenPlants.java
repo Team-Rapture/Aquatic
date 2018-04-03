@@ -26,13 +26,13 @@ public class WorldGenPlants extends WorldGenerator {
 
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position) {
-		for (int i = 0; i < 20; ++i) {
+		for (int i = 0; i < 100; ++i) {
 			BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4),
 					rand.nextInt(8) - rand.nextInt(8));
 		
-			if (worldIn.getBlockState(position) == AquaticBlocks.AQUATIC_STONE.getDefaultState()
+			if (worldIn.getBlockState(position) == AquaticBlocks.AQUA_WATER_BLOCK.getDefaultState()
 					&& (worldIn.getBlockState(position.down()) != AquaticBlocks.AQUA_WATER_BLOCK.getDefaultState()
-							|| blockpos.getY() < 20)) {
+							&& worldIn.getBlockState(position.down()) == AquaticBlocks.AQUATIC_STONE.getDefaultState() )) {
 				worldIn.setBlockState(blockpos, this.state, 2);
 			}
 		}

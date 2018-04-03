@@ -32,6 +32,7 @@ public class AquaticBlocks {
     public static final Block ENERGY_FILLER = new BlockEnergyFiller();
     public static final Block DEPTH_GENERATOR = new BlockDepthGenerator();
 
+    public static final Block REEF_STONE = new BlockBase("reef_stone");
     public static final Block IRON_ORE_DEPOSIT = new BlockBase("iron_ore_deposit");
     public static final Block GOLD_ORE_DEPOSIT = new BlockBase("gold_ore_deposit");
     public static final Block DIAMOND_ORE_DEPOSIT = new BlockBase("diamond_ore_deposit");
