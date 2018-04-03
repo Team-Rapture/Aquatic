@@ -4,8 +4,10 @@ import com.github.rapture.aquatic.client.guide.GuideReader;
 import com.github.rapture.aquatic.client.render.entity.RenderEntityBubble;
 import com.github.rapture.aquatic.client.render.entity.boss.RenderScylla;
 import com.github.rapture.aquatic.client.render.entity.hostile.RenderAnglerFish;
+import com.github.rapture.aquatic.client.render.entity.hostile.RenderShark;
 import com.github.rapture.aquatic.entity.boss.EntityScylla;
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
+import com.github.rapture.aquatic.entity.hostile.EntityShark;
 import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.init.AquaticTiles;
@@ -38,6 +40,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityAnglerFish.class, RenderAnglerFish::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityScylla.class, RenderScylla::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWaterBubble.class, RenderEntityBubble::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityShark.class, RenderShark::new);
         GuideReader.init();
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
+import com.github.rapture.aquatic.entity.hostile.EntityShark;
 import com.google.common.collect.Lists;
 
 import net.minecraft.entity.EnumCreatureType;
@@ -24,6 +25,7 @@ public class BiomeAquatic extends Biome {
 
         entityList.add(new Biome.SpawnListEntry(EntitySquid.class, 7, 2, 3));
         entityList.add(new Biome.SpawnListEntry(EntityAnglerFish.class, 5, 1, 2));
+        entityList.add(new Biome.SpawnListEntry(EntityShark.class, 5, 1, 2));
 
         this.modSpawnableLists.put(EnumCreatureType.CREATURE, entityList);
     }

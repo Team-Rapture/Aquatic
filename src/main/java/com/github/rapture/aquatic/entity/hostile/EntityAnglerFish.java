@@ -240,6 +240,7 @@ public class EntityAnglerFish extends EntityMob {
     static class AIMoveRandom extends EntityAIBase {
         private final EntityAnglerFish angler;
 
+
         public AIMoveRandom(EntityAnglerFish p_i45859_1_) {
             this.angler = p_i45859_1_;
         }

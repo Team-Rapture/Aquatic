@@ -4,7 +4,9 @@ import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.entity.boss.EntityScylla;
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
+import com.github.rapture.aquatic.entity.hostile.EntityShark;
 import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
+import com.github.rapture.aquatic.proxy.CommonProxy;
 import com.github.rapture.aquatic.util.RegistryCreate;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
@@ -37,6 +39,14 @@ public class AquaticEntities {
             .entity(EntityWaterBubble.class)
             .id(getEntityResource("water_bubble"), 2)
             .name("water_bubble").tracker(64, 1, false)
+            .build();
+
+    public static final EntityEntry SHARK = EntityEntryBuilder.create()
+            .entity(EntityShark.class)
+            .id(getEntityResource("shark"), 4)
+            .name("shark").tracker(80, 3, false)
+            .egg(956291, 256)
+            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.angler_spawn_rate, AquaticConfig.angler_MIN_spawn_rate, AquaticConfig.angler_MAX_spawn_rate, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
             .build();
 
     static {
