@@ -20,11 +20,11 @@ import java.util.List;
 
 public class TileDepthGenerator extends TileEntityBase implements IHudSupport {
 
-    public CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
-    public List<Block> ores = new ArrayList<>();
-    public int timer = 0;
+    private CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
+    private static List<Block> ores = new ArrayList<>();
+    private int timer = 0;
 
-    public TileDepthGenerator() {
+    public static void init() {
         for (String string : OreDictionary.getOreNames()) {
             if (string.toLowerCase().startsWith("ore")) {
                 ores.add(Block.getBlockFromItem(OreDictionary.getOres(string).get(0).getItem()));
