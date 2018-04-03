@@ -2,6 +2,7 @@ package com.github.rapture.aquatic.item.tool;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
+import com.github.rapture.aquatic.util.NameUtil;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -29,8 +30,7 @@ public class HydroDrill extends ItemTool {
 
     public HydroDrill() {
         super(1.0F, -2.8F, hydro_drill, EFFECTIVE_ON);
-        this.setRegistryName("hydro_drill");
-        this.setUnlocalizedName("hydro_drill");
+        NameUtil.name(this, "hydro_drill");
         this.setCreativeTab(Aquatic.CREATIVE_TAB);
     }
 

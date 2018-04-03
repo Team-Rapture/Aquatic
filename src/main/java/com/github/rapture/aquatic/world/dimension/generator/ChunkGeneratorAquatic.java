@@ -51,11 +51,11 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
             BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
     private final WorldGenerator aquaCrackedStone = new WorldGenMinable(AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState(), 60,
             BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    public WorldGenPlants coralGenerator0 = new WorldGenPlants(AquaticBlocks.coral_reef_green);
-    public WorldGenPlants coralGenerator1 = new WorldGenPlants(AquaticBlocks.coral_reef_pink);
-    public WorldGenPlants coralGenerator2 = new WorldGenPlants(AquaticBlocks.coral_reef_red);
-    public WorldGenPlants coralGenerator3 = new WorldGenPlants(AquaticBlocks.coral_reef_yellow);
-    public WorldGenPlants coralGenerator4 = new WorldGenPlants(AquaticBlocks.coral_reef_blue);
+    public WorldGenPlants coralGenerator0 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_GREEN);
+    public WorldGenPlants coralGenerator1 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_PINK);
+    public WorldGenPlants coralGenerator2 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_RED);
+    public WorldGenPlants coralGenerator3 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_YELLOW);
+    public WorldGenPlants coralGenerator4 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_BLUE);
     public WorldGenPlants hydrillaGenerator = new WorldGenPlants(AquaticBlocks.HYDRILLA);
     public WorldGenPlants oxygenGenerator = new WorldGenPlants(AquaticBlocks.OXYGEN_STONE);
     public NoiseGeneratorOctaves scaleNoise;

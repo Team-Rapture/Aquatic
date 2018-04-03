@@ -19,12 +19,12 @@ public class DivingKnife extends ItemBase {
 
     public DivingKnife(String name) {
         super(name);
-        breakable.add(AquaticBlocks.coral_reef_blue);
-        breakable.add(AquaticBlocks.coral_reef_pink);
-        breakable.add(AquaticBlocks.coral_reef_red);
+        breakable.add(AquaticBlocks.CORAL_REEF_BLUE);
+        breakable.add(AquaticBlocks.CORAL_REEF_PINK);
+        breakable.add(AquaticBlocks.CORAL_REEF_RED);
 
-        breakable.add(AquaticBlocks.coral_reef_yellow);
-        breakable.add(AquaticBlocks.coral_reef_green);
+        breakable.add(AquaticBlocks.CORAL_REEF_YELLOW);
+        breakable.add(AquaticBlocks.CORAL_REEF_GREEN);
         breakable.add(AquaticBlocks.PISTIA);
     }
 
@@ -36,10 +36,8 @@ public class DivingKnife extends ItemBase {
         if (!worldIn.isRemote) {
             Block block = state.getBlock();
             if (breakable.contains(block))
-                return worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(),
-                        new ItemStack(AquaticItems.ORGANIC_MATTER)))
-                        ? super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving)
-                        : true;
+                return !worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(),
+                        new ItemStack(AquaticItems.ORGANIC_MATTER))) || super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
         }
         return true;
     }
