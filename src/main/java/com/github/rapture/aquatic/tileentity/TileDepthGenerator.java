@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -18,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileDepthGenerator extends TileEntityBase implements IHudSupport {
+public class TileDepthGenerator extends TileEntityBase implements IHudSupport, ITickable {
 
     private CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
     private static List<Block> ores = new ArrayList<>();
@@ -48,7 +49,6 @@ public class TileDepthGenerator extends TileEntityBase implements IHudSupport {
 
     @Override
     public void update() {
-        super.update();
         if (world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
             for (BlockPos po : BlockPos.getAllInBox(pos.getX() - 5, pos.getY(), pos.getZ() - 5, pos.getX() + 5, pos.getY(), pos.getZ() + 5)) {
                 if (world.isAirBlock(po)) {

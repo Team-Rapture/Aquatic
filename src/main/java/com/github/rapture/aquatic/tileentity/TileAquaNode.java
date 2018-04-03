@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -20,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileAquaNode extends TileEntityBase implements IHudSupport {
+public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickable {
 
     public static final int sqRange = 30 * 30;
     public OxygenHandler oxygen = new OxygenHandler(10000);
@@ -28,9 +29,6 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     public BlockPos controllerPos = null;
     public int oxygenTimer = 0;
     public int beamRenderTicks;
-
-    public TileAquaNode() {
-    }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
@@ -58,7 +56,6 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
     @Override
     public void update() {
-        super.update();
         if (!hasAquaController) {
             for (BlockPos bp : BlockPos.getAllInBox(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15)) {
                 IBlockState state = world.getBlockState(bp);

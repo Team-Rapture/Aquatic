@@ -9,12 +9,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
 import javax.annotation.Nullable;
 
-public class TileOxygenFiller extends TileEntityInventory {
+public class TileOxygenFiller extends TileEntityInventory implements ITickable {
 
     public OxygenHandler oxygen = new OxygenHandler(100000);
     public boolean hasAquaController = false;
@@ -48,7 +49,6 @@ public class TileOxygenFiller extends TileEntityInventory {
 
     @Override
     public void update() {
-        super.update();
         if (!hasAquaController) {
             for (BlockPos bp : BlockPos.getAllInBox(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15)) {
                 IBlockState state = world.getBlockState(bp);

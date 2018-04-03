@@ -29,6 +29,7 @@ public class AquaticBlocks {
     public static final Block OXYGEN_FILLER = new BlockOxygenFiller();
     public static final Block ENERGY_FILLER = new BlockEnergyFiller();
     public static final Block DEPTH_GENERATOR = new BlockDepthGenerator();
+    public static final Block CREATIVE_GENERATOR = new BlockCreativeGenerator();
 
     public static final Block IRON_ORE_DEPOSIT = new BlockBase("iron_ore_deposit");
     public static final Block GOLD_ORE_DEPOSIT = new BlockBase("gold_ore_deposit");
