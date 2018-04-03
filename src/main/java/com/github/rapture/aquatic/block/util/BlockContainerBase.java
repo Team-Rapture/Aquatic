@@ -65,8 +65,7 @@ public class BlockContainerBase extends BlockContainer implements IHasItemBlock 
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
+    public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

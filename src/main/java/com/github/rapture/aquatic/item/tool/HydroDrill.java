@@ -2,7 +2,6 @@ package com.github.rapture.aquatic.item.tool;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

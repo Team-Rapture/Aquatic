@@ -5,28 +5,20 @@ import com.github.rapture.aquatic.client.render.hud.HudRender;
 import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.tileentity.TileAquaNode;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
 //TODO rendering of beams
 public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
 
-    public ResourceLocation loc = new ResourceLocation(Aquatic.MODID + "textures/blocks/coral_reef.png");
     private static final ResourceLocation OXYGEN_BEAM = new ResourceLocation("textures/entity/guardian_beam.png");
-
+    public ResourceLocation loc = new ResourceLocation(Aquatic.MODID + "textures/blocks/coral_reef.png");
 
     @Override
     public void render(TileAquaNode te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -143,11 +135,11 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
         glBegin(GL_LINE_STRIP);
 
-        glVertex3d(x1,y1,z1);
-        glVertex3d(x2,y2,z2);
+        glVertex3d(x1, y1, z1);
+        glVertex3d(x2, y2, z2);
 
         glEnd();
-        glColor4f(1f,1f,1f, 1.0f);
+        glColor4f(1f, 1f, 1f, 1.0f);
 
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_ALPHA_TEST);

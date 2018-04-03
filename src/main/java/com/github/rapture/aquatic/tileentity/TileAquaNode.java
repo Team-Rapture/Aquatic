@@ -9,7 +9,6 @@ import com.github.rapture.aquatic.init.AquaticItems;
 import com.github.rapture.aquatic.item.armor.ScubaSuit;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,11 +22,11 @@ import java.util.List;
 
 public class TileAquaNode extends TileEntityBase implements IHudSupport {
 
+    public static final int sqRange = 30 * 30;
     public OxygenHandler oxygen = new OxygenHandler(10000);
     public boolean hasAquaController = false;
     public BlockPos controllerPos = null;
     public int oxygenTimer = 0;
-    public static final int sqRange = 30 * 30;
     public int beamRenderTicks;
 
     public TileAquaNode() {
@@ -91,7 +90,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
         oxygenTimer++;
         if (oxygenTimer >= 10) {
             List<EntityPlayer> playerList = playersInRange();
-            if(playerList.size() > 0) {
+            if (playerList.size() > 0) {
                 this.beamRenderTicks++;
             }
             for (EntityPlayer player : playerList) {
@@ -106,8 +105,8 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport {
     public List<EntityPlayer> playersInRange() {
         List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, getRadius(getPos(), 60, 60));
         List<EntityPlayer> rangePlayer = new ArrayList<>();
-        for(EntityPlayer player : players) {
-            if(player.getDistanceSq(this.pos) <= sqRange) {
+        for (EntityPlayer player : players) {
+            if (player.getDistanceSq(this.pos) <= sqRange) {
                 rangePlayer.add(player);
             }
         }

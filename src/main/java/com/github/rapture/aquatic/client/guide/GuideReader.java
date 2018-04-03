@@ -41,18 +41,17 @@ public class GuideReader {
     }
 
     public static List<String> readPage(String page) {
-        if(page != null && GUIDE_INDEX.containsKey(page)) {
+        if (page != null && GUIDE_INDEX.containsKey(page)) {
             NBTTagCompound nbt = GUIDE_INDEX.get(page);
             ResourceLocation location = new ResourceLocation(nbt.getString("page"));
             String path = ("/assets/" + location.getResourceDomain() + "/pages/" + Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode() + "/" + location.getResourcePath()).toLowerCase(Locale.ROOT);
             if (!path.endsWith(".md")) path += ".md";
-            try(InputStream stream = new BufferedInputStream(MinecraftServer.class.getResourceAsStream(path))) {
+            try (InputStream stream = new BufferedInputStream(MinecraftServer.class.getResourceAsStream(path))) {
                 String output = IOUtils.toString(stream, Charsets.UTF_8);
                 return Arrays.asList(output.split("\r\n"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
 
 
             try (Scanner sc = new Scanner(new BufferedInputStream(MinecraftServer.class.getResourceAsStream(path)))) {

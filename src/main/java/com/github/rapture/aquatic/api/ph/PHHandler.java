@@ -8,8 +8,8 @@ import net.minecraft.world.chunk.Chunk;
 
 public class PHHandler implements IPHProvider {
 
-    private int PH;
     private static final int MAX_PH = 10000;
+    private int PH;
 
     public PHHandler() {
         this(0);
@@ -32,7 +32,7 @@ public class PHHandler implements IPHProvider {
     @Override
     public int getPHFromLocation(World world, BlockPos pos) {
         Chunk chunk = world.getChunkFromBlockCoords(pos);
-        if(chunk.hasCapability(CapabilityPH.PH_CAPABILITY, null)) {
+        if (chunk.hasCapability(CapabilityPH.PH_CAPABILITY, null)) {
             return world.getChunkFromBlockCoords(pos).getCapability(CapabilityPH.PH_CAPABILITY, null).getPH();
         }
         return 0;

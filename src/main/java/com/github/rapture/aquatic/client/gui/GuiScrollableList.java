@@ -38,7 +38,7 @@ public class GuiScrollableList extends Gui {
         //TODO remove dirty fix (after modjam)
         text.forEach(s -> {
             int spaces = 0;
-            while(s.startsWith(">")) {
+            while (s.startsWith(">")) {
                 s = s.substring(1);
                 spaces += 2;
             }
@@ -149,7 +149,7 @@ public class GuiScrollableList extends Gui {
             */
             int index = (i - currentIndex);
             EnumFontType fontType = EnumFontType.DEFAULT;
-            if(index == 0) fontType = EnumFontType.HEADING_1;
+            if (index == 0) fontType = EnumFontType.HEADING_1;
             fontRenderer.FONT_HEIGHT = fontType.getFontHeight();
             fontRenderer.drawString(textLines.get(i), x + TEXT_MARGIN, y + TEXT_MARGIN + (fontRenderer.FONT_HEIGHT + TEXT_HEIGHT) * index, fontType.getFontColor());
             fontRenderer.FONT_HEIGHT = 9;

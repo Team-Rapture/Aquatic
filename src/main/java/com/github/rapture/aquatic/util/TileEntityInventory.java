@@ -16,17 +16,17 @@ public class TileEntityInventory extends TileEntityBase {
     public TileEntityInventory(int slots) {
         inventory = new CustomItemStackHandler(slots) {
             @Override
-            public boolean canInsert(ItemStack stack, int slot){
+            public boolean canInsert(ItemStack stack, int slot) {
                 return TileEntityInventory.this.isItemValidForSlot(slot, stack);
             }
 
             @Override
-            public boolean canExtract(ItemStack stack, int slot){
+            public boolean canExtract(ItemStack stack, int slot) {
                 return TileEntityInventory.this.canExtractItem(slot, stack);
             }
 
             @Override
-            public int getSlotLimit(int slot){
+            public int getSlotLimit(int slot) {
                 return TileEntityInventory.this.getMaxStackSizePerSlot(slot);
             }
 
@@ -52,24 +52,24 @@ public class TileEntityInventory extends TileEntityBase {
         }
     }
 
-    public IItemHandler getItemHandler(EnumFacing facing){
+    public IItemHandler getItemHandler(EnumFacing facing) {
         return this.inventory;
     }
 
-    public boolean isItemValidForSlot(int slot, ItemStack stack){
+    public boolean isItemValidForSlot(int slot, ItemStack stack) {
         return true;
     }
 
-    public boolean canExtractItem(int slot, ItemStack stack){
+    public boolean canExtractItem(int slot, ItemStack stack) {
         return true;
     }
 
-    public int getMaxStackSizePerSlot(int slot){
+    public int getMaxStackSizePerSlot(int slot) {
         return 64;
     }
 
     public void decrease(int slot) {
-        if(!inventory.getStackInSlot(slot).isEmpty()) {
+        if (!inventory.getStackInSlot(slot).isEmpty()) {
             if (inventory.getStackInSlot(slot).getCount() > 1) {
                 inventory.getStackInSlot(slot).shrink(1);
             } else {
@@ -86,10 +86,10 @@ public class TileEntityInventory extends TileEntityBase {
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             IItemHandler handler = this.getItemHandler(facing);
-            if(handler != null){
-                return (T)handler;
+            if (handler != null) {
+                return (T) handler;
             }
         }
         return super.getCapability(capability, facing);

@@ -42,13 +42,14 @@ public class GuiScreenGuide extends GuiScreen {
     private String selectedEntry;
 
     private GuiScreenGuide(@Nullable ResourceLocation selectedPage) {
-        if(selectedPage != null) this.selectedEntry = selectedPage.toString();
-        else if(lastEntry != null) this.selectedEntry = lastEntry;
+        if (selectedPage != null) this.selectedEntry = selectedPage.toString();
+        else if (lastEntry != null) this.selectedEntry = lastEntry;
         else selectedEntry = "aquatic:aqua_net";
     }
 
     public static void openPage(@Nullable ResourceLocation page) {
-        if(MC.currentScreen instanceof GuiScreenGuide) ((GuiScreenGuide) MC.currentScreen).setSelected(page != null ? page.toString() : null);
+        if (MC.currentScreen instanceof GuiScreenGuide)
+            ((GuiScreenGuide) MC.currentScreen).setSelected(page != null ? page.toString() : null);
         else MC.displayGuiScreen(new GuiScreenGuide(page));
     }
 
@@ -84,12 +85,12 @@ public class GuiScreenGuide extends GuiScreen {
         int y = MARGIN_TOP + ENTRY_MARGIN + 1;
         drawRect(x - 1, y - 1, x + INDEX_WIDTH, y, BLACK); //separator
         Iterator<String> iterator = GuideReader.GUIDE_INDEX.keySet().iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             String key = iterator.next();
             NBTTagCompound entryNBT = GuideReader.GUIDE_INDEX.get(key);
             drawEntry(x, y, INDEX_WIDTH, INDEX_HEIGHT, entryNBT);
             y += INDEX_HEIGHT + 1;
-            if(key.equals(selectedEntry) && entryNBT.hasKey("child_elements", Constants.NBT.TAG_LIST)) {
+            if (key.equals(selectedEntry) && entryNBT.hasKey("child_elements", Constants.NBT.TAG_LIST)) {
                 NBTTagList childElements = entryNBT.getTagList("child_elements", Constants.NBT.TAG_COMPOUND);
                 for (int i = 0; i < childElements.tagCount(); i++) {
                     NBTTagCompound childEntryNBT = childElements.getCompoundTagAt(i);
@@ -108,14 +109,13 @@ public class GuiScreenGuide extends GuiScreen {
         drawRect(x, y, x + width, y + height, LIGHT_GRAY);
         drawRect(x, y + height, x + width, y + height + 1, BLACK); //separator
 
-        if(entry.hasKey("icon", Constants.NBT.TAG_STRING)) {
+        if (entry.hasKey("icon", Constants.NBT.TAG_STRING)) {
             try {
                 RenderHelper.enableGUIStandardItemLighting();
                 Item item = Item.getByNameOrId(entry.getString("icon"));
-                if(item != null) MC.getRenderItem().renderItemIntoGUI(new ItemStack(item), x, y);
+                if (item != null) MC.getRenderItem().renderItemIntoGUI(new ItemStack(item), x, y);
                 RenderHelper.disableStandardItemLighting();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 //ignore
             }
         }
