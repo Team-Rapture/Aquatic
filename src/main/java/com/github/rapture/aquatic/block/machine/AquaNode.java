@@ -14,6 +14,7 @@ public class AquaNode extends BlockContainerBase {
         super("aqua_node", Material.ROCK);
         this.setHardness(1.0f);
         this.setHarvestLevel("pickaxe", 1);
+        this.setLightLevel(0.7f);
     }
 
     @Nullable

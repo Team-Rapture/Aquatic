@@ -19,6 +19,7 @@ public class BlockCreativeGenerator extends BlockContainerBase {
     public BlockCreativeGenerator() {
         super("creative_battery", Material.IRON);
         this.setSoundType(SoundType.METAL);
+        this.setLightLevel(1f);
     }
 
     @Override

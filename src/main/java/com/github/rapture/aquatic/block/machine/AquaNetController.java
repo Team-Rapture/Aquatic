@@ -18,6 +18,7 @@ public class AquaNetController extends BlockContainerBase {
         super("aquanet_controller", Material.ROCK);
         this.setHardness(1.0f);
         this.setHarvestLevel("pickaxe", 1);
+        this.setLightLevel(1f);
     }
 
     @SideOnly(Side.CLIENT)
