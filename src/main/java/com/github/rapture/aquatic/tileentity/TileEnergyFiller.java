@@ -34,16 +34,15 @@ public class TileEnergyFiller extends TileEntityInventory {
     @Override
     public void update() {
         super.update();
-
-        if(!inventory.getStackInSlot(0).isEmpty()) {
-            if(inventory.getStackInSlot(0).hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
+        if (!inventory.getStackInSlot(0).isEmpty()) {
+            if (inventory.getStackInSlot(0).hasCapability(CapabilityEnergy.ENERGY, EnumFacing.UP)) {
                 IEnergyStorage energyProvider = inventory.getStackInSlot(0).getCapability(CapabilityEnergy.ENERGY, EnumFacing.UP);
-                if(energyProvider.getEnergyStored() < energyProvider.getMaxEnergyStored()) {
+                if (energyProvider.getEnergyStored() < energyProvider.getMaxEnergyStored()) {
                     if (energyProvider.getMaxEnergyStored() - energyProvider.getEnergyStored() >= 20 && storage.getEnergyStored() >= 20) {
                         energyProvider.receiveEnergy(20, false);
                         storage.extractEnergy(20, false);
                     }
-                }else {
+                } else {
                     inventory.setStackInSlot(1, inventory.getStackInSlot(0));
                     inventory.setStackInSlot(0, ItemStack.EMPTY);
                 }

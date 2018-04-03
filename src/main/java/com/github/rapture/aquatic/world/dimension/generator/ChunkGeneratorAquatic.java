@@ -39,7 +39,6 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     private final WorldGenPlants coralGenerator2 = new WorldGenPlants(AquaticBlocks.coral_reef_pink);
     private final WorldGenPlants coralGenerator3 = new WorldGenPlants(AquaticBlocks.coral_reef_red);
     private final WorldGenPlants coralGenerator4 = new WorldGenPlants(AquaticBlocks.coral_reef_yellow);
-    private final WorldGenPlants coralGenerator5 = new WorldGenPlants(AquaticBlocks.CORAL_REEF);
     private final WorldGenPlants hydrillaGenerator = new WorldGenPlants(AquaticBlocks.HYDRILLA);
     private final WorldGenPlants oxygenGenerator = new WorldGenPlants(AquaticBlocks.OXYGEN_STONE);
     private final WorldGenerator ironGen = new WorldGenMinable(Blocks.IRON_ORE.getDefaultState(), 6, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
@@ -365,7 +364,6 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
             this.coralGenerator2.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
             this.coralGenerator3.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
             this.coralGenerator4.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-            this.coralGenerator5.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
             this.hydrillaGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
             this.oxygenGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
         }

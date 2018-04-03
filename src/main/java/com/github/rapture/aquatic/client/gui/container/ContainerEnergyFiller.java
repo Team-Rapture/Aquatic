@@ -17,10 +17,10 @@ public class ContainerEnergyFiller extends Container {
         this.te = te;
 
         //input energy handler
-        addSlotToContainer(new SlotInput(this.te.inventory, 0, 81, 60));
+        addSlotToContainer(new SlotInput(this.te.inventory, 0, 57, 29));
 
         //output filled
-        addSlotToContainer(new SlotOutput(this.te.inventory, 1, 125, 24));
+        addSlotToContainer(new SlotOutput(this.te.inventory, 1, 109, 29));
 
         int i;
         for (i = 0; i < 3; ++i) {
