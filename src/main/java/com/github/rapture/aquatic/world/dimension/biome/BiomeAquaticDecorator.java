@@ -15,11 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BiomeAquaticDecorator extends BiomeDecorator {
 	public WorldGenPlants corals = new WorldGenPlants(AquaticBlocks.CORAL_REEF_BLUE);
-	@SubscribeEvent
-	public void onRegisterBiomes(RegistryEvent.Register<Biome> event)
-	{
-		event.getRegistry().register(CommonProxy.BIOME_AQUATIC);
-	}
+
     @Override
     public void decorate(World worldIn, Random random, Biome biome, BlockPos pos) {
         super.decorate(worldIn, random, biome, pos);

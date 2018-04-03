@@ -35,8 +35,7 @@ public class CommonProxy {
         ForgeRegistries.BIOMES.register(BIOME_AQUATIC);
         AutoRegistry.findRegistryEntries(event);
         GameRegistry.registerWorldGenerator(new WorldGenReefs(),1);
-        MinecraftForge.EVENT_BUS.register(new BiomeAquaticDecorator());
-
+  
     }
 
     public void init(FMLInitializationEvent event) {
