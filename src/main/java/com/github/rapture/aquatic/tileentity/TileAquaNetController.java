@@ -48,11 +48,15 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     public void update() {
         super.update();
         this.storage.setEnergyStored(storage.getMaxEnergyStored());
-        spawnTimer++;
-        if (spawnTimer >= 25) {
-            EntityWaterBubble bubble = new EntityWaterBubble(world, new BlockPos(pos.getX() + world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() + world.rand.nextInt(8)), pos);
-            world.spawnEntity(bubble);
-            spawnTimer = 0;
+        if(generatingOxygen) {
+            spawnTimer++;
+            if (spawnTimer >= 20) {
+                EntityWaterBubble bubble = new EntityWaterBubble(world, new BlockPos(pos.getX() + world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() + world.rand.nextInt(8)));
+                EntityWaterBubble bubble2 = new EntityWaterBubble(world, new BlockPos(pos.getX() - world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() - world.rand.nextInt(8)));
+                world.spawnEntity(bubble);
+                world.spawnEntity(bubble2);
+                spawnTimer = 0;
+            }
         }
 
         if (oxygen.canReceiveOxygen(oxygenGeneration)) {

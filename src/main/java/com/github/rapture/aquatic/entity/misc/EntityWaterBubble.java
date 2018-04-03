@@ -7,19 +7,19 @@ import net.minecraft.world.World;
 
 public class EntityWaterBubble extends Entity {
 
-    public BlockPos endPos = null;
     public int deathCounter = 0;
+    public boolean oxygen = false;
 
     public EntityWaterBubble(World world) {
         super(world);
     }
 
-    public EntityWaterBubble(World world, BlockPos spawnAt, BlockPos moveTo) {
+    public EntityWaterBubble(World world, BlockPos spawnAt, boolean isOxygenStone) {
         super(world);
         this.posX = spawnAt.getX();
         this.posY = spawnAt.getY();
         this.posZ = spawnAt.getZ();
-        endPos = moveTo;
+        this.oxygen = isOxygenStone;
         this.setEntityInvulnerable(true);
     }
 
@@ -27,7 +27,7 @@ public class EntityWaterBubble extends Entity {
     public void onUpdate() {
         super.onUpdate();
         deathCounter++;
-        if (deathCounter >= 20 * 20) {
+        if (deathCounter >= 20 * 10) {
             this.setDead();
             deathCounter = 0;
         }
@@ -39,17 +39,9 @@ public class EntityWaterBubble extends Entity {
 
     @Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
-        if (nbt.hasKey("x")) {
-            endPos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
-        }
     }
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
-        if (endPos != null) {
-            nbt.setInteger("x", endPos.getX());
-            nbt.setInteger("y", endPos.getY());
-            nbt.setInteger("z", endPos.getZ());
-        }
     }
 }
