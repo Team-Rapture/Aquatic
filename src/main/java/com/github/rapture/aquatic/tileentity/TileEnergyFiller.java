@@ -52,14 +52,14 @@ public class TileEnergyFiller extends TileEntityInventory {
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return true;
+        if (capability == CapabilityEnergy.ENERGY) return true;
         return super.hasCapability(capability, facing);
     }
 
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(capability == CapabilityEnergy.ENERGY) return (T) storage;
+        if (capability == CapabilityEnergy.ENERGY) return (T) storage;
         return super.getCapability(capability, facing);
     }
 }

@@ -11,7 +11,6 @@ import com.github.rapture.aquatic.block.util.BlockBase;
 import com.github.rapture.aquatic.util.RegistryCreate;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemShears;
 
 @RegistryCreate(value = Block.class, modid = Aquatic.MODID)
 public class AquaticBlocks {
@@ -40,8 +39,8 @@ public class AquaticBlocks {
     public static final Block LAPIZ_ORE_DEPOSIT = new BlockBase("lapiz_ore_deposit");
     public static final Block QUARTZ_ORE_DEPOSIT = new BlockBase("quartz_ore_deposit");
     public static final Block EMERALD_ORE_DEPOSIT = new BlockBase("emerald_ore_deposit");
-   
-    
+
+
     public static final Block coral_reef_pink = new BlockPlantBase("coral_reef_pink");
     public static final Block coral_reef_blue = new BlockPlantBase("coral_reef_blue");
     public static final Block coral_reef_green = new BlockPlantBase("coral_reef_green");
