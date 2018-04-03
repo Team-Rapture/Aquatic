@@ -13,6 +13,7 @@ import com.github.rapture.aquatic.block.util.BlockBase;
 import com.github.rapture.aquatic.util.RegistryCreate;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemShears;
 
 @RegistryCreate(value = Block.class, modid = Aquatic.MODID)
 public class AquaticBlocks {

@@ -1,29 +1,30 @@
 package com.github.rapture.aquatic.item;
 
-import net.minecraft.entity.player.EntityPlayer;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.github.rapture.aquatic.init.AquaticBlocks;
+import com.github.rapture.aquatic.init.AquaticItems;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
 public class ItemTesting extends ItemBase {
 
-    public ItemTesting(String name) {
-        super(name);
-    }
+	public ItemTesting(String name) {
+		super(name);
+	
+	}
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos,
+			EntityLivingBase entityLiving) {
+	
+		return true;
+	}
 
-        if (worldIn instanceof WorldServer) {
-
-            playerIn.posY += 1;
-            System.out.println("fired");
-
-        }
-
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
-    }
 }

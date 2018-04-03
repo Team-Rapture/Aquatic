@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "aquatic:hydrilla.obj",
+    "model": "aquatic:hydrilla",
     "custom": {
       "flip-v": true
     }

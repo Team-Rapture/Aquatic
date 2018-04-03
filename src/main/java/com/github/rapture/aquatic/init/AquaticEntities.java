@@ -30,7 +30,7 @@ public class AquaticEntities {
             .id(getEntityResource("scyllaboss"), 1)
             .name("scyllaboss").tracker(80, 3, false)
             .egg(956291, 256)
-            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.angler_spawn_rate, AquaticConfig.angler_MIN_spawn_rate, AquaticConfig.angler_MAX_spawn_rate, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
+            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.angler_spawn_rate, AquaticConfig.angler_MIN_spawn_rate, AquaticConfig.angler_MAX_spawn_rate)
             .build();
 
     public static final EntityEntry WATER_BUBBLE = EntityEntryBuilder.create()
