@@ -18,8 +18,9 @@ import javax.annotation.Nullable;
 public class TileOxygenFiller extends TileEntityInventory implements ITickable {
 
     public OxygenHandler oxygen = new OxygenHandler(100000);
-    public boolean hasAquaController = false;
-    public BlockPos controllerPos = null;
+    private boolean hasAquaController = false;
+    @Nullable
+    private BlockPos controllerPos = null;
 
     public TileOxygenFiller() {
         super(2);
