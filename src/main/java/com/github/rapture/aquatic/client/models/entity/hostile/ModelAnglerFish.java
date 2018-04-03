@@ -2,6 +2,8 @@ package com.github.rapture.aquatic.client.models.entity.hostile;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
 
 /**
@@ -72,7 +74,6 @@ public class ModelAnglerFish extends ModelBase {
         this.headTop.addChild(this.backFinBase);
         this.headBot.addChild(this.teethBottomFront);
         this.backFinBase.addChild(this.finback2);
-        this.anglerLine3.addChild(this.anglerLight);
         this.headTop.addChild(this.headBot);
         this.headBot.addChild(this.teethside);
         this.headTop.addChild(this.anglerLine1);
@@ -86,6 +87,26 @@ public class ModelAnglerFish extends ModelBase {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.headTop.render(f5);
+        GlStateManager.pushMatrix();
+        this.headTop.postRender(f5);
+        this.anglerLine1.postRender(f5);
+        this.anglerLine2.postRender(f5);
+        this.anglerLine3.postRender(f5);
+        GlStateManager.disableLighting();
+        float lastBrightnessX = OpenGlHelper.lastBrightnessX;
+        float lastBrightnessY = OpenGlHelper.lastBrightnessY;
+
+        char c0 = Character.MAX_VALUE;
+        int j = c0 % 65536;
+        int k = c0 / 65536;
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
+
+        this.anglerLight.render(f5);
+
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
+
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
     }
 
     /**
