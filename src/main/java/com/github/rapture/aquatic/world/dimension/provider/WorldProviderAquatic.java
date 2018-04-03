@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.world.dimension.provider;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.proxy.CommonProxy;
 import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
 import com.github.rapture.aquatic.world.dimension.generator.ChunkGeneratorAquatic;
 import net.minecraft.init.Biomes;
@@ -17,7 +18,7 @@ public class WorldProviderAquatic extends WorldProvider {
     @Override
     protected void init() {
         this.hasSkyLight = true;
-        this.biomeProvider = new BiomeProviderSingle(Biomes.DEEP_OCEAN);
+        this.biomeProvider = new BiomeProviderSingle(CommonProxy.BIOME_AQUATIC);
     }
 
     @Override

@@ -7,6 +7,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -16,6 +17,7 @@ import net.minecraft.pathfinding.PathNavigateSwimmer;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,6 +31,9 @@ public class EntityAnglerFish extends EntityMob {
             .createKey(EntityAnglerFish.class, DataSerializers.VARINT);
     protected EntityAIWander wander;
     private EntityLivingBase targetedEntity;
+    private float randomMotionVecX;
+    private float randomMotionVecY;
+    private float randomMotionVecZ;
 
     public EntityAnglerFish(World worldIn) {
         super(worldIn);
@@ -50,11 +55,14 @@ public class EntityAnglerFish extends EntityMob {
         this.wander = new EntityAIWander(this, 1.0D, 80);
         this.tasks.addTask(4, new EntityAIAttackMelee(this, 1, true));
         this.tasks.addTask(5, entityaimovetowardsrestriction);
-        this.tasks.addTask(7, this.wander);
+        //this.tasks.addTask(7, this.wander);
 
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityGuardian.class, 12.0F, 0.01F));
-        this.tasks.addTask(9, new EntityAILookIdle(this));
+        //this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityGuardian.class, 12.0F, 0.01F));
+        //this.tasks.addTask(9, new EntityAILookIdle(this));
+        this.targetTasks.addTask(10, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.tasks.addTask(11, new AIMoveRandom(this));
+
         this.wander.setMutexBits(3);
         entityaimovetowardsrestriction.setMutexBits(3);
         this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, true));
@@ -82,6 +90,18 @@ public class EntityAnglerFish extends EntityMob {
 
     public boolean hasTargetedEntity() {
         return this.dataManager.get(TARGET_ENTITY) != 0;
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (inWater) {
+            if (!this.world.isRemote) {
+                this.motionX = (double) (this.randomMotionVecX * 1.0);
+                this.motionY = (double) (this.randomMotionVecY * 1.0);
+                this.motionZ = (double) (this.randomMotionVecZ * 1.0);
+            }
+        }
     }
 
     @Nullable
@@ -209,5 +229,47 @@ public class EntityAnglerFish extends EntityMob {
     @Override
     public boolean isPushedByWater() {
         return false;
+    }
+
+    static class AIMoveRandom extends EntityAIBase {
+        private final EntityAnglerFish angler;
+
+        public AIMoveRandom(EntityAnglerFish p_i45859_1_) {
+            this.angler = p_i45859_1_;
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute() {
+            return true;
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask() {
+            int i = this.angler.getIdleTime();
+
+            if (i > 100) {
+                this.angler.setMovementVector(0.0F, 0.0F, 0.0F);
+            } else if (this.angler.getRNG().nextInt(50) == 0 || !this.angler.inWater || !this.angler.hasMovementVector()) {
+                float f = this.angler.getRNG().nextFloat() * ((float) Math.PI * 2F);
+                float f1 = MathHelper.cos(f) * 0.2F;
+                float f2 = -0.1F + this.angler.getRNG().nextFloat() * 0.2F;
+                float f3 = MathHelper.sin(f) * 0.2F;
+                this.angler.setMovementVector(f1, f2, f3);
+            }
+        }
+    }
+
+    public void setMovementVector(float randomMotionVecXIn, float randomMotionVecYIn, float randomMotionVecZIn) {
+        this.randomMotionVecX = randomMotionVecXIn;
+        this.randomMotionVecY = randomMotionVecYIn;
+        this.randomMotionVecZ = randomMotionVecZIn;
+    }
+
+    public boolean hasMovementVector() {
+        return this.randomMotionVecX != 0.0F || this.randomMotionVecY != 0.0F || this.randomMotionVecZ != 0.0F;
     }
 }
