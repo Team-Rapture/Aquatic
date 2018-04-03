@@ -231,7 +231,8 @@ curseforge {
             changelog = getChangelogText()
             releaseType = project.release_type
 
-            relations curseRelations
+            //TODO uncomment when adding libraries/optional dependencies
+            //relations curseRelations
 
             //no such jars for now
             //addArtifact javadocJar
