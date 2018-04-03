@@ -10,11 +10,13 @@ import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.UpdateChecker;
 import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
 import com.github.rapture.aquatic.world.dimension.biome.BiomeAquatic;
+import com.github.rapture.aquatic.world.dimension.biome.BiomeAquaticDecorator;
 import com.github.rapture.aquatic.world.dimension.generator.WorldGenReefs;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -33,7 +35,7 @@ public class CommonProxy {
         ForgeRegistries.BIOMES.register(BIOME_AQUATIC);
         AutoRegistry.findRegistryEntries(event);
         GameRegistry.registerWorldGenerator(new WorldGenReefs(),1);
-		 
+        MinecraftForge.EVENT_BUS.register(new BiomeAquaticDecorator());
 
     }
 

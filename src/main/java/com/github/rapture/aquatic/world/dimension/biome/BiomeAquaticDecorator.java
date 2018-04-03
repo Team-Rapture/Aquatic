@@ -3,16 +3,23 @@ package com.github.rapture.aquatic.world.dimension.biome;
 import java.util.Random;
 
 import com.github.rapture.aquatic.init.AquaticBlocks;
+import com.github.rapture.aquatic.proxy.CommonProxy;
 import com.github.rapture.aquatic.world.dimension.generator.WorldGenPlants;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BiomeAquaticDecorator extends BiomeDecorator {
-	public WorldGenPlants corals = new WorldGenPlants(AquaticBlocks.coral_reef_blue);
-
+	public WorldGenPlants corals = new WorldGenPlants(AquaticBlocks.CORAL_REEF_BLUE);
+	@SubscribeEvent
+	public void onRegisterBiomes(RegistryEvent.Register<Biome> event)
+	{
+		event.getRegistry().register(CommonProxy.BIOME_AQUATIC);
+	}
     @Override
     public void decorate(World worldIn, Random random, Biome biome, BlockPos pos) {
         super.decorate(worldIn, random, biome, pos);
@@ -35,7 +42,7 @@ public class BiomeAquaticDecorator extends BiomeDecorator {
 
                 if (j14 > 0)
                 {
-                    this.corals.setBlock(AquaticBlocks.coral_reef_blue);
+                    this.corals.setBlock(AquaticBlocks.CORAL_REEF_BLUE);
                     this.corals.generate(worldIn, random, this.chunkPos.add(i7, random.nextInt(j14), l10));
                 }
             }
@@ -48,7 +55,7 @@ public class BiomeAquaticDecorator extends BiomeDecorator {
 
                 if (j14 > 0)
                 {
-                    this.corals.setBlock(AquaticBlocks.coral_reef_yellow);
+                    this.corals.setBlock(AquaticBlocks.CORAL_REEF_YELLOW);
                     this.corals.generate(worldIn, random, this.chunkPos.add(i7, random.nextInt(j14), l10));
                 }
             }
@@ -61,7 +68,7 @@ public class BiomeAquaticDecorator extends BiomeDecorator {
 
                 if (j14 > 0)
                 {
-                    this.corals.setBlock(AquaticBlocks.coral_reef_red);
+                    this.corals.setBlock(AquaticBlocks.CORAL_REEF_RED);
                     this.corals.generate(worldIn, random, this.chunkPos.add(i7, random.nextInt(j14), l10));
                 }
             }
@@ -74,7 +81,7 @@ public class BiomeAquaticDecorator extends BiomeDecorator {
 
                 if (j14 > 0)
                 {
-                    this.corals.setBlock(AquaticBlocks.coral_reef_pink);
+                    this.corals.setBlock(AquaticBlocks.CORAL_REEF_PINK);
                     this.corals.generate(worldIn, random, this.chunkPos.add(i7, random.nextInt(j14), l10));
                 }
             }
@@ -87,7 +94,7 @@ public class BiomeAquaticDecorator extends BiomeDecorator {
 
                 if (j14 > 0)
                 {
-                    this.corals.setBlock(AquaticBlocks.coral_reef_green);
+                    this.corals.setBlock(AquaticBlocks.CORAL_REEF_GREEN);
                     this.corals.generate(worldIn, random, this.chunkPos.add(i7, random.nextInt(j14), l10));
                 }
             }

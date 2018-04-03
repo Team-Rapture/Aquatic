@@ -67,11 +67,11 @@ public class WorldGenReefs implements IWorldGenerator {
 						if (worldIn.setBlockState(pos, AquaticBlocks.REEF_STONE.getDefaultState())) {
 						}
 
-						IBlockState variant = AquaticBlocks.coral_reef_blue.getDefaultState();
-						IBlockState variant1 = AquaticBlocks.coral_reef_green.getDefaultState();
-						IBlockState variant2 = AquaticBlocks.coral_reef_red.getDefaultState();
-						IBlockState variant3 = AquaticBlocks.coral_reef_yellow.getDefaultState();
-						IBlockState variant4 = AquaticBlocks.coral_reef_pink.getDefaultState();
+						IBlockState variant = AquaticBlocks.CORAL_REEF_BLUE.getDefaultState();
+						IBlockState variant1 = AquaticBlocks.CORAL_REEF_GREEN.getDefaultState();
+						IBlockState variant2 = AquaticBlocks.CORAL_REEF_RED.getDefaultState();
+						IBlockState variant3 = AquaticBlocks.CORAL_REEF_YELLOW.getDefaultState();
+						IBlockState variant4 = AquaticBlocks.CORAL_REEF_PINK.getDefaultState();
 						IBlockState variant5 = AquaticBlocks.HYDRILLA.getDefaultState();
 						IBlockState variant6 = AquaticBlocks.OXYGEN_STONE.getDefaultState();
 
