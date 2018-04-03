@@ -26,7 +26,6 @@ public class DivingKnife extends ItemBase {
 
 		breakable.add(AquaticBlocks.coral_reef_yellow);
 		breakable.add(AquaticBlocks.coral_reef_green);
-		breakable.add(AquaticBlocks.CORAL_REEF);
 		breakable.add(AquaticBlocks.PISTIA);
 	}
 
