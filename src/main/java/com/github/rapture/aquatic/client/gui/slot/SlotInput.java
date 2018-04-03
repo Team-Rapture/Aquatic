@@ -18,7 +18,7 @@ public class SlotInput extends SlotItemHandler {
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-        if (handler.isValid(stack)) {
+        if (CustomItemStackHandler.isValid(stack)) {
             ItemStack currentStack = this.handler.getStackInSlot(this.getSlotIndex());
             this.handler.setStackInSlot(this.getSlotIndex(), ItemStack.EMPTY);
             ItemStack remainder = this.handler.insertItemInternal(this.getSlotIndex(), stack, true);

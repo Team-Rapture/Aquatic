@@ -32,7 +32,7 @@ public class BiomeAquatic extends Biome {
     @Override
     public List<SpawnListEntry> getSpawnableList(EnumCreatureType creatureType) {
         if (!this.modSpawnableLists.containsKey(creatureType))
-            this.modSpawnableLists.put(creatureType, Lists.<SpawnListEntry>newArrayList());
+            this.modSpawnableLists.put(creatureType, Lists.newArrayList());
 
         return this.modSpawnableLists.get(creatureType);
     }

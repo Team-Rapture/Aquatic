@@ -20,7 +20,7 @@ public class WorldGenEntities {
 
         if (!list.isEmpty()) {
             while (randomIn.nextFloat() < biomeIn.getSpawningChance()) {
-                Biome.SpawnListEntry biome$spawnlistentry = (Biome.SpawnListEntry) WeightedRandom.getRandomItem(worldIn.rand, list);
+                Biome.SpawnListEntry biome$spawnlistentry = WeightedRandom.getRandomItem(worldIn.rand, list);
                 int i = biome$spawnlistentry.minGroupCount + randomIn.nextInt(1 + biome$spawnlistentry.maxGroupCount - biome$spawnlistentry.minGroupCount);
                 IEntityLivingData ientitylivingdata = null;
                 int j = centerX + randomIn.nextInt(diameterX);

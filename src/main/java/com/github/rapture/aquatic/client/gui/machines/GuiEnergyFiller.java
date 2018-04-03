@@ -19,7 +19,7 @@ public class GuiEnergyFiller extends GuiContainer {
 
     public GuiEnergyFiller(ContainerEnergyFiller containerEnergyFiller, TileEnergyFiller te) {
         super(containerEnergyFiller);
-        tile = (TileEnergyFiller) te;
+        tile = te;
         xSize = WIDTH;
         ySize = HEIGHT;
     }

@@ -93,9 +93,9 @@ public class EntityShark extends EntityMob {
         super.onLivingUpdate();
         if (inWater) {
             if (!this.world.isRemote) {
-                this.motionX = (double) (this.randomMotionVecX * 1.0);
-                this.motionY = (double) (this.randomMotionVecY * 1.0);
-                this.motionZ = (double) (this.randomMotionVecZ * 1.0);
+                this.motionX = this.randomMotionVecX * 1.0;
+                this.motionY = this.randomMotionVecY * 1.0;
+                this.motionZ = this.randomMotionVecZ * 1.0;
             }
         }
     }

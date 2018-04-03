@@ -19,7 +19,7 @@ public class GuiOxygenFiller extends GuiContainer {
 
     public GuiOxygenFiller(ContainerOxygenFiller containerOxygenFiller, TileOxygenFiller te) {
         super(containerOxygenFiller);
-        tile = (TileOxygenFiller) te;
+        tile = te;
         xSize = WIDTH;
         ySize = HEIGHT;
     }

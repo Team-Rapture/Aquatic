@@ -1,9 +1,12 @@
 {
 	"homepage": "https://minecraft.curseforge.com/projects/aquatic",
 	"promos": {
-        "1.12.2-latest": "0.1.0"
+        "1.12.2-latest": "1.0.0-b",
+        "1.12.2-recommended": "1.0.0-b"
 	},
     "1.12.2": {
-        "0.1.0": "* very first build"
+        "1.0.0-b": "* fixed crash with capabilities\nHOTFIX!",
+        "1.0.0": "* fixed cascading world generation lag",
+        "0.9-ModJam": "* very first build"
     }
 }

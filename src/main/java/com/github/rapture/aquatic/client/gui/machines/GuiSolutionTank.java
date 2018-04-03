@@ -32,7 +32,7 @@ public class GuiSolutionTank extends GuiContainer {
 
     public GuiSolutionTank(ContainerSolutionTank containerSolutionTank, TileSolutionTank te) {
         super(containerSolutionTank);
-        tile = (TileSolutionTank) te;
+        tile = te;
         xSize = WIDTH;
         ySize = HEIGHT;
     }
