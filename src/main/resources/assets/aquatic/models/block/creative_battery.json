@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "aquatic:blocks/creative_top",
+        "front": "aquatic:blocks/creative_sides",
+        "side": "aquatic:blocks/creative_sides"
+    }
+}
