@@ -2,31 +2,60 @@
   "index": [
     {
       "id": "aquatic:aqua_net",
-      "icon": "minecraft:prismarine_shard",
+      "icon": "aquatic:aquanet_controller",
       "tooltip": true,
-      "page": "aquatic:aqua_net/aquanet",
+      "page": "aquatic:aqua_net/aquanet_overview",
       "child_elements": [
         {
           "id": "aquatic:aqua_net_controller",
           "page": "aquatic:aqua_net/controller",
-          "icon": "minecraft:prismarine_shard"
+          "icon": "aquatic:aquanet_controller"
         },
         {
           "id": "aquatic:aqua_net_nodes",
           "page": "aquatic:aqua_net/nodes",
-          "icon": "minecraft:prismarine_shard"
+          "icon": "aquatic:aqua_node"
         },
         {
           "id": "aquatic:aqua_net_nodes_advanced",
           "page": "aquatic:aqua_net/nodes_advanced",
-          "icon": "minecraft:prismarine_shard"
+          "icon": "aquatic:aqua_node"
         }
       ]
     },
     {
-      "id": "aquatic:test",
-      "icon": "minecraft:diamond",
-      "page": "aquatic:test"
+      "id": "aquatic:items",
+      "icon": "aquatic:organic_matter",
+      "page": "aquatic:items/item_overview",
+      "child_elements": [
+        {
+          "id": "aquatic:charm",
+          "page": "aquatic:items/charm",
+          "icon": "aquatic:aquatic_charm_item"
+        },
+        {
+          "id": "aquatic:organic_matter",
+          "page": "aquatic:items/organic_matter",
+          "icon": "aquatic:organic_matter"
+        }
+      ]
+    },
+    {
+      "id": "aquatic:tools",
+      "icon": "aquatic:hydro_drill",
+      "page": "aquatic:tools/tools_overview",
+      "child_elements": [
+        {
+          "id": "aquatic:hydro_drill",
+          "page": "aquatic:tools/hydro_drill",
+          "icon": "aquatic:hydro_drill"
+        },
+        {
+          "id": "aquatic:diving_knife",
+          "page": "aquatic:tools/diving_knife",
+          "icon": "aquatic:diving_knife"
+        }
+      ]
     }
   ]
 }
