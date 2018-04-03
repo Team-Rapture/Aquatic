@@ -58,9 +58,9 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
                         double dZ = player.posZ - player.lastTickPosZ;
                         float invAlpha = (1f - partialTicks);
                         double pX = blockPos.getX() - pPos.x - x + dX * invAlpha;
-                        double pY = blockPos.getY() - pPos.y - y + dY * invAlpha + (player.height / 2f);
+                        double pY = blockPos.getY() - pPos.y - y + dY * invAlpha - (player.height / 2f);
                         double pZ = blockPos.getZ() - pPos.z - z + dZ * invAlpha;
-                        renderBeam(x + 0.5, y + 0.625, z + 0.5, pX, pY, pZ, te.beamRenderTicks, partialTicks, true);
+                        renderBeam(x + 0.5, y + 0.625, z + 0.5, -pX, -pY, -pZ, te.beamRenderTicks, partialTicks, true);
                     }
                 }
             }
