@@ -6,6 +6,7 @@ import com.github.rapture.aquatic.client.render.hud.HudRender;
 import com.github.rapture.aquatic.client.render.hud.IHudSupport;
 import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
+import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,27 +48,30 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     @Override
     public void update() {
         super.update();
-        this.storage.setEnergyStored(storage.getMaxEnergyStored());
-        if(generatingOxygen) {
-            spawnTimer++;
-            if (spawnTimer >= 20) {
-                EntityWaterBubble bubble = new EntityWaterBubble(world, new BlockPos(pos.getX() + world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() + world.rand.nextInt(8)));
-                EntityWaterBubble bubble2 = new EntityWaterBubble(world, new BlockPos(pos.getX() - world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() - world.rand.nextInt(8)));
-                world.spawnEntity(bubble);
-                world.spawnEntity(bubble2);
-                spawnTimer = 0;
+        if(world.getBlockState(pos.down()) == AquaticBlocks.OXYGEN_STONE) {
+            if (generatingOxygen) {
+                spawnTimer++;
+                if (spawnTimer >= 20) {
+                    EntityWaterBubble bubble = new EntityWaterBubble(world, new BlockPos(pos.getX() + world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() + world.rand.nextInt(8)));
+                    EntityWaterBubble bubble2 = new EntityWaterBubble(world, new BlockPos(pos.getX() - world.rand.nextInt(8), pos.getY() + world.rand.nextInt(8), pos.getZ() - world.rand.nextInt(8)));
+                    world.spawnEntity(bubble);
+                    world.spawnEntity(bubble2);
+                    spawnTimer = 0;
+                }
             }
-        }
 
-        if (oxygen.canReceiveOxygen(oxygenGeneration)) {
-            if (storage.getEnergyStored() >= energyToGenerate) {
-                generatingOxygen = true;
-                storage.extractEnergy(energyToGenerate, false);
-                oxygen.fillOxygen(oxygenGeneration);
+            if (oxygen.canReceiveOxygen(oxygenGeneration)) {
+                if (storage.getEnergyStored() >= energyToGenerate) {
+                    generatingOxygen = true;
+                    storage.extractEnergy(energyToGenerate, false);
+                    oxygen.fillOxygen(oxygenGeneration);
+                } else {
+                    generatingOxygen = false;
+                }
             } else {
                 generatingOxygen = false;
             }
-        } else {
+        }else {
             generatingOxygen = false;
         }
     }
