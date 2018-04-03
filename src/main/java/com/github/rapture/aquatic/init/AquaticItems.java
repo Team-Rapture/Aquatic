@@ -28,6 +28,8 @@ public class AquaticItems {
     public static final Item DIVING_KNIFE = new DivingKnife("diving_knife");
     public static final Item ORGANIC_MATTER = new ItemBase("organic_matter");
 
+    
+    
     public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm_item", 1, 0, AquaticConfig.dimensionID);
     public static final Item TEST = new ItemTesting("test");
 }

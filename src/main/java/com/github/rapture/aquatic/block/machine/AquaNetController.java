@@ -3,6 +3,7 @@ package com.github.rapture.aquatic.block.machine;
 import com.github.rapture.aquatic.block.util.BlockContainerBase;
 import com.github.rapture.aquatic.tileentity.TileAquaNetController;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.world.World;
@@ -23,6 +24,7 @@ public class AquaNetController extends BlockContainerBase {
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
+       
     }
 
     @Nullable
