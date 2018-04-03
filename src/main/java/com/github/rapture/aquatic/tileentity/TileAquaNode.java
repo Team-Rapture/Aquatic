@@ -34,8 +34,8 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
         super.readFromNBT(nbt);
         oxygen.readFromNBT(nbt);
         hasAquaController = nbt.getBoolean("hasAquaController");
-        if (nbt.hasKey("x") && nbt.hasKey("y") && nbt.hasKey("z")) {
-            controllerPos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
+        if (nbt.hasKey("contx") && nbt.hasKey("conty") && nbt.hasKey("contz")) {
+            controllerPos = new BlockPos(nbt.getInteger("contx"), nbt.getInteger("conty"), nbt.getInteger("contz"));
         }
     }
 
@@ -44,21 +44,21 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
         oxygen.writeToNBT(nbt);
         nbt.setBoolean("hasAquaController", hasAquaController());
         if (controllerPos != null) {
-            nbt.setInteger("x", controllerPos.getX());
-            nbt.setInteger("y", controllerPos.getY());
-            nbt.setInteger("z", controllerPos.getZ());
+            nbt.setInteger("contx", controllerPos.getX());
+            nbt.setInteger("conty", controllerPos.getY());
+            nbt.setInteger("contz", controllerPos.getZ());
         }
         return super.writeToNBT(nbt);
     }
 
     @Override
     public void update() {
-        if (!world.isRemote) {
-            IBlockState state = world.getBlockState(pos);
-            world.notifyBlockUpdate(pos, state, state, 3);
-        }
         this.beamRenderTicks++;
         if (world.isRemote) return;
+
+        IBlockState cuurentState = world.getBlockState(pos);
+        world.notifyBlockUpdate(pos, cuurentState, cuurentState, 3);
+
         if (!hasAquaController()) {
             if (world.getTotalWorldTime() % 20 != 0) return;
             for (BlockPos bp : BlockPos.getAllInBox(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15)) {
