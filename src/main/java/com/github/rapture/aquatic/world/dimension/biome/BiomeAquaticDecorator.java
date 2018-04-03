@@ -2,33 +2,34 @@ package com.github.rapture.aquatic.world.dimension.biome;
 
 import java.util.Random;
 
+import com.github.rapture.aquatic.init.AquaticBiomes;
 import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.proxy.CommonProxy;
 import com.github.rapture.aquatic.world.dimension.generator.WorldGenPlants;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BiomeAquaticDecorator extends BiomeDecorator {
-	public WorldGenPlants corals = new WorldGenPlants(AquaticBlocks.CORAL_REEF_BLUE);
 
-    @Override
+    private WorldGenPlants corals = new WorldGenPlants(AquaticBlocks.CORAL_REEF_BLUE);
+
+	@Override
     public void decorate(World worldIn, Random random, Biome biome, BlockPos pos) {
         super.decorate(worldIn, random, biome, pos);
     }
     @Override
     protected void genDecorations(Biome biomeIn, World worldIn, Random random)
     {
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(worldIn, random, this.chunkPos));
+        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(worldIn, random, this.chunkPos));
 
-        
-        
-
-        if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, random, this.chunkPos, net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.FLOWERS))
+        if(TerrainGen.decorate(worldIn, random, this.chunkPos, DecorateBiomeEvent.Decorate.EventType.FLOWERS))
         {
             for (int l2 = 0; l2 < 5; ++l2)
             {
@@ -108,10 +109,7 @@ public class BiomeAquaticDecorator extends BiomeDecorator {
                 }
             }
         }
-
-      
-
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Post(worldIn, random, this.chunkPos));
+        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Post(worldIn, random, this.chunkPos));
     }
 
 	

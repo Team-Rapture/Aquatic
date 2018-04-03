@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -61,6 +62,11 @@ public class AutoRegistry {
             Aquatic.getLogger().info("Active mod container restored.");
             Aquatic.getLogger().info("successfully registered {} objects for event {}", count, registry.getRegistrySuperType().getSimpleName().toUpperCase(Locale.ROOT));
         }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static <T extends IForgeRegistryEntry<T>> void onRegisterBlocks(RegistryEvent.Register<Block> event) {
+        FluidUtil.addBuckets();
     }
 
     /**

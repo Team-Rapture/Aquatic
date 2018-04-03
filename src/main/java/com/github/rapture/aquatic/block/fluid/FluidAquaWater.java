@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class FluidAquaWater extends Fluid {
+public class FluidAquaWater extends net.minecraftforge.fluids.Fluid {
 
     public FluidAquaWater() {
         super("aqua_water", new ResourceLocation(Aquatic.MODID, "blocks/fluids/aqua_water_still"), new ResourceLocation(Aquatic.MODID, "blocks/fluids/aqua_water_flowing"));
@@ -15,8 +15,4 @@ public class FluidAquaWater extends Fluid {
         this.setRarity(EnumRarity.RARE);
     }
 
-    public void register() {
-        FluidRegistry.registerFluid(this);
-        FluidRegistry.addBucketForFluid(this);
-    }
 }
