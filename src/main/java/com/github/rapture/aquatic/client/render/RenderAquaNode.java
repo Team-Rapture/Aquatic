@@ -3,6 +3,7 @@ package com.github.rapture.aquatic.client.render;
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.client.render.hud.HudRender;
 import com.github.rapture.aquatic.config.AquaticConfig;
+import com.github.rapture.aquatic.tileentity.TileAquaNetController;
 import com.github.rapture.aquatic.tileentity.TileAquaNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -13,13 +14,10 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import org.lwjgl.opengl.GL11;
-
-import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -34,16 +32,24 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
     @Override
     public void render(TileAquaNode te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         BlockPos blockPos = te.getPos();
+
         HudRender.renderHud(te, x, y, z);
         if (te.controllerPos != null && te.hasAquaController) {
-            double sX = te.controllerPos.getX() - blockPos.getX() + x + 0.5;
-            double sY = te.controllerPos.getY() - blockPos.getY() + y + 0.5;
-            double sZ = te.controllerPos.getZ() - blockPos.getZ() + z + 0.5;
-            this.renderBeam( sX, sY, sZ, x + 0.5, y + 0.625, z + 0.5, te.beamRenderTicks, partialTicks);
+            TileEntity controllerTe = te.getWorld().getTileEntity(te.controllerPos);
+            if(controllerTe != null && controllerTe instanceof  TileAquaNetController) {
+                TileAquaNetController controller = (TileAquaNetController)controllerTe;
+
+                double sX = te.controllerPos.getX() - blockPos.getX() + x + 0.5;
+                double sY = te.controllerPos.getY() - blockPos.getY() + y + 0.5;
+                double sZ = te.controllerPos.getZ() - blockPos.getZ() + z + 0.5;
+
+                this.renderBeam( sX, sY, sZ, x + 0.5, y + 0.625, z + 0.5, te.beamRenderTicks, partialTicks,
+                        te.oxygen.getOxygenStored() != te.oxygen.getMaxOxygenStorage() && controller.oxygen.canSendOxygen(20));
+            }
         }
         //System.out.printf("%s %s%n", partialTicks, alpha);
         //System.out.printf("%s %s %s%n", blockPos.getX(), blockPos.getY(), blockPos.getZ());
-        if (AquaticConfig.aquaNodeBeam) {
+        if (AquaticConfig.aquaNodeBeam && te.oxygen.getOxygenStored() != 0) {
             if (te.playersInRange() != null) {
                 for (EntityPlayer player : te.playersInRange()) {
                     if (te.hasFullArmor(player)) {
@@ -55,14 +61,14 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
                         double pX = blockPos.getX() - pPos.x - x + dX * invAlpha;
                         double pY = blockPos.getY() - pPos.y - y + dY * invAlpha + (player.height / 2f);
                         double pZ = blockPos.getZ() - pPos.z - z + dZ * invAlpha;
-                        renderBeam(x + 0.5, y + 0.625, z + 0.5, pX, pY, pZ, te.beamRenderTicks, partialTicks);
+                        renderBeam(x + 0.5, y + 0.625, z + 0.5, pX, pY, pZ, te.beamRenderTicks, partialTicks, true);
                     }
                 }
             }
         }
     }
 
-    private void renderBeam(double x1, double y1, double z1, double x2, double y2, double z2, int ticks, double partialTicks) {
+    private void renderBeam(double x1, double y1, double z1, double x2, double y2, double z2, int ticks, double partialTicks, boolean renderBubbles) {
 
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -142,37 +148,21 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         tessellator.draw();
         GlStateManager.popMatrix();
 
+        if(!renderBubbles) return;
         this.bindTexture(BUBBLE);
         // DO RENDERS FOR BUBBLES
         /*Vec3d pos1 = new Vec3d(x1,y1,z1);
         Vec3d pos2 = new Vec3d(x2,y2,z2);
         Vec3d halfWay = pos1.subtract(pos2).scale(0.5f).add(pos2).add(beamDirection.scale(-timing * 0.10 % 2));
         this.renderBubble(halfWay.x,halfWay.y,halfWay.z);*/
-        Vec3d origin = new Vec3d(x2,y2,z2);
+        Vec3d origin = new Vec3d(x1,y1,z1);
         float bubbleDist = 1;
-        for(int i = 0; i < beamLength / bubbleDist; i++) {
-            Vec3d bubbleLoc = origin.add(beamDirection.scale(((i * bubbleDist + -timing * 0.10) % beamLength) + beamLength));
+        for(int i = 0; i <= beamLength / bubbleDist; i++) {
+            double bubbleProg = (timing * 0.10) % bubbleDist + i * bubbleDist;
+            if(bubbleProg > beamLength) break;
+            Vec3d bubbleLoc = origin.add(beamDirection.scale(-bubbleProg));
             this.renderBubble(bubbleLoc.x,bubbleLoc.y,bubbleLoc.z);
         }
-
-
-        /**glDisable(GL_TEXTURE_2D);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glDisable(GL_LIGHTING);
-
-        glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-        glBegin(GL_LINE_STRIP);
-
-        glVertex3d(x1, y1, z1);
-        glVertex3d(x2, y2, z2);
-
-        glEnd();
-        glColor4f(1f, 1f, 1f, 1.0f);
-
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_ALPHA_TEST);
-
-        glEnable(GL_LIGHTING);'**/
     }
 
     public void renderBubble(double x, double y, double z) {
