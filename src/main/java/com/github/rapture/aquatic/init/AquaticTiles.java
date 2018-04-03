@@ -7,6 +7,8 @@ import com.github.rapture.aquatic.client.render.RenderSolutionTank;
 import com.github.rapture.aquatic.tileentity.*;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AquaticTiles {
 
@@ -20,6 +22,7 @@ public class AquaticTiles {
         GameRegistry.registerTileEntity(TileCreativeGenerator.class, "aquatic:creative_generator");
     }
 
+    @SideOnly(Side.CLIENT)
     public static void bindTESR() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileAquaNetController.class, new RenderAquaNetController());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAquaNode.class, new RenderAquaNode());

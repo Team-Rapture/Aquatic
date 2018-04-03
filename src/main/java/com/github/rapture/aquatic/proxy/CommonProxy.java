@@ -10,12 +10,9 @@ import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.FluidUtil;
 import com.github.rapture.aquatic.util.UpdateChecker;
 import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
-import com.github.rapture.aquatic.world.dimension.biome.BiomeAquaticDecorator;
 import com.github.rapture.aquatic.world.dimension.generator.WorldGenReefs;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

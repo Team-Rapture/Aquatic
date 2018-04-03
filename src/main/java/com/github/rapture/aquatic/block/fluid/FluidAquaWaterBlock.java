@@ -11,6 +11,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -22,6 +24,7 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
         this.setUnlocalizedName(fluidName);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void initModel() {
         ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
