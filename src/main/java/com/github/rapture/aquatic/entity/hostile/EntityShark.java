@@ -52,11 +52,8 @@ public class EntityShark extends EntityMob {
         this.wander = new EntityAIWander(this, 1.0D, 80);
         this.tasks.addTask(4, new EntityAIAttackMelee(this, 1, true));
         this.tasks.addTask(5, entityaimovetowardsrestriction);
-        //this.tasks.addTask(7, this.wander);
 
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        //this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityGuardian.class, 12.0F, 0.01F));
-        //this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(10, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 
         this.wander.setMutexBits(3);
@@ -235,37 +232,5 @@ public class EntityShark extends EntityMob {
 
     public boolean hasMovementVector() {
         return this.randomMotionVecX != 0.0F || this.randomMotionVecY != 0.0F || this.randomMotionVecZ != 0.0F;
-    }
-
-    static class AIMoveRandom extends EntityAIBase {
-        private final EntityShark angler;
-
-        public AIMoveRandom(EntityShark p_i45859_1_) {
-            this.angler = p_i45859_1_;
-        }
-
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        public boolean shouldExecute() {
-            return true;
-        }
-
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
-        public void updateTask() {
-            int i = this.angler.getIdleTime();
-
-            if (i > 100) {
-                this.angler.setMovementVector(0.0F, 0.0F, 0.0F);
-            } else if (this.angler.getRNG().nextInt(50) == 0 || !this.angler.isInWater() || !this.angler.hasMovementVector()) {
-                float f = this.angler.getRNG().nextFloat() * ((float) Math.PI * 2F);
-                float f1 = MathHelper.cos(f) * 0.2F;
-                float f2 = -0.1F + this.angler.getRNG().nextFloat() * 0.2F;
-                float f3 = MathHelper.sin(f) * 0.2F;
-                this.angler.setMovementVector(f1, f2, f3);
-            }
-        }
     }
 }

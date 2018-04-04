@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "stone",
+    "model": "aquatic:oxygen_filler",
     "custom": {
       "flip-v": true
     }

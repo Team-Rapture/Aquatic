@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "aquatic:blocks/oxygen_filler_top",
+    "front": "aquatic:blocks/oxygen_filler_front",
+    "side": "aquatic:blocks/oxygen_filler_sides"
+  }
+}
