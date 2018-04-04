@@ -32,7 +32,6 @@ public class BlockAquaCharm extends BlockRenderInLiquidBase {
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
         super.onBlockHarvested(worldIn, pos, state, player);
-
     }
 
     @Override
