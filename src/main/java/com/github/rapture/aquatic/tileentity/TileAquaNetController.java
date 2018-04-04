@@ -33,7 +33,7 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        setGeneratingOxygen(nbt.getBoolean("generatingOxygen"));
+        this.generatingOxygen = nbt.getBoolean("generatingOxygen");
         storage.readFromNBT(nbt);
         oxygen.readFromNBT(nbt);
     }
