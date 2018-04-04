@@ -12,6 +12,10 @@
     ],
     "inventory": [
       {}
-    ]
+    ],
+    "facing=north": [{ "model": "aquatic:aquatic_charm" }],
+    "facing=south": [{ "model": "aquatic:aquatic_charm", "y": 180 }],
+    "facing=west":  [{ "model": "aquatic:aquatic_charm", "y": 270 }],
+    "facing=east":  [{ "model": "aquatic:aquatic_charm", "y": 90 }]
   }
 }

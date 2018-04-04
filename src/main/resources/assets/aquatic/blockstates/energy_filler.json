@@ -12,6 +12,10 @@
     ],
     "inventory": [
       {}
-    ]
+    ],
+    "facing=north": [{ "model": "cobblestone" }],
+    "facing=south": [{ "model": "aquatic:oxygen_filler", "y": 180 }],
+    "facing=west":  [{ "model": "aquatic:oxygen_filler", "y": 270 }],
+    "facing=east":  [{ "model": "aquatic:oxygen_filler", "y": 90 }]
   }
 }
