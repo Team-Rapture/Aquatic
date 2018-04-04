@@ -7,9 +7,11 @@ import com.github.rapture.aquatic.util.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -21,14 +23,24 @@ import java.util.List;
 
 public class TileDepthGenerator extends TileEntityBase implements IHudSupport, ITickable {
 
-    private static List<Block> ores = new ArrayList<>();
+    private static final List<Block> ORES = new ArrayList<>();
     private CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
     private int timer = 0;
 
+    /**
+     * get some ore blocks to generate
+     */
     public static void init() {
         for (String string : OreDictionary.getOreNames()) {
             if (string.toLowerCase().startsWith("ore")) {
-                ores.add(Block.getBlockFromItem(OreDictionary.getOres(string).get(0).getItem()));
+                NonNullList<ItemStack> oreNames = OreDictionary.getOres(string);
+                for (ItemStack stack : oreNames) {
+                    Block block = Block.getBlockFromItem(stack.getItem());
+                    if (block != Blocks.AIR) {
+                        ORES.add(block);
+                        break;
+                    }
+                }
             }
         }
     }
@@ -52,11 +64,11 @@ public class TileDepthGenerator extends TileEntityBase implements IHudSupport, I
         if (world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
             for (BlockPos po : BlockPos.getAllInBox(pos.getX() - 5, pos.getY(), pos.getZ() - 5, pos.getX() + 5, pos.getY(), pos.getZ() + 5)) {
                 if (world.isAirBlock(po)) {
-                    if (storage.getEnergyStored() >= AquaticConfig.depthUsage && ores.size() > 0) {
+                    if (storage.getEnergyStored() >= AquaticConfig.depthUsage && ORES.size() > 0) {
                         timer++;
                         if (timer >= 20 * 15) {
                             storage.extractEnergy(AquaticConfig.depthUsage, false);
-                            world.setBlockState(po, ores.get(world.rand.nextInt(ores.size())).getDefaultState());
+                            world.setBlockState(po, ORES.get(world.rand.nextInt(ORES.size())).getDefaultState());
                             timer = 0;
                         }
                     }
