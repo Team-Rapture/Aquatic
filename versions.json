@@ -5,6 +5,7 @@
         "1.12.2-recommended": "1.0.0-c"
 	},
     "1.12.2": {
+        "1.0.0-c": "* fixed possible crash with other mods registering ores\n* fixed error when reloading aqua controllers",
         "1.0.0-b": "* fixed crash with capabilities\nHOTFIX!",
         "1.0.0": "* fixed cascading world generation lag",
         "0.9-ModJam": "* very first build"
