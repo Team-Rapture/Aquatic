@@ -1,8 +1,8 @@
 {
 	"homepage": "https://minecraft.curseforge.com/projects/aquatic",
 	"promos": {
-        "1.12.2-latest": "1.0.0-b",
-        "1.12.2-recommended": "1.0.0-b"
+        "1.12.2-latest": "1.0.0-c",
+        "1.12.2-recommended": "1.0.0-c"
 	},
     "1.12.2": {
         "1.0.0-b": "* fixed crash with capabilities\nHOTFIX!",
