@@ -104,8 +104,8 @@ public class HydroDrill extends ItemTool {
 @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        int damage = stack.getItemDamage();
-        int maxDamage = stack.getMaxDamage();
+        int damage = energyStorage.getEnergyStored();
+        int maxDamage = energyStorage.getMaxEnergyStored();
         tooltip.add(damage + "FE" + "/" + maxDamage+ "FE");
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
