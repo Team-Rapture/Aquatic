@@ -47,5 +47,6 @@ public class AquaticBlocks {
     public static final Block CORAL_REEF_RED = new BlockPlantBase("coral_reef_red");
     public static final Block CORAL_REEF_YELLOW = new BlockPlantBase("coral_reef_yellow");
 
+    public static final Block ANGLER_TORCH = new BlockPlantBase("angler_torch").setLightLevel(2);
 
 }

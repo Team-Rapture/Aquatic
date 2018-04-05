@@ -1,0 +1,89 @@
+{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"textures": {
+		"0": "aquatic:blocks/angler_torch",
+		"particle": "aquatic:blocks/angler_torch"
+	},
+	"elements": [
+		{
+			"name": "stickBase",
+			"from": [6, 0, 7],
+			"to": [9, 14, 10],
+			"faces": {
+				"north": {"uv": [13, 0, 14, 8], "texture": "#0"},
+				"east": {"uv": [13, 0, 15, 8], "texture": "#0"},
+				"south": {"uv": [13, 0, 15, 8], "texture": "#0"},
+				"west": {"uv": [13, 0, 15, 8], "texture": "#0"},
+				"up": {"uv": [13, 0, 16, 1], "texture": "#0"},
+				"down": {"uv": [13, 15, 16, 16], "texture": "#0"}
+			}
+		},
+		{
+			"name": "anglerBot",
+			"from": [7, 12, 7],
+			"to": [8, 18, 8],
+			"rotation": {
+				"angle": -22.5,
+				"axis": "x",
+				"origin": [7.5, 13.5, 7.5]
+			},
+			"faces": {
+				"north": {"uv": [1, 0, 3, 6], "texture": "#0"},
+				"east": {"uv": [1, 0, 3, 6], "texture": "#0"},
+				"south": {"uv": [1, 0, 3, 6], "texture": "#0"},
+				"west": {"uv": [1, 0, 3, 6], "texture": "#0"},
+				"up": {"uv": [1, 0, 3, 6], "texture": "#0"},
+				"down": {"uv": [1, 0, 3, 6], "texture": "#0"}
+			}
+		},
+		{
+			"name": "anglerMid",
+			"from": [7, 17, 2.5749999999999997],
+			"to": [8, 18, 6.25],
+			"rotation": {
+				"angle": -22.5,
+				"axis": "x",
+				"origin": [7.5, 17.5, 4.4125]
+			},
+			"faces": {
+				"north": {"uv": [1, 0, 2.675, 3], "texture": "#0"},
+				"east": {"uv": [1, 0, 2.675, 3], "texture": "#0"},
+				"south": {"uv": [1, 0, 2.675, 3], "texture": "#0"},
+				"west": {"uv": [1, 0, 2.675, 3], "texture": "#0"},
+				"up": {"uv": [1, 0, 2.675, 3], "texture": "#0"},
+				"down": {"uv": [1, 0, 2.675, 3], "texture": "#0"}
+			}
+		},
+		{
+			"name": "anglerLight",
+			"from": [6, 14.75, 1],
+			"to": [9, 17.75, 4],
+			"rotation": {
+				"angle": -22.5,
+				"axis": "x",
+				"origin": [7.5, 16.25, 2.5]
+			},
+			"faces": {
+				"north": {"uv": [6, 0, 10, 4], "texture": "#0"},
+				"east": {"uv": [6, 0, 10, 4], "texture": "#0"},
+				"south": {"uv": [6, 0, 10, 4], "texture": "#0"},
+				"west": {"uv": [6, 0, 10, 4], "texture": "#0"},
+				"up": {"uv": [6, 0, 10, 4], "texture": "#0"},
+				"down": {"uv": [6, 0, 10, 4], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {"translation": [0, 5, 0]},
+		"thirdperson_lefthand": {"translation": [0, 4.5, 0]},
+		"gui": {
+			"scale": [0.8, 0.8, 0.8],
+			"translation": [0.5, -1, 0],
+			"rotation": [0, -90, 0]
+		},
+		"fixed": {
+			"rotation": [0, 90, 0],
+			"translation": [0, -1, -1]
+		}
+	}
+}

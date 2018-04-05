@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "aquatic:angler_torch",
+    "custom": {
+      "flip-v": true
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "facing=north": [{ "model": "aquatic:angler_torch" }],
+    "facing=south": [{ "model": "aquatic:angler_torch", "y": 180 }],
+    "facing=west":  [{ "model": "aquatic:angler_torch", "y": 270 }],
+    "facing=east":  [{ "model": "aquatic:angler_torch", "y": 90 }]
+  }
+}

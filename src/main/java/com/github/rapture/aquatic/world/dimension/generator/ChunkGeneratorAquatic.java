@@ -391,7 +391,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         if (rand.nextInt(3) == 0)
             this.oxygenGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
 
-        if (false) for (int l1 = 0; l1 < 6; l1++) { //FIXME cascading worldgen
+        for (int l1 = 0; l1 < 6; l1++) { 
 
             this.ironGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
             this.diamonGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
@@ -401,8 +401,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
             this.quartzGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
             this.emeraldGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
             this.lapizGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
-            this.aquaCrackedStone.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
-        }
+          }
 
         biome.decorate(this.world, this.rand, blockpos);
 
