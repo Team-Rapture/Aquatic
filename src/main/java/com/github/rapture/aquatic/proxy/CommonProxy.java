@@ -7,7 +7,7 @@ import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.network.CapabilityRegistry;
 import com.github.rapture.aquatic.tileentity.TileDepthGenerator;
 import com.github.rapture.aquatic.util.AutoRegistry;
-import com.github.rapture.aquatic.util.FluidUtil;
+import com.github.rapture.aquatic.util.FluidUtils;
 import com.github.rapture.aquatic.util.UpdateChecker;
 import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
 import com.github.rapture.aquatic.world.dimension.generator.WorldGenReefs;
@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 
-    public static final Fluid AQUA_WATER = FluidUtil.createAndRegister(new FluidAquaWater());
+    public static final Fluid AQUA_WATER = FluidUtils.createAndRegister(new FluidAquaWater());
 
     public void preInit(FMLPreInitializationEvent event) {
         AutoRegistry.findRegistryEntries(event);

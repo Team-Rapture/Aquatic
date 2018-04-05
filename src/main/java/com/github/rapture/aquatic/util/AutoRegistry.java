@@ -66,7 +66,7 @@ public class AutoRegistry {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static <T extends IForgeRegistryEntry<T>> void onRegisterBlocks(RegistryEvent.Register<Block> event) {
-        FluidUtil.addBuckets();
+        FluidUtils.addBuckets();
     }
 
     /**
