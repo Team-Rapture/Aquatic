@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class BlockContainerBase extends BlockContainer implements IHasItemBlock {
+public abstract class BlockContainerBase extends BlockContainer implements IHasItemBlock {
 
     public BlockContainerBase(String name, Material material) {
         super(material);
@@ -28,25 +28,7 @@ public class BlockContainerBase extends BlockContainer implements IHasItemBlock 
 
     @Override
     public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-        switch (face) {
-            case DOWN:
-                return false;
-            case UP:
-                return isWater(world, pos.add(0, 1, 0));
-            case NORTH:
-                return isWater(world, pos.add(0, 0, -1));
-            case SOUTH:
-                return isWater(world, pos.add(0, 0, 1));
-            case EAST:
-                return isWater(world, pos.add(1, 0, 0));
-            case WEST:
-                return isWater(world, pos.add(-1, 0, 0));
-        }
-        return false;
-    }
-
-    private boolean isWater(IBlockAccess world, BlockPos pos) {
-        return world.getBlockState(pos).getMaterial() == Material.WATER;
+        return face != EnumFacing.DOWN && world.getBlockState(pos.offset(face)).getMaterial() == Material.WATER;
     }
 
     @Override
@@ -74,9 +56,4 @@ public class BlockContainerBase extends BlockContainer implements IHasItemBlock 
         return true;
     }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return null;
-    }
 }

@@ -10,8 +10,8 @@ public class DimensionAquatic {
     public static DimensionType dimension;
 
     public static void init() {
-        dimension = DimensionType.register("Aquatic", "_aquatic", AquaticConfig.dimensionID, WorldProviderAquatic.class,
+        dimension = DimensionType.register("Aquatic", "_aquatic", AquaticConfig.Dimension.dimensionID, WorldProviderAquatic.class,
                 false);
-        DimensionManager.registerDimension(AquaticConfig.dimensionID, dimension);
+        DimensionManager.registerDimension(AquaticConfig.Dimension.dimensionID, dimension);
     }
 }

@@ -63,7 +63,7 @@ public class TileCreativeGenerator extends TileEntityBase implements IEnergyStor
             if (te != null && te.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite())) {
                 IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
                 if (energyStorage.canReceive())
-                    energyStorage.receiveEnergy(AquaticConfig.creativeBatteryMaxTransfer, false);
+                    energyStorage.receiveEnergy(AquaticConfig.machines.creativeBatteryMaxTransfer, false);
             }
         }
     }

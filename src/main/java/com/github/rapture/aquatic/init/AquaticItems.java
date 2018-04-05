@@ -24,5 +24,5 @@ public class AquaticItems {
     public static final Item SCYLLA_SKULL = new ItemBase("scylla_skull");
     public static final Item DIVING_KNIFE = new DivingKnife("diving_knife");
     public static final Item ORGANIC_MATTER = new ItemBase("organic_matter");
-    public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm_item", 0, AquaticConfig.dimensionID);
+    public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm_item");
 }

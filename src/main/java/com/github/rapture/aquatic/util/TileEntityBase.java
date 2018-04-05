@@ -7,6 +7,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
@@ -49,7 +50,7 @@ public class TileEntityBase extends TileEntity {
         handleUpdateTag(pkt.getNbtCompound());
     }
 
-    public void sendUpdates() {
+    protected void sendUpdates() {
         world.markBlockRangeForRenderUpdate(pos, pos);
         world.notifyBlockUpdate(pos, getState(), getState(), 3);
         world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
@@ -60,10 +61,15 @@ public class TileEntityBase extends TileEntity {
         return world.getBlockState(pos);
     }
 
-    public AxisAlignedBB getRadius(BlockPos blockPos, int size, int height) {
+    protected AxisAlignedBB getRadius(BlockPos blockPos, int size, int height) {
         double hs = size / 2;
         double hh = height / 2;
         return new AxisAlignedBB(blockPos.getX() - hs, blockPos.getY() - hh, blockPos.getZ() - hs,
                 blockPos.getX() + hs, blockPos.getY() + hh, blockPos.getZ() + hs);
+    }
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+        return oldState.getBlock() != newState.getBlock();
     }
 }

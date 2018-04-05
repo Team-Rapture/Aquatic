@@ -64,10 +64,10 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
                 }
             }
 
-            if (oxygen.canReceiveOxygen(AquaticConfig.aquaNetGeneration)) {
+            if (oxygen.canReceiveOxygen(AquaticConfig.machines.aquaNetGeneration)) {
                 if (storage.getEnergyStored() >= energyToGenerate) {
                     storage.extractEnergy(energyToGenerate, false);
-                    oxygen.fillOxygen(AquaticConfig.aquaNetGeneration);
+                    oxygen.fillOxygen(AquaticConfig.machines.aquaNetGeneration);
                     setGeneratingOxygen(true);
                 } else {
                     setGeneratingOxygen(false);

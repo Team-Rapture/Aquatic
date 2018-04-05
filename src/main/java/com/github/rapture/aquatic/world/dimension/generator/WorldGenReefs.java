@@ -45,7 +45,7 @@ public class WorldGenReefs implements IWorldGenerator {
     @Override
     public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
                          IChunkProvider chunkProvider) {
-        if (world.provider.getDimension() == AquaticConfig.dimensionID) {
+        if (world.provider.getDimension() == AquaticConfig.Dimension.dimensionID) {
             this.runGenerator(world, rand, chunkX, chunkZ, 0, world.getSeaLevel() - 4);
         }
     }

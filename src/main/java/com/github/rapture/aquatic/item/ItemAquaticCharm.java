@@ -1,5 +1,6 @@
 package com.github.rapture.aquatic.item;
 
+import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.world.dimension.TeleporterDim;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
@@ -20,13 +21,10 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ItemAquaticCharm extends ItemBase {
 
-    protected final int DIMENSION_FROM_ID;
-    protected final int DIMENSION_TO_ID;
+    protected final int DIMENSION_FROM_ID = 0; //TODO store in player capability?
 
-    public ItemAquaticCharm(String name, int dimFromID, int dimToID) {
+    public ItemAquaticCharm(String name) {
         super(name);
-        this.DIMENSION_FROM_ID = dimFromID;
-        this.DIMENSION_TO_ID = dimToID;
         this.setMaxStackSize(1);
     }
 
@@ -37,11 +35,11 @@ public class ItemAquaticCharm extends ItemBase {
             TeleporterDim teleporter = new TeleporterDim((WorldServer) worldIn);
             if (playerIn instanceof EntityPlayerMP) {
                 EntityPlayerMP teleportee = (EntityPlayerMP) playerIn;
-                if (teleportee.dimension == DIMENSION_TO_ID) {
+                if (teleportee.dimension == AquaticConfig.dimension.dimensionID) {
                     playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, DIMENSION_FROM_ID, teleporter);
                     moveToEmptyArea(playerIn, worldIn);
                 } else {
-                    playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, DIMENSION_TO_ID, teleporter);
+                    playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, AquaticConfig.dimension.dimensionID, teleporter);
                     moveToEmptyArea(playerIn, worldIn);
                 }
             }
@@ -51,7 +49,7 @@ public class ItemAquaticCharm extends ItemBase {
 
     private void moveToEmptyArea(EntityPlayer entity, World world) {
         while (!isClear(entity, world)) {
-            entity.setPosition(entity.posX, entity.posY + 1, entity.posZ);
+            entity.setPosition(entity.posX, entity.posY + 1, entity.posZ); //TODO better algorithm for finding a suitable spawn position
         }
     }
 

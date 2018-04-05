@@ -9,53 +9,87 @@ import static com.github.rapture.aquatic.Aquatic.MODNAME;
 @Config.LangKey("config.aquatic.title")
 public class AquaticConfig {
 
-    //TODO add default value to all comments!
+    @Config.Name("Aquatic Machines")
+    public static Machines machines = new Machines();
 
-    @Config.RequiresMcRestart
-    @Config.Name("Enable Update Checker")
-    @Config.Comment("whether to announce mod updates")
-    public static boolean enableUpdateChecker = true;
+    @Config.Name("Aquatic Dimension")
+    public static Dimension dimension = new Dimension();
 
-    @Config.RequiresMcRestart
-    @Config.Name("Announce Beta Updates")
-    @Config.Comment("enable to also show beta updates")
-    public static boolean announceBetaUpdates = false;
+    @Config.Name("Update Checker")
+    public static Updater updater = new Updater();
+
+    @Config.Name("Mod Compatibility")
+    @Config.Comment("These config values will only be effective if the other mod is actually loaded!")
+    public static ModCompat compatibility = new ModCompat();
 
     @Config.Name("Debug Mode")
     @Config.Comment("enable additional console output")
     public static boolean debugMode = false;
 
-    @Config.Name("Aqua Net Controller")
-    @Config.Comment("Amount of oxygen an aqua net controller will generate per 20 FE")
-    public static int aquaNetGeneration = 10;
+    //mod compatibility configs, only effective if the other mod is actually loaded!
+    public static class ModCompat {
 
-    @Config.Name("Aqua Node Laser Beams")
-    @Config.Comment("Set to false to disable laser beam render to player from Aqua Nodes")
-    public static boolean aquaNodeBeam = true;
+        @Config.Name("Explosive Fishing")
+        @Config.Comment({"ExplosiveFishing - Can you fish in the aquatic dimension?", "Default: true"})
+        public boolean explosiveFishingInAquaticDimension = true;
+    }
 
-    @Config.Name("Depth Generator energy usage")
-    @Config.Comment("Set the amount of power per ore the depth generator uses")
-    public static int depthUsage = 2000;
+    public static class Machines {
 
-    @Config.RequiresMcRestart
-    @Config.Name("Dimension ID")
-    @Config.Comment("Dimension ID - CAREFUL WHEN CHANGING!")
-    public static int dimensionID = 300;
+        @Config.RangeInt(min = 0)
+        @Config.Name("Aqua Net Controller")
+        @Config.Comment({"Amount of oxygen an aqua net controller will generate per 20 FE", "Default: 10"})
+        public int aquaNetGeneration = 10;
 
-    @Config.Name("Angler Spawn Rate")
-    @Config.Comment("Angler Fish Spawn Rate")
-    public static int angler_spawn_rate = 8;
+        @Config.Name("Aqua Node Laser Beams")
+        @Config.Comment({"Set to false to disable laser beam render to player from Aqua Nodes", "Default: true"})
+        public boolean aquaNodeBeam = true;
 
+        @Config.RangeInt(min = 0)
+        @Config.Name("Depth Generator energy usage")
+        @Config.Comment({"Set the amount of power per ore the depth generator uses", "Default: 2000"})
+        public int depthUsage = 2000;
 
-    @Config.Name("Angler MIN amount")
-    @Config.Comment("Angler Fish Spawn Rate")
-    public static int angler_MIN_spawn_rate = 1;
+        @Config.RangeInt(min = 0)
+        @Config.Name("Creative Battery max transfer")
+        @Config.Comment({"how much the creative battery should transfer per tick and connection", "Default: 16384"})
+        public int creativeBatteryMaxTransfer = 16384;
+    }
 
-    @Config.Name("Angler MAX amount")
-    @Config.Comment("Angler Fish Spawn Rate")
-    public static int angler_MAX_spawn_rate = 3;
+    public static class Dimension {
 
-    @Config.Name("Creative Battery max transfer")
-    @Config.Comment("how much the creative battery should transfer per tick and connection")
-    public static int creativeBatteryMaxTransfer = 16384;
+        @Config.RangeInt(min = 0, max = 1000)
+        @Config.RequiresMcRestart
+        @Config.Name("Dimension ID")
+        @Config.Comment({"Dimension ID - CAREFUL WHEN CHANGING!", "Default: 300"})
+        public int dimensionID = 300;
+
+        @Config.RangeInt(min = 0, max = 100)
+        @Config.Name("Angler Spawn Rate")
+        @Config.Comment({"Angler Fish Spawn Rate", "Default: 8"})
+        public int angler_spawn_rate = 8;
+
+        @Config.RangeInt(min = 0, max = 100)
+        @Config.Name("Angler MIN amount")
+        @Config.Comment({"Angler Fish Spawn Rate", "Default: 1"})
+        public int angler_MIN_spawn_rate = 1;
+
+        @Config.RangeInt(min = 0, max = 100)
+        @Config.Name("Angler MAX amount")
+        @Config.Comment({"Angler Fish Spawn Rate", "Default: 3"})
+        public int angler_MAX_spawn_rate = 3;
+    }
+
+    public static class Updater {
+
+        @Config.RequiresMcRestart
+        @Config.Name("Enable Update Checker")
+        @Config.Comment({"whether to announce mod updates", "Default: true"})
+        public boolean enableUpdateChecker = true;
+
+        @Config.RequiresMcRestart
+        @Config.Name("Announce Beta Updates")
+        @Config.Comment({"enable to also show beta updates", "Default: false"})
+        public boolean announceBetaUpdates = false;
+    }
 }
