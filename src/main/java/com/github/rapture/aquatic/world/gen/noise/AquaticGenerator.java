@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.world.dimension.generator;
+package com.github.rapture.aquatic.world.gen.noise;
 
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;

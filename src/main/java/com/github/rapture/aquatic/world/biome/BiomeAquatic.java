@@ -1,7 +1,8 @@
-package com.github.rapture.aquatic.world.dimension.biome;
+package com.github.rapture.aquatic.world.biome;
 
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.rapture.aquatic.entity.hostile.EntityShark;
+import com.github.rapture.aquatic.world.biome.decorator.BiomeAquaticDecorator;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntitySquid;

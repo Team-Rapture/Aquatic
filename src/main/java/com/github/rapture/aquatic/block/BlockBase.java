@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.block.util;
+package com.github.rapture.aquatic.block;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.util.IHasItemBlock;

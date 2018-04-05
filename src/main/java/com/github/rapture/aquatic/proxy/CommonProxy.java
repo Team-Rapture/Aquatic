@@ -1,18 +1,24 @@
 package com.github.rapture.aquatic.proxy;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.api.oxygen.IOxygenProvider;
+import com.github.rapture.aquatic.api.oxygen.OxygenHandler;
+import com.github.rapture.aquatic.api.ph.IPHProvider;
+import com.github.rapture.aquatic.api.ph.PHHandler;
 import com.github.rapture.aquatic.block.fluid.FluidAquaWater;
 import com.github.rapture.aquatic.client.gui.GuiHandler;
 import com.github.rapture.aquatic.init.AquaticTiles;
-import com.github.rapture.aquatic.network.CapabilityRegistry;
 import com.github.rapture.aquatic.tileentity.TileDepthGenerator;
 import com.github.rapture.aquatic.util.AutoRegistry;
 import com.github.rapture.aquatic.util.FluidUtils;
 import com.github.rapture.aquatic.util.UpdateChecker;
+import com.github.rapture.aquatic.util.capability.OxygenStorage;
+import com.github.rapture.aquatic.util.capability.PHStorage;
 import com.github.rapture.aquatic.world.dimension.DimensionAquatic;
-import com.github.rapture.aquatic.world.dimension.generator.WorldGenReefs;
+import com.github.rapture.aquatic.world.gen.WorldGenReefs;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -33,7 +39,8 @@ public class CommonProxy {
     public void init(FMLInitializationEvent event) {
         AquaticTiles.registerTiles();
         DimensionAquatic.init();
-        CapabilityRegistry.registerCapabilities();
+        CapabilityManager.INSTANCE.register(IOxygenProvider.class, new OxygenStorage(), OxygenHandler::new);
+        CapabilityManager.INSTANCE.register(IPHProvider.class, new PHStorage(), PHHandler::new);
         NetworkRegistry.INSTANCE.registerGuiHandler(Aquatic.instance, new GuiHandler());
     }
 

@@ -1,7 +1,7 @@
-package com.github.rapture.aquatic.world.dimension.biome;
+package com.github.rapture.aquatic.world.biome.decorator;
 
 import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.world.dimension.generator.WorldGenPlants;
+import com.github.rapture.aquatic.world.gen.WorldGenPlants;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;

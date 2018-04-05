@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package com.github.rapture.aquatic.block.util;
+package com.github.rapture.aquatic.world.biome.decorator;
 
 import mcp.MethodsReturnNonnullByDefault;
 

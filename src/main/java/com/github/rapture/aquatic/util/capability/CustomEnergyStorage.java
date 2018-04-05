@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.util;
+package com.github.rapture.aquatic.util.capability;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;

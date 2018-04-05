@@ -2,7 +2,7 @@ package com.github.rapture.aquatic.init;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.util.RegistryCreate;
-import com.github.rapture.aquatic.world.dimension.biome.BiomeAquatic;
+import com.github.rapture.aquatic.world.biome.BiomeAquatic;
 import net.minecraft.world.biome.Biome;
 
 @RegistryCreate(value = Biome.class, modid = Aquatic.MODID)

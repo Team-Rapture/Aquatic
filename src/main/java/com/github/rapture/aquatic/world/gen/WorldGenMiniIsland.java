@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.world.dimension.generator;
+package com.github.rapture.aquatic.world.gen;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -11,8 +11,6 @@ public class WorldGenMiniIsland extends WorldGenerator {
 
     @Override
     public boolean generate(World worldIn, Random rand, BlockPos position) {
-        float f = (float) (rand.nextInt(25));
-
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = 0; y < worldIn.rand.nextInt(34); y++) {

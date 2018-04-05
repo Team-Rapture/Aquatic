@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.util;
+package com.github.rapture.aquatic.tileentity;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;

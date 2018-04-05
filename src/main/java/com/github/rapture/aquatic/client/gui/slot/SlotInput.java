@@ -1,6 +1,6 @@
 package com.github.rapture.aquatic.client.gui.slot;
 
-import com.github.rapture.aquatic.util.CustomItemStackHandler;
+import com.github.rapture.aquatic.util.capability.CustomItemStackHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;

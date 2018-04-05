@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.world.dimension.generator;
+package com.github.rapture.aquatic.world.gen;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

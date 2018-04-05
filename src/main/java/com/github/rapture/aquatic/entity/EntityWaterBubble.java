@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.entity.misc;
+package com.github.rapture.aquatic.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;

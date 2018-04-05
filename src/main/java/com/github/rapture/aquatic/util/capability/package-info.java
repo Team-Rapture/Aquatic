@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package com.github.rapture.aquatic.entity.misc;
+package com.github.rapture.aquatic.util.capability;
 
 import mcp.MethodsReturnNonnullByDefault;
 

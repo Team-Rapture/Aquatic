@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.world.dimension.generator;
+package com.github.rapture.aquatic.world.gen;
 
 import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.init.AquaticBlocks;
@@ -45,7 +45,7 @@ public class WorldGenReefs implements IWorldGenerator {
     @Override
     public void generate(Random rand, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
                          IChunkProvider chunkProvider) {
-        if (world.provider.getDimension() == AquaticConfig.Dimension.dimensionID) {
+        if (world.provider.getDimension() == AquaticConfig.dimension.dimensionID) {
             this.runGenerator(world, rand, chunkX, chunkZ, 0, world.getSeaLevel() - 4);
         }
     }

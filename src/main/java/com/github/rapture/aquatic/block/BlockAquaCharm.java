@@ -1,6 +1,5 @@
 package com.github.rapture.aquatic.block;
 
-import com.github.rapture.aquatic.block.util.BlockRenderInLiquidBase;
 import com.github.rapture.aquatic.init.AquaticItems;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;

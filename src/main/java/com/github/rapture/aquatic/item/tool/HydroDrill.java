@@ -1,7 +1,7 @@
 package com.github.rapture.aquatic.item.tool;
 
 import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.util.CustomEnergyStorage;
+import com.github.rapture.aquatic.util.capability.CustomEnergyStorage;
 import com.github.rapture.aquatic.util.NameUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -10,13 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

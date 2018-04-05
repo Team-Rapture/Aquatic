@@ -7,7 +7,7 @@ import com.github.rapture.aquatic.block.fluid.FluidAquaWaterBlock;
 import com.github.rapture.aquatic.block.machine.*;
 import com.github.rapture.aquatic.block.plants.BlockPistia;
 import com.github.rapture.aquatic.block.plants.BlockPlantBase;
-import com.github.rapture.aquatic.block.util.BlockBase;
+import com.github.rapture.aquatic.block.BlockBase;
 import com.github.rapture.aquatic.util.RegistryCreate;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

@@ -1,6 +1,9 @@
-package com.github.rapture.aquatic.world.dimension.generator;
+package com.github.rapture.aquatic.world.dimension;
 
 import com.github.rapture.aquatic.init.AquaticBlocks;
+import com.github.rapture.aquatic.world.gen.WorldGenEntities;
+import com.github.rapture.aquatic.world.gen.WorldGenPlants;
+import com.github.rapture.aquatic.world.gen.noise.AquaticGenerator;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -56,11 +59,11 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     private final WorldGenerator aquaCrackedStone = new WorldGenMinable(
             AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState(), 60,
             BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    double[] pnr;
-    double[] ar;
-    double[] br;
-    double[] noiseData4;
-    double[] dr;
+    private double[] pnr;
+    private double[] ar;
+    private double[] br;
+    private double[] noiseData4;
+    private double[] dr;
     private WorldGenPlants coralGenerator0 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_GREEN);
     private WorldGenPlants coralGenerator1 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_PINK);
     private WorldGenPlants coralGenerator2 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_RED);

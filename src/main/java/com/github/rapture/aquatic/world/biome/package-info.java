@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package com.github.rapture.aquatic.network;
+package com.github.rapture.aquatic.world.biome;
 
 import mcp.MethodsReturnNonnullByDefault;
 

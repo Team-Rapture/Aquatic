@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.network.capability;
+package com.github.rapture.aquatic.util.capability;
 
 import com.github.rapture.aquatic.api.oxygen.IOxygenProvider;
 import net.minecraft.nbt.NBTBase;

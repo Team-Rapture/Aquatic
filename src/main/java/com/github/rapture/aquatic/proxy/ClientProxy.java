@@ -8,7 +8,7 @@ import com.github.rapture.aquatic.client.render.entity.hostile.RenderShark;
 import com.github.rapture.aquatic.entity.boss.EntityScylla;
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.rapture.aquatic.entity.hostile.EntityShark;
-import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
+import com.github.rapture.aquatic.entity.EntityWaterBubble;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.init.AquaticTiles;
 import com.github.rapture.aquatic.util.ICustomModelProvider;

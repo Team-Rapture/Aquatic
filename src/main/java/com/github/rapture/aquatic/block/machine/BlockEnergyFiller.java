@@ -1,7 +1,7 @@
 package com.github.rapture.aquatic.block.machine;
 
 import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.block.util.BlockContainerBase;
+import com.github.rapture.aquatic.block.BlockContainerBase;
 import com.github.rapture.aquatic.client.gui.GuiHandler;
 import com.github.rapture.aquatic.tileentity.TileEnergyFiller;
 import net.minecraft.block.BlockHorizontal;
@@ -11,7 +11,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;

@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package com.github.rapture.aquatic.world.dimension.provider;
+package com.github.rapture.aquatic.world.gen.noise;
 
 import mcp.MethodsReturnNonnullByDefault;
 

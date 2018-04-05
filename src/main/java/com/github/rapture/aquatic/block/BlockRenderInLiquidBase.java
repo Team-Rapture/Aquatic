@@ -1,4 +1,4 @@
-package com.github.rapture.aquatic.block.util;
+package com.github.rapture.aquatic.block;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
