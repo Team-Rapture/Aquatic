@@ -37,7 +37,13 @@
           "id": "aquatic:organic_matter",
           "page": "aquatic:items/organic_matter",
           "icon": "aquatic:organic_matter"
+        },
+        {
+          "id": "aquatic:mob_drop_list",
+          "page": "aquatic:items/mob_drop_list",
+          "icon": "aquatic:sliced_meat"
         }
+
       ]
     },
     {
@@ -59,7 +65,7 @@
     },
 	    {
       "id": "aquatic:machines",
-      "icon": "aquatic:depth_generator",
+      "icon": "aquatic:oxygen_filler",
       "page": "aquatic:machines/machines_overview",
       "child_elements": [
         {
