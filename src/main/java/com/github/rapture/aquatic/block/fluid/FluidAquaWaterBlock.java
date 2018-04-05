@@ -1,5 +1,7 @@
 package com.github.rapture.aquatic.block.fluid;
 
+import com.deflatedpickle.picklelib.api.IFishable;
+import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.rapture.aquatic.proxy.CommonProxy;
 import com.github.rapture.aquatic.util.ICustomModelProvider;
 import net.minecraft.block.material.Material;
@@ -11,12 +13,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomModelProvider {
+@Optional.Interface(modid = "picklelib", iface = "com.deflatedpickle.picklelib.api.IFishable")
+public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomModelProvider, IFishable {
 
     public FluidAquaWaterBlock() {
         super(CommonProxy.AQUA_WATER, Material.WATER);
@@ -37,5 +41,10 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
             return (!isSourceBlock(world, pos) || !upperState.isFullBlock()) && upperState.getMaterial() != Material.WATER;
         }
         return super.shouldSideBeRendered(state, world, pos, side);
+    }
+
+    @Override
+    public boolean isFishable() {
+        return AquaticConfig.compatibility.explosiveFishingInAquaticDimension;
     }
 }
