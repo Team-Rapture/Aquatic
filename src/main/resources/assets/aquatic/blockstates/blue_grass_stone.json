@@ -1,0 +1,17 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+      "model": "aquatic:blue_grass_stone",
+      "custom": {
+        "flip-v": true
+      }
+    },
+    "variants": {
+      "normal": [
+        {}
+      ],
+      "inventory": [
+        {}
+      ]
+    }
+  }

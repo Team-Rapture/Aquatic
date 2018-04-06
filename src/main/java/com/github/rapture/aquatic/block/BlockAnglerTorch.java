@@ -36,10 +36,11 @@ public class BlockAnglerTorch extends BlockBase {
 	public boolean isTorchOnTop = false;
 
 	public BlockAnglerTorch() {
-		super("angler_torch", Material.PLANTS);
+		super("angler_torch", Material.ROCK);
 		this.setTickRandomly(true);
 		this.setCreativeTab(Aquatic.CREATIVE_TAB);
 		this.setLightLevel(2.0f);
+		
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(STICK[0], false));
 	}
 

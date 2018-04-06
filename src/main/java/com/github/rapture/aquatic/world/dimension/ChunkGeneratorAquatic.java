@@ -1,9 +1,15 @@
 package com.github.rapture.aquatic.world.dimension;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.world.gen.WorldGenEntities;
 import com.github.rapture.aquatic.world.gen.WorldGenPlants;
 import com.github.rapture.aquatic.world.gen.noise.AquaticGenerator;
+
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -27,10 +33,6 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
-
 public class ChunkGeneratorAquatic implements IChunkGenerator {
 
 
@@ -40,6 +42,8 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     private static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
     private static final IBlockState SAND = Blocks.SAND.getDefaultState();
     private static final IBlockState STONE_CRACKED = AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState();
+    private static final IBlockState GRASS_STONE_DARK = AquaticBlocks.GRASS_STONE_1.getDefaultState();
+    private static final IBlockState GRASS_STONE_LIGHT = AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState();
     private final WorldGenerator ironGen = new WorldGenMinable(AquaticBlocks.IRON_ORE_DEPOSIT.getDefaultState(), 6,
             BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
     private final WorldGenerator goldGen = new WorldGenMinable(AquaticBlocks.GOLD_ORE_DEPOSIT.getDefaultState(), 4,
@@ -56,9 +60,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
             8, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
     private final WorldGenerator quartzGen = new WorldGenMinable(AquaticBlocks.QUARTZ_ORE_DEPOSIT.getDefaultState(), 13,
             BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    private final WorldGenerator aquaCrackedStone = new WorldGenMinable(
-            AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState(), 60,
-            BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+
     private double[] pnr;
     private double[] ar;
     private double[] br;
@@ -71,6 +73,8 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     private WorldGenPlants coralGenerator4 = new WorldGenPlants(AquaticBlocks.CORAL_REEF_BLUE);
     private WorldGenPlants hydrillaGenerator = new WorldGenPlants(AquaticBlocks.HYDRILLA);
     private WorldGenPlants oxygenGenerator = new WorldGenPlants(AquaticBlocks.OXYGEN_STONE);
+
+    private WorldGenPlants grassGenerator = new WorldGenPlants(AquaticBlocks.SEA_GRASS);
     private NoiseGeneratorOctaves scaleNoise;
     private NoiseGeneratorOctaves depthNoise;
     private World world;
@@ -219,6 +223,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
                                             iblockstate = STONE_CRACKED;
                                             iblockstate1 = STONE_CRACKED;
                                         }
+                                       
                                     }
 
                                     if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR)) {
@@ -393,7 +398,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
             this.hydrillaGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
         if (rand.nextInt(3) == 0)
             this.oxygenGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-
+       
         for (int l1 = 0; l1 < 6; l1++) { 
 
             this.ironGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));

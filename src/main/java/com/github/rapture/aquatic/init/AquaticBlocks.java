@@ -37,9 +37,12 @@ public class AquaticBlocks {
 
 	
 	public static final Block GRASS_STONE_1 = new BlockBase("grass_stone_1");
+	public static final Block BLUE_GRASS_STONE = new BlockBase("blue_grass_stone");
 	public static final Block GRASS_STONE_2 = new BlockBase("grass_stone_2");
 	public static final Block SANDY_GRASS_STONE = new BlockBase("grass_sandy");
 	public static final Block AQUATIC_MOSS_STONE = new BlockBase("aquatic_mossy_stone");
+	public static final Block SEA_GRASS = new BlockPlantBase("sea_grass");
+	public static final Block BIG_PLANT = new BlockPlantBase("big_plant");
 	
 	public static final Block IRON_ORE_DEPOSIT = new BlockBase("iron_ore_deposit");
 	public static final Block GOLD_ORE_DEPOSIT = new BlockBase("gold_ore_deposit");

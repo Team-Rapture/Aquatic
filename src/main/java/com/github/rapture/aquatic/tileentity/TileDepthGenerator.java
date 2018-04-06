@@ -64,8 +64,8 @@ public class TileDepthGenerator extends TileEntityBase implements IHudSupport, I
             world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
         }
 
-        if (world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
-            for (BlockPos po : BlockPos.getAllInBox(pos.getX() - 5, pos.getY(), pos.getZ() - 5, pos.getX() + 5, pos.getY(), pos.getZ() + 5)) {
+        if (!world.isRemote && world.getBlockState(pos.down()).getBlock() == Blocks.BEDROCK) {
+            for (BlockPos po : BlockPos.getAllInBox(pos.getX() - 5, pos.getY(), pos.getZ() - 5, pos.getX() + 5, pos.getY() + 4, pos.getZ() + 5)) {
                 if (world.isAirBlock(po)) {
                     if (storage.getEnergyStored() >= AquaticConfig.machines.depthUsage && ORES.size() > 0) {
                         timer++;
