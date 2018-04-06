@@ -35,6 +35,12 @@ public class AquaticBlocks {
 	public static final Block CREATIVE_GENERATOR = new BlockCreativeGenerator();
 	public static final Block ANGLER_TORCH = new BlockAnglerTorch();
 
+	
+	public static final Block GRASS_STONE_1 = new BlockBase("grass_stone_1");
+	public static final Block GRASS_STONE_2 = new BlockBase("grass_stone_2");
+	public static final Block SANDY_GRASS_STONE = new BlockBase("grass_sandy");
+	public static final Block AQUATIC_MOSS_STONE = new BlockBase("aquatic_mossy_stone");
+	
 	public static final Block IRON_ORE_DEPOSIT = new BlockBase("iron_ore_deposit");
 	public static final Block GOLD_ORE_DEPOSIT = new BlockBase("gold_ore_deposit");
 	public static final Block DIAMOND_ORE_DEPOSIT = new BlockBase("diamond_ore_deposit");

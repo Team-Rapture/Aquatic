@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "aquatic:blocks/decorBlocks/grass_stone_2/grass_stone_top",
+    "bottom": "aquatic:blocks/decorBlocks/grass_stone_2/grass_stone_bottom",
+    "side": "aquatic:blocks/decorBlocks/grass_stone_2/grass_stone_side",
+    "front": "aquatic:blocks/decorBlocks/grass_stone_2/grass_stone_side"
+  }
+}

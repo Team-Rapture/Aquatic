@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "aquatic:blocks/decorblocks/sandy_block/sandy_top",
+    "bottom": "aquatic:blocks/decorblocks/sandy_block/sandy_bottom",
+    "side": "aquatic:blocks/decorblocks/sandy_block/sandy_side",
+    "front": "aquatic:blocks/decorblocks/sandy_block/sandy_side"
+  }
+}

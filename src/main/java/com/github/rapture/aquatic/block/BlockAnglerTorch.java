@@ -29,11 +29,12 @@ public class BlockAnglerTorch extends BlockBase {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	public BlockAnglerTorch() {
-		super("angler_torch", Material.PLANTS);
+		super("angler_torch", Material.ROCK);
 		this.setTickRandomly(true);
 		this.setCreativeTab(Aquatic.CREATIVE_TAB);
 		this.setLightLevel(2.0f);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setHardness(0.02f);
 	}
 
 	@SideOnly(Side.CLIENT)
