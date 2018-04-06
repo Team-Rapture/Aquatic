@@ -113,10 +113,11 @@ dependencies {
     runtime "mezz.jei:jei_${project.mc_version}:${project.jei_version}"
 
     //PickleLib, from CurseForge
-    deobfCompile "picklelib:picklelib:1.12.2:1.0.5.0"
+    compileOnly "picklelib:picklelib:1.12.2:1.0.5.0"
 
+    //CURRENTLY BROKEN!
     //ExplosiveFishing, from CurseForge, for testing compatibility
-    runtime 'explosivefishing:explosivefishing:1.12.2:1.0.3.1'
+    //runtime 'explosivefishing:explosivefishing:1.12.2:1.0.3.3'
 
 }
 
@@ -198,8 +199,8 @@ task signJar(type: SignJar, dependsOn: reobfJar) {
 tasks.build.dependsOn signJar
 tasks.curseforge.dependsOn build
 
-def curseRelations = {
-    //optionalLibrary '' //add curseforge-slug here
+def curseRelations = { //add curseforge-slug here
+    optionalLibrary 'explosivefishing' //support for the IFishable interface
 }
 
 processResources
@@ -239,8 +240,7 @@ curseforge {
             changelog = getChangelogText()
             releaseType = project.release_type
 
-            //TODO uncomment when adding libraries/optional dependencies
-            //relations curseRelations
+            relations curseRelations
 
             //no such jars for now
             //addArtifact javadocJar
