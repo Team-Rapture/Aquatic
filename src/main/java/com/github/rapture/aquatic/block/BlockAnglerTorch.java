@@ -28,10 +28,11 @@ public class BlockAnglerTorch extends BlockBase {
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-	public BlockAnglerTorch(String name, Material material) {
-		super(name);
+	public BlockAnglerTorch() {
+		super("angler_torch", Material.PLANTS);
 		this.setTickRandomly(true);
 		this.setCreativeTab(Aquatic.CREATIVE_TAB);
+		this.setLightLevel(2.0f);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
@@ -80,18 +81,18 @@ public class BlockAnglerTorch extends BlockBase {
 	@Override
 	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
 		switch (face) {
-		case DOWN:
-			return false;
-		case UP:
-			return isWater(world, pos.add(0, 1, 0));
-		case NORTH:
-			return isWater(world, pos.add(0, 0, -1));
-		case SOUTH:
-			return isWater(world, pos.add(0, 0, 1));
-		case EAST:
-			return isWater(world, pos.add(1, 0, 0));
-		case WEST:
-			return isWater(world, pos.add(-1, 0, 0));
+			case DOWN:
+				return false;
+			case UP:
+				return isWater(world, pos.add(0, 1, 0));
+			case NORTH:
+				return isWater(world, pos.add(0, 0, -1));
+			case SOUTH:
+				return isWater(world, pos.add(0, 0, 1));
+			case EAST:
+				return isWater(world, pos.add(1, 0, 0));
+			case WEST:
+				return isWater(world, pos.add(-1, 0, 0));
 		}
 		return false;
 	}
@@ -149,13 +150,13 @@ public class BlockAnglerTorch extends BlockBase {
 
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer) {
+											float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
+								ItemStack stack) {
 		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 	}
 
@@ -187,6 +188,6 @@ public class BlockAnglerTorch extends BlockBase {
 
 	@Override
 	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { FACING });
+		return new BlockStateContainer(this, new IProperty[]{FACING});
 	}
 }

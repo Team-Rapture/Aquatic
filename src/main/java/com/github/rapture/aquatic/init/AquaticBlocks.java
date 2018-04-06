@@ -46,10 +46,7 @@ public class AquaticBlocks {
     public static final Block REDSTONE_ORE_DEPOSIT = new BlockBase("redstone_ore_deposit");
     public static final Block LAPIZ_ORE_DEPOSIT = new BlockBase("lapiz_ore_deposit");
     public static final Block QUARTZ_ORE_DEPOSIT = new BlockBase("quartz_ore_deposit");
-    public static final Block EMERALD_ORE_DEPOSIT = new BlockBase("emerald_ore_deposit") {
-    	@Override
-    public void getDrops(net.minecraft.util.NonNullList<net.minecraft.item.ItemStack> drops, net.minecraft.world.IBlockAccess world, net.minecraft.util.math.BlockPos pos, net.minecraft.block.state.IBlockState state, int fortune) {};
-    };
+    public static final Block EMERALD_ORE_DEPOSIT = new BlockBase("emerald_ore_deposit");
 
     public static final Block CORAL_REEF_PINK = new BlockPlantBase("coral_reef_pink");
     public static final Block CORAL_REEF_BLUE = new BlockPlantBase("coral_reef_blue");
@@ -57,6 +54,6 @@ public class AquaticBlocks {
     public static final Block CORAL_REEF_RED = new BlockPlantBase("coral_reef_red");
     public static final Block CORAL_REEF_YELLOW = new BlockPlantBase("coral_reef_yellow");
 
-    public static final Block ANGLER_TORCH = new BlockAnglerTorch("angler_torch", Material.PLANTS).setLightLevel(2);
+    public static final Block ANGLER_TORCH = new BlockAnglerTorch();
 
 }
