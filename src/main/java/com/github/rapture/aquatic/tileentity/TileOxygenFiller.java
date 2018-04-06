@@ -4,7 +4,6 @@ import com.github.rapture.aquatic.api.oxygen.IOxygenProvider;
 import com.github.rapture.aquatic.api.oxygen.OxygenHandler;
 import com.github.rapture.aquatic.api.oxygen.capability.CapabilityOxygen;
 import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.util.TileEntityInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

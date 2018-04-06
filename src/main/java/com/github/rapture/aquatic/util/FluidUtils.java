@@ -11,10 +11,17 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FluidUtils {
+
+    private static List<Fluid> FLUIDS = new ArrayList<>();
 
     public static void translateAgainstPlayer(BlockPos pos, boolean offset) {
         final float x = (float) (pos.getX() - TileEntityRendererDispatcher.staticPlayerX);
@@ -223,5 +230,16 @@ public class FluidUtils {
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
         RenderHelper.enableStandardItemLighting();
+    }
+
+    public static Fluid createAndRegister(Fluid fluid) {
+        if (FluidRegistry.registerFluid(fluid)) {
+            FLUIDS.add(fluid);
+            return fluid;
+        } else return FluidRegistry.getFluid(fluid.getName());
+    }
+
+    public static void addBuckets() {
+        for (Fluid fluid : FLUIDS) FluidRegistry.addBucketForFluid(fluid);
     }
 }

@@ -1,7 +1,7 @@
 package com.github.rapture.aquatic.client.render.entity;
 
 import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
+import com.github.rapture.aquatic.entity.EntityWaterBubble;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

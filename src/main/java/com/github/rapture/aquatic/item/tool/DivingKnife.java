@@ -3,9 +3,11 @@ package com.github.rapture.aquatic.item.tool;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.entity.hostile.EntityShark;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.init.AquaticItems;
+import com.github.rapture.aquatic.util.NameUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -14,7 +16,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.math.BlockPos;
@@ -30,14 +31,15 @@ public class DivingKnife extends ItemSword {
 		breakable.add(AquaticBlocks.CORAL_REEF_YELLOW);
 		breakable.add(AquaticBlocks.CORAL_REEF_GREEN);
 		breakable.add(AquaticBlocks.PISTIA);
-
 		breakable.add(AquaticBlocks.HYDRILLA);
 	}
 
 	public DivingKnife(String name, ToolMaterial material) {
 		super(material);
+		NameUtil.name(this, name);
+		this.setCreativeTab(Aquatic.CREATIVE_TAB);
 	}
-	 
+
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos,
 			EntityLivingBase entityLiving) {
@@ -48,7 +50,7 @@ public class DivingKnife extends ItemSword {
 				return !worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(),
 						new ItemStack(AquaticItems.ORGANIC_MATTER)))
 						|| super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
-			
+
 		}
 		return true;
 	}
@@ -69,7 +71,7 @@ public class DivingKnife extends ItemSword {
 				if (player.world.rand.nextBoolean()) {
 					player.world.spawnEntity(new EntityItem(player.world, entity.posX, entity.posY, entity.posZ,
 							new ItemStack(AquaticItems.SHARK_TOOTH)));
-				
+
 				}
 			}
 		}

@@ -26,22 +26,20 @@ public class AquaticItems {
     public static final Item SCYLLA_SKULL = new ItemBase("scylla_skull");
     public static final Item DIVING_KNIFE = new DivingKnife("diving_knife", ToolMaterial.IRON);
     public static final Item ORGANIC_MATTER = new ItemBase("organic_matter");
-    public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm_item", 0, AquaticConfig.dimensionID);
+public static final Item AQUATIC_CHARM = new ItemAquaticCharm("aquatic_charm_item");
     public static final Item ANGLER_LIGHT = new ItemBase("angler_light");
     public static final Item SHARK_TOOTH = new ItemBase("shark_tooth");
     // Foods
     
     public static final Item RAW_SCYLLA_MEAT = new BaseFoodItem("raw_scylla_meat", 10, true);
     public static final Item COOKED_SCYLLA_MEAT = new BaseFoodItem("cooked_scylla_meat", 10, true);
-    public static final Item RAW_FIN = new BaseFoodItem("raw_fin", 10, false);
+    public static final Item RAW_FIN = new BaseFoodItem("raw_shark_fin", 10, false);
     public static final Item RAW_ANGLER_FISH = new BaseFoodItem("raw_angler_fish", 10, true);
     public static final Item RAW_SLICED_MEAT = new BaseFoodItem("raw_sliced_meat", 10, true);
-    public static final Item SLICED_MEAT = new BaseFoodItem("sliced_meat", 10, true);
+    public static final Item SLICED_MEAT = new BaseFoodItem("cooked_sliced_meat", 10, true);
     public static final Item COOKED_ANGLER_FISH = new BaseFoodItem("cooked_angler_fish", 10, true);
-    public static final Item COOKED_FIN = new BaseFoodItem("cooked_fin", 10, false);
+    public static final Item COOKED_FIN = new BaseFoodItem("cooked_shark_fin", 10, false);
    // public static final Item SCYLLA_SKULL = new ItemBase("scylla_skull");
-    
-    
     
     
     

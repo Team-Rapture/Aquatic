@@ -103,12 +103,20 @@ minecraft {
     //skip jansi warnings in the log
     serverJvmArgs += '-Dlog4j.skipJansi=true'
     clientJvmArgs += '-Dlog4j.skipJansi=true'
+
+    useDepAts = true //PickleLib needs some ATs
 }
 
 dependencies {
 
     //JEI at runtime (no build dependency, this is for testing purposes ONLY!)
     runtime "mezz.jei:jei_${project.mc_version}:${project.jei_version}"
+
+    //PickleLib, from CurseForge
+    deobfCompile "picklelib:picklelib:1.12.2:1.0.5.0"
+
+    //ExplosiveFishing, from CurseForge, for testing compatibility
+    runtime 'explosivefishing:explosivefishing:1.12.2:1.0.3.1'
 
 }
 

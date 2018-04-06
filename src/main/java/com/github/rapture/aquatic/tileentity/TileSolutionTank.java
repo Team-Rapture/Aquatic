@@ -1,7 +1,6 @@
 package com.github.rapture.aquatic.tileentity;
 
 import com.github.rapture.aquatic.proxy.CommonProxy;
-import com.github.rapture.aquatic.util.TileEntityInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

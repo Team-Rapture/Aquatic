@@ -1,7 +1,6 @@
 package com.github.rapture.aquatic.tileentity;
 
-import com.github.rapture.aquatic.util.CustomEnergyStorage;
-import com.github.rapture.aquatic.util.TileEntityInventory;
+import com.github.rapture.aquatic.util.capability.CustomEnergyStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

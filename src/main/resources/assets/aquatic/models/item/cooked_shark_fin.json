@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "aquatic:items/cooked_shark_fin"
+    }
+}

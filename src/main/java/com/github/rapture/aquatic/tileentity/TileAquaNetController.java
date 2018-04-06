@@ -5,10 +5,9 @@ import com.github.rapture.aquatic.api.oxygen.capability.CapabilityOxygen;
 import com.github.rapture.aquatic.client.render.hud.HudRender;
 import com.github.rapture.aquatic.client.render.hud.IHudSupport;
 import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.entity.misc.EntityWaterBubble;
+import com.github.rapture.aquatic.entity.EntityWaterBubble;
 import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.util.CustomEnergyStorage;
-import com.github.rapture.aquatic.util.TileEntityBase;
+import com.github.rapture.aquatic.util.capability.CustomEnergyStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -64,10 +63,10 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
                 }
             }
 
-            if (oxygen.canReceiveOxygen(AquaticConfig.aquaNetGeneration)) {
+            if (oxygen.canReceiveOxygen(AquaticConfig.machines.aquaNetGeneration)) {
                 if (storage.getEnergyStored() >= energyToGenerate) {
                     storage.extractEnergy(energyToGenerate, false);
-                    oxygen.fillOxygen(AquaticConfig.aquaNetGeneration);
+                    oxygen.fillOxygen(AquaticConfig.machines.aquaNetGeneration);
                     setGeneratingOxygen(true);
                 } else {
                     setGeneratingOxygen(false);

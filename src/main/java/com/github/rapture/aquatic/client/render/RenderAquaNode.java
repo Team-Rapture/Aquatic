@@ -48,20 +48,18 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         }
         //System.out.printf("%s %s%n", partialTicks, alpha);
         //System.out.printf("%s %s %s%n", blockPos.getX(), blockPos.getY(), blockPos.getZ());
-        if (AquaticConfig.aquaNodeBeam && te.oxygen.getOxygenStored() != 0) {
-            if (te.playersInRange() != null) {
-                for (EntityPlayer player : te.playersInRange()) {
-                    if (te.hasFullArmor(player)) {
-                        Vec3d pPos = player.getPositionVector();
-                        double dX = player.posX - player.lastTickPosX;
-                        double dY = player.posY - player.lastTickPosY;
-                        double dZ = player.posZ - player.lastTickPosZ;
-                        float invAlpha = (1f - partialTicks);
-                        double pX = blockPos.getX() - pPos.x - x + dX * invAlpha;
-                        double pY = blockPos.getY() - pPos.y - y + dY * invAlpha - (player.height / 2f);
-                        double pZ = blockPos.getZ() - pPos.z - z + dZ * invAlpha;
-                        renderBeam(x + 0.5, y + 0.625, z + 0.5, -pX, -pY, -pZ, te.beamRenderTicks, partialTicks, true);
-                    }
+        if (AquaticConfig.machines.aquaNodeBeam && te.oxygen.getOxygenStored() != 0) {
+            for (EntityPlayer player : te.playersInRange()) {
+                if (te.hasFullArmor(player)) {
+                    Vec3d pPos = player.getPositionVector();
+                    double dX = player.posX - player.lastTickPosX;
+                    double dY = player.posY - player.lastTickPosY;
+                    double dZ = player.posZ - player.lastTickPosZ;
+                    float invAlpha = (1f - partialTicks);
+                    double pX = blockPos.getX() - pPos.x - x + dX * invAlpha;
+                    double pY = blockPos.getY() - pPos.y - y + dY * invAlpha - (player.height / 2f);
+                    double pZ = blockPos.getZ() - pPos.z - z + dZ * invAlpha;
+                    renderBeam(x + 0.5, y + 0.625, z + 0.5, -pX, -pY, -pZ, te.beamRenderTicks, partialTicks, true);
                 }
             }
         }

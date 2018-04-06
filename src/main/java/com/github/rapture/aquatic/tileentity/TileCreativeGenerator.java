@@ -1,7 +1,6 @@
 package com.github.rapture.aquatic.tileentity;
 
 import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -63,7 +62,7 @@ public class TileCreativeGenerator extends TileEntityBase implements IEnergyStor
             if (te != null && te.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite())) {
                 IEnergyStorage energyStorage = te.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite());
                 if (energyStorage.canReceive())
-                    energyStorage.receiveEnergy(AquaticConfig.creativeBatteryMaxTransfer, false);
+                    energyStorage.receiveEnergy(AquaticConfig.machines.creativeBatteryMaxTransfer, false);
             }
         }
     }

@@ -7,7 +7,6 @@ import com.github.rapture.aquatic.client.render.hud.IHudSupport;
 import com.github.rapture.aquatic.init.AquaticBlocks;
 import com.github.rapture.aquatic.init.AquaticItems;
 import com.github.rapture.aquatic.item.armor.ScubaSuit;
-import com.github.rapture.aquatic.util.TileEntityBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;

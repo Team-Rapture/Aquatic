@@ -2,13 +2,20 @@ package com.github.rapture.aquatic.init;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.block.BlockAquaCharm;
+import com.github.rapture.aquatic.block.BlockBase;
 import com.github.rapture.aquatic.block.BlockOxygenStone;
 import com.github.rapture.aquatic.block.fluid.FluidAquaWaterBlock;
-import com.github.rapture.aquatic.block.machine.*;
+import com.github.rapture.aquatic.block.machine.AquaNetController;
+import com.github.rapture.aquatic.block.machine.AquaNode;
+import com.github.rapture.aquatic.block.machine.BlockCreativeGenerator;
+import com.github.rapture.aquatic.block.machine.BlockDepthGenerator;
+import com.github.rapture.aquatic.block.machine.BlockEnergyFiller;
+import com.github.rapture.aquatic.block.machine.BlockOxygenFiller;
+import com.github.rapture.aquatic.block.machine.BlockSolutionTank;
 import com.github.rapture.aquatic.block.plants.BlockPistia;
 import com.github.rapture.aquatic.block.plants.BlockPlantBase;
-import com.github.rapture.aquatic.block.util.BlockBase;
 import com.github.rapture.aquatic.util.RegistryCreate;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -31,7 +38,6 @@ public class AquaticBlocks {
     public static final Block DEPTH_GENERATOR = new BlockDepthGenerator();
     public static final Block CREATIVE_GENERATOR = new BlockCreativeGenerator();
 
-    public static final Block REEF_STONE = new BlockBase("reef_stone");
     public static final Block IRON_ORE_DEPOSIT = new BlockBase("iron_ore_deposit");
     public static final Block GOLD_ORE_DEPOSIT = new BlockBase("gold_ore_deposit");
     public static final Block DIAMOND_ORE_DEPOSIT = new BlockBase("diamond_ore_deposit");
@@ -39,7 +45,10 @@ public class AquaticBlocks {
     public static final Block REDSTONE_ORE_DEPOSIT = new BlockBase("redstone_ore_deposit");
     public static final Block LAPIZ_ORE_DEPOSIT = new BlockBase("lapiz_ore_deposit");
     public static final Block QUARTZ_ORE_DEPOSIT = new BlockBase("quartz_ore_deposit");
-    public static final Block EMERALD_ORE_DEPOSIT = new BlockBase("emerald_ore_deposit");
+    public static final Block EMERALD_ORE_DEPOSIT = new BlockBase("emerald_ore_deposit") {
+    	@Override
+    public void getDrops(net.minecraft.util.NonNullList<net.minecraft.item.ItemStack> drops, net.minecraft.world.IBlockAccess world, net.minecraft.util.math.BlockPos pos, net.minecraft.block.state.IBlockState state, int fortune) {};
+    };
 
     public static final Block CORAL_REEF_PINK = new BlockPlantBase("coral_reef_pink");
     public static final Block CORAL_REEF_BLUE = new BlockPlantBase("coral_reef_blue");
