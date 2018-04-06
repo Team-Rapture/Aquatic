@@ -12,5 +12,4 @@ public class FluidAquaWater extends net.minecraftforge.fluids.Fluid {
         this.setDensity(1000);
         this.setRarity(EnumRarity.RARE);
     }
-
 }

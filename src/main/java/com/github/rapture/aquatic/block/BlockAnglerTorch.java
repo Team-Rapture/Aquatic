@@ -4,10 +4,12 @@ import java.util.Random;
 
 import com.github.rapture.aquatic.Aquatic;
 
+import com.github.rapture.aquatic.init.AquaticBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -18,22 +20,38 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+
 public class BlockAnglerTorch extends BlockBase {
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	public static final PropertyBool[] STICK = new PropertyBool[]{PropertyBool.create("stick")};
+	public boolean isTorchOnTop = false;
 
 	public BlockAnglerTorch() {
 		super("angler_torch", Material.PLANTS);
 		this.setTickRandomly(true);
 		this.setCreativeTab(Aquatic.CREATIVE_TAB);
 		this.setLightLevel(2.0f);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(STICK[0], false));
+	}
+
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return new AxisAlignedBB(0.4000000059604645D * 0.85, 0.0D, 0.4000000059604645D * 0.85, 0.6000000238418579D, 1, 0.6000000238418579D);
+	}
+
+	@Nullable
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+		return new AxisAlignedBB(3.5 * 0.16, 1, 3.5 * 0.16, 0.16, 0, 0);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -157,7 +175,13 @@ public class BlockAnglerTorch extends BlockBase {
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
 								ItemStack stack) {
-		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+		if (worldIn.getBlockState(pos.up()).getBlock() == AquaticBlocks.ANGLER_TORCH) {
+			isTorchOnTop = true;
+			worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(STICK[0], isTorchOnTop), 2);
+		} else {
+			isTorchOnTop = false;
+			worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
+		}
 	}
 
 	@Override
@@ -188,6 +212,15 @@ public class BlockAnglerTorch extends BlockBase {
 
 	@Override
 	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[]{FACING});
+		return new BlockStateContainer(this, new IProperty[]{FACING, STICK[0]});
+	}
+
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		if (worldIn.getBlockState(pos.up()).getBlock() == AquaticBlocks.ANGLER_TORCH) {
+			isTorchOnTop = true;
+			state = state.withProperty(STICK[0], isTorchOnTop);
+		}
+		return state;
 	}
 }

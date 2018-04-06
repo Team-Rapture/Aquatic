@@ -10,12 +10,14 @@
     "normal": [
       {}
     ],
-    "inventory": [
-      {}
-    ],
-    "facing=north": [{ "model": "aquatic:angler_torch" }],
-    "facing=south": [{ "model": "aquatic:angler_torch", "y": 180 }],
-    "facing=west":  [{ "model": "aquatic:angler_torch", "y": 270 }],
-    "facing=east":  [{ "model": "aquatic:angler_torch", "y": 90 }]
+    "facing=north,stick=false": [{ "model": "aquatic:angler_torch" }],
+    "facing=south,stick=false": [{ "model": "aquatic:angler_torch", "y": 180 }],
+    "facing=west,stick=false":  [{ "model": "aquatic:angler_torch", "y": 270 }],
+    "facing=east,stick=false":  [{ "model": "aquatic:angler_torch", "y": 90 }],
+
+    "facing=north,stick=true": [{ "model": "aquatic:angler_torch_stick" }],
+    "facing=south,stick=true": [{ "model": "aquatic:angler_torch_stick", "y": 180 }],
+    "facing=west,stick=true":  [{ "model": "aquatic:angler_torch_stick", "y": 270 }],
+    "facing=east,stick=true":  [{ "model": "aquatic:angler_torch_stick", "y": 90 }]
   }
 }

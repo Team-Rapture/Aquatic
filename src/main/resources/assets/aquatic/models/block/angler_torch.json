@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"parent": "block/block",
 	"textures": {
 		"0": "aquatic:blocks/angler_torch",
 		"particle": "aquatic:blocks/angler_torch"

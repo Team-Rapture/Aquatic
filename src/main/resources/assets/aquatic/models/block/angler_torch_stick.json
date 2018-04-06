@@ -1,0 +1,35 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "0": "aquatic:blocks/angler_torch",
+    "particle": "aquatic:blocks/angler_torch"
+  },
+  "elements": [
+    {
+      "name": "stickBase",
+      "from": [6, 0, 7],
+      "to": [9, 16, 10],
+      "faces": {
+        "north": {"uv": [13, 0, 14, 8], "texture": "#0"},
+        "east": {"uv": [13, 0, 15, 8], "texture": "#0"},
+        "south": {"uv": [13, 0, 15, 8], "texture": "#0"},
+        "west": {"uv": [13, 0, 15, 8], "texture": "#0"},
+        "up": {"uv": [13, 0, 16, 1], "texture": "#0"},
+        "down": {"uv": [13, 15, 16, 16], "texture": "#0"}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {"translation": [0, 5, 0]},
+    "thirdperson_lefthand": {"translation": [0, 4.5, 0]},
+    "gui": {
+      "scale": [0.8, 0.8, 0.8],
+      "translation": [0.5, -1, 0],
+      "rotation": [0, -90, 0]
+    },
+    "fixed": {
+      "rotation": [0, 90, 0],
+      "translation": [0, -1, -1]
+    }
+  }
+}
