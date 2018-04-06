@@ -1,6 +1,7 @@
 package com.github.rapture.aquatic.init;
 
 import com.github.rapture.aquatic.Aquatic;
+import com.github.rapture.aquatic.block.BlockAnglerTorch;
 import com.github.rapture.aquatic.block.BlockAquaCharm;
 import com.github.rapture.aquatic.block.BlockBase;
 import com.github.rapture.aquatic.block.BlockOxygenStone;
@@ -56,6 +57,6 @@ public class AquaticBlocks {
     public static final Block CORAL_REEF_RED = new BlockPlantBase("coral_reef_red");
     public static final Block CORAL_REEF_YELLOW = new BlockPlantBase("coral_reef_yellow");
 
-    public static final Block ANGLER_TORCH = new BlockPlantBase("angler_torch").setLightLevel(2);
+    public static final Block ANGLER_TORCH = new BlockAnglerTorch("angler_torch", Material.PLANTS).setLightLevel(2);
 
 }
