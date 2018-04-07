@@ -1,0 +1,62 @@
+{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"elements": [
+		{
+			"name": "cube",
+			"from": [4, 4, 4],
+			"to": [12, 7, 12],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 8, 3],
+					"texture": "#missing"
+				},
+				"east": {"uv": [0, 0, 8, 3], "texture": "#missing"},
+				"south": {
+					"uv": [0, 0, 8, 3],
+					"texture": "#missing"
+				},
+				"west": {"uv": [0, 0, 8, 3], "texture": "#missing"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#missing"},
+				"down": {"uv": [0, 0, 8, 8], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "cube",
+			"from": [6, 1, 6],
+			"to": [10, 4, 10],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 4, 3],
+					"texture": "#missing"
+				},
+				"east": {"uv": [0, 0, 4, 3], "texture": "#missing"},
+				"south": {
+					"uv": [0, 0, 4, 3],
+					"texture": "#missing"
+				},
+				"west": {"uv": [0, 0, 4, 3], "texture": "#missing"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#missing"},
+				"down": {"uv": [0, 0, 4, 4], "texture": "#missing"}
+			}
+		},
+		{
+			"name": "cube",
+			"from": [7, 0, 7],
+			"to": [9, 1, 9],
+			"faces": {
+				"north": {
+					"uv": [0, 0, 2, 1],
+					"texture": "#missing"
+				},
+				"east": {"uv": [0, 0, 2, 1], "texture": "#missing"},
+				"south": {
+					"uv": [0, 0, 2, 1],
+					"texture": "#missing"
+				},
+				"west": {"uv": [0, 0, 2, 1], "texture": "#missing"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#missing"},
+				"down": {"uv": [0, 0, 2, 2], "texture": "#missing"}
+			}
+		}
+	]
+}
