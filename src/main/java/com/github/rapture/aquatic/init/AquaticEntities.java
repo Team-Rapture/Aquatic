@@ -2,11 +2,13 @@ package com.github.rapture.aquatic.init;
 
 import com.github.rapture.aquatic.Aquatic;
 import com.github.rapture.aquatic.config.AquaticConfig;
+import com.github.rapture.aquatic.entity.EntityWaterBubble;
 import com.github.rapture.aquatic.entity.boss.EntityScylla;
 import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.rapture.aquatic.entity.hostile.EntityShark;
-import com.github.rapture.aquatic.entity.EntityWaterBubble;
+import com.github.rapture.aquatic.entity.passive.EntityJellyFish;
 import com.github.rapture.aquatic.util.RegistryCreate;
+
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EnumCreatureType;
@@ -42,22 +44,32 @@ public class AquaticEntities {
 
     public static final EntityEntry SHARK = EntityEntryBuilder.create()
             .entity(EntityShark.class)
-            .id(getEntityResource("shark"), 4)
+            .id(getEntityResource("shark"), 3)
             .name("shark").tracker(80, 3, false)
             .egg(956291, 256)
             .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.angler_spawn_rate, AquaticConfig.dimension.angler_MIN_spawn_rate, AquaticConfig.dimension.angler_MAX_spawn_rate, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
             .build();
+    public static final EntityEntry JELLY_FISH = EntityEntryBuilder.create()
+            .entity(EntityJellyFish.class)
+            .id(getEntityResource("jellyfish"), 4)
+            .name("jellyfish").tracker(80, 3, false)
+            .egg(956291, 256)
+            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.angler_spawn_rate, AquaticConfig.dimension.angler_MIN_spawn_rate, AquaticConfig.dimension.angler_MAX_spawn_rate, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
+            .build();
 
-    static {
-        EntitySpawnPlacementRegistry.setPlacementType(EntityAnglerFish.class, SpawnPlacementType.IN_WATER);
-        // LootTableList.register(EntityAnglerFish.LOOT_);
 
-        EntitySpawnPlacementRegistry.setPlacementType(EntityScylla.class, SpawnPlacementType.IN_WATER);
-        // LootTableList.register(EntityScylla.LOOT_);
-    }
+	static {
+		EntitySpawnPlacementRegistry.setPlacementType(EntityAnglerFish.class, SpawnPlacementType.IN_WATER);
+		// LootTableList.register(EntityAnglerFish.LOOT_);
 
-    private static ResourceLocation getEntityResource(String entityName) {
-        return new ResourceLocation(Aquatic.MODID, entityName);
-    }
+		EntitySpawnPlacementRegistry.setPlacementType(EntityShark.class, SpawnPlacementType.IN_WATER);
+		EntitySpawnPlacementRegistry.setPlacementType(EntityJellyFish.class, SpawnPlacementType.IN_WATER);
+		EntitySpawnPlacementRegistry.setPlacementType(EntityScylla.class, SpawnPlacementType.IN_WATER);
+		// LootTableList.register(EntityScylla.LOOT_);
+	}
+
+	private static ResourceLocation getEntityResource(String entityName) {
+		return new ResourceLocation(Aquatic.MODID, entityName);
+	}
 
 }
