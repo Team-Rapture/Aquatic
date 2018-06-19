@@ -19,24 +19,28 @@ buildscript {
 }
 apply plugin: 'com.matthewprenger.cursegradle'
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+apply from: 'https://gist.githubusercontent.com/UpcraftLP/0a98a7dfe913bd3e99073efa7ad0353b/raw'
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-def username = "${mod_name}"
+def username = "${modid}"
 if (project.hasProperty('dev_mail')) {
     username = "${dev_mail}"
 }
 else if(project.hasProperty('dev_username')) {
-    username = "${project.dev_username}"
+    username = "${dev_username}"
 }
 
-version = "${project.mc_version}-${project.mod_version}"
+def buildVersion = project.mod_version + ext.buildName
+version = "${project.mc_version}-" + buildVersion
 group = project.maven_group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = project.mod_name
+archivesBaseName = project.modid
+tasks.build.doFirst { println("Current version is ${modid}-${version}") }
 
-sourceCompatibility = targetCompatibility = project.jvm_version // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8 // Need this here so eclipse task generates correctly.
 compileJava {
-    sourceCompatibility = targetCompatibility = project.jvm_version
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
@@ -69,12 +73,12 @@ minecraft {
         runDir = project.runDir
     }
     else if(file('../run').exists()) {
-		runDir = "../run"
-	}
-	else
-	{
-		runDir = "run"
-	}
+        runDir = "../run"
+    }
+    else
+    {
+        runDir = "run"
+    }
 
     mappings = project.forge_mappings
     makeObfSourceJar = false
@@ -85,9 +89,13 @@ minecraft {
     replace "@UPDATEJSON@", project.hasProperty('update_json') ? findProperty('update_json') : ""
     replaceIn project.reference_class
 
-    clientRunArgs += "--username=${username}"
-    if(project.hasProperty('dev_password')) {
-        clientRunArgs += "--password=${dev_password}"
+    //auto-configure the run arguments
+    if(project.hasProperty('dev_uuid')) {
+        clientRunArgs += "--uuid=${dev_uuid}"
+    }
+    else {
+        clientRunArgs += "--username=${username}"
+        if(project.hasProperty('dev_password')) clientRunArgs += "--password=${dev_password}"
     }
     
     //skip the screen to confirm that you want to load a world with missing registry entries
@@ -117,7 +125,7 @@ dependencies {
 
     //CURRENTLY BROKEN!
     //ExplosiveFishing, from CurseForge, for testing compatibility
-    //runtime 'explosivefishing:explosivefishing:1.12.2:1.0.3.3'
+    runtime 'explosivefishing:explosivefishing:1.12.2:1.0.4.0'
 
 }
 
@@ -172,6 +180,7 @@ if (JavaVersion.current().isJava8Compatible()) {
 }
 
 jar {
+    from "LICENSE"
     manifest.mainAttributes(
             "Implementation-Title": project.name,
             "Implementation-Version": "${project.mod_version}",
@@ -195,37 +204,30 @@ task signJar(type: SignJar, dependsOn: reobfJar) {
     inputFile = jar.archivePath
     outputFile = jar.archivePath
 }
-
-tasks.build.dependsOn signJar
+tasks.build.dependsOn signJar, publish
 tasks.curseforge.dependsOn build
+
+artifacts {
+    //archives apiJar
+    //archives javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            //artifact apiJar
+            //artifact javadocJar
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
+}
 
 def curseRelations = { //add curseforge-slug here
     optionalLibrary 'explosivefishing' //support for the IFishable interface
-}
-
-processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version,
-                'mod_name':project.mod_name, 'mod_description':project.mod_description,
-                'url':project.url, 'update_url':project.update_json, 'year': Year.now().getValue()
-    }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'		
-    }
-
-    //ATs
-    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
 curseforge {
@@ -237,7 +239,7 @@ curseforge {
         project {
             id = project.curse_id
             changelogType = 'markdown'
-            changelog = getChangelogText()
+            changelog = "${project.ext.changeLog}"
             releaseType = project.release_type
 
             relations curseRelations
@@ -257,33 +259,27 @@ curseforge {
     }
 }
 
-String getChangelogText() {
-    def changelogFile = new File(project.projectDir, "changelog.md")
-    String str = ''
-    if(!changelogFile.exists()) {
-        System.out.println("No changelog file found, creating one at \"" + changelogFile.getAbsolutePath() + "\"")
-        changelogFile.createNewFile()
-        return str
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version,
+                'mod_name':project.mod_name, 'mod_description':project.mod_description,
+                'url':project.url, 'update_url':project.update_json, 'year': Year.now().getValue()
     }
-    String separator = '---'
-    int lineCount = 0
-    boolean done = false
-    changelogFile.eachLine {
-        if (done || it == null) {
-            return
-        }
-        if (lineCount < 3) {
-            lineCount++
-            if (it.startsWith(separator)) {
-                return
-            }
-        }
-        if (!it.startsWith(separator)) {
-            str += "$it" + (lineCount < 3 ? ':\n\n' : '\n')
-            return
-        }
-        done = true // once we go past the first version block, parse no more
+
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
     }
-	str += "\n\n see full changelog [here](${project.changelog_url} \"Changelog\")"
-    return str
+
+    //ATs
+    rename '(.+_at.cfg)', 'META-INF/$1'
 }
