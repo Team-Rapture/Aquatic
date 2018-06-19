@@ -55,6 +55,12 @@ repositories {
     }
 
     maven {
+        //hwyla
+        name = "TehNut"
+        url = "https://tehnut.info/maven"
+    }
+
+    maven {
         //fallback for almost everything, this is CurseForge :P
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
@@ -117,16 +123,18 @@ minecraft {
 
 dependencies {
 
+    // compile against the JEI API but do not include it at runtime
+    deobfProvided "mezz.jei:jei_${project.mc_version}:${project.jei_version}:api"
     //JEI at runtime (no build dependency, this is for testing purposes ONLY!)
     runtime "mezz.jei:jei_${project.mc_version}:${project.jei_version}"
 
     //PickleLib, from CurseForge
-    compileOnly "picklelib:picklelib:1.12.2:1.0.5.0"
-
-    //CURRENTLY BROKEN!
+    compileOnly "picklelib:picklelib:${project.mc_version}:1.0.5.0"
     //ExplosiveFishing, from CurseForge, for testing compatibility
-    runtime 'explosivefishing:explosivefishing:1.12.2:1.0.4.0'
+    runtime "explosivefishing:explosivefishing:${project.mc_version}:1.0.4.0"
 
+    deobfProvided "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
+    runtime "mcp.mobius.waila:Hwyla:${hwyla_version}"
 }
 
 compileJava {
