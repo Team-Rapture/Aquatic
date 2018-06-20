@@ -84,7 +84,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 
     public ChunkGeneratorAquatic(World world) {
         this.world = world;
-        this.rand = new Random();
+        this.rand = new Random(world.getSeed());
 
         rand.setSeed(rand.nextLong());
         gensPerlin = new NoiseGeneratorAquatic(rand, 16);
