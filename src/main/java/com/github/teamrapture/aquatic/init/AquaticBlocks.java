@@ -15,9 +15,25 @@ import com.github.teamrapture.aquatic.block.machine.BlockOxygenFiller;
 import com.github.teamrapture.aquatic.block.machine.BlockSolutionTank;
 import com.github.teamrapture.aquatic.block.plants.BlockPistia;
 import com.github.teamrapture.aquatic.block.plants.BlockPlantBase;
+import com.github.teamrapture.aquatic.client.render.RenderAquaNetController;
+import com.github.teamrapture.aquatic.client.render.RenderAquaNode;
+import com.github.teamrapture.aquatic.client.render.RenderDepthGenerator;
+import com.github.teamrapture.aquatic.client.render.RenderSolutionTank;
+import com.github.teamrapture.aquatic.tileentity.TileAquaNetController;
+import com.github.teamrapture.aquatic.tileentity.TileAquaNode;
+import com.github.teamrapture.aquatic.tileentity.TileCreativeGenerator;
+import com.github.teamrapture.aquatic.tileentity.TileDepthGenerator;
+import com.github.teamrapture.aquatic.tileentity.TileEnergyFiller;
+import com.github.teamrapture.aquatic.tileentity.TileOxygenFiller;
+import com.github.teamrapture.aquatic.tileentity.TileSolutionTank;
 import com.github.teamrapture.aquatic.util.RegistryCreate;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @RegistryCreate(value = Block.class, modid = Aquatic.MODID)
 public class AquaticBlocks {
@@ -61,4 +77,21 @@ public class AquaticBlocks {
 	public static final Block CORAL_REEF_RED = new BlockPlantBase("coral_reef_red");
 	public static final Block CORAL_REEF_YELLOW = new BlockPlantBase("coral_reef_yellow");
 
+    public static void registerTiles() {
+        GameRegistry.registerTileEntity(TileAquaNetController.class, new ResourceLocation(Aquatic.MODID, "aquanet_controller"));
+        GameRegistry.registerTileEntity(TileAquaNode.class, new ResourceLocation(Aquatic.MODID, "aquatic:aqua_node"));
+        GameRegistry.registerTileEntity(TileSolutionTank.class, new ResourceLocation(Aquatic.MODID, "aquatic:solution_tank"));
+        GameRegistry.registerTileEntity(TileOxygenFiller.class, new ResourceLocation(Aquatic.MODID, "aquatic:oxygen_filler"));
+        GameRegistry.registerTileEntity(TileEnergyFiller.class, new ResourceLocation(Aquatic.MODID, "aquatic:energy_filler"));
+        GameRegistry.registerTileEntity(TileDepthGenerator.class, new ResourceLocation(Aquatic.MODID, "aquatic:depth_generator"));
+        GameRegistry.registerTileEntity(TileCreativeGenerator.class, new ResourceLocation(Aquatic.MODID, "aquatic:creative_generator"));
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void bindTESR() {
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAquaNetController.class, new RenderAquaNetController());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAquaNode.class, new RenderAquaNode());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileSolutionTank.class, new RenderSolutionTank());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileDepthGenerator.class, new RenderDepthGenerator());
+    }
 }

@@ -12,7 +12,6 @@ import com.github.teamrapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.teamrapture.aquatic.entity.hostile.EntityShark;
 import com.github.teamrapture.aquatic.entity.passive.EntityJellyFish;
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
-import com.github.teamrapture.aquatic.init.AquaticTiles;
 import com.github.teamrapture.aquatic.util.ICustomModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -39,7 +38,7 @@ public class ClientProxy extends CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
 		OBJLoader.INSTANCE.addDomain(MODID);
-		AquaticTiles.bindTESR();
+		AquaticBlocks.bindTESR();
 		ModelLoader.setCustomStateMapper(AquaticBlocks.AQUA_WATER_BLOCK,
 				new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 		RenderingRegistry.registerEntityRenderingHandler(EntityAnglerFish.class, RenderAnglerFish::new);

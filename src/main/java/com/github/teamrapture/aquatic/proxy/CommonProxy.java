@@ -6,9 +6,9 @@ import com.github.teamrapture.aquatic.api.ph.IPHProvider;
 import com.github.teamrapture.aquatic.block.fluid.FluidAquaWater;
 import com.github.teamrapture.aquatic.client.gui.GuiHandler;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
+import com.github.teamrapture.aquatic.init.AquaticBlocks;
 import com.github.teamrapture.aquatic.init.AquaticCrafting;
 import com.github.teamrapture.aquatic.init.AquaticRecipes;
-import com.github.teamrapture.aquatic.init.AquaticTiles;
 import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
 import com.github.teamrapture.aquatic.oxygen.OxygenStorage;
 import com.github.teamrapture.aquatic.ph.PHHandler;
@@ -40,7 +40,7 @@ public class CommonProxy {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		AquaticTiles.registerTiles();
+		AquaticBlocks.registerTiles();
         DimensionManager.registerDimension(AquaticConfig.dimension.dimensionID, WorldProviderAquatic.DIMENSION_TYPE);
 		CapabilityManager.INSTANCE.register(IOxygenProvider.class, new OxygenStorage(), OxygenHandler::new);
 		CapabilityManager.INSTANCE.register(IPHProvider.class, new PHStorage(), PHHandler::new);
