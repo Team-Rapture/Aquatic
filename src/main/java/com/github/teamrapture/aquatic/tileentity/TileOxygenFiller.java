@@ -1,13 +1,9 @@
 package com.github.teamrapture.aquatic.tileentity;
 
-import com.github.rapture.aquatic.api.oxygen.IOxygenProvider;
-import com.github.rapture.aquatic.api.oxygen.OxygenHandler;
-import com.github.rapture.aquatic.api.oxygen.capability.CapabilityOxygen;
-import com.github.rapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.api.oxygen.CapabilityOxygen;
 import com.github.teamrapture.aquatic.api.oxygen.IOxygenProvider;
-import com.github.teamrapture.aquatic.api.oxygen.OxygenHandler;
-import com.github.teamrapture.aquatic.api.oxygen.capability.CapabilityOxygen;
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

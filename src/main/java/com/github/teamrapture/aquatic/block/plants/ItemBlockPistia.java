@@ -1,6 +1,6 @@
 package com.github.teamrapture.aquatic.block.plants;
 
-import com.github.rapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.init.AquaticBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

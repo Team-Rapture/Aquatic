@@ -1,8 +1,6 @@
 package com.github.teamrapture.aquatic.item.armor;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.util.NameUtil;
-import com.github.rapture.aquatic.util.ParticleUtils;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.util.NameUtil;
 import com.github.teamrapture.aquatic.util.ParticleUtils;
 import net.minecraft.block.material.Material;

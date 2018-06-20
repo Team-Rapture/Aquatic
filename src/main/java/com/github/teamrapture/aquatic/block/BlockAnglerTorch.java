@@ -1,10 +1,7 @@
 package com.github.teamrapture.aquatic.block;
 
-import java.util.Random;
-
-import com.github.rapture.aquatic.Aquatic;
-
-import com.github.rapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.init.AquaticBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -28,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockAnglerTorch extends BlockBase {
 

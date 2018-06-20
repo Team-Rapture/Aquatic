@@ -1,7 +1,7 @@
 package com.github.teamrapture.aquatic.client;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.util.UpdateChecker;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.util.UpdateChecker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.text.*;

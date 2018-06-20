@@ -1,6 +1,5 @@
 package com.github.teamrapture.aquatic.client;
 
-import com.github.rapture.aquatic.client.gui.GuiScreenGuide;
 import com.github.teamrapture.aquatic.client.gui.GuiScreenGuide;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;

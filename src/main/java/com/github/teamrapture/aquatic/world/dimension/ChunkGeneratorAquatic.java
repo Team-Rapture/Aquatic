@@ -1,15 +1,9 @@
 package com.github.teamrapture.aquatic.world.dimension;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.world.gen.WorldGenEntities;
-import com.github.rapture.aquatic.world.gen.WorldGenPlants;
-import com.github.rapture.aquatic.world.gen.noise.AquaticGenerator;
-
+import com.github.teamrapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.world.gen.WorldGenEntities;
+import com.github.teamrapture.aquatic.world.gen.WorldGenPlants;
+import com.github.teamrapture.aquatic.world.gen.noise.AquaticGenerator;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -32,6 +26,10 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class ChunkGeneratorAquatic implements IChunkGenerator {
 

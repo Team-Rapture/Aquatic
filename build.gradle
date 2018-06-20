@@ -129,9 +129,9 @@ dependencies {
     runtime "mezz.jei:jei_${project.mc_version}:${project.jei_version}"
 
     //PickleLib, from CurseForge
-    compileOnly "picklelib:picklelib:${project.mc_version}:1.0.5.0"
+    compile "picklelib:picklelib:${project.mc_version}:${project.picklelib_version}"
     //ExplosiveFishing, from CurseForge, for testing compatibility
-    runtime "explosivefishing:explosivefishing:${project.mc_version}:1.0.4.0"
+    runtime "explosivefishing:explosivefishing:${project.mc_version}:${project.explosivefishing_version}"
 
     deobfProvided "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
     runtime "mcp.mobius.waila:Hwyla:${hwyla_version}"

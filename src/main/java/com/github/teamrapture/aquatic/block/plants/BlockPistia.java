@@ -1,8 +1,8 @@
 package com.github.teamrapture.aquatic.block.plants;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.util.IHasItemBlock;
-import com.github.rapture.aquatic.util.NameUtil;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.util.IHasItemBlock;
+import com.github.teamrapture.aquatic.util.NameUtil;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;

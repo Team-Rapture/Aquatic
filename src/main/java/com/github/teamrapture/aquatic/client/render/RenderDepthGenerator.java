@@ -1,8 +1,7 @@
 package com.github.teamrapture.aquatic.client.render;
 
-import com.github.rapture.aquatic.client.render.hud.HudRender;
-import com.github.rapture.aquatic.tileentity.TileDepthGenerator;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
+import com.github.teamrapture.aquatic.tileentity.TileDepthGenerator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 
 public class RenderDepthGenerator extends TileEntitySpecialRenderer<TileDepthGenerator> {

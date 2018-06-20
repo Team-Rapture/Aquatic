@@ -1,6 +1,7 @@
-package com.github.teamrapture.aquatic.api.ph;
+package com.github.teamrapture.aquatic.ph;
 
-import com.github.rapture.aquatic.api.ph.capability.CapabilityPH;
+import com.github.teamrapture.aquatic.api.ph.CapabilityPH;
+import com.github.teamrapture.aquatic.api.ph.IPHProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;

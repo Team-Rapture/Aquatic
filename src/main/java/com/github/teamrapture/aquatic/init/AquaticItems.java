@@ -1,15 +1,6 @@
 package com.github.teamrapture.aquatic.init;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.item.ItemAquaticCharm;
-import com.github.rapture.aquatic.item.ItemBase;
-import com.github.rapture.aquatic.item.armor.HeavyIronBoots;
-import com.github.rapture.aquatic.item.armor.ScubaSuit;
-import com.github.rapture.aquatic.item.food.BaseFoodItem;
-import com.github.rapture.aquatic.item.tool.DivingKnife;
-import com.github.rapture.aquatic.item.tool.HydroDrill;
-import com.github.rapture.aquatic.util.RegistryCreate;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.item.ItemAquaticCharm;
 import com.github.teamrapture.aquatic.item.ItemBase;
 import com.github.teamrapture.aquatic.item.armor.HeavyIronBoots;

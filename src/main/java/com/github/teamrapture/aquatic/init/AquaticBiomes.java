@@ -1,8 +1,6 @@
 package com.github.teamrapture.aquatic.init;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.util.RegistryCreate;
-import com.github.rapture.aquatic.world.biome.BiomeAquatic;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.util.RegistryCreate;
 import com.github.teamrapture.aquatic.world.biome.BiomeAquatic;
 import net.minecraft.world.biome.Biome;

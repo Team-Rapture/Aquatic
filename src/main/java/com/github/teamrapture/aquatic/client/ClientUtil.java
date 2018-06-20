@@ -1,6 +1,6 @@
 package com.github.teamrapture.aquatic.client;
 
-import com.github.rapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.google.common.base.Preconditions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;

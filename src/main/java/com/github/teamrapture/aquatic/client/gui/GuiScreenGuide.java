@@ -1,6 +1,5 @@
 package com.github.teamrapture.aquatic.client.gui;
 
-import com.github.rapture.aquatic.client.guide.GuideReader;
 import com.github.teamrapture.aquatic.client.guide.GuideReader;
 import jline.internal.Nullable;
 import net.minecraft.client.Minecraft;

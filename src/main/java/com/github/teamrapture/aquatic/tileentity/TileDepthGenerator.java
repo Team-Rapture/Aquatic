@@ -1,9 +1,5 @@
 package com.github.teamrapture.aquatic.tileentity;
 
-import com.github.rapture.aquatic.client.render.hud.HudRender;
-import com.github.rapture.aquatic.client.render.hud.IHudSupport;
-import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.util.capability.CustomEnergyStorage;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
 import com.github.teamrapture.aquatic.client.render.hud.IHudSupport;
 import com.github.teamrapture.aquatic.config.AquaticConfig;

@@ -1,16 +1,12 @@
 package com.github.teamrapture.aquatic.init;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.entity.EntityWaterBubble;
-import com.github.rapture.aquatic.entity.boss.EntityScylla;
-import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
-import com.github.rapture.aquatic.entity.hostile.EntityShark;
-import com.github.rapture.aquatic.entity.passive.EntityJellyFish;
-import com.github.rapture.aquatic.util.RegistryCreate;
-
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.entity.EntityWaterBubble;
+import com.github.teamrapture.aquatic.entity.boss.EntityScylla;
+import com.github.teamrapture.aquatic.entity.hostile.EntityAnglerFish;
+import com.github.teamrapture.aquatic.entity.hostile.EntityShark;
+import com.github.teamrapture.aquatic.entity.passive.EntityJellyFish;
 import com.github.teamrapture.aquatic.util.RegistryCreate;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;

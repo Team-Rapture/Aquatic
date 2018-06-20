@@ -1,7 +1,6 @@
 package com.github.teamrapture.aquatic.util;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.config.AquaticConfig;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.common.FMLCommonHandler;

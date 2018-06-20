@@ -1,8 +1,8 @@
 package com.github.teamrapture.aquatic.client.render.entity.boss;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.client.models.entity.boss.ModelScylla;
-import com.github.rapture.aquatic.entity.boss.EntityScylla;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.client.models.entity.boss.ModelScylla;
+import com.github.teamrapture.aquatic.entity.boss.EntityScylla;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

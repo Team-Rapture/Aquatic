@@ -1,7 +1,7 @@
 package com.github.teamrapture.aquatic.client.render;
 
-import com.github.rapture.aquatic.tileentity.TileSolutionTank;
-import com.github.rapture.aquatic.util.FluidUtils;
+import com.github.teamrapture.aquatic.tileentity.TileSolutionTank;
+import com.github.teamrapture.aquatic.util.FluidUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraftforge.fluids.FluidTank;

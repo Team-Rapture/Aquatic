@@ -1,8 +1,8 @@
 package com.github.teamrapture.aquatic.client;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.init.AquaticItems;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.init.AquaticItems;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.client.event.EntityViewRenderEvent;

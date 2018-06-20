@@ -1,12 +1,10 @@
 package com.github.teamrapture.aquatic.client.render;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.client.render.hud.HudRender;
-import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.tileentity.TileAquaNetController;
-import com.github.rapture.aquatic.tileentity.TileAquaNode;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
+import com.github.teamrapture.aquatic.tileentity.TileAquaNetController;
+import com.github.teamrapture.aquatic.tileentity.TileAquaNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

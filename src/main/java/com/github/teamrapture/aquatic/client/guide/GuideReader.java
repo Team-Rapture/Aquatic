@@ -1,6 +1,6 @@
 package com.github.teamrapture.aquatic.client.guide;
 
-import com.github.rapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;

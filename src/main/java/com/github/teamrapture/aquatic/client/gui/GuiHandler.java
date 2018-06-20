@@ -1,20 +1,14 @@
 package com.github.teamrapture.aquatic.client.gui;
 
-import com.github.rapture.aquatic.client.gui.container.ContainerEnergyFiller;
-import com.github.rapture.aquatic.client.gui.container.ContainerOxygenFiller;
-import com.github.rapture.aquatic.client.gui.container.ContainerSolutionTank;
-import com.github.rapture.aquatic.client.gui.machines.GuiEnergyFiller;
-import com.github.rapture.aquatic.client.gui.machines.GuiOxygenFiller;
-import com.github.rapture.aquatic.client.gui.machines.GuiSolutionTank;
-import com.github.rapture.aquatic.tileentity.TileEnergyFiller;
-import com.github.rapture.aquatic.tileentity.TileOxygenFiller;
-import com.github.rapture.aquatic.tileentity.TileSolutionTank;
 import com.github.teamrapture.aquatic.client.gui.container.ContainerEnergyFiller;
 import com.github.teamrapture.aquatic.client.gui.container.ContainerOxygenFiller;
 import com.github.teamrapture.aquatic.client.gui.container.ContainerSolutionTank;
 import com.github.teamrapture.aquatic.client.gui.machines.GuiEnergyFiller;
 import com.github.teamrapture.aquatic.client.gui.machines.GuiOxygenFiller;
 import com.github.teamrapture.aquatic.client.gui.machines.GuiSolutionTank;
+import com.github.teamrapture.aquatic.tileentity.TileEnergyFiller;
+import com.github.teamrapture.aquatic.tileentity.TileOxygenFiller;
+import com.github.teamrapture.aquatic.tileentity.TileSolutionTank;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

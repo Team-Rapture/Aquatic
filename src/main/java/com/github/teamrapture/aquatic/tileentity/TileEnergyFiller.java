@@ -1,6 +1,5 @@
 package com.github.teamrapture.aquatic.tileentity;
 
-import com.github.rapture.aquatic.util.capability.CustomEnergyStorage;
 import com.github.teamrapture.aquatic.util.capability.CustomEnergyStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;

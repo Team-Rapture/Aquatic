@@ -1,19 +1,12 @@
 package com.github.teamrapture.aquatic.tileentity;
 
-import com.github.rapture.aquatic.api.oxygen.OxygenHandler;
-import com.github.rapture.aquatic.api.oxygen.capability.CapabilityOxygen;
-import com.github.rapture.aquatic.client.render.hud.HudRender;
-import com.github.rapture.aquatic.client.render.hud.IHudSupport;
-import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.init.AquaticItems;
-import com.github.rapture.aquatic.item.armor.ScubaSuit;
-import com.github.teamrapture.aquatic.api.oxygen.OxygenHandler;
-import com.github.teamrapture.aquatic.api.oxygen.capability.CapabilityOxygen;
+import com.github.teamrapture.aquatic.api.oxygen.CapabilityOxygen;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
 import com.github.teamrapture.aquatic.client.render.hud.IHudSupport;
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
 import com.github.teamrapture.aquatic.init.AquaticItems;
 import com.github.teamrapture.aquatic.item.armor.ScubaSuit;
+import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;

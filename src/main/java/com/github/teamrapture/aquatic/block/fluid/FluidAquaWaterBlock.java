@@ -1,11 +1,9 @@
 package com.github.teamrapture.aquatic.block.fluid;
 
 import com.deflatedpickle.picklelib.api.IFishable;
-import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.proxy.CommonProxy;
-import com.github.rapture.aquatic.util.ICustomModelProvider;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.proxy.CommonProxy;
+import com.github.teamrapture.aquatic.util.ICustomModelProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;

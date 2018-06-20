@@ -1,13 +1,17 @@
 package com.github.teamrapture.aquatic.entity.boss;
 
-import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
-import com.github.rapture.aquatic.init.AquaticItems;
+import com.github.teamrapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.teamrapture.aquatic.init.AquaticItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityElderGuardian;
 import net.minecraft.entity.monster.EntityGuardian;

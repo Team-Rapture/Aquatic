@@ -1,6 +1,5 @@
 package com.github.teamrapture.aquatic.tileentity;
 
-import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

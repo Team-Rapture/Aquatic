@@ -1,7 +1,6 @@
 package com.github.teamrapture.aquatic.world.biome.decorator;
 
-import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.world.gen.WorldGenPlants;
+import com.github.teamrapture.aquatic.init.AquaticBlocks;
 import com.github.teamrapture.aquatic.world.gen.WorldGenPlants;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

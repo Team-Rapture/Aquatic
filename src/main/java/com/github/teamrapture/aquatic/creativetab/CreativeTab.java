@@ -1,6 +1,5 @@
 package com.github.teamrapture.aquatic.creativetab;
 
-import com.github.rapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.Aquatic;
 import com.google.common.base.Preconditions;
 import net.minecraft.block.Block;

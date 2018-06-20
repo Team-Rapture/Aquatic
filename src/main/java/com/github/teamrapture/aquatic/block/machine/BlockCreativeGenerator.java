@@ -1,7 +1,7 @@
 package com.github.teamrapture.aquatic.block.machine;
 
-import com.github.rapture.aquatic.block.BlockContainerBase;
-import com.github.rapture.aquatic.tileentity.TileCreativeGenerator;
+import com.github.teamrapture.aquatic.block.BlockContainerBase;
+import com.github.teamrapture.aquatic.tileentity.TileCreativeGenerator;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

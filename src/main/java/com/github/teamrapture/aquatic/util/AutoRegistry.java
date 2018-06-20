@@ -1,9 +1,8 @@
 package com.github.teamrapture.aquatic.util;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.item.ItemBlockBase;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
+import com.github.teamrapture.aquatic.item.ItemBlockBase;
 import com.google.common.collect.ObjectArrays;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

@@ -1,10 +1,9 @@
 package com.github.teamrapture.aquatic.block.machine;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.block.BlockContainerBase;
-import com.github.rapture.aquatic.client.gui.GuiHandler;
-import com.github.rapture.aquatic.tileentity.TileEnergyFiller;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.block.BlockContainerBase;
 import com.github.teamrapture.aquatic.client.gui.GuiHandler;
+import com.github.teamrapture.aquatic.tileentity.TileEnergyFiller;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;

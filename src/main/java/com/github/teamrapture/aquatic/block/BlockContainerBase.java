@@ -1,22 +1,18 @@
 package com.github.teamrapture.aquatic.block;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.util.IHasItemBlock;
-import com.github.rapture.aquatic.util.NameUtil;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.util.IHasItemBlock;
+import com.github.teamrapture.aquatic.util.NameUtil;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
 
 public abstract class BlockContainerBase extends BlockContainer implements IHasItemBlock {
 

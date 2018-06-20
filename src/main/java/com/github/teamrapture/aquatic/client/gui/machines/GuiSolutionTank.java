@@ -1,10 +1,10 @@
 package com.github.teamrapture.aquatic.client.gui.machines;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.client.gui.container.ContainerSolutionTank;
-import com.github.rapture.aquatic.proxy.CommonProxy;
-import com.github.rapture.aquatic.tileentity.TileSolutionTank;
-import com.github.rapture.aquatic.util.FluidUtils;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.client.gui.container.ContainerSolutionTank;
+import com.github.teamrapture.aquatic.proxy.CommonProxy;
+import com.github.teamrapture.aquatic.tileentity.TileSolutionTank;
+import com.github.teamrapture.aquatic.util.FluidUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.BufferBuilder;

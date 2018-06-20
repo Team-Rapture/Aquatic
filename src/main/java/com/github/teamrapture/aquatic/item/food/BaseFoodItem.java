@@ -1,8 +1,6 @@
 package com.github.teamrapture.aquatic.item.food;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.util.NameUtil;
-
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.util.NameUtil;
 import net.minecraft.item.ItemFood;
 

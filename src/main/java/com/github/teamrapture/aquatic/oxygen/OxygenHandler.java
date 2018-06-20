@@ -1,5 +1,6 @@
-package com.github.teamrapture.aquatic.api.oxygen;
+package com.github.teamrapture.aquatic.oxygen;
 
+import com.github.teamrapture.aquatic.api.oxygen.IOxygenProvider;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 

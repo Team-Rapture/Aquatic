@@ -1,15 +1,6 @@
 package com.github.teamrapture.aquatic.item.tool;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.util.NameUtil;
-import com.github.rapture.aquatic.util.capability.CustomEnergyStorage;
-
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.util.NameUtil;
 import com.github.teamrapture.aquatic.util.capability.CustomEnergyStorage;
 import net.minecraft.block.state.IBlockState;
@@ -28,6 +19,11 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 
 public class HydroDrill extends ItemTool {
 

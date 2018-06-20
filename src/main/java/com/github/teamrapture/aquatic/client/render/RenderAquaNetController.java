@@ -1,8 +1,7 @@
 package com.github.teamrapture.aquatic.client.render;
 
-import com.github.rapture.aquatic.client.render.hud.HudRender;
-import com.github.rapture.aquatic.tileentity.TileAquaNetController;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
+import com.github.teamrapture.aquatic.tileentity.TileAquaNetController;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 
 public class RenderAquaNetController extends TileEntitySpecialRenderer<TileAquaNetController> {

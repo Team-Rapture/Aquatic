@@ -1,6 +1,6 @@
 package com.github.teamrapture.aquatic.block.fluid;
 
-import com.github.rapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.Aquatic;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.ResourceLocation;
 

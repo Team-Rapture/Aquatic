@@ -1,7 +1,6 @@
 package com.github.teamrapture.aquatic;
 
-import com.github.rapture.aquatic.creativetab.CreativeTab;
-import com.github.rapture.aquatic.proxy.CommonProxy;
+import com.github.teamrapture.aquatic.creativetab.CreativeTab;
 import com.github.teamrapture.aquatic.proxy.CommonProxy;
 import net.minecraft.init.Items;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -34,7 +33,7 @@ public class Aquatic {
     public static final CreativeTab CREATIVE_TAB = new CreativeTab(MODID);
     @Instance(value = Aquatic.MODID)
     public static Aquatic instance;
-    @SidedProxy(clientSide = "com.github.rapture.aquatic.proxy.ClientProxy", serverSide = "com.github.rapture.aquatic.proxy.ServerProxy")
+    @SidedProxy(clientSide = "com.github.teamrapture.aquatic.proxy.ClientProxy", serverSide = "com.github.teamrapture.aquatic.proxy.ServerProxy")
     public static CommonProxy proxy;
     private static Logger log = LogManager.getLogger(MODID);
 

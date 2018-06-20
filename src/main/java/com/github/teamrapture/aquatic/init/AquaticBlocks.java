@@ -1,22 +1,6 @@
 package com.github.teamrapture.aquatic.init;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.block.BlockAnglerTorch;
-import com.github.rapture.aquatic.block.BlockAquaCharm;
-import com.github.rapture.aquatic.block.BlockBase;
-import com.github.rapture.aquatic.block.BlockOxygenStone;
-import com.github.rapture.aquatic.block.fluid.FluidAquaWaterBlock;
-import com.github.rapture.aquatic.block.machine.AquaNetController;
-import com.github.rapture.aquatic.block.machine.AquaNode;
-import com.github.rapture.aquatic.block.machine.BlockCreativeGenerator;
-import com.github.rapture.aquatic.block.machine.BlockDepthGenerator;
-import com.github.rapture.aquatic.block.machine.BlockEnergyFiller;
-import com.github.rapture.aquatic.block.machine.BlockOxygenFiller;
-import com.github.rapture.aquatic.block.machine.BlockSolutionTank;
-import com.github.rapture.aquatic.block.plants.BlockPistia;
-import com.github.rapture.aquatic.block.plants.BlockPlantBase;
-import com.github.rapture.aquatic.util.RegistryCreate;
-
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.block.BlockAnglerTorch;
 import com.github.teamrapture.aquatic.block.BlockAquaCharm;
 import com.github.teamrapture.aquatic.block.BlockBase;

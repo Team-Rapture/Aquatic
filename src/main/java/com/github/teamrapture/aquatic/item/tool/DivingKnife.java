@@ -1,14 +1,9 @@
 package com.github.teamrapture.aquatic.item.tool;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.entity.hostile.EntityShark;
-import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.init.AquaticItems;
-import com.github.rapture.aquatic.util.NameUtil;
-
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.entity.hostile.EntityShark;
+import com.github.teamrapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.init.AquaticItems;
 import com.github.teamrapture.aquatic.util.NameUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DivingKnife extends ItemSword {
 	private static final List<Block> breakable = new ArrayList<>();

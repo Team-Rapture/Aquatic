@@ -1,6 +1,6 @@
 package com.github.teamrapture.aquatic.util;
 
-import com.github.rapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.Aquatic;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

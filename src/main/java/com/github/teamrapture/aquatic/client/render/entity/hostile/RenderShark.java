@@ -1,8 +1,8 @@
 package com.github.teamrapture.aquatic.client.render.entity.hostile;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.client.models.entity.hostile.ModelShark;
-import com.github.rapture.aquatic.entity.hostile.EntityShark;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.client.models.entity.hostile.ModelShark;
+import com.github.teamrapture.aquatic.entity.hostile.EntityShark;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

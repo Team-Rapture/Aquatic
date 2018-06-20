@@ -1,7 +1,5 @@
-package com.github.teamrapture.aquatic.api.ph.capability;
+package com.github.teamrapture.aquatic.api.ph;
 
-import com.github.rapture.aquatic.api.ph.IPHProvider;
-import com.github.teamrapture.aquatic.api.ph.IPHProvider;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;

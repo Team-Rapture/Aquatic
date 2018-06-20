@@ -1,9 +1,8 @@
 package com.github.teamrapture.aquatic.client.gui.machines;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.client.gui.container.ContainerOxygenFiller;
-import com.github.rapture.aquatic.tileentity.TileOxygenFiller;
+import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.client.gui.container.ContainerOxygenFiller;
+import com.github.teamrapture.aquatic.tileentity.TileOxygenFiller;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;

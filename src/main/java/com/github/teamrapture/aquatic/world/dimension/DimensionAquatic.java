@@ -1,6 +1,5 @@
 package com.github.teamrapture.aquatic.world.dimension;
 
-import com.github.rapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;

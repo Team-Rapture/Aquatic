@@ -1,6 +1,6 @@
 package com.github.teamrapture.aquatic.block;
 
-import com.github.rapture.aquatic.init.AquaticItems;
+import com.github.teamrapture.aquatic.init.AquaticItems;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -55,7 +55,7 @@ public class BlockAquaCharm extends BlockRenderInLiquidBase {
             IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
             IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
             IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-            EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+            EnumFacing enumfacing = state.getValue(FACING);
 
             if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock()) {
                 enumfacing = EnumFacing.SOUTH;

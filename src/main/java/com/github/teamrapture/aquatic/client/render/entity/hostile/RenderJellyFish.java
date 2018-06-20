@@ -1,8 +1,8 @@
 package com.github.teamrapture.aquatic.client.render.entity.hostile;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.client.models.entity.hostile.ModelJellyFish;
-import com.github.rapture.aquatic.entity.passive.EntityJellyFish;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.client.models.entity.hostile.ModelJellyFish;
+import com.github.teamrapture.aquatic.entity.passive.EntityJellyFish;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;

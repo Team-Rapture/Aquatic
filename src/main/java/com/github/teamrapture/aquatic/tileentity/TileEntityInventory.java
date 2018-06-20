@@ -1,6 +1,5 @@
 package com.github.teamrapture.aquatic.tileentity;
 
-import com.github.rapture.aquatic.util.capability.CustomItemStackHandler;
 import com.github.teamrapture.aquatic.util.capability.CustomItemStackHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

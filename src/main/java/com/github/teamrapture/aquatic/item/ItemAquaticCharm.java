@@ -1,7 +1,5 @@
 package com.github.teamrapture.aquatic.item;
 
-import com.github.rapture.aquatic.config.AquaticConfig;
-import com.github.rapture.aquatic.world.dimension.TeleporterDim;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.world.dimension.TeleporterDim;
 import net.minecraft.block.material.EnumPushReaction;

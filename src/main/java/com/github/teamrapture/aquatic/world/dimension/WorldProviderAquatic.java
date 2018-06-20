@@ -1,7 +1,7 @@
 package com.github.teamrapture.aquatic.world.dimension;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.init.AquaticBiomes;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.init.AquaticBiomes;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;

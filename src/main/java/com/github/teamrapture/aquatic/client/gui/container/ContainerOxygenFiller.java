@@ -1,8 +1,8 @@
 package com.github.teamrapture.aquatic.client.gui.container;
 
-import com.github.rapture.aquatic.client.gui.slot.SlotInput;
-import com.github.rapture.aquatic.client.gui.slot.SlotOutput;
-import com.github.rapture.aquatic.tileentity.TileOxygenFiller;
+import com.github.teamrapture.aquatic.client.gui.slot.SlotInput;
+import com.github.teamrapture.aquatic.client.gui.slot.SlotOutput;
+import com.github.teamrapture.aquatic.tileentity.TileOxygenFiller;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;

@@ -1,6 +1,6 @@
-package com.github.teamrapture.aquatic.util.capability;
+package com.github.teamrapture.aquatic.oxygen;
 
-import com.github.rapture.aquatic.api.oxygen.IOxygenProvider;
+import com.github.teamrapture.aquatic.api.oxygen.IOxygenProvider;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTPrimitive;
 import net.minecraft.nbt.NBTTagInt;

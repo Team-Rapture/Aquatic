@@ -1,7 +1,6 @@
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package com.github.teamrapture.aquatic.client.guide;
+@ParametersAreNonnullByDefault
+package com.github.teamrapture.aquatic;
 
 import mcp.MethodsReturnNonnullByDefault;
-
 import javax.annotation.ParametersAreNonnullByDefault;

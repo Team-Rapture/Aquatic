@@ -1,7 +1,7 @@
 package com.github.teamrapture.aquatic.block.machine;
 
-import com.github.rapture.aquatic.block.BlockContainerBase;
-import com.github.rapture.aquatic.tileentity.TileAquaNetController;
+import com.github.teamrapture.aquatic.block.BlockContainerBase;
+import com.github.teamrapture.aquatic.tileentity.TileAquaNetController;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;

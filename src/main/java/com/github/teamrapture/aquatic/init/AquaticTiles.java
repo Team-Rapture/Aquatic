@@ -1,14 +1,16 @@
 package com.github.teamrapture.aquatic.init;
 
-import com.github.rapture.aquatic.client.render.RenderAquaNetController;
-import com.github.rapture.aquatic.client.render.RenderAquaNode;
-import com.github.rapture.aquatic.client.render.RenderDepthGenerator;
-import com.github.rapture.aquatic.client.render.RenderSolutionTank;
-import com.github.rapture.aquatic.tileentity.*;
 import com.github.teamrapture.aquatic.client.render.RenderAquaNetController;
 import com.github.teamrapture.aquatic.client.render.RenderAquaNode;
 import com.github.teamrapture.aquatic.client.render.RenderDepthGenerator;
 import com.github.teamrapture.aquatic.client.render.RenderSolutionTank;
+import com.github.teamrapture.aquatic.tileentity.TileAquaNetController;
+import com.github.teamrapture.aquatic.tileentity.TileAquaNode;
+import com.github.teamrapture.aquatic.tileentity.TileCreativeGenerator;
+import com.github.teamrapture.aquatic.tileentity.TileDepthGenerator;
+import com.github.teamrapture.aquatic.tileentity.TileEnergyFiller;
+import com.github.teamrapture.aquatic.tileentity.TileOxygenFiller;
+import com.github.teamrapture.aquatic.tileentity.TileSolutionTank;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;

@@ -1,10 +1,9 @@
 package com.github.teamrapture.aquatic.item.armor;
 
-import com.github.rapture.aquatic.Aquatic;
-import com.github.rapture.aquatic.api.oxygen.OxygenHandler;
-import com.github.rapture.aquatic.api.oxygen.capability.CapabilityOxygen;
-import com.github.rapture.aquatic.init.AquaticItems;
-import com.github.rapture.aquatic.util.NameUtil;
+import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.api.oxygen.CapabilityOxygen;
+import com.github.teamrapture.aquatic.init.AquaticItems;
+import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
 import com.github.teamrapture.aquatic.util.NameUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -23,7 +22,7 @@ import javax.annotation.Nullable;
 
 public class ScubaSuit extends ItemArmor {
 
-    public static final ArmorMaterial scuba_suit = EnumHelper.addArmorMaterial("scuba_suit", "scuba_suit", 5, new int[]{1, 2, 3, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
+    public static final ArmorMaterial scuba_suit = EnumHelper.addArmorMaterial("scuba_suit", "aquatic:scuba_suit", 5, new int[]{1, 2, 3, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
     public EntityEquipmentSlot slot;
     public OxygenHandler oxygenStorage = new OxygenHandler(10000);
 

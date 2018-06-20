@@ -1,22 +1,5 @@
 package com.github.teamrapture.aquatic.proxy;
 
-import static com.github.rapture.aquatic.Aquatic.MODID;
-
-import com.github.rapture.aquatic.client.guide.GuideReader;
-import com.github.rapture.aquatic.client.render.entity.RenderEntityBubble;
-import com.github.rapture.aquatic.client.render.entity.boss.RenderScylla;
-import com.github.rapture.aquatic.client.render.entity.hostile.RenderAnglerFish;
-import com.github.rapture.aquatic.client.render.entity.hostile.RenderJellyFish;
-import com.github.rapture.aquatic.client.render.entity.hostile.RenderShark;
-import com.github.rapture.aquatic.entity.EntityWaterBubble;
-import com.github.rapture.aquatic.entity.boss.EntityScylla;
-import com.github.rapture.aquatic.entity.hostile.EntityAnglerFish;
-import com.github.rapture.aquatic.entity.hostile.EntityShark;
-import com.github.rapture.aquatic.entity.passive.EntityJellyFish;
-import com.github.rapture.aquatic.init.AquaticBlocks;
-import com.github.rapture.aquatic.init.AquaticTiles;
-import com.github.rapture.aquatic.util.ICustomModelProvider;
-
 import com.github.teamrapture.aquatic.client.guide.GuideReader;
 import com.github.teamrapture.aquatic.client.render.entity.RenderEntityBubble;
 import com.github.teamrapture.aquatic.client.render.entity.boss.RenderScylla;
@@ -24,6 +7,13 @@ import com.github.teamrapture.aquatic.client.render.entity.hostile.RenderAnglerF
 import com.github.teamrapture.aquatic.client.render.entity.hostile.RenderJellyFish;
 import com.github.teamrapture.aquatic.client.render.entity.hostile.RenderShark;
 import com.github.teamrapture.aquatic.entity.EntityWaterBubble;
+import com.github.teamrapture.aquatic.entity.boss.EntityScylla;
+import com.github.teamrapture.aquatic.entity.hostile.EntityAnglerFish;
+import com.github.teamrapture.aquatic.entity.hostile.EntityShark;
+import com.github.teamrapture.aquatic.entity.passive.EntityJellyFish;
+import com.github.teamrapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.init.AquaticTiles;
+import com.github.teamrapture.aquatic.util.ICustomModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -34,10 +24,15 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import static com.github.teamrapture.aquatic.Aquatic.*;
 
 /**
  * @author UpcraftLP
  */
+@SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
 	@Override

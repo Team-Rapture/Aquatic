@@ -2,8 +2,8 @@ package com.github.teamrapture.aquatic.config;
 
 import net.minecraftforge.common.config.Config;
 
-import static com.github.rapture.aquatic.Aquatic.MODID;
-import static com.github.rapture.aquatic.Aquatic.MODNAME;
+import static com.github.teamrapture.aquatic.Aquatic.MODID;
+import static com.github.teamrapture.aquatic.Aquatic.MODNAME;
 
 @Config(modid = MODID, name = MODNAME)
 @Config.LangKey("config.aquatic.title")
