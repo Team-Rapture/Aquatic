@@ -160,9 +160,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     }
 
     private void buildSurfaces(int p_185937_1_, int p_185937_2_, ChunkPrimer primer) {
-        if (!ForgeEventFactory.onReplaceBiomeBlocks(this, p_185937_1_, p_185937_2_, primer,
-                this.world))
-            return;
+        if (!ForgeEventFactory.onReplaceBiomeBlocks(this, p_185937_1_, p_185937_2_, primer, this.world)) return;
         int i = this.world.getSeaLevel() + 1;
         double d0 = 0.03125D;
         this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, p_185937_1_ * 16, p_185937_2_ * 16, 0, 16, 16, 1, 0.03125D, 0.03125D, 1.0D);
@@ -263,7 +261,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     private void generateWater(ChunkPrimer p, Random r) {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                for (int y = 0; y <= SEA_LEVEL; y++) {
+                for (int y = 1; y < SEA_LEVEL + 1; y++) {
                     if (p.getBlockState(x, y, z) == Blocks.AIR.getDefaultState()) {
                         p.setBlockState(x, y, z, WATER);
                     }
@@ -272,27 +270,26 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         }
     }
 
-    private double[] getHeights(double[] p_185938_1_, int p_185938_2_, int p_185938_3_, int p_185938_4_, int p_185938_5_, int p_185938_6_, int p_185938_7_) {
-        if (p_185938_1_ == null) p_185938_1_ = new double[p_185938_5_ * p_185938_6_ * p_185938_7_];
+    private double[] getHeights(double[] noiseField, int posX, int posY, int posZ, int sizeX, int sizeY, int sizeZ) {
+        if (noiseField == null) noiseField = new double[sizeX * sizeY * sizeZ];
 
-        ChunkGeneratorEvent.InitNoiseField event = new ChunkGeneratorEvent.InitNoiseField(
-                this, p_185938_1_, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_);
+        ChunkGeneratorEvent.InitNoiseField event = new ChunkGeneratorEvent.InitNoiseField(this, noiseField, posX, posY, posZ, sizeX, sizeY, sizeZ);
         MinecraftForge.EVENT_BUS.post(event);
         if (event.getResult() == Event.Result.DENY) return event.getNoisefield();
 
-        this.noiseData4 = this.scaleNoise.generateNoiseOctaves(this.noiseData4, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, 1, p_185938_7_, 1.0D, 0.0D, 1.0D);
-        this.dr = this.depthNoise.generateNoiseOctaves(this.dr, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, 1, p_185938_7_, 100.0D, 0.0D, 100.0D);
-        this.pnr = this.perlinNoise1.generateNoiseOctaves(this.pnr, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_, 8.555150000000001D, 34.2206D, 8.555150000000001D);
-        this.ar = this.lperlinNoise1.generateNoiseOctaves(this.ar, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_, 684.412D, 2053.236D, 684.412D);
-        this.br = this.lperlinNoise2.generateNoiseOctaves(this.br, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_, 684.412D, 2053.236D, 684.412D);
+        this.noiseData4 = this.scaleNoise.generateNoiseOctaves(this.noiseData4, posX, posY, posZ, sizeX, 1, sizeZ, 1.0D, 0.0D, 1.0D);
+        this.dr = this.depthNoise.generateNoiseOctaves(this.dr, posX, posY, posZ, sizeX, 1, sizeZ, 100.0D, 0.0D, 100.0D);
+        this.pnr = this.perlinNoise1.generateNoiseOctaves(this.pnr, posX, posY, posZ, sizeX, sizeY, sizeZ, 8.555150000000001D, 34.2206D, 8.555150000000001D);
+        this.ar = this.lperlinNoise1.generateNoiseOctaves(this.ar, posX, posY, posZ, sizeX, sizeY, sizeZ, 684.412D, 2053.236D, 684.412D);
+        this.br = this.lperlinNoise2.generateNoiseOctaves(this.br, posX, posY, posZ, sizeX, sizeY, sizeZ, 684.412D, 2053.236D, 684.412D);
         int i = 0;
-        double[] adouble = new double[p_185938_6_];
+        double[] adouble = new double[sizeY];
 
-        for (int j = 0; j < p_185938_6_; ++j) {
-            adouble[j] = Math.cos(j * Math.PI * 6.0D / p_185938_6_) * 2.0D;
+        for (int j = 0; j < sizeY; ++j) {
+            adouble[j] = Math.cos(j * Math.PI * 6.0D / sizeY) * 2.0D;
             double d2 = j;
 
-            if (j > p_185938_6_ / 2) d2 = p_185938_6_ - 1 - j;
+            if (j > sizeY / 2) d2 = sizeY - 1 - j;
 
             if (d2 < 4.0D) {
                 d2 = 4.0D - d2;
@@ -300,28 +297,24 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
             }
         }
 
-        for (int l = 0; l < p_185938_5_; ++l) {
-            for (int i1 = 0; i1 < p_185938_7_; ++i1) {
+        for (int l = 0; l < sizeX; ++l) {
+            for (int i1 = 0; i1 < sizeZ; ++i1) {
 
-                for (int k = 0; k < p_185938_6_; ++k) {
+                for (int k = 0; k < sizeY; ++k) {
                     double d4 = adouble[k];
                     double d5 = this.ar[i] / 512.0D;
                     double d6 = this.br[i] / 512.0D;
                     double d7 = (this.pnr[i] / 10.0D + 1.0D) / 2.0D;
                     double d8;
 
-                    if (d7 < 0.0D) {
-                        d8 = d5;
-                    } else if (d7 > 1.0D) {
-                        d8 = d6;
-                    } else {
-                        d8 = d5 + (d6 - d5) * d7;
-                    }
+                    if (d7 < 0.0D) d8 = d5;
+                    else if (d7 > 1.0D) d8 = d6;
+                    else d8 = d5 + (d6 - d5) * d7;
 
                     d8 = d8 - d4;
 
-                    if (k > p_185938_6_ - 4) {
-                        double d9 = k - (p_185938_6_ - 4) / 3.0F;
+                    if (k > sizeY - 4) {
+                        double d9 = k - (sizeY - 4) / 3.0F;
                         d8 = d8 * (1.0D - d9) + -10.0D * d9;
                     }
 
@@ -330,12 +323,12 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
                         d10 = MathHelper.clamp(d10, 0.0D, 1.0D);
                         d8 = d8 * (1.0D - d10) + -10.0D * d10;
                     }
-                    p_185938_1_[i] = d8;
+                    noiseField[i] = d8;
                     i++;
                 }
             }
         }
-        return p_185938_1_;
+        return noiseField;
     }
 
     @Override
