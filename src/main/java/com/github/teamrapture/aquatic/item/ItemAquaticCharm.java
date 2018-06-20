@@ -31,20 +31,13 @@ public class ItemAquaticCharm extends ItemBase {
                 EntityPlayerMP teleportee = (EntityPlayerMP) playerIn;
                 if (teleportee.dimension == AquaticConfig.dimension.dimensionID) {
                     playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, DIMENSION_FROM_ID, teleporter);
-                    moveToEmptyArea(playerIn, worldIn);
                 } else {
                     playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, AquaticConfig.dimension.dimensionID, teleporter);
-                    moveToEmptyArea(playerIn, worldIn);
                 }
+                TeleporterAquatic.moveToEmptyArea(playerIn, worldIn);
             }
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-    }
-
-    private void moveToEmptyArea(EntityPlayer entity, World world) {
-        while (!TeleporterAquatic.isPosClear(entity, world)) {
-            entity.setPosition(entity.posX, entity.posY + 1, entity.posZ); //TODO better algorithm for finding a suitable spawn position
-        }
     }
 
 
