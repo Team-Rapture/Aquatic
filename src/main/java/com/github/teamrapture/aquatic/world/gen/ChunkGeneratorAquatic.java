@@ -20,9 +20,12 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.event.terraingen.InitNoiseGensEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -30,6 +33,8 @@ import java.util.Random;
 
 public class ChunkGeneratorAquatic implements IChunkGenerator {
 
+    //config
+    private static final int SEA_LEVEL = 156;
 
     protected static final IBlockState WATER = AquaticBlocks.AQUA_WATER_BLOCK.getDefaultState();
     private static final IBlockState AIR = Blocks.AIR.getDefaultState();
@@ -39,22 +44,14 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     private static final IBlockState STONE_CRACKED = AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState();
     private static final IBlockState GRASS_STONE_DARK = AquaticBlocks.GRASS_STONE_1.getDefaultState();
     private static final IBlockState GRASS_STONE_LIGHT = AquaticBlocks.AQUATIC_STONE_CRACKED.getDefaultState();
-    private final WorldGenerator ironGen = new WorldGenMinable(AquaticBlocks.IRON_ORE_DEPOSIT.getDefaultState(), 6,
-            BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    private final WorldGenerator goldGen = new WorldGenMinable(AquaticBlocks.GOLD_ORE_DEPOSIT.getDefaultState(), 4,
-            BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    private final WorldGenerator diamonGen = new WorldGenMinable(AquaticBlocks.DIAMOND_ORE_DEPOSIT.getDefaultState(), 3,
-            BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    private final WorldGenerator coalGen = new WorldGenMinable(AquaticBlocks.COAL_ORE_DEPOSIT.getDefaultState(), 18,
-            BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    private final WorldGenerator emeraldGen = new WorldGenMinable(AquaticBlocks.EMERALD_ORE_DEPOSIT.getDefaultState(),
-            2, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    private final WorldGenerator lapizGen = new WorldGenMinable(AquaticBlocks.LAPIZ_ORE_DEPOSIT.getDefaultState(), 6,
-            BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    private final WorldGenerator redstoneGen = new WorldGenMinable(AquaticBlocks.REDSTONE_ORE_DEPOSIT.getDefaultState(),
-            8, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
-    private final WorldGenerator quartzGen = new WorldGenMinable(AquaticBlocks.QUARTZ_ORE_DEPOSIT.getDefaultState(), 13,
-            BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+    private final WorldGenerator ironGen = new WorldGenMinable(AquaticBlocks.IRON_ORE_DEPOSIT.getDefaultState(), 6, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+    private final WorldGenerator goldGen = new WorldGenMinable(AquaticBlocks.GOLD_ORE_DEPOSIT.getDefaultState(), 4, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+    private final WorldGenerator diamonGen = new WorldGenMinable(AquaticBlocks.DIAMOND_ORE_DEPOSIT.getDefaultState(), 3, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+    private final WorldGenerator coalGen = new WorldGenMinable(AquaticBlocks.COAL_ORE_DEPOSIT.getDefaultState(), 18, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+    private final WorldGenerator emeraldGen = new WorldGenMinable(AquaticBlocks.EMERALD_ORE_DEPOSIT.getDefaultState(), 2, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+    private final WorldGenerator lapizGen = new WorldGenMinable(AquaticBlocks.LAPIZ_ORE_DEPOSIT.getDefaultState(), 6, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+    private final WorldGenerator redstoneGen = new WorldGenMinable(AquaticBlocks.REDSTONE_ORE_DEPOSIT.getDefaultState(), 8, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
+    private final WorldGenerator quartzGen = new WorldGenMinable(AquaticBlocks.QUARTZ_ORE_DEPOSIT.getDefaultState(), 13, BlockMatcher.forBlock(AquaticBlocks.AQUATIC_STONE));
 
     private double[] pnr;
     private double[] ar;
@@ -100,10 +97,8 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         this.slowsandGravelNoiseGen = new NoiseGeneratorOctaves(this.rand, 4);
         this.stoneExculsivityNoiseGen = new NoiseGeneratorOctaves(this.rand, 4);
 
-        net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextHell ctx = new net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextHell(
-                lperlinNoise1, lperlinNoise2, perlinNoise1, slowsandGravelNoiseGen, stoneExculsivityNoiseGen,
-                scaleNoise, depthNoise);
-        ctx = net.minecraftforge.event.terraingen.TerrainGen.getModdedNoiseGenerators(world, this.rand, ctx);
+        InitNoiseGensEvent.ContextHell ctx = new InitNoiseGensEvent.ContextHell(lperlinNoise1, lperlinNoise2, perlinNoise1, slowsandGravelNoiseGen, stoneExculsivityNoiseGen, scaleNoise, depthNoise);
+        ctx = TerrainGen.getModdedNoiseGenerators(world, this.rand, ctx);
         this.lperlinNoise1 = ctx.getLPerlin1();
         this.lperlinNoise2 = ctx.getLPerlin2();
         this.perlinNoise1 = ctx.getPerlin();
@@ -143,26 +138,17 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 
                             for (int k2 = 0; k2 < 4; ++k2) {
                                 IBlockState iblockstate = null;
-
-                                if (l1 * 8 + i2 < j) {
-                                    iblockstate = WATER;
-                                }
-
-                                if (d15 > 0.0D) {
-                                    iblockstate = AQUA_STONE;
-                                }
-
+                                if (l1 * 8 + i2 < j) iblockstate = WATER;
+                                if (d15 > 0.0D) iblockstate = AQUA_STONE;
                                 int l2 = j2 + j1 * 4;
                                 int i3 = i2 + l1 * 8;
                                 int j3 = k2 + k1 * 4;
                                 primer.setBlockState(l2, i3, j3, iblockstate);
                                 d15 += d16;
                             }
-
                             d10 += d12;
                             d11 += d13;
                         }
-
                         d1 += d5;
                         d2 += d6;
                         d3 += d7;
@@ -174,17 +160,14 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     }
 
     private void buildSurfaces(int p_185937_1_, int p_185937_2_, ChunkPrimer primer) {
-        if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, p_185937_1_, p_185937_2_, primer,
+        if (!ForgeEventFactory.onReplaceBiomeBlocks(this, p_185937_1_, p_185937_2_, primer,
                 this.world))
             return;
         int i = this.world.getSeaLevel() + 1;
         double d0 = 0.03125D;
-        this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, p_185937_1_ * 16,
-                p_185937_2_ * 16, 0, 16, 16, 1, 0.03125D, 0.03125D, 1.0D);
-        this.gravelNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.gravelNoise, p_185937_1_ * 16, 109,
-                p_185937_2_ * 16, 16, 1, 16, 0.03125D, 1.0D, 0.03125D);
-        this.depthBuffer = this.stoneExculsivityNoiseGen.generateNoiseOctaves(this.depthBuffer, p_185937_1_ * 16,
-                p_185937_2_ * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
+        this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, p_185937_1_ * 16, p_185937_2_ * 16, 0, 16, 16, 1, 0.03125D, 0.03125D, 1.0D);
+        this.gravelNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.gravelNoise, p_185937_1_ * 16, 109, p_185937_2_ * 16, 16, 1, 16, 0.03125D, 1.0D, 0.03125D);
+        this.depthBuffer = this.stoneExculsivityNoiseGen.generateNoiseOctaves(this.depthBuffer, p_185937_1_ * 16, p_185937_2_ * 16, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
 
         for (int j = 0; j < 16; ++j) {
             for (int k = 0; k < 16; ++k) {
@@ -254,7 +237,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         this.prepareHeights(x, z, chunkprimer);
         this.buildSurfaces(x, z, chunkprimer);
         generateBedrockLayer(chunkprimer, rand, 0);
-        generateWater(chunkprimer, rand, 1);
+        generateWater(chunkprimer, rand);
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
         Biome[] abiome = this.world.getBiomeProvider().getBiomes(null, x * 16, z * 16, 16, 16);
@@ -268,59 +251,47 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         return chunk;
     }
 
-    private void generateBedrockLayer(ChunkPrimer p, Random r, int y) {
+    private void generateBedrockLayer(ChunkPrimer p, Random r, int yLevel) {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                p.setBlockState(x, y, z, BEDROCK);
-                p.setBlockState(x, 128, z, Blocks.BEDROCK.getDefaultState());
+                p.setBlockState(x, yLevel, z, BEDROCK);
             }
         }
     }
 
-    private void generateWater(ChunkPrimer p, Random r, int yn) {
+    private void generateWater(ChunkPrimer p, Random r) {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < 86; y++) {
-                    if (p.getBlockState(x, y + yn, z) == Blocks.AIR.getDefaultState()) {
-                        p.setBlockState(x, y + yn, z, WATER);
+                for (int y = 0; y <= SEA_LEVEL; y++) {
+                    if (p.getBlockState(x, y, z) == Blocks.AIR.getDefaultState()) {
+                        p.setBlockState(x, y, z, WATER);
                     }
                 }
             }
         }
     }
 
-    private double[] getHeights(double[] p_185938_1_, int p_185938_2_, int p_185938_3_, int p_185938_4_,
-                                int p_185938_5_, int p_185938_6_, int p_185938_7_) {
-        if (p_185938_1_ == null) {
-            p_185938_1_ = new double[p_185938_5_ * p_185938_6_ * p_185938_7_];
-        }
+    private double[] getHeights(double[] p_185938_1_, int p_185938_2_, int p_185938_3_, int p_185938_4_, int p_185938_5_, int p_185938_6_, int p_185938_7_) {
+        if (p_185938_1_ == null) p_185938_1_ = new double[p_185938_5_ * p_185938_6_ * p_185938_7_];
 
-        net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField event = new net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField(
+        ChunkGeneratorEvent.InitNoiseField event = new ChunkGeneratorEvent.InitNoiseField(
                 this, p_185938_1_, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
-        if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY)
-            return event.getNoisefield();
+        MinecraftForge.EVENT_BUS.post(event);
+        if (event.getResult() == Event.Result.DENY) return event.getNoisefield();
 
-        this.noiseData4 = this.scaleNoise.generateNoiseOctaves(this.noiseData4, p_185938_2_, p_185938_3_, p_185938_4_,
-                p_185938_5_, 1, p_185938_7_, 1.0D, 0.0D, 1.0D);
-        this.dr = this.depthNoise.generateNoiseOctaves(this.dr, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, 1,
-                p_185938_7_, 100.0D, 0.0D, 100.0D);
-        this.pnr = this.perlinNoise1.generateNoiseOctaves(this.pnr, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_,
-                p_185938_6_, p_185938_7_, 8.555150000000001D, 34.2206D, 8.555150000000001D);
-        this.ar = this.lperlinNoise1.generateNoiseOctaves(this.ar, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_,
-                p_185938_6_, p_185938_7_, 684.412D, 2053.236D, 684.412D);
-        this.br = this.lperlinNoise2.generateNoiseOctaves(this.br, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_,
-                p_185938_6_, p_185938_7_, 684.412D, 2053.236D, 684.412D);
+        this.noiseData4 = this.scaleNoise.generateNoiseOctaves(this.noiseData4, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, 1, p_185938_7_, 1.0D, 0.0D, 1.0D);
+        this.dr = this.depthNoise.generateNoiseOctaves(this.dr, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, 1, p_185938_7_, 100.0D, 0.0D, 100.0D);
+        this.pnr = this.perlinNoise1.generateNoiseOctaves(this.pnr, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_, 8.555150000000001D, 34.2206D, 8.555150000000001D);
+        this.ar = this.lperlinNoise1.generateNoiseOctaves(this.ar, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_, 684.412D, 2053.236D, 684.412D);
+        this.br = this.lperlinNoise2.generateNoiseOctaves(this.br, p_185938_2_, p_185938_3_, p_185938_4_, p_185938_5_, p_185938_6_, p_185938_7_, 684.412D, 2053.236D, 684.412D);
         int i = 0;
         double[] adouble = new double[p_185938_6_];
 
         for (int j = 0; j < p_185938_6_; ++j) {
-            adouble[j] = Math.cos((double) j * Math.PI * 6.0D / (double) p_185938_6_) * 2.0D;
-            double d2 = (double) j;
+            adouble[j] = Math.cos(j * Math.PI * 6.0D / p_185938_6_) * 2.0D;
+            double d2 = j;
 
-            if (j > p_185938_6_ / 2) {
-                d2 = (double) (p_185938_6_ - 1 - j);
-            }
+            if (j > p_185938_6_ / 2) d2 = p_185938_6_ - 1 - j;
 
             if (d2 < 4.0D) {
                 d2 = 4.0D - d2;
@@ -349,22 +320,20 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
                     d8 = d8 - d4;
 
                     if (k > p_185938_6_ - 4) {
-                        double d9 = (double) ((float) (k - (p_185938_6_ - 4)) / 3.0F);
+                        double d9 = k - (p_185938_6_ - 4) / 3.0F;
                         d8 = d8 * (1.0D - d9) + -10.0D * d9;
                     }
 
-                    if ((double) k < 0.0D) {
-                        double d10 = (0.0D - (double) k) / 4.0D;
+                    if (k < 0.0D) {
+                        double d10 = k / -4.0D;
                         d10 = MathHelper.clamp(d10, 0.0D, 1.0D);
                         d8 = d8 * (1.0D - d10) + -10.0D * d10;
                     }
-
                     p_185938_1_[i] = d8;
-                    ++i;
+                    i++;
                 }
             }
         }
-
         return p_185938_1_;
     }
 
@@ -377,25 +346,17 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         Biome biome = this.world.getBiome(blockpos.add(16, 0, 16));
 
         ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
-        MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(this.world, this.rand, blockpos));
+        MinecraftForge.EVENT_BUS.post(new DecorateBiomeEvent.Pre(this.world, this.rand, blockpos));
 
-        if (rand.nextInt(3) == 0)
-            this.coralGenerator0.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-        if (rand.nextInt(3) == 0)
-            this.coralGenerator1.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-        if (rand.nextInt(3) == 0)
-            this.coralGenerator2.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-        if (rand.nextInt(3) == 0)
-            this.coralGenerator3.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-        if (rand.nextInt(3) == 0)
-            this.coralGenerator4.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-        if (rand.nextInt(3) == 0)
-            this.hydrillaGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
-        if (rand.nextInt(3) == 0)
-            this.oxygenGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+        if (rand.nextInt(3) == 0) this.coralGenerator0.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+        if (rand.nextInt(3) == 0) this.coralGenerator1.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+        if (rand.nextInt(3) == 0) this.coralGenerator2.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+        if (rand.nextInt(3) == 0) this.coralGenerator3.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+        if (rand.nextInt(3) == 0) this.coralGenerator4.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+        if (rand.nextInt(3) == 0) this.hydrillaGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
+        if (rand.nextInt(3) == 0) this.oxygenGenerator.generate(this.world, this.rand, blockpos.add(this.rand.nextInt(16) + 8, this.rand.nextInt(128), this.rand.nextInt(16) + 8));
        
         for (int l1 = 0; l1 < 6; l1++) { 
-
             this.ironGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
             this.diamonGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
             this.coalGen.generate(this.world, this.rand, blockpos.add(0, this.rand.nextInt(108) + 10, 0));
@@ -418,23 +379,17 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
 
     @Override
     public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-        Biome biome = this.world.getBiome(pos);
-
-        if (biome != null) {
-            return biome.getSpawnableList(creatureType);
-        }
-
-        return null;
+        return this.world.getBiome(pos).getSpawnableList(creatureType);
     }
 
+    //TODO structure gen!
     public boolean generateStructures(Chunk chunkIn, int x, int z) {
         return false;
     }
 
     @Nullable
     @Override
-    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position,
-                                           boolean findUnexplored) {
+    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
         return null;
     }
 

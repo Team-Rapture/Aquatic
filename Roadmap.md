@@ -75,9 +75,9 @@
             - [ ] Lost Underwater bases
         - [ ] General
             - [ ] caves filled with oxygen
-            - [ ] remove ceiling
+            - [x] remove ceiling
             - [ ] rarely generate anything above water level
-            - [ ] raise water level to 180
+            - [x] raise water level to 156
             - [ ] different biomes
             - [ ] cave gen / ravine gen
     - [ ] recolor clouds
