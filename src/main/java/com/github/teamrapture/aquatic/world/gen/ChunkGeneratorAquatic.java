@@ -36,7 +36,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     //config
     private static final int SEA_LEVEL = 156;
 
-    protected static final IBlockState WATER = AquaticBlocks.AQUA_WATER_BLOCK.getDefaultState();
+    private static final IBlockState WATER = AquaticBlocks.AQUA_WATER_BLOCK.getDefaultState();
     private static final IBlockState AIR = Blocks.AIR.getDefaultState();
     private static final IBlockState AQUA_STONE = AquaticBlocks.AQUATIC_STONE.getDefaultState();
     private static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
@@ -107,7 +107,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         this.scaleNoise = ctx.getScale();
         this.depthNoise = ctx.getDepth();
 
-        this.world.setSeaLevel(87);
+        this.world.setSeaLevel(SEA_LEVEL);
     }
 
     private void prepareHeights(int p_185936_1_, int p_185936_2_, ChunkPrimer primer) {
@@ -223,16 +223,18 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
                         } else {
                             i1 = -1;
                         }
-                    } else {
-                        primer.setBlockState(k, j1, j, BEDROCK);
                     }
+                    /*else {
+                        primer.setBlockState(k, j1, j, BEDROCK);
+                    }*/
                 }
             }
         }
     }
 
+    @Override
     public Chunk generateChunk(int x, int z) {
-        this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+        this.rand.setSeed((long) x * 796235255948L + (long) z * 679238861542L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
         this.prepareHeights(x, z, chunkprimer);
         this.buildSurfaces(x, z, chunkprimer);
@@ -242,11 +244,10 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
         Biome[] abiome = this.world.getBiomeProvider().getBiomes(null, x * 16, z * 16, 16, 16);
         byte[] abyte = chunk.getBiomeArray();
-
         for (int i = 0; i < abyte.length; ++i) {
             abyte[i] = (byte) Biome.getIdForBiome(abiome[i]);
         }
-
+        chunk.setBiomeArray(abyte);
         chunk.resetRelightChecks();
         return chunk;
     }
@@ -337,6 +338,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         return p_185938_1_;
     }
 
+    @Override
     public void populate(int x, int z) {
         BlockFalling.fallInstantly = true;
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);

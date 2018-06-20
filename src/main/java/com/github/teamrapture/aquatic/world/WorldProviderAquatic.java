@@ -87,7 +87,6 @@ public class WorldProviderAquatic extends WorldProvider {
 
     @Override
     public boolean shouldClientCheckLighting() {
-        //TODO true/false?
         return true;
     }
 }
