@@ -11,9 +11,8 @@ public class AquaticBiomes {
 
     public static final Biome BIOME_AQUATIC = new BiomeAquatic(new Biome.BiomeProperties("Aquatic Ocean").setRainDisabled()).setRegistryName(Aquatic.MODID, "biome_aquatic_ocean");
 
-    static {
+    public static void registerBiomeTypes() {
         //add biome types for each biome based on the description in BIomeDictionary, this also improves modded mob spawn compatibility
-
         BiomeDictionary.addTypes(AquaticBiomes.BIOME_AQUATIC,
                 BiomeDictionary.Type.OCEAN, //WATER is automatically set
                 BiomeDictionary.Type.WET,

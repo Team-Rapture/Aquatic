@@ -6,8 +6,8 @@ import com.github.teamrapture.aquatic.api.ph.IPHProvider;
 import com.github.teamrapture.aquatic.block.fluid.FluidAquaWater;
 import com.github.teamrapture.aquatic.client.gui.GuiHandler;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
+import com.github.teamrapture.aquatic.init.AquaticBiomes;
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
-import com.github.teamrapture.aquatic.init.AquaticCrafting;
 import com.github.teamrapture.aquatic.init.AquaticRecipes;
 import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
 import com.github.teamrapture.aquatic.oxygen.OxygenStorage;
@@ -35,17 +35,17 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		AutoRegistry.findRegistryEntries(event);
-		AquaticRecipes.FurnaceRegister(event);
-		
 	}
 
 	public void init(FMLInitializationEvent event) {
 		AquaticBlocks.registerTiles();
+        AquaticBiomes.registerBiomeTypes();
+        AquaticRecipes.OreDict.initOreDictionary();
+        AquaticRecipes.Smelting.registerRecipes();
+        NetworkRegistry.INSTANCE.registerGuiHandler(Aquatic.instance, new GuiHandler());
         DimensionManager.registerDimension(AquaticConfig.dimension.dimensionID, WorldProviderAquatic.DIMENSION_TYPE);
 		CapabilityManager.INSTANCE.register(IOxygenProvider.class, new OxygenStorage(), OxygenHandler::new);
 		CapabilityManager.INSTANCE.register(IPHProvider.class, new PHStorage(), PHHandler::new);
-		NetworkRegistry.INSTANCE.registerGuiHandler(Aquatic.instance, new GuiHandler());
-		AquaticCrafting.initOreDictionary();
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
