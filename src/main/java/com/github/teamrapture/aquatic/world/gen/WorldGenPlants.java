@@ -1,7 +1,6 @@
 package com.github.teamrapture.aquatic.world.gen;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -32,7 +31,7 @@ public class WorldGenPlants extends WorldGenerator {
             if (xMod == 0 || xMod == 15 || zMod == 0 || zMod == 15) continue;
 
             IBlockState state = worldIn.getBlockState(blockpos);
-            if (state.getMaterial() == Material.WATER && worldIn.isSideSolid(blockpos.down(), EnumFacing.UP)) {
+            if (state.getMaterial().isLiquid() && worldIn.isSideSolid(blockpos.down(), EnumFacing.UP)) {
                 setBlockAndNotifyAdequately(worldIn, blockpos, this.state);
             }
         }

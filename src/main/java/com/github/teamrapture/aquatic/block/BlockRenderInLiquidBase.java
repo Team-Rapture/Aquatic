@@ -36,7 +36,7 @@ public class BlockRenderInLiquidBase extends BlockBase {
     }
 
     private boolean isWater(IBlockAccess world, BlockPos pos) {
-        return world.getBlockState(pos).getMaterial() == Material.WATER;
+        return world.getBlockState(pos).getMaterial().isLiquid();
     }
 
     @Override

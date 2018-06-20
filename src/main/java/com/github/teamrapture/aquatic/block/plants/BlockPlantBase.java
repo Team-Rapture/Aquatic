@@ -40,7 +40,7 @@ public class BlockPlantBase extends BlockBush {
     }
 
     private boolean isWater(IBlockAccess world, BlockPos pos) {
-        return world.getBlockState(pos).getMaterial() == Material.WATER;
+        return world.getBlockState(pos).getMaterial().isLiquid();
     }
 
     @Override

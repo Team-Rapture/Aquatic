@@ -2,7 +2,6 @@ package com.github.teamrapture.aquatic.entity.boss;
 
 import com.github.teamrapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.teamrapture.aquatic.init.AquaticItems;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -87,7 +86,7 @@ public class EntityScylla extends EntityMob {
 
     @Override
     public float getBlockPathWeight(BlockPos pos) {
-        return this.world.getBlockState(pos).getMaterial() == Material.WATER
+        return this.world.getBlockState(pos).getMaterial().isLiquid()
                 ? 10.0F + this.world.getLightBrightness(pos) - 0.5F
                 : super.getBlockPathWeight(pos);
     }

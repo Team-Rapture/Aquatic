@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.fluids.BlockFluidBase;
 
 //TODO get a better texture/model made
 public class BlockPistia extends BlockBush implements IHasItemBlock {
@@ -42,7 +43,7 @@ public class BlockPistia extends BlockBush implements IHasItemBlock {
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
         IBlockState soil = world.getBlockState(pos.down());
-        return world.isAirBlock(pos) && soil.getMaterial() == Material.WATER && (!soil.getPropertyKeys().contains(BlockLiquid.LEVEL) || soil.getValue(BlockLiquid.LEVEL) == 0);
+        return world.isAirBlock(pos) && soil.getMaterial().isLiquid() && (!soil.getPropertyKeys().contains(BlockLiquid.LEVEL) || soil.getValue(BlockLiquid.LEVEL) == 0) && (!soil.getPropertyKeys().contains(BlockFluidBase.LEVEL) || soil.getValue(BlockFluidBase.LEVEL) == 0);
     }
 
     @Override
@@ -57,7 +58,7 @@ public class BlockPistia extends BlockBush implements IHasItemBlock {
 
     @Override
     public boolean canSustainBush(IBlockState state) {
-        return state.getMaterial() == Material.ICE || state.getMaterial() == Material.WATER && (!state.getPropertyKeys().contains(BlockLiquid.LEVEL) || state.getValue(BlockLiquid.LEVEL) == 0);
+        return state.getMaterial() == Material.ICE || state.getMaterial().isLiquid() && (!state.getPropertyKeys().contains(BlockLiquid.LEVEL) || state.getValue(BlockLiquid.LEVEL) == 0) && (!state.getPropertyKeys().contains(BlockFluidBase.LEVEL) || state.getValue(BlockFluidBase.LEVEL) == 0);
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.github.teamrapture.aquatic.item.armor;
 import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.util.NameUtil;
 import com.github.teamrapture.aquatic.util.ParticleUtils;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +37,7 @@ public class HeavyIronBoots extends ItemArmor {
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
         if (player.isInWater()) {
             if (player.capabilities.isFlying) return;
-            if (world.getBlockState(player.getPosition().down(1)).getMaterial() == Material.WATER && !player.onGround) {
+            if (!world.getBlockState(player.getPosition().down(1)).getMaterial().isSolid() && !player.onGround) {
                 ParticleUtils.spawnParticles(player, EnumParticleTypes.WATER_BUBBLE, (int) Math.round(Math.random() * 4), player.getPositionVector().x, player.getPositionVector().y, player.getPositionVector().z, (Math.random() - 0.5) * 0.8, 0.5, (Math.random() - 0.5) * 0.8, 0);
                 player.motionY -= 0.08F;
             }

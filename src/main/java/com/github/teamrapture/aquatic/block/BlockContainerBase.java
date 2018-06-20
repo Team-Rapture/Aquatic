@@ -24,7 +24,7 @@ public abstract class BlockContainerBase extends BlockContainer implements IHasI
 
     @Override
     public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-        return face != EnumFacing.DOWN && world.getBlockState(pos.offset(face)).getMaterial() == Material.WATER;
+        return face != EnumFacing.DOWN && world.getBlockState(pos.offset(face)).getMaterial().isLiquid();
     }
 
     @Override
