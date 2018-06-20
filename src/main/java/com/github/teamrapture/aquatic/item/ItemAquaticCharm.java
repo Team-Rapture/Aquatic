@@ -10,7 +10,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ItemAquaticCharm extends ItemBase {
@@ -24,16 +23,13 @@ public class ItemAquaticCharm extends ItemBase {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        if (worldIn instanceof WorldServer) {
+        if (!worldIn.isRemote) {
             PlayerList playerList = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
-            TeleporterAquatic teleporter = new TeleporterAquatic((WorldServer) worldIn);
             if (playerIn instanceof EntityPlayerMP) {
-                EntityPlayerMP teleportee = (EntityPlayerMP) playerIn;
-                if (teleportee.dimension == AquaticConfig.dimension.dimensionID) {
-                    playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, DIMENSION_FROM_ID, teleporter);
-                } else {
-                    playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, AquaticConfig.dimension.dimensionID, teleporter);
-                }
+                EntityPlayerMP player = (EntityPlayerMP) playerIn;
+                int targetDim = player.dimension == AquaticConfig.dimension.dimensionID ? DIMENSION_FROM_ID : AquaticConfig.dimension.dimensionID;
+                TeleporterAquatic teleporter = new TeleporterAquatic();
+                playerList.transferPlayerToDimension(player, targetDim, teleporter);
             }
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));

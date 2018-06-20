@@ -3,38 +3,27 @@ package com.github.teamrapture.aquatic.world;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.ITeleporter;
 
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+public class TeleporterAquatic implements ITeleporter {
 
-public class TeleporterAquatic extends Teleporter {
-    public TeleporterAquatic(WorldServer world) {
-        super(world);
+    public TeleporterAquatic() {
+        //NO-OP
     }
 
     @Override
-    public void placeInPortal(Entity entityIn, float rotationYaw) {
-        while (!isPosClear(entityIn, world)) {
-            entityIn.setPosition(entityIn.posX, entityIn.posY + 1, entityIn.posZ); //TODO better algorithm for finding a suitable spawn position
+    public void placeEntity(World world, Entity entity, float yaw) {
+        while (!isPosClear(entity.getPosition(), world) || !isPosClear(entity.getPosition().add(0, entity.getEyeHeight(), 0), world)) {
+            entity.posY += 1; //TODO better algorithm for finding a suitable spawn position
         }
-        entityIn.setPositionAndUpdate(entityIn.posX, entityIn.posY, entityIn.posZ);
+        BlockPos pos = entity.getPosition();
+        entity.setPositionAndUpdate(pos.getX(), pos.getY() + 0.1D, pos.getZ());
     }
 
-    @Override
-    public boolean makePortal(Entity entity) {
-        return true;
-    }
-
-    public static boolean isPosClear(Entity ent, World world) {
-        AxisAlignedBB box = ent.getEntityBoundingBox();
-        return StreamSupport.stream(BlockPos.getAllInBox(new BlockPos(box.minX, box.minY, box.minZ), new BlockPos(box.maxX, box.maxY, box.maxZ)).spliterator(), false).filter(pos -> {
-            IBlockState blockState = world.getBlockState(pos);
-            return blockState.getMaterial().isSolid() || blockState.getMaterial().getMobilityFlag() == EnumPushReaction.BLOCK;
-        }).collect(Collectors.toList()).size() > 0;
+    public static boolean isPosClear(BlockPos pos, World world) {
+        IBlockState state = world.getBlockState(pos);
+        return (!state.getMaterial().isSolid() && state.getMaterial().getMobilityFlag() != EnumPushReaction.BLOCK) || pos.getY() > world.getHeight();
     }
 }
