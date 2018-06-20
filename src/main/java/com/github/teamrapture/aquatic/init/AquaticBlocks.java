@@ -79,12 +79,12 @@ public class AquaticBlocks {
 
     public static void registerTiles() {
         GameRegistry.registerTileEntity(TileAquaNetController.class, new ResourceLocation(Aquatic.MODID, "aquanet_controller"));
-        GameRegistry.registerTileEntity(TileAquaNode.class, new ResourceLocation(Aquatic.MODID, "aquatic:aqua_node"));
-        GameRegistry.registerTileEntity(TileSolutionTank.class, new ResourceLocation(Aquatic.MODID, "aquatic:solution_tank"));
-        GameRegistry.registerTileEntity(TileOxygenFiller.class, new ResourceLocation(Aquatic.MODID, "aquatic:oxygen_filler"));
-        GameRegistry.registerTileEntity(TileEnergyFiller.class, new ResourceLocation(Aquatic.MODID, "aquatic:energy_filler"));
-        GameRegistry.registerTileEntity(TileDepthGenerator.class, new ResourceLocation(Aquatic.MODID, "aquatic:depth_generator"));
-        GameRegistry.registerTileEntity(TileCreativeGenerator.class, new ResourceLocation(Aquatic.MODID, "aquatic:creative_generator"));
+        GameRegistry.registerTileEntity(TileAquaNode.class, new ResourceLocation(Aquatic.MODID, "aqua_node"));
+        GameRegistry.registerTileEntity(TileSolutionTank.class, new ResourceLocation(Aquatic.MODID, "solution_tank"));
+        GameRegistry.registerTileEntity(TileOxygenFiller.class, new ResourceLocation(Aquatic.MODID, "oxygen_filler"));
+        GameRegistry.registerTileEntity(TileEnergyFiller.class, new ResourceLocation(Aquatic.MODID, "energy_filler"));
+        GameRegistry.registerTileEntity(TileDepthGenerator.class, new ResourceLocation(Aquatic.MODID, "depth_generator"));
+        GameRegistry.registerTileEntity(TileCreativeGenerator.class, new ResourceLocation(Aquatic.MODID, "creative_generator"));
     }
 
     @SideOnly(Side.CLIENT)
