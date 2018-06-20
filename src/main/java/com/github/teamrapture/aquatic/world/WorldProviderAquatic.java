@@ -1,7 +1,9 @@
-package com.github.teamrapture.aquatic.world.dimension;
+package com.github.teamrapture.aquatic.world;
 
 import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.init.AquaticBiomes;
+import com.github.teamrapture.aquatic.world.gen.ChunkGeneratorAquatic;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
@@ -11,6 +13,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderAquatic extends WorldProvider {
+
+    public static DimensionType DIMENSION_TYPE = DimensionType.register("Aquatic", "_aquatic", AquaticConfig.dimension.dimensionID, WorldProviderAquatic.class,
+                false);
 
     @Override
     protected void init() {
@@ -38,6 +43,8 @@ public class WorldProviderAquatic extends WorldProvider {
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int x, int z) {
         return false;
+        //TODO experimental fog; only in certain biomes!
+        //return Minecraft.getMinecraft().world.getBlockState(new BlockPos(Minecraft.getMinecraft().player.getPositionEyes(Minecraft.getMinecraft().getRenderPartialTicks()))).getMaterial().isLiquid();
     }
 
     @Override
@@ -53,17 +60,13 @@ public class WorldProviderAquatic extends WorldProvider {
 
     @Override
     public DimensionType getDimensionType() {
-        return DimensionAquatic.dimension;
-    }
-
-    @Override
-    public boolean isSurfaceWorld() {
-        return super.isSurfaceWorld();
+        return DIMENSION_TYPE;
     }
 
     @Override
     public int getMoonPhase(long worldTime) {
-        return (int) (worldTime / 24000L % 8L + 8L) % 8;
+        //TODO moon phase
+        return super.getMoonPhase(worldTime);
     }
 
     @Override
@@ -74,19 +77,17 @@ public class WorldProviderAquatic extends WorldProvider {
 
     @Override
     public float calculateCelestialAngle(long worldTime, float partialTicks) {
-        int i = (int) (worldTime % 24000L);
-        float f = ((float) i + partialTicks) / 24000.0F - 0.25F;
+        return super.calculateCelestialAngle(worldTime, partialTicks);
+    }
 
-        if (f < 0.0F) {
-            ++f;
-        }
+    @Override
+    public double getMovementFactor() {
+        return 3.5D;
+    }
 
-        if (f > 1.0F) {
-            --f;
-        }
-
-        float f1 = 1.0F - (float) ((Math.cos((double) f * Math.PI) + 1.0D) / 2.0D);
-        f = f + (f1 - f) / 3.0F;
-        return f;
+    @Override
+    public boolean shouldClientCheckLighting() {
+        //TODO true/false?
+        return true;
     }
 }

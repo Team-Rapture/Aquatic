@@ -1,9 +1,6 @@
-package com.github.teamrapture.aquatic.world.dimension;
+package com.github.teamrapture.aquatic.world.gen;
 
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
-import com.github.teamrapture.aquatic.world.gen.WorldGenEntities;
-import com.github.teamrapture.aquatic.world.gen.WorldGenPlants;
-import com.github.teamrapture.aquatic.world.gen.noise.AquaticGenerator;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -85,7 +82,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
     private NoiseGeneratorOctaves perlinNoise1;
     private NoiseGeneratorOctaves slowsandGravelNoiseGen;
     private NoiseGeneratorOctaves stoneExculsivityNoiseGen;
-    private AquaticGenerator gensPerlin;
+    private NoiseGeneratorAquatic gensPerlin;
     private Random rand;
 
     public ChunkGeneratorAquatic(World world) {
@@ -93,7 +90,7 @@ public class ChunkGeneratorAquatic implements IChunkGenerator {
         this.rand = new Random();
 
         rand.setSeed(rand.nextLong());
-        gensPerlin = new AquaticGenerator(rand, 16);
+        gensPerlin = new NoiseGeneratorAquatic(rand, 16);
         this.scaleNoise = new NoiseGeneratorOctaves(this.rand, 10);
         this.depthNoise = new NoiseGeneratorOctaves(this.rand, 16);
 

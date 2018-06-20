@@ -1,4 +1,4 @@
-package com.github.teamrapture.aquatic.world.biome.decorator;
+package com.github.teamrapture.aquatic.world.biome;
 
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
 import com.github.teamrapture.aquatic.world.gen.WorldGenPlants;
@@ -12,7 +12,7 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 import java.util.Random;
 
-public class BiomeAquaticDecorator extends BiomeDecorator {
+public class BiomeDecoratorAquatic extends BiomeDecorator {
 
     private WorldGenPlants corals = new WorldGenPlants(AquaticBlocks.CORAL_REEF_BLUE);
 

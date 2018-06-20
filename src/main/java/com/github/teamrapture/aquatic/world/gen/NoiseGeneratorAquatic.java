@@ -1,16 +1,16 @@
-package com.github.teamrapture.aquatic.world.gen.noise;
+package com.github.teamrapture.aquatic.world.gen;
 
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 
 import java.util.Random;
 
-public class AquaticGenerator extends NoiseGenerator {
+public class NoiseGeneratorAquatic extends NoiseGenerator {
 
     private final NoiseGeneratorSimplex[] noiseLevels;
     private final int levels;
 
-    public AquaticGenerator(Random random, int levels) {
+    public NoiseGeneratorAquatic(Random random, int levels) {
         this.levels = levels;
         this.noiseLevels = new NoiseGeneratorSimplex[levels];
 

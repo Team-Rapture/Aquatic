@@ -2,7 +2,6 @@ package com.github.teamrapture.aquatic.world.biome;
 
 import com.github.teamrapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.teamrapture.aquatic.entity.hostile.EntityShark;
-import com.github.teamrapture.aquatic.world.biome.decorator.BiomeAquaticDecorator;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.passive.EntitySquid;
@@ -40,7 +39,7 @@ public class BiomeAquatic extends Biome {
 
     @Override
     public BiomeDecorator createBiomeDecorator() {
-        return new BiomeAquaticDecorator();
+        return new BiomeDecoratorAquatic();
     }
 
     @Override
