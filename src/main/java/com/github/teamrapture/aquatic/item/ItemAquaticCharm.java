@@ -34,7 +34,6 @@ public class ItemAquaticCharm extends ItemBase {
                 } else {
                     playerList.transferPlayerToDimension((EntityPlayerMP) playerIn, AquaticConfig.dimension.dimensionID, teleporter);
                 }
-                TeleporterAquatic.moveToEmptyArea(playerIn, worldIn);
             }
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
