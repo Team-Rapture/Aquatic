@@ -15,6 +15,10 @@ public class AquaticConfig {
     @Config.Name("Aquatic Dimension")
     public static Dimension dimension = new Dimension();
 
+    @Config.Name("Experimental Features")
+    @Config.Comment("WARNING: these settings might be unstable!")
+    public static ExperimentalFeatures experimental = new ExperimentalFeatures();
+
     @Config.Name("Update Checker")
     public static Updater updater = new Updater();
 
@@ -78,6 +82,13 @@ public class AquaticConfig {
         @Config.Name("Angler MAX amount")
         @Config.Comment({"Angler Fish Spawn Rate", "Default: 3"})
         public int angler_MAX_spawn_rate = 3;
+    }
+
+    public static class ExperimentalFeatures {
+
+        @Config.Name("Aqua Water ANY liquid source")
+        @Config.Comment({"make aqua water accept any liquid when checking for source blocks to form a new source block", "WARNING: this might cause a lot of lag when pouring aqua water over large bodies of other liquid!"})
+        public boolean aquaWaterAcceptsAnyLiquidSource = false;
     }
 
     public static class Updater {
