@@ -1,14 +1,15 @@
 package com.github.teamrapture.aquatic.world.biome;
 
+import com.github.teamrapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.teamrapture.aquatic.entity.hostile.EntityShark;
 import com.google.common.collect.Lists;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BiomeAquatic extends Biome {
@@ -20,13 +21,14 @@ public class BiomeAquatic extends Biome {
     }
 
     public void addSpawnablesList() {
-        ArrayList<SpawnListEntry> entityList = new ArrayList<SpawnListEntry>();
-
-        entityList.add(new Biome.SpawnListEntry(EntitySquid.class, 7, 2, 3));
-        entityList.add(new Biome.SpawnListEntry(EntityAnglerFish.class, 5, 1, 2));
-        entityList.add(new Biome.SpawnListEntry(EntityShark.class, 5, 1, 2));
-
-        this.modSpawnableLists.put(EnumCreatureType.CREATURE, entityList);
+        this.spawnableCreatureList.clear();
+        this.modSpawnableLists.put(EnumCreatureType.WATER_CREATURE, Lists.newArrayList(
+                new Biome.SpawnListEntry(EntityAnglerFish.class, AquaticConfig.dimension.anglerFish.spawnRate, AquaticConfig.dimension.anglerFish.minGroupSize, AquaticConfig.dimension.anglerFish.maxGroupSize),
+                new Biome.SpawnListEntry(EntityShark.class, AquaticConfig.dimension.shark.spawnRate, AquaticConfig.dimension.shark.minGroupSize, AquaticConfig.dimension.shark.maxGroupSize),
+                new Biome.SpawnListEntry(EntityGuardian.class, AquaticConfig.dimension.guardian.spawnRate, AquaticConfig.dimension.guardian.minGroupSize, AquaticConfig.dimension.guardian.maxGroupSize),
+                new Biome.SpawnListEntry(EntitySquid.class, AquaticConfig.dimension.squid.spawnRate, AquaticConfig.dimension.squid.minGroupSize, AquaticConfig.dimension.squid.maxGroupSize)
+                //TODO add generic fishes to spawn list
+        ));
     }
 
     @Override

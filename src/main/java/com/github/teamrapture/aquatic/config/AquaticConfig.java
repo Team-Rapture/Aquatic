@@ -77,6 +77,14 @@ public class AquaticConfig {
         @Config.RequiresMcRestart
         @Config.Name("Shark")
         public final EntitySpawn shark = new EntitySpawn(8, 1, 2);
+
+        @Config.RequiresMcRestart
+        @Config.Name("Guardian")
+        public final EntitySpawn guardian = new EntitySpawn(4, 1, 2);
+
+        @Config.RequiresMcRestart
+        @Config.Name("Squid")
+        public final EntitySpawn squid = new EntitySpawn(8, 1, 6);
     }
 
     public static class EntitySpawn {
