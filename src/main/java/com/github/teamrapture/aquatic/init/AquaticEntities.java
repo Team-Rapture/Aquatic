@@ -24,15 +24,15 @@ public class AquaticEntities {
             .id(getEntityResource("anglerfish"), 0)
             .name("anglerfish").tracker(80, 3, false)
             .egg(956291, 256)
-            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.angler_spawn_rate, AquaticConfig.dimension.angler_MIN_spawn_rate, AquaticConfig.dimension.angler_MAX_spawn_rate, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
+            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.anglerFish.spawnRate, AquaticConfig.dimension.anglerFish.minGroupSize, AquaticConfig.dimension.anglerFish.maxGroupSize, AquaticBiomes.BIOME_AQUATIC, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
             .build();
 
+    //TODO spawns?
     public static final EntityEntry SCYLLABOSS = EntityEntryBuilder.create()
             .entity(EntityScylla.class)
             .id(getEntityResource("scyllaboss"), 1)
             .name("scyllaboss").tracker(80, 3, false)
             .egg(956291, 256)
-            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.angler_spawn_rate, AquaticConfig.dimension.angler_MIN_spawn_rate, AquaticConfig.dimension.angler_MAX_spawn_rate)
             .build();
 
     public static final EntityEntry WATER_BUBBLE = EntityEntryBuilder.create()
@@ -41,34 +41,42 @@ public class AquaticEntities {
             .name("water_bubble").tracker(64, 1, false)
             .build();
 
-    public static final EntityEntry SHARK = EntityEntryBuilder.create()
-            .entity(EntityShark.class)
-            .id(getEntityResource("shark"), 3)
-            .name("shark").tracker(80, 3, false)
-            .egg(956291, 256)
-            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.angler_spawn_rate, AquaticConfig.dimension.angler_MIN_spawn_rate, AquaticConfig.dimension.angler_MAX_spawn_rate, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
-            .build();
     public static final EntityEntry JELLY_FISH = EntityEntryBuilder.create()
             .entity(EntityJellyFish.class)
             .id(getEntityResource("jellyfish"), 4)
             .name("jellyfish").tracker(80, 3, false)
             .egg(956291, 256)
-            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.angler_spawn_rate, AquaticConfig.dimension.angler_MIN_spawn_rate, AquaticConfig.dimension.angler_MAX_spawn_rate, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
+            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.jellyFish.spawnRate, AquaticConfig.dimension.jellyFish.minGroupSize, AquaticConfig.dimension.jellyFish.maxGroupSize, AquaticBiomes.BIOME_AQUATIC, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
             .build();
 
 
-	static {
-		EntitySpawnPlacementRegistry.setPlacementType(EntityAnglerFish.class, SpawnPlacementType.IN_WATER);
-		// LootTableList.register(EntityAnglerFish.LOOT_);
+    public static final EntityEntry SHARK = EntityEntryBuilder.create()
+            .entity(EntityShark.class)
+            .id(getEntityResource("shark"), 3)
+            .name("shark").tracker(80, 3, false)
+            .egg(956291, 256)
+            .spawn(EnumCreatureType.WATER_CREATURE, AquaticConfig.dimension.shark.spawnRate, AquaticConfig.dimension.shark.minGroupSize, AquaticConfig.dimension.shark.maxGroupSize, AquaticBiomes.BIOME_AQUATIC, Biomes.DEEP_OCEAN, Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.RIVER, Biomes.FROZEN_RIVER)
+            .build();
 
-		EntitySpawnPlacementRegistry.setPlacementType(EntityShark.class, SpawnPlacementType.IN_WATER);
-		EntitySpawnPlacementRegistry.setPlacementType(EntityJellyFish.class, SpawnPlacementType.IN_WATER);
-		EntitySpawnPlacementRegistry.setPlacementType(EntityScylla.class, SpawnPlacementType.IN_WATER);
-		// LootTableList.register(EntityScylla.LOOT_);
-	}
+    static {
 
-	private static ResourceLocation getEntityResource(String entityName) {
+
+    }
+
+    private static ResourceLocation getEntityResource(String entityName) {
 		return new ResourceLocation(Aquatic.MODID, entityName);
 	}
+
+	public static void init() {
+        //EntityRegistry.addSpawn(EntitySquid.class, );
+
+        EntitySpawnPlacementRegistry.setPlacementType(EntityAnglerFish.class, SpawnPlacementType.IN_WATER);
+        // LootTableList.register(EntityAnglerFish.LOOT_);
+
+        EntitySpawnPlacementRegistry.setPlacementType(EntityShark.class, SpawnPlacementType.IN_WATER);
+        EntitySpawnPlacementRegistry.setPlacementType(EntityJellyFish.class, SpawnPlacementType.IN_WATER);
+        EntitySpawnPlacementRegistry.setPlacementType(EntityScylla.class, SpawnPlacementType.IN_WATER);
+        // LootTableList.register(EntityScylla.LOOT_);
+    }
 
 }

@@ -8,11 +8,11 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 public class UpdateChecker {
 
     public static boolean hasUpdate() {
-        if (AquaticConfig.updater.enableUpdateChecker) {
+        if (AquaticConfig.updates.enableUpdateChecker) {
             ForgeVersion.CheckResult result = getResult();
             ForgeVersion.Status status = result.status;
             if (status != ForgeVersion.Status.PENDING && status != ForgeVersion.Status.FAILED) {
-                return status == ForgeVersion.Status.OUTDATED || (AquaticConfig.updater.announceBetaUpdates && status == ForgeVersion.Status.BETA_OUTDATED);
+                return status == ForgeVersion.Status.OUTDATED || (AquaticConfig.updates.announceBetaUpdates && status == ForgeVersion.Status.BETA_OUTDATED);
             }
             Aquatic.getLogger().warn("Error getting update status for {}, found status {}!", Aquatic.MODID, status.toString());
         }

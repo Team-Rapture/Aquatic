@@ -24,6 +24,8 @@ import javax.annotation.Nullable;
 
 public class EntityShark extends EntityMob {
 
+    //TODO make shark not suffocate in water lol
+
     private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityShark.class,
             DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> TARGET_ENTITY = EntityDataManager

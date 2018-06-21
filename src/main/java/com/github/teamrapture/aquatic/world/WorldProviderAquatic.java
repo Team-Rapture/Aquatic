@@ -14,13 +14,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderAquatic extends WorldProvider {
 
-    public static DimensionType DIMENSION_TYPE = DimensionType.register("Aquatic", "_aquatic", AquaticConfig.dimension.dimensionID, WorldProviderAquatic.class,
-                false);
+    public static DimensionType DIMENSION_TYPE = DimensionType.register("Aquatic", "_aquatic", AquaticConfig.dimension.dimensionID, WorldProviderAquatic.class, false);
 
     @Override
     protected void init() {
         this.hasSkyLight = true;
-        this.biomeProvider = new BiomeProviderSingle(AquaticBiomes.BIOME_AQUATIC);
+        this.biomeProvider = new BiomeProviderSingle(AquaticBiomes.BIOME_AQUATIC); //TODO biome provider!
     }
 
     @Override
@@ -43,14 +42,17 @@ public class WorldProviderAquatic extends WorldProvider {
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int x, int z) {
         return false;
-        //TODO experimental fog; only in certain biomes!
-        //return Minecraft.getMinecraft().world.getBlockState(new BlockPos(Minecraft.getMinecraft().player.getPositionEyes(Minecraft.getMinecraft().getRenderPartialTicks()))).getMaterial().isLiquid();
+    }
+
+    @Override
+    public float getCloudHeight() {
+        return super.getCloudHeight() + 100.0F; //-> 228F default
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public float getStarBrightness(float par1) {
-        return 10.0F;
+        return 10.0F; //TODO star brightness
     }
 
     @Override

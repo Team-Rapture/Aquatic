@@ -58,7 +58,7 @@ public class AutoRegistry {
             }
         }
         Loader.instance().setActiveModContainer(currentModContainer);
-        if (AquaticConfig.debugMode) {
+        if (AquaticConfig.experimental.debugMode) {
             Aquatic.getLogger().info("Active mod container restored.");
             Aquatic.getLogger().info("successfully registered {} objects for event {}", count, registry.getRegistrySuperType().getSimpleName().toUpperCase(Locale.ROOT));
         }
@@ -92,7 +92,7 @@ public class AutoRegistry {
             }
         });
         Loader.instance().setActiveModContainer(originalModContainer); //restore the active mod container
-        if (AquaticConfig.debugMode)
+        if (AquaticConfig.experimental.debugMode)
             Aquatic.getLogger().debug("Mod container restored. The following classes were determined for registry entry examination: {}", list.toString());
     }
 

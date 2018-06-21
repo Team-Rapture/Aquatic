@@ -24,6 +24,6 @@ public class TeleporterAquatic implements ITeleporter {
 
     public static boolean isPosClear(BlockPos pos, World world) {
         IBlockState state = world.getBlockState(pos);
-        return (!state.getMaterial().isSolid() && state.getMaterial().getMobilityFlag() != EnumPushReaction.BLOCK) || pos.getY() > world.getHeight();
+        return (!state.getMaterial().isSolid() && state.getMaterial().getMobilityFlag() != EnumPushReaction.BLOCK) || pos.getY() > world.getHeight(); //failsafe for finding a spawn position
     }
 }
