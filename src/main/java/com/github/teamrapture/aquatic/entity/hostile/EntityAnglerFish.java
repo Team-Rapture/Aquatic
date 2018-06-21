@@ -170,7 +170,7 @@ public class EntityAnglerFish extends EntityMob {
      */
     @Override
     public boolean getCanSpawnHere() {
-        return true;
+        return this.posY < 70.0D && this.posY < this.world.getSeaLevel() && super.getCanSpawnHere();
     }
 
     /**

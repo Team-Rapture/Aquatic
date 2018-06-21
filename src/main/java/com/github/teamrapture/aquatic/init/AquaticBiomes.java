@@ -9,7 +9,7 @@ import net.minecraftforge.common.BiomeDictionary;
 @RegistryCreate(value = Biome.class, modid = Aquatic.MODID)
 public class AquaticBiomes {
 
-    public static final Biome BIOME_AQUATIC = new BiomeAquatic(new Biome.BiomeProperties("Aquatic Ocean").setRainDisabled()).setRegistryName(Aquatic.MODID, "biome_aquatic_ocean");
+    public static final Biome BIOME_AQUATIC = new BiomeAquatic(new Biome.BiomeProperties("Aquatic Ocean").setBaseHeight(-1.0F).setHeightVariation(0.1F).setRainfall(0.25F)).setRegistryName(Aquatic.MODID, "aquatic_ocean");
 
     public static void registerBiomeTypes() {
         //add biome types for each biome based on the description in BIomeDictionary, this also improves modded mob spawn compatibility

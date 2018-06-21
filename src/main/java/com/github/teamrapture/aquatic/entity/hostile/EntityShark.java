@@ -167,7 +167,7 @@ public class EntityShark extends EntityMob {
      */
     @Override
     public boolean getCanSpawnHere() {
-        return true;
+        return this.posY > 100 && this.posY < this.world.getSeaLevel() && super.getCanSpawnHere();
     }
 
     /**
