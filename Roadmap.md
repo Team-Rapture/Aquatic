@@ -6,6 +6,14 @@
 
 ---
 - [ ] Entities
+
+    - [ ] generic Fishes
+        - [ ] entities
+        - [ ] models
+        - [ ] animations
+        - [ ] behaviour
+        - [ ] hitbox
+        - [ ] drops
     - [ ] Tlaloc
         - [ ] base entity
         - [ ] model
