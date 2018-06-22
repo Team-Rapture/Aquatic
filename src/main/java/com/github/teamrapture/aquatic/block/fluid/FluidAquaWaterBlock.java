@@ -12,7 +12,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -35,8 +37,8 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
         super(CommonProxy.AQUA_WATER, Material.WATER);
         this.setRegistryName(CommonProxy.AQUA_WATER.getName());
         this.setUnlocalizedName(fluidName);
-        this.setHardness(100.0F);
         this.setLightOpacity(3);
+        this.setLightLevel(0.5F);
         this.disableStats();
     }
 
@@ -44,6 +46,11 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
     @Override
     public void initModel() {
         ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
+    }
+
+    @Override
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
+        //NO-OP: make blocks not affected by explosions at all, yet don't block explosion power so you can go crazy in the aquatic dimension
     }
 
     @Override
