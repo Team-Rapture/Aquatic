@@ -84,7 +84,7 @@ public class WorldProviderAquatic extends WorldProvider {
 
     @Override
     public double getMovementFactor() {
-        return 3.5D;
+        return 0.75D;
     }
 
     @Override
