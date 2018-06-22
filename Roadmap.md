@@ -6,7 +6,6 @@
 
 ---
 - [ ] Entities
-
     - [ ] generic Fishes
         - [ ] entities
         - [ ] models
@@ -72,10 +71,10 @@
 ---
 - [ ] Dimension
     - [ ] Fix mob spawn rates
-        - [ ] Squid (normal)
-        - [ ] Jellyfish (normal, swarms)
+        - [x] Squid (normal)
+        - [x] Jellyfish (normal, swarms)
         - [ ] Octopus (semi-rare)
-        - [ ] Guardian (semi-rare, ravines only)
+        - [x] Guardian (semi-rare, ravines only)
         - [ ] Elder Guardian (rare, only in monuments)
     - [ ] World Gen
         - [ ] Structures
@@ -89,3 +88,4 @@
             - [ ] different biomes
             - [ ] cave gen / ravine gen
     - [ ] recolor clouds
+    - [x] make explosives useable
