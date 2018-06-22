@@ -31,8 +31,8 @@ public class AquaticConfig {
     public static class ModCompat {
 
         @Config.Name("Explosive Fishing")
-        @Config.Comment({"ExplosiveFishing - Can you fish in the aquatic dimension?", "Default: true"})
-        public boolean explosiveFishingInAquaticDimension = true;
+        @Config.Comment({"ExplosiveFishing - Can you fish in the aquatic dimension?", "WARNING: might cause crashes!", "Default: false"})
+        public boolean explosiveFishingInAquaticDimension = false;
     }
 
     public static class Machines {
