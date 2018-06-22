@@ -8,6 +8,7 @@ import com.github.teamrapture.aquatic.client.gui.GuiHandler;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.init.AquaticBiomes;
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
+import com.github.teamrapture.aquatic.init.AquaticEntities;
 import com.github.teamrapture.aquatic.init.AquaticRecipes;
 import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
 import com.github.teamrapture.aquatic.oxygen.OxygenStorage;
@@ -35,17 +36,18 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		AutoRegistry.findRegistryEntries(event);
+        NetworkRegistry.INSTANCE.registerGuiHandler(Aquatic.instance, new GuiHandler());
+        CapabilityManager.INSTANCE.register(IOxygenProvider.class, new OxygenStorage(), OxygenHandler::new);
+        CapabilityManager.INSTANCE.register(IPHProvider.class, new PHStorage(), PHHandler::new);
 	}
 
 	public void init(FMLInitializationEvent event) {
-		AquaticBlocks.registerTiles();
+        AquaticBlocks.registerTiles();
         AquaticBiomes.registerBiomeTypes();
+        AquaticEntities.init();
+        DimensionManager.registerDimension(AquaticConfig.dimension.dimensionID, WorldProviderAquatic.DIMENSION_TYPE);
         AquaticRecipes.OreDict.initOreDictionary();
         AquaticRecipes.Smelting.registerRecipes();
-        NetworkRegistry.INSTANCE.registerGuiHandler(Aquatic.instance, new GuiHandler());
-        DimensionManager.registerDimension(AquaticConfig.dimension.dimensionID, WorldProviderAquatic.DIMENSION_TYPE);
-		CapabilityManager.INSTANCE.register(IOxygenProvider.class, new OxygenStorage(), OxygenHandler::new);
-		CapabilityManager.INSTANCE.register(IPHProvider.class, new PHStorage(), PHHandler::new);
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

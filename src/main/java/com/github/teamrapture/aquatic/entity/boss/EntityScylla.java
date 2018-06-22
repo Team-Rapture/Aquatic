@@ -2,22 +2,21 @@ package com.github.teamrapture.aquatic.entity.boss;
 
 import com.github.teamrapture.aquatic.entity.hostile.EntityAnglerFish;
 import com.github.teamrapture.aquatic.init.AquaticItems;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityElderGuardian;
 import net.minecraft.entity.monster.EntityGuardian;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateSwimmer;
@@ -31,11 +30,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityScylla extends EntityMob {
+import javax.annotation.Nullable;
+
+public class EntityScylla extends EntityWaterMob implements IMob {
     private final BossInfoServer bossInfo = (BossInfoServer) (new BossInfoServer(this.getDisplayName(),
             BossInfo.Color.BLUE, BossInfo.Overlay.PROGRESS)).setDarkenSky(false);
-    protected EntityAIWander wander;
-    private EntityLivingBase targetedEntity;
+    private EntityLivingBase targetedEntity; //TODO set target via AI task?
     private int spawn;
 
     public EntityScylla(World worldIn) {
@@ -51,18 +51,15 @@ public class EntityScylla extends EntityMob {
 
     @Override
     protected void initEntityAI() {
-        EntityAIMoveTowardsRestriction entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D);
-        this.wander = new EntityAIWander(this, 1.0D, 80);
-        this.tasks.addTask(4, new EntityAIAttackMelee(this, 1, true));
-        this.tasks.addTask(5, entityaimovetowardsrestriction);
-        this.tasks.addTask(7, this.wander);
+        //EntityAIMoveTowardsRestriction entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D);
+        //this.tasks.addTask(4, new EntityAIAttackMelee(this, 1, true));
+        //this.tasks.addTask(5, entityaimovetowardsrestriction);
 
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityGuardian.class, 12.0F, 0.01F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
-        this.wander.setMutexBits(3);
-        entityaimovetowardsrestriction.setMutexBits(3);
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, true));
+        //entityaimovetowardsrestriction.setMutexBits(3);
+        //this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, true));
 
     }
 
@@ -71,9 +68,9 @@ public class EntityScylla extends EntityMob {
         return false;
     }
 
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-
         if (this.hasCustomName()) {
             this.bossInfo.setName(this.getDisplayName());
         }
@@ -82,13 +79,6 @@ public class EntityScylla extends EntityMob {
     @Override
     protected PathNavigate createNavigator(World worldIn) {
         return new PathNavigateSwimmer(this, worldIn);
-    }
-
-    @Override
-    public float getBlockPathWeight(BlockPos pos) {
-        return this.world.getBlockState(pos).getMaterial().isLiquid()
-                ? 10.0F + this.world.getLightBrightness(pos) - 0.5F
-                : super.getBlockPathWeight(pos);
     }
 
     @Override
@@ -108,41 +98,40 @@ public class EntityScylla extends EntityMob {
         return 15728880;
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
+        //FIXME entity attributes need to be added before they can be set
+        //this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(300.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(80.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(20.0D);
+        //this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        //this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(80.0D);
+        //this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(20.0D);
     }
 
+    @Override
     public boolean isNonBoss() {
         return false;
     }
 
     private void initFishSpawn() {
-        for (int i = 0; i < 20 + world.rand.nextInt(19); i++) {
+        for (int i = 0; i < this.rand.nextInt(19); i++) {
             EntityLiving entity = null;
             switch (world.rand.nextInt(4)) {
                 case 0: {
                     entity = new EntityGuardian(world);
-
                     break;
                 }
                 case 1: {
                     entity = new EntityAnglerFish(world);
-
                     break;
                 }
                 case 2: {
                     entity = new EntitySquid(world);
-
                     break;
                 }
                 case 3: {
                     entity = new EntityElderGuardian(world);
-
                     break;
                 }
 
@@ -152,6 +141,7 @@ public class EntityScylla extends EntityMob {
                 entity.setPosition(posX + 0.5 + Math.random() * range - range / 2, this.posY + 2,
                         posZ + 0.5 + Math.random() * range - range / 2);
                 entity.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entity)), null);
+                if(entity instanceof EntityCreature) entity.setAttackTarget(this.targetedEntity);
             }
             world.spawnEntity(entity);
         }
@@ -220,7 +210,7 @@ public class EntityScylla extends EntityMob {
         super.onLivingUpdate();
     }
 
-    @SideOnly(Side.CLIENT)
+    @SideOnly(Side.CLIENT) //TODO use this method or delete it
     private void spawnParticles(EnumParticleTypes particleType) {
         for (int i = 0; i < 5; ++i) {
             double d0 = this.rand.nextGaussian() * 0.02D;
@@ -236,93 +226,30 @@ public class EntityScylla extends EntityMob {
 
     @Override
     protected void updateAITasks() {
+        super.updateAITasks();
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+    }
 
-        {
-            super.updateAITasks();
+    @Nullable
+    @Override
+    protected Item getDropItem() {
+        return AquaticItems.SCYLLA_SKULL;
+    }
 
-            this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+    @Override
+    protected void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source) {
+        super.dropLoot(wasRecentlyHit, lootingModifier, source);
+        if(wasRecentlyHit) {
+            EntityItem entityitem = this.dropItem(this.getDropItem(), 1);
+            if (entityitem != null) {
+                entityitem.setNoDespawn();
+            }
         }
     }
 
-    protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
-        EntityItem entityitem = this.dropItem(AquaticItems.SCYLLA_SKULL, 1);
-
-        if (entityitem != null) {
-            entityitem.setNoDespawn();
-        }
-    }
-
-    /**
-     * Sets the custom name tag for this entity
-     */
+    @Override
     public void setCustomNameTag(String name) {
         super.setCustomNameTag(name);
         this.bossInfo.setName(this.getDisplayName());
-    }
-
-    // WATER MOB CODE
-    // ---------------------------------------------------------------------------//
-    @Override
-    public boolean canBreatheUnderwater() {
-        return true;
-    }
-
-    /**
-     * Checks if the entity's current position is a valid location to spawn this
-     * entity.
-     */
-    @Override
-    public boolean getCanSpawnHere() {
-        return true;
-    }
-
-    /**
-     * Checks that the entity is not colliding with any blocks / liquids
-     */
-    @Override
-    public boolean isNotColliding() {
-        return this.world.checkNoEntityCollision(this.getEntityBoundingBox(), this);
-    }
-
-    /**
-     * Get number of ticks, at least during which the living entity will be silent.
-     */
-    @Override
-    public int getTalkInterval() {
-        return 120;
-    }
-
-    /**
-     * Get the experience points the entity currently has.
-     */
-    @Override
-    protected int getExperiencePoints(EntityPlayer player) {
-        return 1 + this.world.rand.nextInt(3);
-    }
-
-    /**
-     * Gets called every tick from main Entity class
-     */
-    @Override
-    public void onEntityUpdate() {
-        int i = this.getAir();
-        super.onEntityUpdate();
-
-        if (this.isEntityAlive() && !this.isInWater()) {
-            --i;
-            this.setAir(i);
-
-            if (this.getAir() == -20) {
-                this.setAir(0);
-                this.attackEntityFrom(DamageSource.DROWN, 2.0F);
-            }
-        } else {
-            this.setAir(300);
-        }
-    }
-
-    @Override
-    public boolean isPushedByWater() {
-        return false;
     }
 }

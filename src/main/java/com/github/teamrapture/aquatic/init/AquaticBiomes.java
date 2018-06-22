@@ -15,8 +15,8 @@ public class AquaticBiomes {
         //add biome types for each biome based on the description in BIomeDictionary, this also improves modded mob spawn compatibility
         BiomeDictionary.addTypes(AquaticBiomes.BIOME_AQUATIC,
                 BiomeDictionary.Type.OCEAN, //WATER is automatically set
-                BiomeDictionary.Type.WET,
-                BiomeDictionary.Type.SPOOKY, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.RARE
+                BiomeDictionary.Type.SPOOKY,
+                BiomeDictionary.Type.MAGICAL
         );
     }
 }

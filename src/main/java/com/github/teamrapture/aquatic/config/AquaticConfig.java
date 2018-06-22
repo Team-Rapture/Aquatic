@@ -68,19 +68,19 @@ public class AquaticConfig {
 
         @Config.RequiresMcRestart
         @Config.Name("Anglerfish")
-        public final EntitySpawn anglerFish = new EntitySpawn(10, 1, 3);
+        public final EntitySpawn anglerFish = new EntitySpawn(5, 1, 3);
 
         @Config.RequiresMcRestart
         @Config.Name("JellyFish")
-        public final EntitySpawn jellyFish = new EntitySpawn(21, 5, 14);
+        public final EntitySpawn jellyFish = new EntitySpawn(14, 9, 26);
 
         @Config.RequiresMcRestart
         @Config.Name("Shark")
-        public final EntitySpawn shark = new EntitySpawn(8, 1, 2);
+        public final EntitySpawn shark = new EntitySpawn(4, 1, 4);
 
         @Config.RequiresMcRestart
         @Config.Name("Guardian")
-        public final EntitySpawn guardian = new EntitySpawn(4, 1, 2);
+        public final EntitySpawn guardian = new EntitySpawn(2, 1, 2);
 
         @Config.RequiresMcRestart
         @Config.Name("Squid")

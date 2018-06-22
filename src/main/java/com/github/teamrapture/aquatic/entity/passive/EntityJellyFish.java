@@ -52,35 +52,37 @@ public class EntityJellyFish extends EntityWaterMob {
         this.rotationVelocity = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
     }
 
-
+    @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityJellyFish.AIMoveRandom(this));
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
     }
 
+    @Override
     public float getEyeHeight() {
         return this.height * 0.5F;
     }
 
+    @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_SQUID_AMBIENT;
     }
 
+    @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_SQUID_HURT;
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SQUID_DEATH;
     }
 
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
     protected float getSoundVolume() {
         return 0.4F;
     }
@@ -89,20 +91,18 @@ public class EntityJellyFish extends EntityWaterMob {
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk
      * on. used for spiders and wolves to prevent them from trampling crops
      */
+    @Override
     protected boolean canTriggerWalking() {
         return false;
     }
 /*
 	@Nullable
+	@Override
 	protected ResourceLocation getLootTable() {
 		return LootTableList.ENTITIES_SQUID;
 	}*/
 
-    /**
-     * Called frequently so the entity can update its state every tick as required.
-     * For example, zombies and skeletons use this to react to sunlight and start to
-     * burn.
-     */
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
         this.prevjellyPitch = this.jellyPitch;
@@ -177,14 +177,12 @@ public class EntityJellyFish extends EntityWaterMob {
         }
     }
 
+    @Override
     public void travel(float strafe, float vertical, float forward) {
         this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
     }
 
-    /**
-     * Checks if the entity's current position is a valid location to spawn this
-     * entity.
-     */
+    @Override
     public boolean getCanSpawnHere() {
         return this.posY > 65.0D && this.posY < this.world.getSeaLevel() - 20 && super.getCanSpawnHere();
     }
@@ -193,6 +191,7 @@ public class EntityJellyFish extends EntityWaterMob {
      * Handler for {@link World#setEntityState}
      */
     @SideOnly(Side.CLIENT)
+    @Override
     public void handleStatusUpdate(byte id) {
         if (id == 19) {
             this.jellyRotation = 0.0F;
@@ -218,16 +217,12 @@ public class EntityJellyFish extends EntityWaterMob {
             this.jelly = p_i45859_1_;
         }
 
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
+        @Override
         public boolean shouldExecute() {
             return true;
         }
 
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
+        @Override
         public void updateTask() {
             int i = this.jelly.getIdleTime();
 
