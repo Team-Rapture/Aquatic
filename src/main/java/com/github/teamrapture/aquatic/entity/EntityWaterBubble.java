@@ -1,12 +1,14 @@
 package com.github.teamrapture.aquatic.entity;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityWaterBubble extends Entity {
@@ -31,9 +33,10 @@ public class EntityWaterBubble extends Entity {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if (this.ticksExisted >= 20 * 10) {
+        if (!this.isInWater() || this.ticksExisted >= 20 * 60 * 2) {
             this.setDead();
         }
+        this.move(MoverType.SELF, this.posX, this.posY + 0.075D, this.posZ);
     }
 
     @Override
@@ -44,6 +47,8 @@ public class EntityWaterBubble extends Entity {
 
     @Override
     public void entityInit() {
+        this.dataManager.register(SIZE, 0.5F);
+        this.dataManager.register(AIR_SUPPLY, 100);
     }
 
     @Override
@@ -67,6 +72,6 @@ public class EntityWaterBubble extends Entity {
     }
 
     public void setSize(float size) {
-        this.dataManager.set(SIZE, Math.max(size, 0.0F));
+        this.dataManager.set(SIZE, MathHelper.clamp(size, 0.0F, 1.0F));
     }
 }

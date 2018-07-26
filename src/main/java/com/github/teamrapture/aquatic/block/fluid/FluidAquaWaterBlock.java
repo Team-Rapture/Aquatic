@@ -55,11 +55,10 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
 
     @Override
     public boolean shouldSideBeRendered(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
-        if (side == EnumFacing.UP) {
-            IBlockState upperState = world.getBlockState(pos.add(0, 1, 0));
-            return (!isSourceBlock(world, pos) || !upperState.isFullBlock()) && !upperState.getMaterial().isLiquid();
-        }
-        return super.shouldSideBeRendered(state, world, pos, side);
+        IBlockState blockState = world.getBlockState(pos.offset(side));
+        if(blockState.isFullBlock() && blockState.getMaterial() == Material.GLASS) return false;
+        if(side == EnumFacing.UP) return (!isSourceBlock(world, pos) || !blockState.isFullBlock()) && !blockState.getMaterial().isLiquid();
+        return super.shouldSideBeRendered(blockState, world, pos, side);
     }
 
     //ExplosiveFishing integration

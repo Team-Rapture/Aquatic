@@ -20,10 +20,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class EntityAnglerFish extends EntityWaterMob implements IMob {
-    private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityAnglerFish.class,
-            DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> TARGET_ENTITY = EntityDataManager
-            .createKey(EntityAnglerFish.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityAnglerFish.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> TARGET_ENTITY = EntityDataManager.createKey(EntityAnglerFish.class, DataSerializers.VARINT);
     private EntityLivingBase targetedEntity;
     private float randomMotionVecX;
     private float randomMotionVecY;
