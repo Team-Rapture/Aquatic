@@ -1,28 +1,26 @@
-package com.github.teamrapture.aquatic.ph;
+package com.github.teamrapture.aquatic.api.capability.ph;
 
-import com.github.teamrapture.aquatic.api.ph.CapabilityPH;
-import com.github.teamrapture.aquatic.api.ph.IPHProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
-public class PHHandler implements IPHProvider {
+public class PHStorage implements IPHProvider {
 
     private static final int MAX_PH = 10000;
-    private int PH;
+    protected int ph;
 
-    public PHHandler() {
+    public PHStorage() {
         this(0);
     }
 
-    public PHHandler(int ph) {
-        this.PH = ph;
+    public PHStorage(int ph) {
+        this.ph = ph;
     }
 
     @Override
     public void addPH(int amount) {
-        this.PH = MathHelper.clamp(this.PH + amount, 0, MAX_PH);
+        this.ph = MathHelper.clamp(this.ph + amount, 0, MAX_PH);
     }
 
     @Override
@@ -42,12 +40,12 @@ public class PHHandler implements IPHProvider {
 
     @Override
     public int getPH() {
-        return this.PH;
+        return this.ph;
     }
 
     @Override
     public void setPH(int amount) {
-        this.PH = Math.max(0, amount);
+        this.ph = Math.max(0, amount);
     }
 
     @Override

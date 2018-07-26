@@ -68,7 +68,7 @@ public class TileSolutionTank extends TileEntityInventory implements ITickable {
             }
         }
 
-        if (tank.getFluidAmount() > 0 && tank.getFluid().isFluidEqual(new FluidStack(CommonProxy.AQUA_WATER, 1000))) {
+        if (tank.getFluidAmount() > 0 && tank.getFluid().isFluidEqual(new FluidStack(CommonProxy.AQUATIC_WATER, 1000))) {
             if (tank.getFluid().tag != null) {
                 double randomValue = (double) Math.round(Math.sqrt(6 + (14 - 6) * world.rand.nextDouble()) * 100d) / 100d;
                 tank.getFluid().tag.setDouble("ph", randomValue);

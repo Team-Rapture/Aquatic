@@ -62,6 +62,9 @@ item.aquatic.cooked_angler_fish.name=Cooked Angler Fish
 item.aquatic.raw_sliced_meat.name=Raw Bacon
 item.aquatic.cooked_sliced_meat.name=Cooked Bacon
 
+#Fluids
+fluid.aquatic_water=Aquatic Water
+
 #CreativeTabs
 itemGroup.aquatic.name=Aquatic
 

@@ -1,18 +1,17 @@
 package com.github.teamrapture.aquatic.tileentity;
 
-import com.github.teamrapture.aquatic.api.oxygen.CapabilityOxygen;
+import com.github.teamrapture.aquatic.api.capability.oxygen.CapabilityOxygen;
+import com.github.teamrapture.aquatic.api.capability.oxygen.IOxygenProvider;
+import com.github.teamrapture.aquatic.api.capability.oxygen.OxygenStorage;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
 import com.github.teamrapture.aquatic.client.render.hud.IHudSupport;
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
-import com.github.teamrapture.aquatic.init.AquaticItems;
-import com.github.teamrapture.aquatic.item.armor.ScubaSuit;
-import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 
@@ -22,16 +21,19 @@ import java.util.List;
 
 public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickable {
 
-    public static final int sqRange = 30 * 30;
-    public OxygenHandler oxygen = new OxygenHandler(10000);
+    private static final int sqRange = 30 * 30;
+
+    //FIXME merge into one variable!
+    private static final int NETWORK_TRANSFER_AMOUNT = 20;
+    private static final int SUIT_TRANSFER_AMOUNT = 300;
+    private IOxygenProvider oxygen = new OxygenStorage(10000);
     public BlockPos controllerPos = null;
-    public int beamRenderTicks;
     private boolean hasAquaController = false;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        oxygen.readFromNBT(nbt);
+        CapabilityOxygen.OXYGEN.readNBT(this.oxygen, null, nbt.getTag("oxygen"));
         hasAquaController = nbt.getBoolean("hasAquaController");
         if (nbt.hasKey("contx") && nbt.hasKey("conty") && nbt.hasKey("contz")) {
             controllerPos = new BlockPos(nbt.getInteger("contx"), nbt.getInteger("conty"), nbt.getInteger("contz"));
@@ -40,7 +42,7 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        oxygen.writeToNBT(nbt);
+        nbt.setTag("oxygen", CapabilityOxygen.OXYGEN.writeNBT(this.oxygen, null));
         nbt.setBoolean("hasAquaController", hasAquaController());
         if (controllerPos != null) {
             nbt.setInteger("contx", controllerPos.getX());
@@ -52,52 +54,40 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
 
     @Override
     public void update() {
-        this.beamRenderTicks++;
-        if (world.isRemote) return;
+        if(world.isRemote) {
+            BlockPos pos = this.getPos();
+            IBlockState cuurentState = world.getBlockState(pos);
+            world.notifyBlockUpdate(pos, cuurentState, cuurentState, 3);
 
-        IBlockState cuurentState = world.getBlockState(pos);
-        world.notifyBlockUpdate(pos, cuurentState, cuurentState, 3);
-
-        if (!hasAquaController()) {
-            if (world.getTotalWorldTime() % 20 != 0) return;
-            for (BlockPos bp : BlockPos.getAllInBox(pos.getX() - 15, pos.getY() - 15, pos.getZ() - 15, pos.getX() + 15, pos.getY() + 15, pos.getZ() + 15)) {
-                IBlockState state = world.getBlockState(bp);
-                if (!world.isAirBlock(bp)) {
-                    if (state.getBlock() == AquaticBlocks.AQUANET_CONTROLLER) {
+            if(!hasAquaController()) {
+                if(world.getTotalWorldTime() % 20 == 0) for(BlockPos bp : BlockPos.getAllInBox(pos.add(-15, -15, -15), pos.add(15, 15, 15))) {
+                    if (!world.isAirBlock(bp) && world.getBlockState(bp) == AquaticBlocks.AQUANET_CONTROLLER && world.getTileEntity(bp) instanceof TileAquaNetController) {
                         controllerPos = bp;
                         setHasAquaController(true);
+                        break;
                     }
                 }
             }
-        } else {
-            if (controllerPos != null && world.getTileEntity(controllerPos) != null) {
-                if (!(world.getTileEntity(controllerPos) instanceof TileAquaNetController)) {
-                    setHasAquaController(false);
-                    return;
-                }
-                TileAquaNetController controller = (TileAquaNetController) world.getTileEntity(controllerPos);
-                if (controller.oxygen.canSendOxygen(20)) {
-                    if (oxygen.canReceiveOxygen(20)) {
-                        controller.oxygen.drainOxygen(20);
-                        oxygen.fillOxygen(20);
-                        markDirty();
-                        controller.markDirty();
-                    }
-                }
-            } else {
-                setHasAquaController(false);
-            }
-        }
+            else {
 
-        if (world.getTotalWorldTime() % 10 == 0) {
-            List<EntityPlayer> playerList = playersInRange();
-            if (playerList.size() > 0) {
-            }
-            for (EntityPlayer player : playerList) {
-                if (player.isInWater() && !player.capabilities.isCreativeMode) {
-                    sendPlayerAir(player);
+                //TODO make nodes connect to each other!
+
+                if(controllerPos != null && world.getTileEntity(controllerPos) instanceof TileAquaNetController) {
+                    TileAquaNetController controller = (TileAquaNetController) world.getTileEntity(controllerPos);
+                    IOxygenProvider oxygenController = controller.getCapability(CapabilityOxygen.OXYGEN, null);
+                    if(oxygenController != null) {
+                        if(oxygen.canReceiveOxygen(NETWORK_TRANSFER_AMOUNT) && oxygenController.canSendOxygen(NETWORK_TRANSFER_AMOUNT)) {
+                            oxygenController.drainOxygen(NETWORK_TRANSFER_AMOUNT);
+                            oxygen.fillOxygen(NETWORK_TRANSFER_AMOUNT);
+                            this.markDirty();
+                            controller.markDirty();
+                        }
+                    }
                 }
+                else setHasAquaController(false);
             }
+
+            if (world.getTotalWorldTime() % 10 == 0) playersInRange().forEach(this::sendPlayerAir);
         }
     }
 
@@ -112,27 +102,18 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
         return rangePlayer;
     }
 
-    public void sendPlayerAir(EntityPlayer player) {
-        if (player.getAir() < 300) {
-            if (oxygen.canSendOxygen(300)) {
-                if (hasFullArmor(player)) {
-                    ScubaSuit suit = (ScubaSuit) player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem();
-                    suit.oxygenStorage.fillOxygen(300);
-                    oxygen.drainOxygen(300);
-                    player.setAir(player.getAir() + 30);
+    private void sendPlayerAir(EntityPlayer player) {
+        player.getArmorInventoryList().forEach(stack -> {
+            if(!this.oxygen.canSendOxygen(SUIT_TRANSFER_AMOUNT)) return;
+            IOxygenProvider suitOxygen = stack.getCapability(CapabilityOxygen.OXYGEN, null);
+            if(suitOxygen != null) {
+                if(suitOxygen.canReceiveOxygen(SUIT_TRANSFER_AMOUNT)) {
+                    suitOxygen.fillOxygen(SUIT_TRANSFER_AMOUNT);
+                    this.oxygen.drainOxygen(SUIT_TRANSFER_AMOUNT);
                     markDirty();
                 }
             }
-        }
-    }
-
-    public boolean hasFullArmor(EntityPlayer player) {
-        return player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == AquaticItems.SCUBA_HELEMT
-                && player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem() == AquaticItems.SCUBA_CHEST
-                && player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem() == AquaticItems.SCUBA_LEGGINGS
-                && (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.SCUBA_FEET
-                || player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == AquaticItems.HEAVY_IRON_BOOTS);
-
+        });
     }
 
     @Override
@@ -157,14 +138,14 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return true;
+        if (capability == CapabilityOxygen.OXYGEN) return true;
         return super.hasCapability(capability, facing);
     }
 
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) this.oxygen;
+        if (capability == CapabilityOxygen.OXYGEN) return (T) this.oxygen;
         return super.getCapability(capability, facing);
     }
 
@@ -175,5 +156,10 @@ public class TileAquaNode extends TileEntityBase implements IHudSupport, ITickab
     public void setHasAquaController(boolean hasAquaController) {
         this.hasAquaController = hasAquaController;
         markDirty();
+    }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        return INFINITE_EXTENT_AABB;
     }
 }

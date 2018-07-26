@@ -1,23 +1,22 @@
-package com.github.teamrapture.aquatic.oxygen;
+package com.github.teamrapture.aquatic.api.capability.oxygen;
 
-import com.github.teamrapture.aquatic.api.oxygen.IOxygenProvider;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 
-public class OxygenHandler implements IOxygenProvider {
+public class OxygenStorage implements IOxygenProvider {
 
-    private int oxygen = 0;
+    protected int oxygen = 0;
     private int maxOxygen;
 
-    public OxygenHandler() {
+    public OxygenStorage() {
         this(10000);
     }
 
-    public OxygenHandler(int capacity) {
+    public OxygenStorage(int capacity) {
         this.maxOxygen = capacity;
     }
 
-    public OxygenHandler(int capacity, int initialAmount) {
+    public OxygenStorage(int capacity, int initialAmount) {
         this(capacity);
         this.setOxygen(initialAmount);
     }
@@ -63,7 +62,7 @@ public class OxygenHandler implements IOxygenProvider {
         return this.maxOxygen;
     }
 
-    public OxygenHandler readFromNBT(NBTTagCompound nbt) {
+    public OxygenStorage readFromNBT(NBTTagCompound nbt) {
         this.setOxygen(nbt.getInteger("oxygen"));
         return this;
     }

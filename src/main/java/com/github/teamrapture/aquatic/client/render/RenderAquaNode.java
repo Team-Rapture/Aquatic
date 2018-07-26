@@ -1,9 +1,10 @@
 package com.github.teamrapture.aquatic.client.render;
 
 import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.api.capability.oxygen.CapabilityOxygen;
+import com.github.teamrapture.aquatic.api.capability.oxygen.IOxygenProvider;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
-import com.github.teamrapture.aquatic.tileentity.TileAquaNetController;
 import com.github.teamrapture.aquatic.tileentity.TileAquaNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -12,7 +13,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -27,46 +28,51 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
     private static final ResourceLocation BUBBLE = new ResourceLocation(Aquatic.MODID, "textures/entity/bubble.png");
     private Minecraft mc = Minecraft.getMinecraft();
 
-
     @Override
     public void render(TileAquaNode te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         BlockPos blockPos = te.getPos();
-
         HudRender.renderHud(te, x, y, z);
-        if (te.controllerPos != null && te.hasAquaController()) {
-            TileEntity controllerTe = te.getWorld().getTileEntity(te.controllerPos);
-            if (controllerTe != null && controllerTe instanceof TileAquaNetController) {
-                TileAquaNetController controller = (TileAquaNetController) controllerTe;
-
-                double sX = te.controllerPos.getX() - blockPos.getX() + x + 0.5;
-                double sY = te.controllerPos.getY() - blockPos.getY() + y + 0.5;
-                double sZ = te.controllerPos.getZ() - blockPos.getZ() + z + 0.5;
-
-                this.renderBeam(sX, sY, sZ, x + 0.5, y + 0.625, z + 0.5, te.beamRenderTicks, partialTicks,
-                        te.oxygen.getOxygenStored() != te.oxygen.getMaxOxygenStorage() && controller.oxygen.canSendOxygen(20));
+        IOxygenProvider teOxygen = te.getCapability(CapabilityOxygen.OXYGEN, null);
+        if(teOxygen != null) {
+            if(te.hasAquaController()) {
+                TileEntity controllerTe = te.getWorld().getTileEntity(te.controllerPos);
+                if (controllerTe != null) {
+                    double sX = te.controllerPos.getX() - blockPos.getX() + x + 0.5;
+                    double sY = te.controllerPos.getY() - blockPos.getY() + y + 0.5;
+                    double sZ = te.controllerPos.getZ() - blockPos.getZ() + z + 0.5;
+                    IOxygenProvider controllerOxygen = controllerTe.getCapability(CapabilityOxygen.OXYGEN, null);
+                    if(controllerOxygen != null) this.renderBeam(sX, sY, sZ, x + 0.5, y + 0.625, z + 0.5, mc.player.ticksExisted, partialTicks,teOxygen.canReceiveOxygen(20) && controllerOxygen.canSendOxygen(20));
+                }
             }
         }
         //System.out.printf("%s %s%n", partialTicks, alpha);
         //System.out.printf("%s %s %s%n", blockPos.getX(), blockPos.getY(), blockPos.getZ());
-        if (AquaticConfig.machines.aquaNodeBeam && te.oxygen.getOxygenStored() != 0) {
-            for (EntityPlayer player : te.playersInRange()) {
-                if (te.hasFullArmor(player)) {
-                    Vec3d pPos = player.getPositionVector();
-                    double dX = player.posX - player.lastTickPosX;
-                    double dY = player.posY - player.lastTickPosY;
-                    double dZ = player.posZ - player.lastTickPosZ;
-                    float invAlpha = (1f - partialTicks);
-                    double pX = blockPos.getX() - pPos.x - x + dX * invAlpha;
-                    double pY = blockPos.getY() - pPos.y - y + dY * invAlpha - (player.height / 2f);
-                    double pZ = blockPos.getZ() - pPos.z - z + dZ * invAlpha;
-                    renderBeam(x + 0.5, y + 0.625, z + 0.5, -pX, -pY, -pZ, te.beamRenderTicks, partialTicks, true);
+
+        if (AquaticConfig.machines.aquaNodeBeam && teOxygen.getOxygenStored() != 0) {
+            te.playersInRange().forEach(player -> {
+                boolean bubbles = false;
+                for(ItemStack stack : player.getEquipmentAndArmor()) {
+                    if(!teOxygen.canSendOxygen(300) || stack.isEmpty()) continue;
+                    IOxygenProvider stackOxygen = stack.getCapability(CapabilityOxygen.OXYGEN, null);
+                    if(stackOxygen != null && stackOxygen.canReceiveOxygen(300)) {
+                        bubbles = true;
+                        break;
+                    }
                 }
-            }
+                Vec3d pPos = player.getPositionVector();
+                double dX = player.posX - player.lastTickPosX;
+                double dY = player.posY - player.lastTickPosY;
+                double dZ = player.posZ - player.lastTickPosZ;
+                float invAlpha = (1f - partialTicks);
+                double pX = blockPos.getX() - pPos.x - x + dX * invAlpha;
+                double pY = blockPos.getY() - pPos.y - y + dY * invAlpha - (player.height / 2f);
+                double pZ = blockPos.getZ() - pPos.z - z + dZ * invAlpha;
+                renderBeam(x + 0.5, y + 0.625, z + 0.5, -pX, -pY, -pZ, mc.player.ticksExisted, partialTicks, bubbles);
+            });
         }
     }
 
     private void renderBeam(double x1, double y1, double z1, double x2, double y2, double z2, int ticks, double partialTicks, boolean renderBubbles) {
-
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         this.bindTexture(OXYGEN_BEAM);

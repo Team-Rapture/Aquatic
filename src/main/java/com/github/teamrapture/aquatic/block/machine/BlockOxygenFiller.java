@@ -53,7 +53,7 @@ public class BlockOxygenFiller extends BlockContainerBase {
             IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
             IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
             IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-            EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
+            EnumFacing enumfacing = state.getValue(FACING);
 
             if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock()) {
                 enumfacing = EnumFacing.SOUTH;

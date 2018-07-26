@@ -1,9 +1,9 @@
 package com.github.teamrapture.aquatic.item.armor;
 
 import com.github.teamrapture.aquatic.Aquatic;
-import com.github.teamrapture.aquatic.api.oxygen.CapabilityOxygen;
+import com.github.teamrapture.aquatic.api.capability.oxygen.CapabilityOxygen;
 import com.github.teamrapture.aquatic.init.AquaticItems;
-import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
+import com.github.teamrapture.aquatic.api.capability.oxygen.OxygenStorage;
 import com.github.teamrapture.aquatic.util.NameUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -24,7 +24,7 @@ public class ScubaSuit extends ItemArmor {
 
     public static final ArmorMaterial scuba_suit = EnumHelper.addArmorMaterial("scuba_suit", "aquatic:scuba_suit", 5, new int[]{1, 2, 3, 1}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F);
     public EntityEquipmentSlot slot;
-    public OxygenHandler oxygenStorage = new OxygenHandler(10000);
+    public OxygenStorage oxygenStorage = new OxygenStorage(10000);
 
     public ScubaSuit(EntityEquipmentSlot slot, String name) {
         super(scuba_suit, 0, slot);
@@ -66,13 +66,13 @@ public class ScubaSuit extends ItemArmor {
         return new ICapabilityProvider() {
             @Override
             public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityOxygen.OXYGEN_CAPABILITY;
+                return capability == CapabilityOxygen.OXYGEN;
             }
 
             @Nullable
             @Override
             public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-                return capability == CapabilityOxygen.OXYGEN_CAPABILITY ? CapabilityOxygen.OXYGEN_CAPABILITY.cast(oxygenStorage) : null;
+                return capability == CapabilityOxygen.OXYGEN ? CapabilityOxygen.OXYGEN.cast(oxygenStorage) : null;
             }
         };
     }

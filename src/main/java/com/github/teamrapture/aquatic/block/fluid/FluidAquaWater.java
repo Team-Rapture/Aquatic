@@ -8,10 +8,10 @@ import net.minecraftforge.fluids.Fluid;
 public class FluidAquaWater extends Fluid {
 
     public FluidAquaWater() {
-        super("aqua_water", new ResourceLocation(Aquatic.MODID, "blocks/fluids/aqua_water_still"), new ResourceLocation(Aquatic.MODID, "blocks/fluids/aqua_water_flowing"));
+        super("aquatic_water", new ResourceLocation(Aquatic.MODID, "blocks/fluids/aqua_water_still"), new ResourceLocation(Aquatic.MODID, "blocks/fluids/aqua_water_flowing"));
         this.setGaseous(false);
         this.setDensity(1000);
         this.setViscosity(500);
-        this.setRarity(EnumRarity.RARE);
+        this.setRarity(EnumRarity.COMMON);
     }
 }

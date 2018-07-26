@@ -1,6 +1,8 @@
-package com.github.teamrapture.aquatic.api.oxygen;
+package com.github.teamrapture.aquatic.api.capability.oxygen;
 
 public interface IOxygenProvider {
+
+    //FIXME add simulate and real return values, (see EnergyStorage)!
 
     //Set the oxygen amount
     void setOxygen(int amount);

@@ -3,7 +3,6 @@ package com.github.teamrapture.aquatic.tileentity;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
 import com.github.teamrapture.aquatic.client.render.hud.IHudSupport;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
-import com.github.teamrapture.aquatic.util.capability.CustomEnergyStorage;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -14,6 +13,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
@@ -23,7 +24,7 @@ import java.util.List;
 public class TileDepthGenerator extends TileEntityBase implements IHudSupport, ITickable {
 
     private static final List<Block> ORES = new ArrayList<>();
-    private CustomEnergyStorage storage = new CustomEnergyStorage(1000000);
+    private IEnergyStorage storage = new EnergyStorage(1000000, 0, 128000);
     private int timer = 0;
 
     /**
@@ -47,15 +48,16 @@ public class TileDepthGenerator extends TileEntityBase implements IHudSupport, I
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        storage.readFromNBT(nbt);
+        CapabilityEnergy.ENERGY.readNBT(storage, null, nbt.getTag("energy"));
         timer = nbt.getInteger("timer");
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        storage.writeToNBT(nbt);
+        super.writeToNBT(nbt);
+        nbt.setTag("energy", CapabilityEnergy.ENERGY.writeNBT(storage, null));
         nbt.setInteger("timer", timer);
-        return super.writeToNBT(nbt);
+        return nbt;
     }
 
     @Override

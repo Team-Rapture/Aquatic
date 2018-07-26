@@ -1,12 +1,13 @@
 package com.github.teamrapture.aquatic.tileentity;
 
-import com.github.teamrapture.aquatic.api.oxygen.CapabilityOxygen;
-import com.github.teamrapture.aquatic.api.oxygen.IOxygenProvider;
+import com.github.teamrapture.aquatic.api.capability.oxygen.CapabilityOxygen;
+import com.github.teamrapture.aquatic.api.capability.oxygen.IOxygenProvider;
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
-import com.github.teamrapture.aquatic.oxygen.OxygenHandler;
+import com.github.teamrapture.aquatic.api.capability.oxygen.OxygenStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +17,7 @@ import javax.annotation.Nullable;
 
 public class TileOxygenFiller extends TileEntityInventory implements ITickable {
 
-    public OxygenHandler oxygen = new OxygenHandler(100000);
+    public OxygenStorage oxygen = new OxygenStorage(100000);
     private boolean hasAquaController = false;
     @Nullable
     private BlockPos controllerPos = null;
@@ -56,35 +57,35 @@ public class TileOxygenFiller extends TileEntityInventory implements ITickable {
                     if (state.getBlock() == AquaticBlocks.AQUANET_CONTROLLER) {
                         controllerPos = bp;
                         hasAquaController = true;
+                        this.markDirty();
                     }
                 }
-            }
-        } else {
-            if (controllerPos != null && world.getTileEntity(controllerPos) != null) {
-                if (!(world.getTileEntity(controllerPos) instanceof TileAquaNetController)) {
-                    hasAquaController = false;
-                    return;
-                }
-                TileAquaNetController controller = (TileAquaNetController) world.getTileEntity(controllerPos);
-                if (controller.oxygen.canSendOxygen(20)) {
-                    if (oxygen.canReceiveOxygen(20)) {
-                        controller.oxygen.drainOxygen(20);
-                        oxygen.fillOxygen(20);
-                    }
-                }
-            } else {
-                hasAquaController = false;
             }
         }
+        if(controllerPos != null) {
+            TileEntity controller = world.getTileEntity(controllerPos);
+            if(controller != null) {
+                IOxygenProvider controllerOxygen = controller.getCapability(CapabilityOxygen.OXYGEN, null);
+                if(controllerOxygen != null) {
+                    if(controllerOxygen.canSendOxygen(20) && oxygen.canReceiveOxygen(20)) {
+                        controllerOxygen.drainOxygen(20);
+                        oxygen.fillOxygen(20);
+                        this.markDirty();
+                        controller.markDirty();
+                    }
+                }
+            }
+        }
+        hasAquaController = false;  //TODO add setter -> mark dirkty
+        this.markDirty();
 
         if (!inventory.getStackInSlot(0).isEmpty()) {
-            if (inventory.getStackInSlot(0).hasCapability(CapabilityOxygen.OXYGEN_CAPABILITY, EnumFacing.UP)) {
-                IOxygenProvider oxygenProvider = inventory.getStackInSlot(0).getCapability(CapabilityOxygen.OXYGEN_CAPABILITY, EnumFacing.UP);
-                if (oxygenProvider.getOxygenStored() < oxygenProvider.getMaxOxygenStorage()) {
-                    if (oxygenProvider.canReceiveOxygen(20) && oxygen.canSendOxygen(20)) {
-                        oxygenProvider.fillOxygen(20);
-                        oxygen.drainOxygen(20);
-                    }
+            if (inventory.getStackInSlot(0).hasCapability(CapabilityOxygen.OXYGEN, EnumFacing.UP)) {
+                IOxygenProvider oxygenProvider = inventory.getStackInSlot(0).getCapability(CapabilityOxygen.OXYGEN, EnumFacing.UP);
+                if (oxygenProvider != null && oxygenProvider.canReceiveOxygen(20) && oxygen.canSendOxygen(20)) {
+                    oxygenProvider.fillOxygen(20);
+                    oxygen.drainOxygen(20);
+                    this.markDirty();
                 } else {
                     inventory.setStackInSlot(1, inventory.getStackInSlot(0));
                     inventory.setStackInSlot(0, ItemStack.EMPTY);
@@ -95,14 +96,14 @@ public class TileOxygenFiller extends TileEntityInventory implements ITickable {
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return true;
+        if (capability == CapabilityOxygen.OXYGEN) return true;
         return super.hasCapability(capability, facing);
     }
 
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityOxygen.OXYGEN_CAPABILITY) return (T) oxygen;
+        if (capability == CapabilityOxygen.OXYGEN) return CapabilityOxygen.OXYGEN.cast(oxygen);
         return super.getCapability(capability, facing);
     }
 }

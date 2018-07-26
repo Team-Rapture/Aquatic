@@ -61,7 +61,7 @@ public class GuiSolutionTank extends GuiContainer {
         if (this.isPointInRegion(82, 6, 14, 50, mouseX, mouseY)) {
             List<String> fluid = new ArrayList<String>();
             fluid.add(tile.tank.getFluidAmount() + " / " + tile.tank.getCapacity() + "  MB");
-            if (tile.tank.getFluidAmount() > 0 && tile.tank.getFluid().isFluidEqual(new FluidStack(CommonProxy.AQUA_WATER, 1000))) {
+            if (tile.tank.getFluidAmount() > 0 && tile.tank.getFluid().isFluidEqual(new FluidStack(CommonProxy.AQUATIC_WATER, 1000))) {
                 if (tile.tank.getFluid().tag != null) {
                     fluid.add(tile.tank.getFluid().tag.getDouble("ph") + " PH Level");
                 }

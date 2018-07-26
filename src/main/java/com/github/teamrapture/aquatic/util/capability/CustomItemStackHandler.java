@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.ItemStackHandler;
 
+//TODO remove??
 public class CustomItemStackHandler extends ItemStackHandler {
 
     private boolean tempIgnoreConditions;
