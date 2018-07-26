@@ -149,12 +149,13 @@ if (JavaVersion.current().isJava8Compatible()) {
     }
 }
 
-/*
+
 // API jar
 task apiJar(type: Jar) {
-    from sourceSets.main.output
-    from sourceSets.main.allJava
-    include 'core/upcraftlp/craftdev/api/**'
+    from "LICENSE"
+    from (sourceSets.api.allJava) {
+        include 'com/github/teamrapture/aquatic/api/**'
+    }
     manifest.mainAttributes(
             "Built-On-Java": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
             "Implementation-Title": project.name + '-api',
@@ -167,6 +168,7 @@ task apiJar(type: Jar) {
 
 // Javadoc jar
 task javadocJar(type: Jar, dependsOn: javadoc) {
+    from "LICENSE"
     from javadoc.destinationDir
     manifest.mainAttributes(
             "Built-On-Java": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
@@ -177,7 +179,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     )
     classifier = 'javadoc'
 }
-*/
 
 if (JavaVersion.current().isJava8Compatible()) {
     allprojects {
@@ -189,6 +190,7 @@ if (JavaVersion.current().isJava8Compatible()) {
 
 jar {
     from "LICENSE"
+    from sourceSets.api.output
     manifest.mainAttributes(
             "Implementation-Title": project.name,
             "Implementation-Version": "${project.mod_version}",
@@ -212,20 +214,22 @@ task signJar(type: SignJar, dependsOn: reobfJar) {
     inputFile = jar.archivePath
     outputFile = jar.archivePath
 }
-tasks.build.dependsOn signJar, publish
-tasks.curseforge.dependsOn build
+tasks.build.dependsOn signJar, apiJar, javadocJar
+tasks.curseforge.dependsOn build, publish
+tasks.curseforge.mustRunAfter build, signJar
+tasks.publish.mustRunAfter build, signJar
 
 artifacts {
-    //archives apiJar
-    //archives javadocJar
+    archives apiJar
+    archives javadocJar
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
-            //artifact apiJar
-            //artifact javadocJar
+            artifact apiJar
+            artifact javadocJar
         }
     }
 
@@ -252,10 +256,8 @@ curseforge {
 
             relations curseRelations
 
-            //no such jars for now
-            //addArtifact javadocJar
-            //addArtifact sourceJar
-            //addArtifact apiJar
+            addArtifact javadocJar
+            addArtifact apiJar
             if(project.hasProperty('core_package')) addArtifact coreJar
 
             //addGameVersion '1.12.2' //automatically determined by the CurseGradle plugin

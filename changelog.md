@@ -1,4 +1,10 @@
 ------------------------------------------------------
+Version 1.1.0
+------------------------------------------------------
+- fixed crash when going to controls menu while in a world
+- worldgen overhaul
+
+------------------------------------------------------
 Version 1.0.0-c
 ------------------------------------------------------
 - fixed possible crash with other mods registering ores (closes [#1](https://github.com/Team-Rapture/Aquatic/issues/1))
