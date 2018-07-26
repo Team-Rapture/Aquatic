@@ -87,7 +87,7 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         Vec3d vec3d = new Vec3d(x1, y1, z1);
         Vec3d vec3d1 = new Vec3d(x2, y2, z2);
         Vec3d beamDirection = vec3d.subtract(vec3d1);
-        double beamLength = beamDirection.lengthVector();
+        double beamLength = beamDirection.length();
         beamDirection = beamDirection.normalize();
         float f5 = (float) Math.acos(beamDirection.y);
         float f6 = (float) Math.atan2(beamDirection.z, beamDirection.x);

@@ -30,7 +30,7 @@ public class GuideReader {
 
     private static NBTTagCompound readJsonToNbt(@Nullable ResourceLocation location) {
         if (location != null) {
-            String path = ("/assets/" + location.getResourceDomain() + "/pages/" + location.getResourcePath()).toLowerCase(Locale.ROOT);
+            String path = ("/assets/" + location.getNamespace() + "/pages/" + location.getPath()).toLowerCase(Locale.ROOT);
             if (!path.endsWith(".json")) path += ".json";
             try (Scanner sc = new Scanner(new BufferedInputStream(MinecraftServer.class.getResourceAsStream(path)))) {
                 StringBuilder builder = new StringBuilder();
@@ -46,7 +46,7 @@ public class GuideReader {
     public static List<String> readPage(String page) {
         if (page != null && PAGES.containsKey(page)) {
             ResourceLocation location = new ResourceLocation(PAGES.get(page));
-            String path = ("/assets/" + location.getResourceDomain() + "/pages/" + Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode() + "/" + location.getResourcePath()).toLowerCase(Locale.ROOT);
+            String path = ("/assets/" + location.getNamespace() + "/pages/" + Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode() + "/" + location.getPath()).toLowerCase(Locale.ROOT);
             if (!path.endsWith(".md")) path += ".md";
             try (InputStream stream = new BufferedInputStream(MinecraftServer.class.getResourceAsStream(path))) {
                 String output = IOUtils.toString(stream, Charsets.UTF_8);

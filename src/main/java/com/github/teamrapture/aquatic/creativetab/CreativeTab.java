@@ -76,41 +76,36 @@ public class CreativeTab extends CreativeTabs {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ItemStack getIconItemStack() {
-        this.updateDisplayStack();
+    public ItemStack createIcon() {
+        if (this.displayStacks.isEmpty()) {
+            this.displayAllRelevantItems(displayStacks);
+        }
+        this.icon = ItemStack.EMPTY;
+        if (!displayStacks.isEmpty()) try {
+            for (int i = 0; i < displayStacks.size(); i++) {
+                ItemStack listStack = displayStacks.get(i);
+                if (!listStack.isEmpty() && listStack.isItemEqual(this.icon)) {
+                    int nextIndex = i + 1;
+                    if (nextIndex > displayStacks.size()) nextIndex = 0;
+                    this.icon = displayStacks.get(nextIndex);
+                }
+            }
+        } catch (Exception e) {
+            //NO-OP
+        }
+        if (this.icon.isEmpty()) {
+            Aquatic.getLogger().warn("found empty Itemstack for CreativeTab " + this.getTabLabel() + ", defaulting to " + Items.DIAMOND.getRegistryName());
+            this.icon = new ItemStack(Items.DIAMOND);
+            this.displayRandom = false;
+        }
         return this.icon;
     }
 
-    @SideOnly(Side.CLIENT)
-    private void updateDisplayStack() {
-        if (this.icon.isEmpty() || this.displayRandom && Minecraft.getSystemTime() % 120 == 0) {
-            if (this.displayStacks.isEmpty()) {
-                this.displayAllRelevantItems(displayStacks);
-            }
-            this.icon = ItemStack.EMPTY;
-            if (!displayStacks.isEmpty()) try {
-                for (int i = 0; i < displayStacks.size(); i++) {
-                    ItemStack listStack = displayStacks.get(i);
-                    if (!listStack.isEmpty() && listStack.isItemEqual(this.icon)) {
-                        int nextIndex = i + 1;
-                        if (nextIndex > displayStacks.size()) nextIndex = 0;
-                        this.icon = displayStacks.get(nextIndex);
-                    }
-                }
-            } catch (Exception e) {
-                //NO-OP
-            }
-            if (this.icon.isEmpty()) {
-                Aquatic.getLogger().warn("found empty Itemstack for CreativeTab " + this.getTabLabel() + ", defaulting to " + Items.DIAMOND.getRegistryName());
-                this.icon = new ItemStack(Items.DIAMOND);
-                this.displayRandom = false;
-            }
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
     @Override
-    public ItemStack getTabIconItem() {
-        return this.getIconItemStack();
+    public ItemStack getIcon() {
+        if(this.icon.isEmpty() || (this.displayRandom && Minecraft.getSystemTime() % 120 == 0)) {
+            this.icon = this.createIcon();
+        }
+        return icon;
     }
 }

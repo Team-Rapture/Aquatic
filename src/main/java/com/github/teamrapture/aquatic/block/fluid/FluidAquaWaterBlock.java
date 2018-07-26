@@ -10,7 +10,6 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -27,8 +26,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-
 @Optional.Interface(modid = "picklelib", iface = "com.deflatedpickle.picklelib.api.IFishable")
 @Mod.EventBusSubscriber(modid = Aquatic.MODID)
 public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomModelProvider, IFishable {
@@ -36,7 +33,7 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
     public FluidAquaWaterBlock() {
         super(CommonProxy.AQUA_WATER, Material.WATER);
         this.setRegistryName(CommonProxy.AQUA_WATER.getName());
-        this.setUnlocalizedName(fluidName);
+        this.setTranslationKey(fluidName);
         this.setLightOpacity(3);
         this.setLightLevel(0.5F);
         this.disableStats();
@@ -53,14 +50,14 @@ public class FluidAquaWaterBlock extends BlockFluidClassic implements ICustomMod
         //NO-OP: make blocks not affected by explosions at all, yet don't block explosion power so you can go crazy in the aquatic dimension
     }
 
-    @Override
+    /*@Override
     public boolean shouldSideBeRendered(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side) {
         if (side == EnumFacing.UP) {
             IBlockState upperState = world.getBlockState(pos.add(0, 1, 0));
             return (!isSourceBlock(world, pos) || !upperState.isFullBlock()) && !upperState.getMaterial().isLiquid();
         }
         return super.shouldSideBeRendered(state, world, pos, side);
-    }
+    }*/
 
     //ExplosiveFishing integration
     @Override

@@ -32,9 +32,9 @@ public class PHHandler implements IPHProvider {
 
     @Override
     public int getPHFromLocation(World world, BlockPos pos) {
-        Chunk chunk = world.getChunkFromBlockCoords(pos);
+        Chunk chunk = world.getChunk(pos);
         if (chunk.hasCapability(CapabilityPH.PH_CAPABILITY, null)) {
-            return world.getChunkFromBlockCoords(pos).getCapability(CapabilityPH.PH_CAPABILITY, null).getPH();
+            return world.getChunk(pos).getCapability(CapabilityPH.PH_CAPABILITY, null).getPH();
         }
         return 0;
 

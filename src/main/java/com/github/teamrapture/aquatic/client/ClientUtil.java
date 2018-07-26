@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -37,10 +38,10 @@ public class ClientUtil {
         Preconditions.checkArgument(data.length == 2, "Data pointer must have an array size of 2");
         ResourceLocation dest;
         try {
-            BufferedImage img = TextureUtil.readBufferedImage(ClientUtil.class.getResourceAsStream("/assets/" + location.getResourceDomain() + "/" + location.getResourcePath()));
+            BufferedImage img = TextureUtil.readBufferedImage(ClientUtil.class.getResourceAsStream("/assets/" + location.getNamespace() + "/" + location.getPath()));
             data[0] = img.getWidth();
             data[1] = img.getHeight();
-            dest = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation(location.getResourceDomain(), new DynamicTexture(img));
+            dest = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation(location.getNamespace(), new DynamicTexture(img));
         } catch (Exception e) {
             dest = TextureMap.LOCATION_MISSING_TEXTURE;
             Aquatic.getLogger().warn("Image not found:" + location);
@@ -49,6 +50,8 @@ public class ClientUtil {
     }
 
     public static KeyBinding getKeyBinding(String name, int keyCode) {
-        return new KeyBinding("key.aquatic." + name, keyCode, "key.category.aquatic");
+        KeyBinding keyBinding = new KeyBinding("key.aquatic." + name, keyCode, "key.category.aquatic");
+        ClientRegistry.registerKeyBinding(keyBinding);
+        return keyBinding;
     }
 }

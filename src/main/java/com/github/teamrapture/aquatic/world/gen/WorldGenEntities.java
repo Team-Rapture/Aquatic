@@ -64,7 +64,7 @@ public class WorldGenEntities {
     }
 
     private static BlockPos getCoreSolidorLiquidBlock(World world, BlockPos pos) {
-        Chunk chunk = world.getChunkFromBlockCoords(pos);
+        Chunk chunk = world.getChunk(pos);
         BlockPos blockpos;
         BlockPos blockpos1;
 

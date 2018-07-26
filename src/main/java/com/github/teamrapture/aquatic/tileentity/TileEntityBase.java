@@ -20,7 +20,7 @@ public class TileEntityBase extends TileEntity {
     public void markDirty() {
         super.markDirty();
         IBlockState state = world.getBlockState(pos);
-        world.markAndNotifyBlock(pos, world.getChunkFromBlockCoords(pos), state, state, 255);
+        world.markAndNotifyBlock(pos, world.getChunk(pos), state, state, 255);
     }
 
     @Override

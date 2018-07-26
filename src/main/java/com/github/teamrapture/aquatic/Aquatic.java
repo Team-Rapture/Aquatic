@@ -28,7 +28,10 @@ public class Aquatic {
     public static final String MODID = "aquatic";
     public static final String VERSION = "@VERSION@";
     public static final String FINGERPRINT_KEY = "@FINGERPRINTKEY@";
-    public static final String DEPENDENCIES = ""; // none for now
+
+    //forge 14.23.4.2739 fixed fluid rendering
+    //see https://github.com/MinecraftForge/MinecraftForge/pull/4763
+    public static final String DEPENDENCIES = "required-after:forge@[14.23.4.2739,)";
     public static final String UPDATE_JSON = "@UPDATEJSON@";
     public static final CreativeTab CREATIVE_TAB = new CreativeTab(MODID);
     @Instance(value = Aquatic.MODID)

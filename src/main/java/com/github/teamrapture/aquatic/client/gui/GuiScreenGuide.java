@@ -1,7 +1,6 @@
 package com.github.teamrapture.aquatic.client.gui;
 
 import com.github.teamrapture.aquatic.client.guide.GuideReader;
-import jline.internal.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,6 +13,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
