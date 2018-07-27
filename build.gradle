@@ -263,7 +263,7 @@ curseforge {
             //addGameVersion '1.12.2' //automatically determined by the CurseGradle plugin
 
             mainArtifact(jar) {
-                displayName = "${project.mod_name} v${project.mod_version} MC${mc_version}"
+                displayName = "${project.mod_name} v${project.mod_version} MC${version}"
             }
         }
     }
