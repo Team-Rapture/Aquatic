@@ -1,8 +1,6 @@
 package com.github.teamrapture.aquatic.config;
 
 import net.minecraftforge.common.config.Config;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static com.github.teamrapture.aquatic.Aquatic.*;
 
@@ -42,7 +40,6 @@ public class AquaticConfig {
         @Config.Comment({"Amount of oxygen an aqua net controller will generate per 20 FE", "Default: 10"})
         public int aquaNetGeneration = 10;
 
-        @SideOnly(Side.CLIENT)
         @Config.Name("Aqua Node Laser Beams")
         @Config.Comment({"Set to false to disable laser beam render to player from Aqua Nodes", "CLIENT ONLY", "Default: true"})
         public boolean aquaNodeBeam = true;
