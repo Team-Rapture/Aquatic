@@ -78,18 +78,14 @@ public class HydroDrill extends ItemTool {
     }
 
     private int getCurrentEnergyStored(ItemStack stack) {
-        if(stack.hasCapability(CapabilityEnergy.ENERGY, null)) {
-            IEnergyStorage battery = stack.getCapability(CapabilityEnergy.ENERGY, null);
-            if(battery != null) return battery.getEnergyStored();
-        }
+        IEnergyStorage battery = stack.getCapability(CapabilityEnergy.ENERGY, null);
+        if(battery != null) return battery.getEnergyStored();
         return 0;
     }
 
     private int getMaxEnergyStored(ItemStack stack) {
-        if(stack.hasCapability(CapabilityEnergy.ENERGY, null)) {
-            IEnergyStorage battery = stack.getCapability(CapabilityEnergy.ENERGY, null);
-            if(battery != null) return battery.getMaxEnergyStored();
-        }
+        IEnergyStorage battery = stack.getCapability(CapabilityEnergy.ENERGY, null);
+        if(battery != null) return battery.getMaxEnergyStored();
         return 0;
     }
 
@@ -104,7 +100,7 @@ public class HydroDrill extends ItemTool {
     @Nullable
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-		return new CapabilityProviderSerializable<>(CapabilityEnergy.ENERGY, null, new EnergyStorage(128000, 16384, 0));
+		return new CapabilityProviderSerializable<>(CapabilityEnergy.ENERGY, null, new EnergyStorage(128000, 16384));
 	}
 
 	@SideOnly(Side.CLIENT)

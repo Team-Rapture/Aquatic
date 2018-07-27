@@ -1,16 +1,18 @@
 package com.github.teamrapture.aquatic.tileentity;
 
+import com.github.teamrapture.aquatic.api.IAquaNetworkNode;
 import com.github.teamrapture.aquatic.api.capability.oxygen.CapabilityOxygen;
 import com.github.teamrapture.aquatic.api.capability.oxygen.IOxygenProvider;
+import com.github.teamrapture.aquatic.api.capability.oxygen.OxygenStorage;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
 import com.github.teamrapture.aquatic.client.render.hud.IHudSupport;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
 import com.github.teamrapture.aquatic.init.AquaticBlocks;
-import com.github.teamrapture.aquatic.api.capability.oxygen.OxygenStorage;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
@@ -18,11 +20,20 @@ import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nullable;
 
-public class TileAquaNetController extends TileEntityBase implements IHudSupport, ITickable {
+public class TileAquaNetController extends TileEntityBase implements IHudSupport, ITickable, IAquaNetworkNode {
 
-    private static final int REQUIRED_ENERGY = 20;
-    private IOxygenProvider oxygen = new OxygenStorage(10000);
-    private IEnergyStorage energy = new EnergyStorage(100000, 1024, 0);
+    //FIXME move to config!
+    public static final int MAX_NETWORK_TRANSFER_AMOUNT = 512;
+    public static final int MAX_ARMOR_TRANSFER_AMOUNT = 32;
+    private final int REQUIRED_ENERGY_PER_TICK = 20; //TODO config!
+    private final int GENERATED_OXYGEN_PER_TICK = AquaticConfig.machines.aquaNetGeneration;
+    private static final boolean DYNAMIC_OXYGEN_GENERATION = true;
+
+
+    private transient int airBlocks = 0;
+
+    private IOxygenProvider oxygen = new OxygenStorage(16000, 4096);
+    private IEnergyStorage energy = new EnergyStorage(128000, 16384);
 
     public TileAquaNetController() {
 
@@ -45,10 +56,18 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
 
     @Override
     public void update() {
-        if(!world.isRemote && world.getBlockState(getPos().down()).getBlock() == AquaticBlocks.OXYGEN_STONE && oxygen.canReceiveOxygen(AquaticConfig.machines.aquaNetGeneration) && energy.extractEnergy(REQUIRED_ENERGY, true) >= REQUIRED_ENERGY) {
-            energy.extractEnergy(REQUIRED_ENERGY, false);
-            oxygen.fillOxygen(AquaticConfig.machines.aquaNetGeneration);
-            this.markDirty();
+        if(!world.isRemote) {
+            if(world.getTotalWorldTime() % 40 == 0 && oxygen.canReceiveOxygen() && energy.canExtract()) {
+                if(world.getBlockState(getPos().down()).getBlock() == AquaticBlocks.OXYGEN_STONE) airBlocks += 2;
+                for(EnumFacing facing : EnumFacing.values()) {
+                    if(world.isAirBlock(pos.offset(facing))) airBlocks++;
+                }
+            }
+            if(energy.extractEnergy(REQUIRED_ENERGY_PER_TICK, true) >= REQUIRED_ENERGY_PER_TICK) {
+                energy.extractEnergy(REQUIRED_ENERGY_PER_TICK, false);
+                oxygen.receiveOxygen(DYNAMIC_OXYGEN_GENERATION ? Math.round(GENERATED_OXYGEN_PER_TICK * MathHelper.clamp(airBlocks / 5.0F, 0.0F, 1.0F)) : GENERATED_OXYGEN_PER_TICK, false);
+                this.markDirty();
+            }
         }
     }
 
@@ -83,5 +102,10 @@ public class TileAquaNetController extends TileEntityBase implements IHudSupport
         if (capability == CapabilityEnergy.ENERGY) return CapabilityEnergy.ENERGY.cast(energy);
         if (capability == CapabilityOxygen.OXYGEN) return CapabilityOxygen.OXYGEN.cast(oxygen);
         return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public void setDirty() {
+        this.markDirty();
     }
 }

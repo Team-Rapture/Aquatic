@@ -5,6 +5,19 @@
 - [ ] overhaul Guide
 
 ---
+
+- [ ] Aquanet
+    - [x] transfer oxygen over network
+    - [ ] transfer energy over network
+    - [ ] offload work from main thread
+    - [x] make nodes connect to controller
+    - [x] make nodes connect to nodes
+    - [ ] make network update when node is added/removed
+    - [ ] make transfer bidirectional
+    - [ ] add GUI to network controller to show node and controller count
+    - [ ] make network balance oxygen supply
+
+---
 - [ ] Entities
     - [ ] generic Fishes
         - [ ] entities

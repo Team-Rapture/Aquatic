@@ -18,6 +18,8 @@ import javax.annotation.Nullable;
 public class TileOxygenFiller extends TileEntityInventory implements ITickable {
 
     public OxygenStorage oxygen = new OxygenStorage(100000);
+
+    //TODO -> getter query pos != null
     private boolean hasAquaController = false;
     @Nullable
     private BlockPos controllerPos = null;
@@ -29,7 +31,7 @@ public class TileOxygenFiller extends TileEntityInventory implements ITickable {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        oxygen.readFromNBT(nbt);
+        CapabilityOxygen.OXYGEN.readNBT(oxygen, null, nbt.getTag("oxygen"));
         hasAquaController = nbt.getBoolean("hasAquaController");
         if (nbt.hasKey("x") && nbt.hasKey("y") && nbt.hasKey("z")) {
             controllerPos = new BlockPos(nbt.getInteger("x"), nbt.getInteger("y"), nbt.getInteger("z"));
@@ -38,7 +40,7 @@ public class TileOxygenFiller extends TileEntityInventory implements ITickable {
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        oxygen.writeToNBT(nbt);
+        nbt.setTag("oxygen", CapabilityOxygen.OXYGEN.writeNBT(oxygen, null));
         nbt.setBoolean("hasAquaController", hasAquaController);
         if (controllerPos != null) {
             nbt.setInteger("x", controllerPos.getX());
@@ -46,6 +48,11 @@ public class TileOxygenFiller extends TileEntityInventory implements ITickable {
             nbt.setInteger("z", controllerPos.getZ());
         }
         return super.writeToNBT(nbt);
+    }
+
+    public void setHasAquaController(boolean hasAquaController) {
+        this.hasAquaController = hasAquaController;
+        this.markDirty();
     }
 
     @Override
@@ -56,8 +63,7 @@ public class TileOxygenFiller extends TileEntityInventory implements ITickable {
                 if (!world.isAirBlock(bp)) {
                     if (state.getBlock() == AquaticBlocks.AQUANET_CONTROLLER) {
                         controllerPos = bp;
-                        hasAquaController = true;
-                        this.markDirty();
+                        this.setHasAquaController(true);
                     }
                 }
             }
@@ -65,32 +71,29 @@ public class TileOxygenFiller extends TileEntityInventory implements ITickable {
         if(controllerPos != null) {
             TileEntity controller = world.getTileEntity(controllerPos);
             if(controller != null) {
-                IOxygenProvider controllerOxygen = controller.getCapability(CapabilityOxygen.OXYGEN, null);
-                if(controllerOxygen != null) {
-                    if(controllerOxygen.canSendOxygen(20) && oxygen.canReceiveOxygen(20)) {
-                        controllerOxygen.drainOxygen(20);
-                        oxygen.fillOxygen(20);
+                IOxygenProvider oxygenController = controller.getCapability(CapabilityOxygen.OXYGEN, null);
+                if(oxygenController != null) {
+                    if(oxygenController.extractOxygen(oxygen.receiveOxygen(oxygenController.extractOxygen(TileAquaNetController.MAX_NETWORK_TRANSFER_AMOUNT, true), false), false) > 0) {
                         this.markDirty();
                         controller.markDirty();
                     }
                 }
             }
+            else this.setHasAquaController(false);
         }
-        hasAquaController = false;  //TODO add setter -> mark dirkty
-        this.markDirty();
 
-        if (!inventory.getStackInSlot(0).isEmpty()) {
-            if (inventory.getStackInSlot(0).hasCapability(CapabilityOxygen.OXYGEN, EnumFacing.UP)) {
-                IOxygenProvider oxygenProvider = inventory.getStackInSlot(0).getCapability(CapabilityOxygen.OXYGEN, EnumFacing.UP);
-                if (oxygenProvider != null && oxygenProvider.canReceiveOxygen(20) && oxygen.canSendOxygen(20)) {
-                    oxygenProvider.fillOxygen(20);
-                    oxygen.drainOxygen(20);
-                    this.markDirty();
-                } else {
-                    inventory.setStackInSlot(1, inventory.getStackInSlot(0));
-                    inventory.setStackInSlot(0, ItemStack.EMPTY);
-                }
+        ItemStack stack = inventory.getStackInSlot(0);
+        if (!stack.isEmpty()) {
+            IOxygenProvider oxygenProvider = stack.getCapability(CapabilityOxygen.OXYGEN, null);
+            boolean flag = true;
+            if(oxygenProvider != null) {
+                flag = oxygen.extractOxygen(oxygenProvider.receiveOxygen(oxygen.extractOxygen(TileAquaNetController.MAX_NETWORK_TRANSFER_AMOUNT, true), false), false) == 0;
             }
+            if(flag) {
+                inventory.setStackInSlot(1, stack);
+                inventory.setStackInSlot(0, ItemStack.EMPTY);
+            }
+            this.markDirty();
         }
     }
 

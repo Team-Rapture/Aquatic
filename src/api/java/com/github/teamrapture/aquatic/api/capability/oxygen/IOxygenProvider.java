@@ -1,25 +1,25 @@
 package com.github.teamrapture.aquatic.api.capability.oxygen;
 
+import net.minecraftforge.energy.IEnergyStorage;
+
+/**
+ * TODO javadoc
+ * @see {@link IEnergyStorage} for how to use
+ */
 public interface IOxygenProvider {
 
     //FIXME add simulate and real return values, (see EnergyStorage)!
 
-    //Set the oxygen amount
-    void setOxygen(int amount);
+    //add oxygen to the storage
+    int receiveOxygen(int maxReceive, boolean simulate);
 
-    void setStorageAmount(int amount);
+    //drain stored oxygen
+    int extractOxygen(int maxExtract, boolean simulate);
 
-    //Fill and drain oxygen stored
-    void fillOxygen(int amount);
+    boolean canReceiveOxygen();
 
-    void drainOxygen(int amount);
+    boolean canExtractOxygen();
 
-    //Checks is oxygen can be received/extracted based on the amount input
-    boolean canReceiveOxygen(int amount);
-
-    boolean canSendOxygen(int amount);
-
-    //Grab oxygen variables
     int getOxygenStored();
 
     int getMaxOxygenStorage();

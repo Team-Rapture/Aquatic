@@ -24,7 +24,6 @@ public class AquaNetController extends BlockContainerBase {
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
-
     }
 
     @Nullable

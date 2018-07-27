@@ -1,74 +1,80 @@
 package com.github.teamrapture.aquatic.api.capability.oxygen;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.math.MathHelper;
-
 public class OxygenStorage implements IOxygenProvider {
 
-    protected int oxygen = 0;
-    private int maxOxygen;
+    protected int oxygen;
+    protected int capacity;
+    protected int maxReceive;
+    protected int maxExtract;
 
     public OxygenStorage() {
-        this(10000);
+        this(16000);
     }
 
-    public OxygenStorage(int capacity) {
-        this.maxOxygen = capacity;
+    public OxygenStorage(int capacity)
+    {
+        this(capacity, capacity, capacity, 0);
     }
 
-    public OxygenStorage(int capacity, int initialAmount) {
-        this(capacity);
-        this.setOxygen(initialAmount);
+    public OxygenStorage(int capacity, int maxTransfer)
+    {
+        this(capacity, maxTransfer, maxTransfer, 0);
     }
 
-    @Override
-    public void setOxygen(int amount) {
-        this.oxygen = MathHelper.clamp(amount, 0, this.maxOxygen);
+    public OxygenStorage(int capacity, int maxReceive, int maxExtract)
+    {
+        this(capacity, maxReceive, maxExtract, 0);
     }
 
-    @Override
-    public void setStorageAmount(int amount) {
-        this.maxOxygen = amount;
-        this.oxygen = Math.min(this.oxygen, amount);
-    }
-
-    @Override
-    public void fillOxygen(int amount) {
-        this.oxygen = MathHelper.clamp(this.oxygen + amount, 0, this.maxOxygen);
-    }
-
-    @Override
-    public void drainOxygen(int amount) {
-        fillOxygen(-amount);
+    public OxygenStorage(int capacity, int maxReceive, int maxExtract, int energy)
+    {
+        this.capacity = capacity;
+        this.maxReceive = maxReceive;
+        this.maxExtract = maxExtract;
+        this.oxygen = Math.max(0 , Math.min(capacity, energy));
     }
 
     @Override
-    public boolean canReceiveOxygen(int amount) {
-        return this.maxOxygen - this.oxygen >= amount;
+    public int receiveOxygen(int maxReceive, boolean simulate)
+    {
+        if (!canReceiveOxygen())
+            return 0;
+
+        int energyReceived = Math.min(capacity - oxygen, Math.min(this.maxReceive, maxReceive));
+        if (!simulate)
+            oxygen += energyReceived;
+        return energyReceived;
     }
 
     @Override
-    public boolean canSendOxygen(int amount) {
-        return this.oxygen >= amount;
+    public int extractOxygen(int maxExtract, boolean simulate)
+    {
+        if (!canExtractOxygen())
+            return 0;
+
+        int energyExtracted = Math.min(oxygen, Math.min(this.maxExtract, maxExtract));
+        if (!simulate)
+            oxygen -= energyExtracted;
+        return energyExtracted;
+    }
+
+    @Override
+    public boolean canReceiveOxygen() {
+        return maxReceive > 0;
+    }
+
+    @Override
+    public boolean canExtractOxygen() {
+        return maxExtract > 0;
     }
 
     @Override
     public int getOxygenStored() {
-        return this.oxygen;
+        return oxygen;
     }
 
     @Override
     public int getMaxOxygenStorage() {
-        return this.maxOxygen;
-    }
-
-    public OxygenStorage readFromNBT(NBTTagCompound nbt) {
-        this.setOxygen(nbt.getInteger("oxygen"));
-        return this;
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setInteger("oxygen", oxygen);
-        return nbt;
+        return capacity;
     }
 }

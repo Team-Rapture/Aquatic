@@ -1,6 +1,7 @@
 package com.github.teamrapture.aquatic.client.render;
 
 import com.github.teamrapture.aquatic.Aquatic;
+import com.github.teamrapture.aquatic.api.IAquaNetworkNode;
 import com.github.teamrapture.aquatic.api.capability.oxygen.CapabilityOxygen;
 import com.github.teamrapture.aquatic.api.capability.oxygen.IOxygenProvider;
 import com.github.teamrapture.aquatic.client.render.hud.HudRender;
@@ -14,7 +15,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -35,26 +35,23 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         IOxygenProvider teOxygen = te.getCapability(CapabilityOxygen.OXYGEN, null);
         if(teOxygen != null) {
             if(te.hasAquaController()) {
-                TileEntity controllerTe = te.getWorld().getTileEntity(te.controllerPos);
+                IAquaNetworkNode controllerTe = (IAquaNetworkNode) te.getWorld().getTileEntity(te.controllerPos);
                 if (controllerTe != null) {
                     double sX = te.controllerPos.getX() - blockPos.getX() + x + 0.5;
                     double sY = te.controllerPos.getY() - blockPos.getY() + y + 0.5;
                     double sZ = te.controllerPos.getZ() - blockPos.getZ() + z + 0.5;
                     IOxygenProvider controllerOxygen = controllerTe.getCapability(CapabilityOxygen.OXYGEN, null);
-                    if(controllerOxygen != null) this.renderBeam(sX, sY, sZ, x + 0.5, y + 0.625, z + 0.5, mc.player.ticksExisted, partialTicks,teOxygen.canReceiveOxygen(20) && controllerOxygen.canSendOxygen(20));
+                    if(controllerOxygen != null) this.renderBeam(sX, sY, sZ, x + 0.5, y + 0.625, z + 0.5, mc.player.ticksExisted, partialTicks,false);
                 }
             }
         }
-        //System.out.printf("%s %s%n", partialTicks, alpha);
-        //System.out.printf("%s %s %s%n", blockPos.getX(), blockPos.getY(), blockPos.getZ());
-
-        if (AquaticConfig.machines.aquaNodeBeam && teOxygen.getOxygenStored() != 0) {
+        if(AquaticConfig.machines.aquaNodeBeam && teOxygen.canExtractOxygen()) {
             te.playersInRange().forEach(player -> {
                 boolean bubbles = false;
                 for(ItemStack stack : player.getEquipmentAndArmor()) {
-                    if(!teOxygen.canSendOxygen(300) || stack.isEmpty()) continue;
+                    if(!teOxygen.canExtractOxygen() || stack.isEmpty()) continue;
                     IOxygenProvider stackOxygen = stack.getCapability(CapabilityOxygen.OXYGEN, null);
-                    if(stackOxygen != null && stackOxygen.canReceiveOxygen(300)) {
+                    if(stackOxygen != null && stackOxygen.canReceiveOxygen()) {
                         bubbles = true;
                         break;
                     }
@@ -82,7 +79,6 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         GlStateManager.disableCull();
         GlStateManager.disableBlend();
         GlStateManager.depthMask(true);
-        float f1 = 240.0F;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         float timing = (float) (ticks + partialTicks);
@@ -107,8 +103,6 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         int r2 = 8;
         int g2 = 193;
         int b2 = 255;
-        double d2 = 0.2D;
-        double d3 = 0.282D;
         double d4 = 0.0D + Math.cos(d1 + 2.356194490192345D) * 0.282D;
         double d5 = 0.0D + Math.sin(d1 + 2.356194490192345D) * 0.282D;
         double d6 = 0.0D + Math.cos(d1 + (Math.PI / 4D)) * 0.282D;
@@ -125,8 +119,6 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         double d17 = 0.0D + Math.sin(d1 + (Math.PI / 2D)) * 0.2D;
         double d18 = 0.0D + Math.cos(d1 + (Math.PI * 3D / 2D)) * 0.2D;
         double d19 = 0.0D + Math.sin(d1 + (Math.PI * 3D / 2D)) * 0.2D;
-        double d20 = 0.0D;
-        double d21 = 0.4999D;
         double d22 = (double) (-1.0F + f3);
         double d23 = beamLength * 2.5D + d22;
         bufferbuilder.pos(d12, beamLength, d13).tex(0.4999D, d23).color(r1, g1, b1, 255).endVertex();
@@ -137,17 +129,10 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         bufferbuilder.pos(d16, 0.0D, d17).tex(0.4999D, d22).color(r2, g2, b2, 255).endVertex();
         bufferbuilder.pos(d18, 0.0D, d19).tex(0.0D, d22).color(r2, g2, b2, 255).endVertex();
         bufferbuilder.pos(d18, beamLength, d19).tex(0.0D, d23).color(r1, g1, b1, 255).endVertex();
-        double d24 = 0.0D;
-
-        /*if (entity.ticksExisted % 2 == 0)
-        {
-            d24 = 0.5D;
-        }*/
-
-        bufferbuilder.pos(d4, beamLength, d5).tex(0.5D, d24 + 0.5D).color(r1, g1, b1, 255).endVertex();
-        bufferbuilder.pos(d6, beamLength, d7).tex(1.0D, d24 + 0.5D).color(r1, g1, b1, 255).endVertex();
-        bufferbuilder.pos(d10, beamLength, d11).tex(1.0D, d24).color(r1, g1, b1, 255).endVertex();
-        bufferbuilder.pos(d8, beamLength, d9).tex(0.5D, d24).color(r1, g1, b1, 255).endVertex();
+        bufferbuilder.pos(d4, beamLength, d5).tex(0.5D, 0.5D).color(r1, g1, b1, 255).endVertex();
+        bufferbuilder.pos(d6, beamLength, d7).tex(1.0D, 0.5D).color(r1, g1, b1, 255).endVertex();
+        bufferbuilder.pos(d10, beamLength, d11).tex(1.0D, 0.0D).color(r1, g1, b1, 255).endVertex();
+        bufferbuilder.pos(d8, beamLength, d9).tex(0.5D, 0.0D).color(r1, g1, b1, 255).endVertex();
         tessellator.draw();
         GlStateManager.popMatrix();
 
@@ -168,8 +153,7 @@ public class RenderAquaNode extends TileEntitySpecialRenderer<TileAquaNode> {
         }
     }
 
-    public void renderBubble(double x, double y, double z) {
-
+    private void renderBubble(double x, double y, double z) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
         GlStateManager.disableBlend();

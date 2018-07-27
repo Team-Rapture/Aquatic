@@ -2,7 +2,7 @@ package com.github.teamrapture.aquatic.proxy;
 
 import com.github.teamrapture.aquatic.Aquatic;
 import com.github.teamrapture.aquatic.api.capability.oxygen.CapabilityOxygen;
-import com.github.teamrapture.aquatic.api.capability.ph.CapabilityPH;
+import com.github.teamrapture.aquatic.api.capability.ph.CapabilityPh;
 import com.github.teamrapture.aquatic.block.fluid.FluidAquaWater;
 import com.github.teamrapture.aquatic.client.gui.GuiHandler;
 import com.github.teamrapture.aquatic.config.AquaticConfig;
@@ -33,7 +33,7 @@ public class CommonProxy {
 		AutoRegistry.findRegistryEntries(event);
         NetworkRegistry.INSTANCE.registerGuiHandler(Aquatic.instance, new GuiHandler());
         CapabilityOxygen.register();
-        CapabilityPH.register();
+        CapabilityPh.register();
 	}
 
 	public void init(FMLInitializationEvent event) {
