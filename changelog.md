@@ -3,6 +3,8 @@ Version 1.1.0
 ------------------------------------------------------
 - fixed crash when going to controls menu while in a world
 - worldgen overhaul
+- AquaNet overhaul
+- added creature spawns to dimension
 
 ------------------------------------------------------
 Version 1.0.0-c
